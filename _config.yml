@@ -1,3 +1,4 @@
 theme: jekyll-theme-hacker
 title: Println("Jason Thai Homepage")
 description: Jason's personal site
+allow_fork: false
