@@ -1,5 +1,24 @@
-theme: jekyll-theme-hacker
-title: Println("Jason Thai Homepage")
-description: Jason's personal site
-author: Jason Thai
-allow_fork: false
+# Dependencies
+markdown:         kramdown
+highlighter: rouge
+
+theme: jekyll-theme-hydeout
+title: Jason Thai
+# description: Jason's personal site
+
+author:
+  name: Jason Thai
+
+paginate:         5
+# paginate_path:    '/page:num'
+                    # Or '/blog/page:num' if you want to move your index pages
+disqus:
+  shortname: jasontrithai
+
+
+plugins:
+  - jekyll-feed
+  - jekyll-gist
+  - jekyll-paginate
+
+sidebar_home_link: true
