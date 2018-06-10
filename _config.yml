@@ -2,7 +2,8 @@
 markdown: kramdown
 highlighter: rouge
 
-remote_theme: jekyll-theme-hydeout
+remote_theme: fongandrew/hydeout
+theme: jekyll-theme-hydeout
 title: Jason Thai
 # description: Jason's personal site
 
