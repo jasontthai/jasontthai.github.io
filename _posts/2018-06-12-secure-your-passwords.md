@@ -64,6 +64,7 @@ for your most common sites and use password managers for the rest.
 * iloveyou
 * aaaaaa
 * 654321
+
 _(list was taken from [https://www.noip.com/blog/2013/12/04/9-easy-ways-choose-safe-secure-password/](https://www.noip.com/blog/2013/12/04/9-easy-ways-choose-safe-secure-password/))_
 
 # Some other resources and references:
