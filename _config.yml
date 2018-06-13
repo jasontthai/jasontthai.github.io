@@ -5,7 +5,7 @@ highlighter: rouge
 remote_theme: fongandrew/hydeout
 # theme: jekyll-theme-hydeout
 title: Jason Thai
-# description: Jason's personal site
+description: This is my personal page
 
 author:
   name: Jason Thai
@@ -21,5 +21,7 @@ plugins:
   - jekyll-feed
   - jekyll-gist
   - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 sidebar_home_link: true
