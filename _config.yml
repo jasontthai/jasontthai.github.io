@@ -23,5 +23,6 @@ plugins:
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-avatar
 
 sidebar_home_link: true
