@@ -16,6 +16,7 @@ paginate:         5
 disqus:
   shortname: jasons-1
 
+permalink: /blog/:year/:month/:day/:title/
 
 plugins:
   - jekyll-feed
@@ -24,5 +25,6 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-avatar
+  - jekyll-redirect-from
 
 sidebar_home_link: true

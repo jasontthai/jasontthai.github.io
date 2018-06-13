@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Recommended Browser Extensions
+redirect_from:
+ - /2018/06/10/browser-extensions.html
 ---
 
 Here is a list of my recommended browser extensions that will make your browsing experience safer:

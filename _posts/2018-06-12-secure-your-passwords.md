@@ -1,6 +1,8 @@
 ---
 layout: post
 title: How to Create a Secure Password
+redirect_from:
+ - /2018/06/12/secure-your-passwords.html
 ---
 
 Do you use the same password for most of your common sites? Is your password easy to remember or to
