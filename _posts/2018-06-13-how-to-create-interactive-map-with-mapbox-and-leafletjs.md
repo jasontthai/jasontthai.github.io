@@ -78,7 +78,7 @@ function style(feature) {
         fillOpacity: 0.7
     };
 }
-L.geoJson(countries, {style: style}).addTo(map);
+var geojson = L.geoJson(countries, {style: style}).addTo(map);
 ```
 
 __Add interactions__ to our map by displaying the color of the areas when we click on them.
