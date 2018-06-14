@@ -9,8 +9,8 @@ This post provides an overview of how to create such interactive map.
 
 ## Libraries
 List of libraries that I used:
-> * Mapbox - [https://www.mapbox.com](https://www.mapbox.com)
-> * Leafletjs - [https://leafletjs.com](https://leafletjs.com)
+* Mapbox - [https://www.mapbox.com](https://www.mapbox.com)
+* Leafletjs - [https://leafletjs.com](https://leafletjs.com)
 
 First thing we need to do is obtain an access token by signing up for Mapbox.
 Once you have the token, we are ready to build our first map.
@@ -84,7 +84,7 @@ var geojson = L.geoJson(countries, {style: style}).addTo(map);
 __Add interactions__ to our map by displaying the color of the areas when we click on them.
 ```javascript
 geojson.eachLayer(function (layer) {
-    layer.bindPopup('<p style="color:' + layer.options.fillColor + '">'  + layer.options.fillColor +'</p>');
+    layer.bindPopup('<p style="color:' + layer.options.fillColor + '">'  + layer.feature.properties.name +'</p>');
 });
 ```
 Voila! Try clicking on the map and see the result!
@@ -92,6 +92,11 @@ Now the map looks like this:
 <p data-height="265" data-theme-id="0" data-slug-hash="LrLoBM" data-default-tab="result" data-user="zirius-the-reactor" data-embed-version="2" data-pen-title="Basic Map with Color" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/zirius-the-reactor/pen/LrLoBM/">Basic Map with Color</a> by Jason Thai (<a href="https://codepen.io/zirius-the-reactor">@zirius-the-reactor</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async="async" src="https://static.codepen.io/assets/embed/ei.js"></script>
 <br/>
+
+## Resources
+* [https://leafletjs.com/examples.html](https://leafletjs.com/examples.html)
+* [https://geojson-maps.ash.ms/](https://geojson-maps.ash.ms/)
+* [https://github.com/tmcw/awesome-geojson](https://github.com/tmcw/awesome-geojson)
 
 ## Conclusion
 Here we create a sample map with interactions using Mapbox and Leafletjs. I encourage everyone to try out

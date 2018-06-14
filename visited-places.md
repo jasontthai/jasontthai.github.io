@@ -5,7 +5,8 @@ sidebar_link: true
 leafletjs: true
 ---
 
-Here are some places that I have visited (_hover on the map for more info_).
+Here are some places that I have visited (_hover on the map for more info_).<br/>
+Check out how I made it [here]({% post_url 2018-06-13-how-to-create-interactive-map-with-mapbox-and-leafletjs %}).
 
 <div id='map'></div>
 
