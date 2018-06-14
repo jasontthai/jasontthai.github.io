@@ -43,13 +43,22 @@ Here are some places that I have visited (_hover on the map for more info_).
 
 	info.addTo(map);
 
-	 function style(feature) {
+	function getRandomColor() {
+		var letters = '0123456789ABCDEF';
+	  	var color = '#';
+	  	for (var i = 0; i < 6; i++) {
+	    	color += letters[Math.floor(Math.random() * 16)];
+	  	}
+	  	return color;
+	}
+
+	function style(feature) {
 		return {
 			weight: 2,
 			opacity: 1,
-			color: '#800026',
+			color: 'black',
 			fillOpacity: 0.7,
-			fillColor: '#800026'
+			fillColor: getRandomColor()
 		};
 	}
 
