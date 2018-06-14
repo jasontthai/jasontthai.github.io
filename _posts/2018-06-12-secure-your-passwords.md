@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How to Create a Secure Password
+tags: blog
 redirect_from:
  - /2018/06/12/secure-your-passwords.html
 ---

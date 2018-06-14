@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Recommended Browser Extensions
+tags: blog
 redirect_from:
  - /2018/06/10/browser-extensions.html
 ---
