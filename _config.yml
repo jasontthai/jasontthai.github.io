@@ -29,3 +29,5 @@ plugins:
   - jekyll-admin
 
 sidebar_home_link: true
+
+google_analytics: UA-120912817-1
