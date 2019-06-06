@@ -6,7 +6,7 @@ tags: blog
 
 After hosting my own custom url shortener service [TinyAlias](https://tinyalias.com) for about 6 months, I learned a few things:
 
-URL Shortener service is a commonity - There are TONS of similar services online. 
+There are many available services on the internet. Some provide more functionalities than the others.
 <br>
 Most people use the service for spam and phishing purposes - Same link is shortened multiple times.
 <br>
@@ -20,7 +20,7 @@ Links are auto rejected by various websites - They all have mechanisms to block 
 <br>
 
 That said, a lot of companies use shortened links with their own vanity domains which feature thair brands to promote their service and that is a good use case for the service.
-Also it is great not to send someone a short link rather than a very long one, which is the main purpose of these services.
+Also it is great to send someone a short link rather than a very long one, which is the main purpose of these services.
 
 
 
