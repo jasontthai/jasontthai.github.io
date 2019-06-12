@@ -2,8 +2,33 @@
 layout: page
 title: Places I Visited
 sidebar_link: true
-leafletjs: true
 ---
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"
+  integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="
+  crossorigin=""></script>
+
+<style>
+	#map {
+		width: 100%;
+		height: 100vh;
+	}
+	.info {
+	    padding: 6px 8px;
+	    font: 14px/16px Arial, Helvetica, sans-serif;
+	    background: white;
+	    background: rgba(255,255,255,0.8);
+	    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	    border-radius: 5px;
+	}
+	.info h4 {
+	    margin: 0 0 5px;
+	    color: #777;
+	}
+</style>
 
 Here are some places that I have visited (_hover on the map for more info_).<br/>
 Check out how I made it [here]({% post_url 2018-06-13-how-to-create-interactive-map-with-mapbox-and-leafletjs %}).
@@ -104,5 +129,3 @@ Check out how I made it [here]({% post_url 2018-06-13-how-to-create-interactive-
 
 
 </script>
-
-{% include comments.html %}

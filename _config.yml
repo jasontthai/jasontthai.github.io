@@ -1,20 +1,30 @@
 # Dependencies
 markdown: kramdown
-highlighter: rouge
+# highlighter: rouge
 
-remote_theme: fongandrew/hydeout
-# theme: jekyll-theme-hydeout
+# remote_theme: fongandrew/hydeout
+theme: minima
+email: thaixtri@gmail.com
 title: Blog of Things
 description: Jason Thai's personal page
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://jtthai.com" # the base hostname & protocol for your site, e.g. http://example.com
 
-author:
-  name: Jason Thai
+# author:
+  # name: Jason Thai
 
-paginate:         5
+# paginate:         5
 # paginate_path:    '/page:num'
                     # Or '/blog/page:num' if you want to move your index pages
 disqus:
   shortname: jasons-1
+
+minima:
+  social_links:
+    github: zirius
+    facebook: zirius
+
+show_excerpts: true
 
 permalink: /blog/:year/:month/:day/:title/
 
@@ -28,6 +38,6 @@ plugins:
   - jekyll-redirect-from
   - jekyll-admin
 
-sidebar_home_link: true
+# sidebar_home_link: true
 
 google_analytics: UA-120912817-1
