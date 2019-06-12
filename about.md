@@ -1,8 +1,9 @@
 ---
 layout: page
 title: About
-sidebar_link: true
 ---
+
+For up to date profile, check out my [LinkedIn](https://www.linkedin.com/in/jason-thai-a0249969)
 
 I am currently a software engineer at [Amazon](https://www.amazon.com) where I am working on advertising experimentation platforms.
 
