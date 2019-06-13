@@ -1,7 +1,7 @@
 ---
-published: true
+published: false
 layout: post
-tags: blog mapbox leafletjs
+tags: blog
 title: About Unit Tests
 ---
 Today while trying to deploy some of my codes, I ran into an issue such that the build kept failing. Turned out that some of my unit tests were failing. The unit tests did pass before, which is why all the builds until now have been successful. How come they failed today? Upon investigating more, it turns out there is a timestamp validation in the code which has been successfully validated until now but the unit test did not cover that case. I ended up deploying a hotfix to unblock the build.
