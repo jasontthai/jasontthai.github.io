@@ -26,6 +26,8 @@ minima:
 
 show_excerpts: true
 
+ads_enable: true
+
 permalink: /blog/:year/:month/:day/:title/
 
 plugins:
