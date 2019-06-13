@@ -1,5 +1,5 @@
 ---
-published: false
+published: true
 layout: post
 tags: blog mapbox leafletjs
 title: About Unit Tests
