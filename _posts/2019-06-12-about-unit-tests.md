@@ -13,5 +13,5 @@ void sampleTest() {
   assertTrue(System.currentTimeMillis() < 1577836800000L);
 }
 ```
-As you can see, this test will run fine until it not. For my specific test, the validation stopped working today.
+As you can see, this test will run fine until it does not. For my specific test, the validation stopped working today.
 I learned a hard lesson today. As a code reviewer, it is important to not only look at codes but also the unit tests and see if they cover all the possible cases. Otherwise, we will have to spend a lot of time debugging issues like this.
