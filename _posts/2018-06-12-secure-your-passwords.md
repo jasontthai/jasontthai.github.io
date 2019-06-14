@@ -1,10 +1,13 @@
 ---
-layout: post
 title: How to Create a Secure Password
+layout: post
 tags: blog
 redirect_from:
- - /2018/06/12/secure-your-passwords.html
+- "/2018/06/12/secure-your-passwords.html"
 ---
+
+#### Updated 2019-06-14:
+* Mention Lesspass
 
 Do you use the same password for most of your common sites? Is your password easy to remember or to
 guess? You may find the convenience in only having to remember one password but that significantly
@@ -39,6 +42,7 @@ online tools that include browser extensions  to help you manage your passwords.
 generate passwords and store them on the clouds so you can access them on any devices. All you need
 to do is remember 1 master password (a secure one!) to access all the data stored in the tool. Enter
 your master password, and the password manager takes care of the rest.
+* [Lesspass](https://lesspass.com/#/) - Stateless password manager. You only need to provide the site, login, and the one master password of your choice and a password will be auto generated for you. You can also host this service yourself.
 * [KeypassX](https://www.keepassx.org) - This has the same functionality as LastPass or 1Password but
 it is an offline tool. If you are serious about your security and don't want other providers to keep
 your data, you can use this to manage your passwords.
