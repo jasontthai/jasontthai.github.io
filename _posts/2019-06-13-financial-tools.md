@@ -2,6 +2,7 @@
 title: Recommended Financial Tools
 layout: post
 tags: finance blog
+published: true
 ---
 
 ![finance](/assets/img/accounting-black-budget.jpg)
@@ -16,6 +17,7 @@ Here is a list of my recommended financial tools that will enhance your experien
 * [Personal Capital](https://www.personalcapital.com) - It is a free tool to manage and keep track of your investiments. You can also track your transactions, networth, asset allocation, retirement analysis and more.
 * [Mint](http://mint.com) - It is another alternative to Personal Capital. It does not offer as many features as PC but less is more. The UI looks cleaner in my opinion.
 * [YNAB*](/go/ynab) - If you prefer a more DIY budgeting tools, I highly recommend YNAB. The site also features some workshop to guide you more about budgeting.
+
 *These are affiliate links and should you chose to do business with them, this blog will earn a small commission.
 
 ### Books
