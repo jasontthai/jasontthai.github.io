@@ -1,11 +1,15 @@
 ---
-layout: post
 title: How to Create an Interactive Map With Mapbox and Leafletjs
+layout: post
 tags: blog mapbox leafletjs
+excerpt_separator: "<!--more-->"
 ---
+
+![map](/assets/img/visited-map.png)
 
 Recently I created [<u>an interactive map page of all the places that I visited</u>](/visited-places).
 This post provides an overview of how to create such interactive map.
+<!--more-->
 
 ## Libraries
 List of libraries that I used:
@@ -101,5 +105,3 @@ Now the map looks like this:
 ## Conclusion
 Here we create a sample map with interactions using Mapbox and Leafletjs. I encourage everyone to try out
 and make new maps with your own twist. Looking forward to seeing what you make!
-
-

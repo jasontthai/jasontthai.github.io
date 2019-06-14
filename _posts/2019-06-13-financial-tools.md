@@ -2,13 +2,13 @@
 title: Recommended Financial Tools
 layout: post
 tags: finance blog
-published: true
+excerpt_separator: "<!--more-->"
 ---
 
 ![finance](/assets/img/accounting-black-budget.jpg)
 
 Here is a list of my recommended financial tools that will enhance your experience of managing your finance:
-
+<!--more-->
 ### Tools
 
 * [Vanguard](https://vanguard.com) - Financial advisor and brokerage. In my opinion this is the best broker in the market for its low expense ratio funds.
