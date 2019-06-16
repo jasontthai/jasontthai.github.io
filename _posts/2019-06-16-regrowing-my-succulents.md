@@ -11,4 +11,6 @@ Look how small and cute they are now.
 
 This makes me wonder: why do we procrastinate and put off things so much. I thought about doing this a long time ago but never got to do it. I am glad I did it today. This was actually quite a self meditative activity as I was so focused on the task. I should not put things off so much anymore.
 
-I have been thinking lately about how to grow myself and do something new. Perhaps taking care of plants can be one of them. Unfortunately I do not have a lot of space to grow plants. How do one improve oneself? 
+I have been thinking lately about how to grow myself and do something new. Perhaps taking care of plants can be one of them. Unfortunately I do not have a lot of space to grow plants. How do one improve oneself? A part of me also wants me to take it easy and not force myself to do too much. I need to find a better balance between forcing myself to do things and doing things out of interest.
+
+If you read this and remember that you are supposed to do something but have not, I hope you will finish it today.
