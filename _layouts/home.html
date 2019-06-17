@@ -2,50 +2,57 @@
 layout: default
 ---
 
+{%- if site.show_excerpts -%}
+  {% assign excerptClass = "excerpt" %}
+{%- else  -%}
+  {% assign excerptClass = "" %}
+{%- endif -%}
 <div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
-  {%- endif -%}
+    {%- if page.title -%}
+    <h1 class="page-heading">
+        {{ page.title }}
+    </h1>
+    {%- endif -%}
 
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
+    <h2 class="post-list-heading">
+        {{ page.list_title | default: "Posts" }}
+    </h2>
     <ul class="post-list">
-      {%- for post in site.posts -%}
-      <li>
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {% if post.featured_img -%}
-            <p>
-              <img src="{{ site.baseurl }}{{ post.featured_img }}" alt="{{ post.title }}" class="img-responsive">
-            </p>
-        {%- endif -%}
+        {%- for post in site.posts -%}
+        <li class="{{ excerptClass }}">
+            {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+            <span class="post-meta">
+                {{ post.date | date: date_format }}
+            </span>
+            <a href="{{ post.url | relative_url }}">
+                <h3>
+                    <span class="post-link" href="{{ post.url | relative_url }}">
+                        {{ post.title | escape }}
+                    </span>
+                </h3>
+                {% if post.featured_img -%}
+                <p>
+                    <img alt="{{ post.title }}" class="img-responsive" src="{{ post.featured_img }}">
+                    </img>
+                </p>
+                {%- endif -%}
 
         {%- if site.show_excerpts -%}
-          {{ post.excerpt }}
-          {% capture content_words %}
-            {{ post.content | number_of_words }}
-          {% endcapture %}
-
-          {% capture excerpt_words %}
-            {{ post.excerpt | number_of_words }}
-          {% endcapture %}
-
-          {% if content_words != excerpt_words  %}
-            <p><a href="{{site.baseurl}}{{ post.url }}">Read more</a></p>
-          {% endif %}
-        {%- endif -%}
-      </li>
-      {%- endfor -%}
+                <div>
+                    {{ post.excerpt | strip_html | truncatewords: 100 }}
+                </div>
+                {%- endif -%}
+            </a>
+        </li>
+        {%- endfor -%}
     </ul>
-
-    <p class="feed-subscribe"><svg class="svg-icon orange"><use xlink:href="{{ '/assets/minima-social-icons.svg#rss' | relative_url }}"></use></svg><a href="{{ "/feed.xml" | relative_url }}">Subscribe</a></p>
-  {%- endif -%}
-
+    <p class="feed-subscribe">
+      <a href="{{ 'feed.xml' | relative_url }}">
+        <svg class="svg-icon orange"><use xlink:href="{{ 'assets/minima-social-icons.svg#rss' | relative_url }}"></use></svg><span>Subscribe</span>
+      </a>
+    </p>
+    {%- endif -%}
 </div>
