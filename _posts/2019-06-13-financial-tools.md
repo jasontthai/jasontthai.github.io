@@ -2,6 +2,7 @@
 title: Recommended Financial Tools
 layout: post
 tags: finance blog
+featured_img: /assets/img/accounting-black-budget.jpg
 excerpt_separator: "<!--more-->"
 ---
 
