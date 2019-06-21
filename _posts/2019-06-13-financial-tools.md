@@ -22,6 +22,7 @@ Here is a list of my recommended financial tools that will enhance your experien
 
 ### Other Resources
 
+* [Boglehead Wiki](https://www.bogleheads.org/wiki/Main_Page) - Investing advice inspired by Mr. John Bogle
 * [Total-return Investing](https://personal.vanguard.com/pdf/s352.pdf) - Yield investing vs total return investing.
 * [The Simple Path to Wealth](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926) - This book provides a simple approach to investing.
 * [The Millionaire Next Door](https://www.amazon.com/Millionaire-Next-Door-Surprising-Americas/dp/1589795474) - What's a millionaire really like and how to become one.
