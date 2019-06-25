@@ -3,7 +3,8 @@ title: Recommended Financial Tools
 layout: post
 tags: finance blog
 featured_img: /assets/img/accounting-black-budget.jpg
-excerpt_separator: "<!--more-->"
+excerpt_separator: <!--more-->
+published: true
 ---
 
 ![finance](/assets/img/accounting-black-budget.jpg)
@@ -27,5 +28,6 @@ Here is a list of my recommended financial tools that will enhance your experien
 * [Total-return Investing](https://personal.vanguard.com/pdf/s352.pdf) - Yield investing vs total return investing.
 * [The Simple Path to Wealth](https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926) - This book provides a simple approach to investing.
 * [The Millionaire Next Door](https://www.amazon.com/Millionaire-Next-Door-Surprising-Americas/dp/1589795474) - What's a millionaire really like and how to become one.
+* [Mad Fientist](https://www.madfientist.com/) - FIRE podcast.
 
 I hope these tools will also benefit you like they do for me. Managing finance is never easy but these tools hopefully will ease you into taking a more active role in doing it.
