@@ -19,10 +19,8 @@ url: "http://jasonthai.me" # the base hostname & protocol for your site, e.g. ht
 disqus:
   shortname: jasons-1
 
-minima:
-  social_links:
-    github: zirius
-    facebook: zirius
+github_username: zirius
+linkedin_username: jasontthai
 
 show_excerpts: true
 
