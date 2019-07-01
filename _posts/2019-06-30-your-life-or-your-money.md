@@ -1,8 +1,9 @@
 ---
-published: true
 title: Your Life or Your Money
+tag: finance
 ---
-## A Collection of What I am keeping track of in the book [Your Life or Your Money](https://www.amazon.com/Your-Money-Life-Transforming-Relationship/dp/0143115766)
+
+### A Collection of What I am keeping track of in the book [Your Life or Your Money](https://www.amazon.com/Your-Money-Life-Transforming-Relationship/dp/0143115766)
 
 Read more about it [here](https://yourmoneyoryourlife.com/)
 
