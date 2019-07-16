@@ -17,7 +17,7 @@ Upon working for a while, you may start noticing that your bank account is going
 
 Here are the first few *INITIAL* steps that you can do (There will be more):
 
-1.  If  you have not done it already, start setting up a budget and keep track of you expense and income. In order to know if you how much you can save, you need to know how much you are earning and spending. @San, Vy made one for you [here](https://docs.google.com/spreadsheets/d/1QcXNs1b35f-vd9t82PB5aL8n1TTsil8HQD-1WbGZJ54/edit#gid=416635166)
+1.  If  you have not done it already, start setting up a budget and keep track of you expense and income. In order to know how much you can save, you need to know how much you are earning and spending. @San, Vy made one for you [here](https://docs.google.com/spreadsheets/d/1QcXNs1b35f-vd9t82PB5aL8n1TTsil8HQD-1WbGZJ54/edit#gid=416635166)
 2.  After you know how much you spend for a month, start saving up for an emergency fund (ideally 3 to 6 months of your monthly expense). This will be your safety net in case some emergency happens. This money will also be the foundation to show that you can save money and live below your mean.
 3.  If you have very high interest debt, start paying them. @San, you can think about paying for your tuition bit by bit now (depending on the interest, which I figure is high)
 
