@@ -7,6 +7,9 @@ tag: finance
 
 ![money](/assets/img/money-matters-1173105.jpg)
 
+Update 2019-07-16:
+* Added Personal Finance Subreddit's flowchart.
+
 To San and Vy,
 
 I know both of you do not like to talk about money. After all you are usually busy or have better things to do - Vy with your internship and thesis and San with your part time job and rotation. This is why I write this post so at least you have some place to read about it when you have the time. And I promise I will keep this short and easy to understand. After all, we do have to talk about this and it is better to do it now than later.
@@ -22,7 +25,9 @@ Here are the first few *INITIAL* steps that you can do (There will be more):
 3.  If you have very high interest debt, start paying them. @San, you can think about paying for your tuition bit by bit now (depending on the interest, which I figure is high)
 
 Here are some other next steps after the first 3 above:
-4. Put your emergency fund into a high yield saving account to earn interest. (I can show you how to do this).
-5. Start learning more about 401K, Traditional/Roth IRA (I will put up another post to go into details about this. For now, you can ignore)
+4.  Put your emergency fund into a high yield saving account to earn interest. (I can show you how to do this).
+5.  Start learning more about 401K, Traditional/Roth IRA (I will put up another post to go into details about this. For now, you can ignore)
+
+You can also take a look at this [flowchart](https://i.imgur.com/lSoUQr2.png) and check out reddit's personalfinance [wiki](hhttps://www.reddit.com/r/personalfinance/wiki/index) to find out more about all things personal finance.
 
 Why you need to do all this stuff? The answer is simple. This is to help you get started on being financially responsible and eventually finanical independent. You may wonder what the heck is financial independence. I promise it will be very fun to know about this and not boring at all even though it also revolves around money a bit. For now, enough money talk for the day. See it is not too long!
