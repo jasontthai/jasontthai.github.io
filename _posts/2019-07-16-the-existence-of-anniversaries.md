@@ -2,6 +2,7 @@
 title: The Existence of Anniversaries
 excerpt_separator: "<!-- more -->"
 featured_img: "/assets/img/3years_featured.png"
+tags: blog
 ---
 
 ![3years](/assets/img/3years.jpg)
