@@ -7,9 +7,6 @@ tag: finance
 
 ![money](/assets/img/money-matters-1173105.jpg)
 
-Update 2019-07-16:
-* Added Personal Finance Subreddit's flowchart.
-
 To San and Vy,
 
 I know both of you do not like to talk about money. After all you are usually busy or have better things to do - Vy with your internship and thesis and San with your part time job and rotation. This is why I write this post so at least you have some place to read about it when you have the time. And I promise I will keep this short and easy to understand. After all, we do have to talk about this and it is better to do it now than later.
