@@ -10,6 +10,23 @@ The script to run to display the most used commands (copied from [linux.byexampl
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
 ```
 
+### 2019-07-17:
+Funny how it did not change much lol.
+```
+     1    468  10.6971%    gst
+     2    452  10.3314%    ls
+     3    388  8.86857%    git
+     4    354  8.09143%    gd
+     5    240  5.48571%    bb
+     6    211  4.82286%    brazil
+     7    147  3.36%       ..
+     8    114  2.60571%    cd
+     9    111  2.53714%    ssh
+    10    85   1.94286%    gcam
+```
+
+### 2018-09-03:
+
 Here is the output from my computer:
 ```
      1	1229  12.2912%   gst    (git status)
