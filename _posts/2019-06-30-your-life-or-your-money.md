@@ -1,6 +1,7 @@
 ---
 title: Your Life or Your Money
 tag: finance
+featured_img: "/assets/img/blur-close-up-environment-401213.jpg"
 ---
 
 ### A Collection of What I am keeping track of in the book [Your Life or Your Money](https://www.amazon.com/Your-Money-Life-Transforming-Relationship/dp/0143115766)
