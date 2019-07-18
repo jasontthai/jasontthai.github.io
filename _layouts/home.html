@@ -29,32 +29,26 @@ layout: default
         {%- for post in posts -%}
         <li class="{{ excerptClass }}">
             {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-            <span class="post-meta">
-                {{ post.date | date: date_format }}
-            </span>
             <a href="{{ post.url | relative_url }}">
-                <h3>
-                    <span class="post-link" href="{{ post.url | relative_url }}">
+                <div>
+                    <div class="bg-img" style="background-image: url({{post.featured_img}})">
+                    </div>
+                    <span class="post-link">
                         {{ post.title | escape }}
                     </span>
-                </h3>
-                {% if post.featured_img -%}
-                <p>
-                    <img alt="{{ post.title }}" class="img-responsive" src="{{ post.featured_img }}">
-                    </img>
-                </p>
-                {%- endif -%}
-
-        {%- if site.show_excerpts -%}
-                <div>
-                    {{ post.excerpt | strip_html | truncatewords: 100 }}
+                    <span class="post-meta">
+                        {{ post.date | date: date_format }}
+                    </span>
+                    {%- if site.show_excerpts -%}
+                    <p>
+                        {{ post.excerpt | strip_html | truncatewords: 100 }}
+                    </p>
+                    {%- endif -%}
                 </div>
-                {%- endif -%}
             </a>
         </li>
         {%- endfor -%}
     </ul>
-
     {% if site.paginate %}
     <div class="pagination" style="text-align: center">
         {% if paginator.previous_page %}
@@ -72,7 +66,6 @@ layout: default
         {% endif %}
     </div>
     {% endif %}
-
     <p class="feed-subscribe">
         <a href="{{ 'feed.xml' | relative_url }}">
             <svg class="svg-icon orange">
