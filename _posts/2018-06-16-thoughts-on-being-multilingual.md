@@ -2,11 +2,12 @@
 title: Thoughts on Being Multilingual
 layout: post
 tags: blog thoughts
+featured_img: /assets/img/hello-1907233_1280.png
 ---
 
 With the recent news of [Trump calling Crimea as part of Russa](http://www.businessinsider.com/trump-claims-crimea-is-part-of-russia-since-people-speak-russian-g7-summit-2018-6), I cannot help but think about how our languages and identities intertwine. I was born into a multilingual family. My parents were born in Vietnam but their parents were from China, which meant they grew up knowing both Chinese and Vietnamese. Not only that, since their ancestors were from a Chinese region where people speak a different dialect, they both know multiple Chinese dialects (Mandarin, Cantonese, and Hokkien). I was also born in Vietnam and grew up in an extended family where we exchanged words through either Vietnamese and Cantonese (Unfortunately I couldn't pick up any other dialects from my parents). Later on,  I studied English and when I moved to the states, English also has become my daily language.
 
-On the contrary of most people's belief that Americans tend to only speak English, I have found out that most people that I talk to in the tech industry - albeit this is a bubble - are multilingual. Just on top of my head, the languages that my coworkers speak include English, Vietnamese, Mandarin, Cantonese, French, Portuguese, German, Polish, Russian, and various Indian languages. This creates an immense diversity of culture that makes the mono-cultural world seem stale. 
+On the contrary of most people's belief that Americans tend to only speak English, I have found out that most people that I talk to in the tech industry - albeit this is a bubble - are multilingual. Just on top of my head, the languages that my coworkers speak include English, Vietnamese, Mandarin, Cantonese, French, Portuguese, German, Polish, Russian, and various Indian languages. This creates an immense diversity of culture that makes the mono-cultural world seem stale.
 
 I find it interesting that I can identify myself not just by the country of origin but the languages that I speak. It helps me **understand and appreciate the cultural references and nuances** of different cultures. I can enjoy artwork and pop cultures presented in their native language. Things like watching a movie, listening to a song, or reading a book. Even though there is a common theme in expressions, different cultures bring their own not so subtle interpretations. Surely things can be translated from one language to another, but being able to understand the work in its own language is a joy of its own.
 
