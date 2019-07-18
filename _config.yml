@@ -24,7 +24,7 @@ linkedin_username: jasontthai
 
 show_excerpts: true
 
-ads_enable: false
+ads_enable: true
 
 permalink: /blog/:year/:month/:day/:title/
 
