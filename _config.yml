@@ -28,8 +28,6 @@ ads_enable: false
 
 permalink: /blog/:year/:month/:day/:title/
 
-show_drafts: true
-
 plugins:
   - jekyll-feed
   - jekyll-gist
