@@ -13,6 +13,9 @@ If you visit my homepage, you will notice each post contains an excerpt and if y
 
 You can see my PR here: [https://github.com/jekyll/minima/pull/382](https://github.com/jekyll/minima/pull/382)
 
+### Added subscribe feature through email or RSS
+I am currently trying out [feedburner](https://feedburner.google.com) to handle subscription for the blog.
+
 ### Added pagination and style each post as a card view.
 Kudos to [prashanthmadi.github.io](prashanthmadi.github.io) for adding pagination and the card view that looks really nice.
 
