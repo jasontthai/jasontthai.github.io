@@ -1,11 +1,11 @@
 ---
-layout: page
 title: About
+layout: page
 ---
 
 For up to date profile, check out my [LinkedIn](https://www.linkedin.com/in/jasontthai)
 
-I am currently a software engineer at [Amazon](https://www.amazon.com) where I am working on advertising experimentation platforms.
+I am currently a software engineer at [Amazon](https://www.amazon.com) where I am working on advertising experimentation platforms. However this blog, its content, and opinions are of my own.
 
 Some of my previous companies include:
 
