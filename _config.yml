@@ -13,8 +13,8 @@ url: "http://jasonthai.me" # the base hostname & protocol for your site, e.g. ht
 # author:
   # name: Jason Thai
 
-# paginate:         5
-# paginate_path:    '/page:num'
+paginate:         5
+paginate_path:    '/page:num'
                     # Or '/blog/page:num' if you want to move your index pages
 disqus:
   shortname: jasons-1
@@ -24,7 +24,7 @@ linkedin_username: jasontthai
 
 show_excerpts: true
 
-ads_enable: true
+ads_enable: false
 
 permalink: /blog/:year/:month/:day/:title/
 

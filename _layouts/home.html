@@ -7,23 +7,26 @@ layout: default
 {%- else  -%}
   {% assign excerptClass = "" %}
 {%- endif -%}
+
+{% assign posts = site.posts %}
+{% if site.paginate %}
+    {% assign posts = paginator.posts %}
+{% endif %}
 <div class="home">
     {%- if page.title -%}
     <h1 class="page-heading">
         {{ page.title }}
     </h1>
     {%- endif -%}
+    {%- include top-center-ads.html -%}
+    {{ content }}
 
-    <!-- {%- include top-center-ads.html -%} -->
-
-  {{ content }}
-
-  {%- if site.posts.size > 0 -%}
+  {%- if posts.size > 0 -%}
     <h2 class="post-list-heading">
         {{ page.list_title | default: "Posts" }}
     </h2>
     <ul class="post-list">
-        {%- for post in site.posts -%}
+        {%- for post in posts -%}
         <li class="{{ excerptClass }}">
             {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
             <span class="post-meta">
@@ -51,10 +54,35 @@ layout: default
         </li>
         {%- endfor -%}
     </ul>
+
+    {% if site.paginate %}
+    <div class="pagination" style="text-align: center">
+        {% if paginator.previous_page %}
+        <a class="previous" href="{{ paginator.previous_page_path }}">
+            « Previous
+        </a>
+        {% endif %}
+        <span class="page_number">
+            Page: {{ paginator.page }} of {{ paginator.total_pages }}
+        </span>
+        {% if paginator.next_page %}
+        <a class="next" href="{{ paginator.next_page_path }}">
+            Next »
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
+
     <p class="feed-subscribe">
-      <a href="{{ 'feed.xml' | relative_url }}">
-        <svg class="svg-icon orange"><use xlink:href="{{ 'assets/minima-social-icons.svg#rss' | relative_url }}"></use></svg><span>Subscribe</span>
-      </a>
+        <a href="{{ 'feed.xml' | relative_url }}">
+            <svg class="svg-icon orange">
+                <use xlink:href="{{ 'assets/minima-social-icons.svg#rss' | relative_url }}">
+                </use>
+            </svg>
+            <span>
+                Subscribe
+            </span>
+        </a>
     </p>
     {%- endif -%}
 </div>
