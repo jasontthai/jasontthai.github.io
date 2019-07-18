@@ -4,6 +4,7 @@ layout: post
 tags: blog
 redirect_from:
 - "/2018/06/12/secure-your-passwords.html"
+featured_img: /assets/img/password-checker.png
 ---
 
 #### Updated 2019-06-14:
@@ -30,7 +31,7 @@ by [Password Checker Online](http://password-checker.online-domain-tools.com/):
 
 ![Password Checker](/assets/img/password-checker.png "Password Checker")
 
-# Never Reuse a Password (Use a Password Management Tool) 
+# Never Reuse a Password (Use a Password Management Tool)
 It is challenging to come up with a new password, let alone having to remember a complicated one
 like above but it is important to do this. Often we want to have more secure passwords and different
 ones for our sites, while staying away from remembering all of them.
