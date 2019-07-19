@@ -22,6 +22,23 @@ layout: default
     {{ content }}
 
   {%- if posts.size > 0 -%}
+    {% if site.paginate %}
+    <div class="pagination" style="text-align: center">
+        {% if paginator.previous_page %}
+        <a class="previous" href="{{ paginator.previous_page_path }}">
+            « Previous
+        </a>
+        {% endif %}
+        <span class="page_number">
+            Page: {{ paginator.page }} of {{ paginator.total_pages }}
+        </span>
+        {% if paginator.next_page %}
+        <a class="next" href="{{ paginator.next_page_path }}">
+            Next »
+        </a>
+        {% endif %}
+    </div>
+    {% endif %}
     <ul class="post-list">
         {%- for post in posts -%}
         <li class="{{ excerptClass }}">
