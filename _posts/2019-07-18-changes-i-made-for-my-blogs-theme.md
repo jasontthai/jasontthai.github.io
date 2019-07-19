@@ -8,18 +8,21 @@ The stock theme that I am currently using is from [https://github.com/jekyll/min
 
 But as you know I enjoy customizing things my way so I did make a few changes to make this blog a bit more to my liking (for now. After all I have switched themes a few times). Here are a couple of new additions that I added.
 
-### Using excerpt and introduce hover effects on the post.
-If you visit my homepage, you will notice each post contains an excerpt and if you hover over the post, you'll see a fading effect. The suggestion was made my the maintainer of Jekyll's theme and I ended up implementing it. 
+### Added subscribe feature through email or RSS
+I am currently trying out [feedburner](https://feedburner.google.com) to handle subscription for the blog.
+
+### Use excerpt and introduce hover effects on the post.
+If you visit my homepage, you will notice each post contains an excerpt and if you hover over the post, you'll see a fading effect. The suggestion was made my the maintainer of Jekyll's theme and I ended up implementing it.
 
 You can see my PR here: [https://github.com/jekyll/minima/pull/382](https://github.com/jekyll/minima/pull/382)
 
-### Added subscribe feature through email or RSS
-I am currently trying out [feedburner](https://feedburner.google.com) to handle subscription for the blog.
+### Added next and previous post link
+IF you view a post, at the end of the post there is are hyperlinks to the next and previous posts to save you some clicks.
 
 ### Added pagination and style each post as a card view.
 Kudos to [prashanthmadi.github.io](prashanthmadi.github.io) for adding pagination and the card view that looks really nice.
 
-You can see the changes to add pagination [here](https://github.com/prashanthmadi/prashanthmadi.github.io/commit/d09b4351f0a8e34318847f14f854b5be2f06b4d6) and the card view [here](https://github.com/prashanthmadi/prashanthmadi.github.io/commit/78bc5e44c80f7bb1cbe129691701d79d3e8bdbb5#diff-891082c144b1c9ddb0047d67a7b4181f). 
+You can see the changes to add pagination [here](https://github.com/prashanthmadi/prashanthmadi.github.io/commit/d09b4351f0a8e34318847f14f854b5be2f06b4d6) and the card view [here](https://github.com/prashanthmadi/prashanthmadi.github.io/commit/78bc5e44c80f7bb1cbe129691701d79d3e8bdbb5#diff-891082c144b1c9ddb0047d67a7b4181f).
 
 Below is the snippet of my homepage changes:
 
