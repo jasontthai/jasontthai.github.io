@@ -13,8 +13,7 @@ TODO:
 * Share books that I've read or reading through good reads
 
 I finally paid off my car loan! Some more stats:
-* Start date: July 16 2014
-* End date: July 16 2019
+* Loan date: July 2014 to July 2019
 * Total amount: <span style="color: green">$2,000</span> (down payment) + <span style="color: green">$28,168.33</span> (0% finance) = <span style="color: green">$30,168.33</span>
 * Current value: <span style="color: green">$12,831.00</span>
 * Depreciation %: <span style="color: red">57.47%</span>
