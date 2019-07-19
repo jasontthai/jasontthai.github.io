@@ -35,6 +35,10 @@ Check out how I made it [here]({% post_url 2018-06-13-how-to-create-interactive-
 
 <div id='map'></div>
 
+{%- if site.disqus.shortname -%}
+  {%- include disqus_comments.html -%}
+{%- endif -%}
+
 <!-- <script type="text/javascript" src="us-states.js"></script> -->
 
 <script src="/assets/js/countries.js" type="text/javascript"></script>
@@ -122,10 +126,10 @@ Check out how I made it [here]({% post_url 2018-06-13-how-to-create-interactive-
 		});
 	}
 
-	var geojson = L.geoJson(countries, { 
+	var geojson = L.geoJson(countries, {
 		style : style,
 		onEachFeature: onEachFeature
-	}).addTo(map);	
+	}).addTo(map);
 
 
 </script>

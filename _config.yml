@@ -9,7 +9,7 @@ title: Blog of Things
 description: Jason Thai's personal page
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://jasonthai.me" # the base hostname & protocol for your site, e.g. http://example.com
-
+author: Jason
 # author:
   # name: Jason Thai
 
