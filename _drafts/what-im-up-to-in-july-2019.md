@@ -1,6 +1,5 @@
 ---
 title: What I'm up to in July 2019
-excerpt_separator: "<!-- more -->"
 tags: blog
 featured_img: /assets/img/the-month-july.jpg
 ---

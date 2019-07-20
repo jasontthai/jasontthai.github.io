@@ -15,7 +15,7 @@ author: Jason
 
 paginate:         5
 paginate_path:    '/page/:num'
-                    # Or '/blog/page:num' if you want to move your index pages
+
 disqus:
   shortname: jasons-1
 
@@ -23,10 +23,25 @@ github_username: zirius
 linkedin_username: jasontthai
 
 show_excerpts: true
+excerpt_separator: <!-- more -->
 
 ads_enable: false
 
 permalink: /blog/:year/:month/:day/:title/
+
+defaults:
+  -
+    scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      category: "en"
+  -
+    scope:
+      path: "_posts/vi"
+      type: "posts"
+    values:
+      category: "vi"
 
 plugins:
   - jekyll-feed
