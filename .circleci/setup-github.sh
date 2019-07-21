@@ -10,6 +10,6 @@ rm -R _site/
 
 git add -fA
 git commit --allow-empty -m "$(git log develop -1 --pretty=%B)"
-git push --force --quiet origin master
+git push -f origin master
 
 echo "deployed successfully"
