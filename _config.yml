@@ -13,8 +13,22 @@ author: Jason
 # author:
   # name: Jason Thai
 
-paginate:         5
-paginate_path:    '/page/:num'
+# paginate:         5
+# paginate_path:    '/page/:num'
+pagination:
+  enabled: true
+  debug: true
+  per_page: 5
+  permalink: '/page/:num/'
+  limit: 0
+  sort_field: 'date'
+  sort_reverse: true
+
+header_pages:
+  - about.md
+  - posts.md
+  - tags.html
+  - visited-places.md
 
 disqus:
   shortname: jasons-1
@@ -46,7 +60,7 @@ defaults:
 plugins:
   - jekyll-feed
   - jekyll-gist
-  - jekyll-paginate
+  - jekyll-paginate-v2
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-avatar
