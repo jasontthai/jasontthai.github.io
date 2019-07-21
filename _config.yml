@@ -66,6 +66,13 @@ plugins:
   - jekyll-avatar
   - jekyll-redirect-from
   - jekyll-admin
+  - jekyll-coffeescript
+  - jekyll-github-metadata
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-default-layout
+  - jekyll-titles-from-headings
 
 # sidebar_home_link: true
 
