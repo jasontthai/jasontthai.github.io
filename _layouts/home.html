@@ -9,20 +9,20 @@ layout: default
 {%- endif -%}
 
 {% assign posts = site.posts %}
-{% if paginator.total_pages >= 1 %}
+{% if site.paginate %}
     {% assign posts = paginator.posts %}
 {% endif %}
 <div class="home">
-<!--     {%- if page.title -%}
+    {%- if page.title -%}
     <h1 class="page-heading">
         {{ page.title }}
     </h1>
-    {%- endif -%} -->
+    {%- endif -%}
     {%- include top-center-ads.html -%}
     {{ content }}
 
   {%- if posts.size > 0 -%}
-    {% if paginator.total_pages > 1 %}
+    {% if site.paginate %}
     <div class="pagination" style="text-align: center">
         {% if paginator.previous_page %}
         <a class="previous" href="{{ paginator.previous_page_path }}">
@@ -63,7 +63,7 @@ layout: default
         </li>
         {%- endfor -%}
     </ul>
-    {% if paginator.total_pages > 1 %}
+    {% if site.paginate %}
     <div class="pagination" style="text-align: center">
         {% if paginator.previous_page %}
         <a class="previous" href="{{ paginator.previous_page_path }}">
