@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How to Create an Interactive Map With Mapbox and Leafletjs | Blog of Things</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="How to Create an Interactive Map With Mapbox and Leafletjs" />
+<meta name="author" content="Jason" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Recently I created an interactive map page of all the places that I visited. This post provides an overview of how to create such interactive map." />
+<meta property="og:description" content="Recently I created an interactive map page of all the places that I visited. This post provides an overview of how to create such interactive map." />
+<link rel="canonical" href="https://jasonthai.me/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/" />
+<meta property="og:url" content="https://jasonthai.me/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/" />
+<meta property="og:site_name" content="Blog of Things" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-06-13T00:00:00+00:00" />
+<script type="application/ld+json">
+{"description":"Recently I created an interactive map page of all the places that I visited. This post provides an overview of how to create such interactive map.","author":{"@type":"Person","name":"Jason"},"@type":"BlogPosting","url":"https://jasonthai.me/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/","headline":"How to Create an Interactive Map With Mapbox and Leafletjs","dateModified":"2018-06-13T00:00:00+00:00","datePublished":"2018-06-13T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://jasonthai.me/feed.xml" title="Blog of Things" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-120912817-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Blog of Things</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="https://feedburner.google.com/fb/a/mailverify?uri=jasonthai&amp;loc=en_US">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>Email</span>
+          </a>
+          <a class="page-link" href="http://feeds.feedburner.com/jasonthai">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>RSS</span>
+          </a><a class="page-link" href="/about/">About</a><a class="page-link" href="/posts/">Posts</a><a class="page-link" href="/tags/">Tags</a><a class="page-link" href="/visited-places/">Places I Visited</a></div>
+      </nav></div>
+  <div class="wrapper">
+    <div class="trigger">
+      <a class="page-link"  href="/">English</a> | 
+      <a class="page-link" href="/vi">Bài Tiếng Việt</a>
+    </div>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">How to Create an Interactive Map With Mapbox and Leafletjs</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-06-13T00:00:00+00:00" itemprop="datePublished">Jun 13, 2018
+      </time>
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason</span></span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="/assets/img/visited-map.png" alt="map" /></p>
+
+<p>Recently I created <a href="/visited-places"><u>an interactive map page of all the places that I visited</u></a>.
+This post provides an overview of how to create such interactive map.
+<!--more--></p>
+
+<h2 id="libraries">Libraries</h2>
+<p>List of libraries that I used:</p>
+<ul>
+  <li>Mapbox - <a href="https://www.mapbox.com">https://www.mapbox.com</a></li>
+  <li>Leafletjs - <a href="https://leafletjs.com">https://leafletjs.com</a></li>
+</ul>
+
+<p>First thing we need to do is obtain an access token by signing up for Mapbox.
+Once you have the token, we are ready to build our first map.</p>
+
+<h2 id="basic-map-with-data-source">Basic Map with Data Source</h2>
+<p><strong>Add leafletjs</strong> by including these in the <em>head</em> of your HTML code:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"</span>
+  <span class="na">integrity=</span><span class="s">"sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="</span>
+  <span class="na">crossorigin=</span><span class="s">""</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"</span>
+  <span class="na">integrity=</span><span class="s">"sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw=="</span>
+  <span class="na">crossorigin=</span><span class="s">""</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Add a div tag to the <em>body</em> of HTML code:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'map'</span> <span class="na">style=</span><span class="s">"width:100%; height:100vh;"</span><span class="nt">&gt;&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Render a map</strong> with some overlay. The overlay data are
+<a href="http://geojson.org">GeoJSON</a>. We will use a sample data
+(<a href="/assets/js/custom.geo.js">custom.geo.js</a>) as a demonstration.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://jtthai.com/assets/js/custom.geo.js"</span> <span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;&lt;/script&gt;</span> // load geojson data
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+
+<span class="kd">var</span> <span class="nx">geojson</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">geoJson</span><span class="p">(</span><span class="nx">countries</span><span class="p">).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="dl">'</span><span class="s1">map</span><span class="dl">'</span><span class="p">).</span><span class="nx">setView</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">);</span>
+<span class="nx">L</span><span class="p">.</span><span class="nx">tileLayer</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">maxZoom</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+  <span class="na">attribution</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Map data &amp;copy; &lt;a href="https://www.openstreetmap.org/"&gt;OpenStreetMap&lt;/a&gt; contributors, </span><span class="dl">'</span> <span class="o">+</span>
+    <span class="dl">'</span><span class="s1">&lt;a href="https://creativecommons.org/licenses/by-sa/2.0/"&gt;CC-BY-SA&lt;/a&gt;, </span><span class="dl">'</span> <span class="o">+</span>
+    <span class="dl">'</span><span class="s1">Imagery © &lt;a href="https://www.mapbox.com/"&gt;Mapbox&lt;/a&gt;</span><span class="dl">'</span><span class="p">,</span>		
+  <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">mapbox.streets-basic</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">accessToken</span><span class="p">:</span> <span class="c1">// Paste your mapbox access token here</span>
+<span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Here is how it looks in action:</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="KeqLRW" data-default-tab="result" data-user="zirius-the-reactor" data-embed-version="2" data-pen-title="Basic Map" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/zirius-the-reactor/pen/KeqLRW/">Basic Map</a> by Jason Thai (<a href="https://codepen.io/zirius-the-reactor">@zirius-the-reactor</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async="async" src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p><br /></p>
+
+<h2 id="custom-styling-and-interaction">Custom Styling and Interaction</h2>
+<p><strong>Define a style</strong> for our custom overlay with a random <code class="highlighter-rouge">fillColor</code></p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getRandomColor</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">letters</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">0123456789ABCDEF</span><span class="dl">'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">#</span><span class="dl">'</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">color</span> <span class="o">+=</span> <span class="nx">letters</span><span class="p">[</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)];</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">color</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">style</span><span class="p">(</span><span class="nx">feature</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="na">fillColor</span><span class="p">:</span> <span class="nx">getRandomColor</span><span class="p">(),</span>
+        <span class="na">weight</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="na">opacity</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">white</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">fillOpacity</span><span class="p">:</span> <span class="mf">0.7</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">geojson</span> <span class="o">=</span> <span class="nx">L</span><span class="p">.</span><span class="nx">geoJson</span><span class="p">(</span><span class="nx">countries</span><span class="p">,</span> <span class="p">{</span><span class="na">style</span><span class="p">:</span> <span class="nx">style</span><span class="p">}).</span><span class="nx">addTo</span><span class="p">(</span><span class="nx">map</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><strong>Add interactions</strong> to our map by displaying the color of the areas when we click on them.</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">geojson</span><span class="p">.</span><span class="nx">eachLayer</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">layer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">layer</span><span class="p">.</span><span class="nx">bindPopup</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;p style="color:</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">layer</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">"&gt;</span><span class="dl">'</span>  <span class="o">+</span> <span class="nx">layer</span><span class="p">.</span><span class="nx">feature</span><span class="p">.</span><span class="nx">properties</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span><span class="dl">'</span><span class="s1">&lt;/p&gt;</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+<p>Voila! Try clicking on the map and see the result!
+Now the map looks like this:</p>
+<p data-height="265" data-theme-id="0" data-slug-hash="LrLoBM" data-default-tab="result" data-user="zirius-the-reactor" data-embed-version="2" data-pen-title="Basic Map with Color" data-preview="true" class="codepen">See the Pen <a href="https://codepen.io/zirius-the-reactor/pen/LrLoBM/">Basic Map with Color</a> by Jason Thai (<a href="https://codepen.io/zirius-the-reactor">@zirius-the-reactor</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async="async" src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<p><br /></p>
+
+<h2 id="resources">Resources</h2>
+<ul>
+  <li><a href="https://leafletjs.com/examples.html">https://leafletjs.com/examples.html</a></li>
+  <li><a href="https://geojson-maps.ash.ms/">https://geojson-maps.ash.ms/</a></li>
+  <li><a href="https://github.com/tmcw/awesome-geojson">https://github.com/tmcw/awesome-geojson</a></li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Here we create a sample map with interactions using Mapbox and Leafletjs. I encourage everyone to try out
+and make new maps with your own twist. Looking forward to seeing what you make!</p>
+
+  </div>
+
+  <div class="page-nav">
+  
+    <a class="prev" href="/blog/2018/06/12/secure-your-passwords/">&laquo; How to Create a Secure Password</a>
+  
+  
+    <a class="next" href="/blog/2018/06/16/thoughts-on-being-multilingual/">Thoughts on Being Multilingual &raquo;</a>
+  
+</div><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://jasonthai.me/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/';
+      this.page.identifier = 'https://jasonthai.me/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://jasons-1.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog of Things</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Jason</li><li><a class="u-email" href="mailto:thaixtri@gmail.com">thaixtri@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zirius"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zirius</span></a></li><li><a href="https://www.linkedin.com/in/jasontthai"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">jasontthai</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Jason Thai&#39;s personal page</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
