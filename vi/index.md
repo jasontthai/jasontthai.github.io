@@ -1,6 +1,6 @@
 ---
 layout: home
-pagination:
+pagination: 
   enabled: true
-  category: en
+  category: vi
 ---

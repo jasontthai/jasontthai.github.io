@@ -26,12 +26,18 @@
           </a>
           {%- for path in page_paths -%}
             {%- assign my_page = site.pages | where: "path", path | first -%}
-            {%- if my_page.title -%}
+            {%- if my_page.title and my_page.autogen == nil -%}
             <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
             {%- endif -%}
           {%- endfor -%}
         </div>
       </nav>
     {%- endif -%}
+  </div>
+  <div class="wrapper">
+    <div class="trigger">
+      <a class="page-link"  href="{{ "/" | relative_url }}">English</a> | 
+      <a class="page-link" href="{{ "/vi" | relative_url }}">Bài Tiếng Việt</a>
+    </div>
   </div>
 </header>
