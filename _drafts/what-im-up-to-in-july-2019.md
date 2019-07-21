@@ -8,7 +8,7 @@ featured_img: /assets/img/the-month-july.jpg
 
 First post of what I am hoping will be a series. Here I will update what has been happening with me in the month.
 
-<!-- more -->
+<!--more-->
 
 List of things that I did in July 2019:
 * Paid off my car (TODO: show picture and some description about the car)

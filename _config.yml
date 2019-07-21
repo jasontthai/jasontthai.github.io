@@ -37,7 +37,7 @@ github_username: zirius
 linkedin_username: jasontthai
 
 show_excerpts: true
-excerpt_separator: <!-- more -->
+excerpt_separator: <!--more-->
 
 ads_enable: false
 

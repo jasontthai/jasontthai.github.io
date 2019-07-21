@@ -2,8 +2,6 @@
 layout: post
 title: Site Refresh
 tags: blog
-redirect_from:
- - /2018/06/08/site-refresh.html
 ---
 
 It has been a while since I last updated this site (almost 2 years - time flies!),

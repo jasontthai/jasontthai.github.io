@@ -2,8 +2,6 @@
 title: How to Create a Secure Password
 layout: post
 tags: blog
-redirect_from:
-- "/2018/06/12/secure-your-passwords.html"
 featured_img: /assets/img/password-checker.png
 ---
 

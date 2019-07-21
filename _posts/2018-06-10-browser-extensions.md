@@ -2,10 +2,6 @@
 title: Recommended Browser Extensions
 layout: post
 tags: blog
-redirect_from:
-- "/2018/06/10/browser-extensions.html"
-featured_img: /assets/img/browser-2457113_1280.png
-excerpt_separator: "<!--more-->"
 ---
 
 ![browsers](/assets/img/browser-2457113_1280.png)
