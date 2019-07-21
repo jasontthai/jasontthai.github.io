@@ -77,3 +77,13 @@ plugins:
 # sidebar_home_link: true
 
 google_analytics: UA-120912817-1
+
+exclude:
+  - .travis.yml
+  - bin/*
+  - circle.yml
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - README.md
+  - yarn.lock
