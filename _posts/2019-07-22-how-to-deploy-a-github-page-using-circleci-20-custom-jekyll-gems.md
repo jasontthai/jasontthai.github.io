@@ -18,6 +18,7 @@ Next step is to configure the build and deployment step so CircleCI knows what t
 ### Create  `.circleci/config.yml` with the following content:
 
 ```yaml
+{% raw %}
 version: 2
 jobs:
   deploy:
@@ -59,6 +60,7 @@ workflows:
           filters:
             branches:
               only: source
+{% endraw %}
 ```
 
 The `config.yml` file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run `bundle install` , save gems cache, build the static site by executing `JEKYLL_ENV=production bundle exec jekyll build` and finally if the code is pushed to **source** branch, the script `setup-github.sh` is executed.
