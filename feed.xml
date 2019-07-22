@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-07-22T22:52:10+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Blog of Things</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason</name></author><entry><title type="html">How to Deploy a Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies</title><link href="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/" rel="alternate" type="text/html" title="How to Deploy a Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies" /><published>2019-07-22T00:00:00+00:00</published><updated>2019-07-22T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/">&lt;p&gt;Since I have been playing with &lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt; to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view &lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;here&lt;/a&gt;. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Page. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Page repo.&lt;/p&gt;
+
+&lt;p&gt;Note: this tutorial assumes that you already know how to host your static site on Github Page. Otherwise, you can check out some  &lt;a href=&quot;https://help.github.com/en/categories/github-pages-basics&quot;&gt;guides&lt;/a&gt; available on Github.&lt;/p&gt;
+
+&lt;h2 id=&quot;circleci&quot;&gt;CircleCI&lt;/h2&gt;
+&lt;p&gt;CircleCI is a very  powerful continuous integration tool, which allows rapid builds and deployment of your projects.  Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploy-to-github-page-with-circleci&quot;&gt;Deploy to Github Page with CircleCI&lt;/h2&gt;
+&lt;p&gt;The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it &lt;a href=&quot;https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Next step is to configure the build and deployment step so CircleCI knows what to do&lt;/p&gt;
+&lt;h3 id=&quot;create--circleciconfigyml-with-the-following-content&quot;&gt;Create  &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/config.yml&lt;/code&gt; with the following content:&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;circleci/ruby:2.4.3-node-browsers&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;USER_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;XXX &amp;lt;- replace with your github username&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;USER_EMAIL&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;XXX &amp;lt;- replace with your email&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;checkout&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;install dependencies&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;gem update --system&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;gem install bundler&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;restore_cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }}&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle install --path .bundle &amp;amp;&amp;amp; bundle clean&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;save_cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;~/.bundle&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }}&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy Release to GitHub&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;if [ $CIRCLE_BRANCH == 'source' ]; then&lt;/span&gt;
+              &lt;span class=&quot;s&quot;&gt;bash .circleci/setup-github.sh&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;workflows&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+              &lt;span class=&quot;na&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;config.yml&lt;/code&gt; file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; , save gems cache, build the static site by executing &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/code&gt; and finally if the code is pushed to &lt;strong&gt;source&lt;/strong&gt; branch, the script &lt;code class=&quot;highlighter-rouge&quot;&gt;setup-github.sh&lt;/code&gt; is executed.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-circlecisetup-githubsh-with-the-following-content&quot;&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/setup-github.sh&lt;/code&gt; with the following content:&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config user.name &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_NAME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+git config user.email &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_EMAIL&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+git checkout master
+git pull origin master
+
+find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-maxdepth&lt;/span&gt; 1 &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'_site'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.git'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.gitignore'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.circleci'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;mv &lt;/span&gt;_site/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; _site/
+
+git add &lt;span class=&quot;nt&quot;&gt;-fA&lt;/span&gt;
+git commit &lt;span class=&quot;nt&quot;&gt;--allow-empty&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;git log &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;%B&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+git push &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deployed successfully&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we are telling CircleCI to checkout the &lt;strong&gt;master&lt;/strong&gt; branch of the repo. For personal website, Github Page uses master branch to render the site. By default, Github Page will build the site and use the contents under &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; that have already been built and put them in the root directory, that way Github Page can render the contents.&lt;/p&gt;
+
+&lt;p&gt;After you have created these files, commit and push the changes to &lt;strong&gt;source&lt;/strong&gt; branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on &lt;strong&gt;master&lt;/strong&gt; branch. Once it’s done, your changes will be available for viewing.&lt;/p&gt;
+
+&lt;h3 id=&quot;added-benefit-custom-jekyll-dependencies--plugins&quot;&gt;Added benefit: Custom Jekyll Dependencies + Plugins&lt;/h3&gt;
+&lt;p&gt;As I mentioned, if we let Github Page handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that &lt;a href=&quot;https://github.com/sverrirs/jekyll-paginate-v2&quot;&gt;jekyll-paginate-v2&lt;/a&gt; is not yet supported by Github Page, but now you can take advantage of the new additional features of this dependency.&lt;/p&gt;
+
+&lt;h2 id=&quot;other-thoughts&quot;&gt;Other thoughts&lt;/h2&gt;
+&lt;p&gt;I also thought about separating the source code of the site in a separate repo so CircleCI can read from this source repo and build and make changes to the actual Github Page repo. This provides the benefits of decoupling the source and the generated sites. For now, I leave this as an exercise so you can find out more about the functionalities of CircleCI.&lt;/p&gt;</content><author><name>Jason</name></author><category term="en" /><category term="blog" /><summary type="html">Since I have been playing with Github Pages to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view here. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Page. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Page repo. Note: this tutorial assumes that you already know how to host your static site on Github Page. Otherwise, you can check out some guides available on Github. CircleCI CircleCI is a very powerful continuous integration tool, which allows rapid builds and deployment of your projects. Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project. Deploy to Github Page with CircleCI The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it here Next step is to configure the build and deployment step so CircleCI knows what to do Create .circleci/config.yml with the following content: version: 2 jobs: deploy: docker: - image: circleci/ruby:2.4.3-node-browsers environment: USER_NAME: XXX &amp;lt;- replace with your github username USER_EMAIL: XXX &amp;lt;- replace with your email steps: - checkout - run: name: install dependencies command: | gem update --system gem install bundler - restore_cache: keys: - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - v1-gem-cache-{{ arch }}-{{ .Branch }}- - v1-gem-cache-{{ arch }}- - run: bundle install --path .bundle &amp;amp;&amp;amp; bundle clean - save_cache: paths: - ~/.bundle key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - run: JEKYLL_ENV=production bundle exec jekyll build - deploy: name: Deploy Release to GitHub command: | if [ $CIRCLE_BRANCH == 'source' ]; then bash .circleci/setup-github.sh fi workflows: version: 2 build: jobs: - deploy: filters: branches: only: source The config.yml file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run bundle install , save gems cache, build the static site by executing JEKYLL_ENV=production bundle exec jekyll build and finally if the code is pushed to source branch, the script setup-github.sh is executed. Create .circleci/setup-github.sh with the following content: git config user.name &quot;$USER_NAME&quot; git config user.email &quot;$USER_EMAIL&quot; git checkout master git pull origin master find . -maxdepth 1 ! -name '_site' ! -name '.git' ! -name '.gitignore' ! -name '.circleci' -exec rm -rf {} \; mv _site/* . rm -R _site/ git add -fA git commit --allow-empty -m &quot;$(git log source -1 --pretty=%B)&quot; git push -f origin master echo &quot;deployed successfully&quot; Here we are telling CircleCI to checkout the master branch of the repo. For personal website, Github Page uses master branch to render the site. By default, Github Page will build the site and use the contents under _site directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under _site that have already been built and put them in the root directory, that way Github Page can render the contents. After you have created these files, commit and push the changes to source branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on master branch. Once it’s done, your changes will be available for viewing. Added benefit: Custom Jekyll Dependencies + Plugins As I mentioned, if we let Github Page handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that jekyll-paginate-v2 is not yet supported by Github Page, but now you can take advantage of the new additional features of this dependency. Other thoughts I also thought about separating the source code of the site in a separate repo so CircleCI can read from this source repo and build and make changes to the actual Github Page repo. This provides the benefits of decoupling the source and the generated sites. For now, I leave this as an exercise so you can find out more about the functionalities of CircleCI.</summary></entry><entry><title type="html">Bài Tiếng Việt</title><link href="https://jasonthai.me/blog/2019/07/20/bai-tieng-viet/" rel="alternate" type="text/html" title="Bài Tiếng Việt" /><published>2019-07-20T00:00:00+00:00</published><updated>2019-07-20T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/20/bai-tieng-viet</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/20/bai-tieng-viet/">&lt;p&gt;&lt;img src=&quot;/assets/img/postage-stamps-484991_640.jpg&quot; alt=&quot;tem&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Thiệt ra cái blog này đầu tiên chỉ định viết bằng tiếng Anh thôi nhưng mà càng viết thì tui lại càng muốn nó thành cái blog tạp hóa hơn. Mò từ hỗm rài tới giờ mới ra được một cách hơi ưng ý một tí để trình bày bài viết. Cái công cụ &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; này không giống như Wordpress (wp thì cái gì cũng làm sẵn cho mình). Này thì phải mày mò viết code nhiều hơn một tí. Mà tui thì lại không có giỏi trong việc chỉnh sửa CSS cho lắm.&lt;/p&gt;
+
+&lt;p&gt;Nhưng mà mò tới giờ thì thấy cũng đã tạm ổn, chỉ cần làm cho đường link xem post nhìn bắt mắt hơn tí là được. Ăn mừng để đánh dấu sự kiện blog đã hỗ trợ 2 ngôn ngữ thôi.&lt;/p&gt;
+
+&lt;div style=&quot;width:100%;height:0;padding-bottom:100%;position:relative;&quot;&gt;&lt;iframe src=&quot;https://giphy.com/embed/rjkJD1v80CjYs&quot; width=&quot;100%&quot; height=&quot;100%&quot; style=&quot;position:absolute&quot; frameborder=&quot;0&quot; class=&quot;giphy-embed&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://giphy.com/gifs/rjkJD1v80CjYs&quot;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;À tiện thể đã ăn mừng thì xin cho tui giới thiệu luôn về &lt;a href=&quot;https://nangtrongbep.com&quot;&gt;Nắng Trong Bếp&lt;/a&gt;. Mọi người vào đây xem mấy bài viết đi tìm tuổi thơ của Vy và tui nha.&lt;/p&gt;</content><author><name>Jason</name></author><category term="vi" /><category term="blog" /><summary type="html">Thiệt ra cái blog này đầu tiên chỉ định viết bằng tiếng Anh thôi nhưng mà càng viết thì tui lại càng muốn nó thành cái blog tạp hóa hơn. Mò từ hỗm rài tới giờ mới ra được một cách hơi ưng ý một tí để trình bày bài viết. Cái công cụ Jekyll này không giống như Wordpress (wp thì cái gì cũng làm sẵn cho mình). Này thì phải mày mò viết code nhiều hơn một tí. Mà tui thì lại không có giỏi trong việc chỉnh sửa CSS cho lắm. Nhưng mà mò tới giờ thì thấy cũng đã tạm ổn, chỉ cần làm cho đường link xem post nhìn bắt mắt hơn tí là được. Ăn mừng để đánh dấu sự kiện blog đã hỗ trợ 2 ngôn ngữ thôi. via GIPHY À tiện thể đã ăn mừng thì xin cho tui giới thiệu luôn về Nắng Trong Bếp. Mọi người vào đây xem mấy bài viết đi tìm tuổi thơ của Vy và tui nha.</summary></entry><entry><title type="html">Changes I Made for My Blog’s Theme</title><link href="https://jasonthai.me/blog/2019/07/18/changes-i-made-for-my-blogs-theme/" rel="alternate" type="text/html" title="Changes I Made for My Blog's Theme" /><published>2019-07-18T00:00:00+00:00</published><updated>2019-07-18T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/18/changes-i-made-for-my-blogs-theme</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/18/changes-i-made-for-my-blogs-theme/">&lt;p&gt;The stock theme that I am currently using is from &lt;a href=&quot;https://github.com/jekyll/minima&quot;&gt;https://github.com/jekyll/minima&lt;/a&gt;. I like it for its cleanliness and simplicty as the name implies.&lt;/p&gt;
+
+&lt;p&gt;But as you know I enjoy customizing things my way so I did make a few changes to make this blog a bit more to my liking (for now. After all I have switched themes a few times). Here are a couple of new additions that I added.&lt;/p&gt;
+
+&lt;h3 id=&quot;added-subscribe-feature-through-email-or-rss&quot;&gt;Added subscribe feature through email or RSS&lt;/h3&gt;
+&lt;p&gt;I am currently trying out &lt;a href=&quot;https://feedburner.google.com&quot;&gt;feedburner&lt;/a&gt; to handle subscription for the blog.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-excerpt-and-introduce-hover-effects-on-the-post&quot;&gt;Use excerpt and introduce hover effects on the post.&lt;/h3&gt;
+&lt;p&gt;If you visit my homepage, you will notice each post contains an excerpt and if you hover over the post, you’ll see a fading effect. The suggestion was made my the maintainer of Jekyll’s theme and I ended up implementing it.&lt;/p&gt;
+
+&lt;p&gt;You can see my PR here: &lt;a href=&quot;https://github.com/jekyll/minima/pull/382&quot;&gt;https://github.com/jekyll/minima/pull/382&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;added-next-and-previous-post-link&quot;&gt;Added next and previous post link&lt;/h3&gt;
+&lt;p&gt;IF you view a post, at the end of the post there is are hyperlinks to the next and previous posts to save you some clicks.&lt;/p&gt;
+
+&lt;h3 id=&quot;added-pagination-and-style-each-post-as-a-card-view&quot;&gt;Added pagination and style each post as a card view.&lt;/h3&gt;
+&lt;p&gt;Kudos to &lt;a href=&quot;prashanthmadi.github.io&quot;&gt;prashanthmadi.github.io&lt;/a&gt; for adding pagination and the card view that looks really nice.&lt;/p&gt;
+
+&lt;p&gt;You can see the changes to add pagination &lt;a href=&quot;https://github.com/prashanthmadi/prashanthmadi.github.io/commit/d09b4351f0a8e34318847f14f854b5be2f06b4d6&quot;&gt;here&lt;/a&gt; and the card view &lt;a href=&quot;https://github.com/prashanthmadi/prashanthmadi.github.io/commit/78bc5e44c80f7bb1cbe129691701d79d3e8bdbb5#diff-891082c144b1c9ddb0047d67a7b4181f&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Below is the snippet of my homepage changes:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/7cc4269a6ea78743616b64a9d8c4dcef.js&quot;&gt; &lt;/script&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/2547bf7ccc911229f6dee3d3c9c27f52.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;added-all-posts-page-grouped-by-year-month&quot;&gt;Added all posts page grouped by year-month&lt;/h3&gt;
+&lt;p&gt;This is a nice way to view all the available posts on the same page. Here is the code to render this page:&lt;/p&gt;
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/23b552da7884e8a06805ac4f15576c1a.js&quot;&gt; &lt;/script&gt;</content><author><name>Jason</name></author><category term="en" /><category term="blog" /><summary type="html">The stock theme that I am currently using is from https://github.com/jekyll/minima. I like it for its cleanliness and simplicty as the name implies. But as you know I enjoy customizing things my way so I did make a few changes to make this blog a bit more to my liking (for now. After all I have switched themes a few times). Here are a couple of new additions that I added. Added subscribe feature through email or RSS I am currently trying out feedburner to handle subscription for the blog. Use excerpt and introduce hover effects on the post. If you visit my homepage, you will notice each post contains an excerpt and if you hover over the post, you’ll see a fading effect. The suggestion was made my the maintainer of Jekyll’s theme and I ended up implementing it. You can see my PR here: https://github.com/jekyll/minima/pull/382 Added next and previous post link IF you view a post, at the end of the post there is are hyperlinks to the next and previous posts to save you some clicks. Added pagination and style each post as a card view. Kudos to prashanthmadi.github.io for adding pagination and the card view that looks really nice. You can see the changes to add pagination here and the card view here. Below is the snippet of my homepage changes: 400: Invalid request 400: Invalid request Added all posts page grouped by year-month This is a nice way to view all the available posts on the same page. Here is the code to render this page: 400: Invalid request</summary></entry><entry><title type="html">The Existence of Anniversaries</title><link href="https://jasonthai.me/blog/2019/07/16/the-existence-of-anniversaries/" rel="alternate" type="text/html" title="The Existence of Anniversaries" /><published>2019-07-16T00:00:00+00:00</published><updated>2019-07-16T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/16/the-existence-of-anniversaries</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/16/the-existence-of-anniversaries/">&lt;p&gt;&lt;img src=&quot;/assets/img/3years.jpg&quot; alt=&quot;3years&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Definition of &lt;strong&gt;anniversary&lt;/strong&gt; from &lt;a href=&quot;https://www.merriam-webster.com/dictionary/anniversary&quot;&gt;Merriam-Webster&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;1: The annual recurrence of a date marking a notable event
+&lt;br /&gt;
+// a wedding anniversary
+&lt;br /&gt;
+broadly : a date that follows such an event by a specified period of time measured in units other than years
+&lt;br /&gt;
+// the 6-month anniversary of the accident&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2: The celebration of an anniversary&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;How do you celebrate anniversaries? Do you go to a fancy restaurant or prepare an intimate meal at home? Either option is great. What is important is that you get to spend some quality time with your loved one to celebrate the special day that you guys experienced however long ago.  Sometimes though, for reasons, you guys cannot spend the time together on your special anniversary and that blows because you really want to. Well you are not alone. I and probably many other have experienced the same issue. You see, I could not spend many anniversaries with my best friend (and now wife) because we had a long distance relationships for many years. Did we ever let the fact that we could not spend much time together affect us? Yes, we did in multiple occasions. However, we always decided to stick together and ride through the storm that coexists with our relationship. So what should you? On the day where you are supposed to celebrate with each other but can’t, I’d say remember about the past, all the events that happened that made this day anniversary. You can send your loved one a text message, or in my case a blog post to remind your someone how much you care. And you can tell them that this anniversary, although lonely it can be, makes you forever more cherish the fact you guys are still in love with each other and that you wish this will be the last anniversary you guys are not each other. After all the person is very important to you. With that, I just want to say the existence of anniversaries, though can be quite superficial, is an important aspect of your life.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;To my wife, I just want to say I love you and happy anniversary dear!&lt;/p&gt;</content><author><name>Jason</name></author><category term="en" /><category term="blog" /><summary type="html">Definition of anniversary from Merriam-Webster: 1: The annual recurrence of a date marking a notable event // a wedding anniversary broadly : a date that follows such an event by a specified period of time measured in units other than years // the 6-month anniversary of the accident 2: The celebration of an anniversary How do you celebrate anniversaries? Do you go to a fancy restaurant or prepare an intimate meal at home? Either option is great. What is important is that you get to spend some quality time with your loved one to celebrate the special day that you guys experienced however long ago. Sometimes though, for reasons, you guys cannot spend the time together on your special anniversary and that blows because you really want to. Well you are not alone. I and probably many other have experienced the same issue. You see, I could not spend many anniversaries with my best friend (and now wife) because we had a long distance relationships for many years. Did we ever let the fact that we could not spend much time together affect us? Yes, we did in multiple occasions. However, we always decided to stick together and ride through the storm that coexists with our relationship. So what should you? On the day where you are supposed to celebrate with each other but can’t, I’d say remember about the past, all the events that happened that made this day anniversary. You can send your loved one a text message, or in my case a blog post to remind your someone how much you care. And you can tell them that this anniversary, although lonely it can be, makes you forever more cherish the fact you guys are still in love with each other and that you wish this will be the last anniversary you guys are not each other. After all the person is very important to you. With that, I just want to say the existence of anniversaries, though can be quite superficial, is an important aspect of your life.</summary></entry><entry><title type="html">So You Have Some Money</title><link href="https://jasonthai.me/blog/2019/07/15/so-you-have-some-money/" rel="alternate" type="text/html" title="So You Have Some Money" /><published>2019-07-15T00:00:00+00:00</published><updated>2019-07-15T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/15/so-you-have-some-money</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/15/so-you-have-some-money/">&lt;p&gt;&lt;img src=&quot;/assets/img/money-matters-1173105.jpg&quot; alt=&quot;money&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To San and Vy,&lt;/p&gt;
+
+&lt;p&gt;I know both of you do not like to talk about money. After all you are usually busy or have better things to do - Vy with your internship and thesis and San with your part time job and rotation. This is why I write this post so at least you have some place to read about it when you have the time. And I promise I will keep this short and easy to understand. After all, we do have to talk about this and it is better to do it now than later.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Upon working for a while, you may start noticing that your bank account is going up. YOU HAVE SOME MONEY. You may start wondering what you can do with that money. You may think about spending that money on a fancy meal, a pair of new shoes, or that beautiful dress that you had your eyes on for a while. You may have already spent a bit of your money on the things mentioned already. But then, growing up you are taught to be frugal and never spend all the money that you have so you want to save them. This is where I want to come in and offer some help.&lt;/p&gt;
+
+&lt;p&gt;Here are the first few &lt;em&gt;INITIAL&lt;/em&gt; steps that you can do (There will be more):&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;If  you have not done it already, start setting up a budget and keep track of you expense and income. In order to know how much you can save, you need to know how much you are earning and spending. @San, Vy made one for you &lt;a href=&quot;https://docs.google.com/spreadsheets/d/1QcXNs1b35f-vd9t82PB5aL8n1TTsil8HQD-1WbGZJ54/edit#gid=416635166&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;After you know how much you spend for a month, start saving up for an emergency fund (ideally 3 to 6 months of your monthly expense). This will be your safety net in case some emergency happens. This money will also be the foundation to show that you can save money and live below your mean.&lt;/li&gt;
+  &lt;li&gt;If you have very high interest debt, start paying them. @San, you can think about paying for your tuition bit by bit now (depending on the interest, which I figure is high)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Here are some other next steps after the first 3 above:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Put your emergency fund into a high yield saving account to earn interest. (I can show you how to do this).&lt;/li&gt;
+  &lt;li&gt;Start learning more about 401K, Traditional/Roth IRA (I will put up another post to go into details about this. For now, you can ignore)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can also take a look at this &lt;a href=&quot;https://i.imgur.com/lSoUQr2.png&quot;&gt;flowchart&lt;/a&gt; and check out reddit’s personalfinance &lt;a href=&quot;https://www.reddit.com/r/personalfinance/wiki/index&quot;&gt;wiki&lt;/a&gt; to find out more about all things personal finance.&lt;/p&gt;
+
+&lt;p&gt;Why you need to do all this stuff? The answer is simple. This is to help you get started on being financially responsible and eventually finanical independent. You may wonder what the heck is financial independence. I promise it will be very fun to know about this and not boring at all even though it also revolves around money a bit. For now, enough money talk for the day. See it is not too long!&lt;/p&gt;</content><author><name>Jason</name></author><category term="en" /><category term="finance" /><summary type="html">To San and Vy, I know both of you do not like to talk about money. After all you are usually busy or have better things to do - Vy with your internship and thesis and San with your part time job and rotation. This is why I write this post so at least you have some place to read about it when you have the time. And I promise I will keep this short and easy to understand. After all, we do have to talk about this and it is better to do it now than later.</summary></entry><entry><title type="html">Your Life or Your Money</title><link href="https://jasonthai.me/blog/2019/06/30/your-life-or-your-money/" rel="alternate" type="text/html" title="Your Life or Your Money" /><published>2019-06-30T00:00:00+00:00</published><updated>2019-06-30T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/06/30/your-life-or-your-money</id><content type="html" xml:base="https://jasonthai.me/blog/2019/06/30/your-life-or-your-money/">&lt;h3 id=&quot;a-collection-of-what-i-am-keeping-track-of-in-the-book-your-life-or-your-money&quot;&gt;A Collection of What I am keeping track of in the book &lt;a href=&quot;https://www.amazon.com/Your-Money-Life-Transforming-Relationship/dp/0143115766&quot;&gt;Your Life or Your Money&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Read more about it &lt;a href=&quot;https://yourmoneyoryourlife.com/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Questions to asked before spending:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Did I receive fullfilment, satisfaction, and value in proportion to life energy spent?&lt;/li&gt;
+  &lt;li&gt;Is this expenditure of life energy in alignment with my values and life purpose?&lt;/li&gt;
+  &lt;li&gt;How might this expenditure change if I didn’t have to work for money?&lt;/li&gt;
+  &lt;li&gt;What would this expense look like in a just and compassionate world?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;CHECKLIST: THINK BEFORE YOU SPEND&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Don’t go shopping.&lt;/li&gt;
+  &lt;li&gt;Live within your means.&lt;/li&gt;
+  &lt;li&gt;Take care of what you have.&lt;/li&gt;
+  &lt;li&gt;Wear it out.&lt;/li&gt;
+  &lt;li&gt;Do it yourself.&lt;/li&gt;
+  &lt;li&gt;Anticipate your needs.&lt;/li&gt;
+  &lt;li&gt;Research value, quality, durability, multiple use, and price.&lt;/li&gt;
+  &lt;li&gt;Buy it for less.&lt;/li&gt;
+  &lt;li&gt;Meet your needs differently.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;the-9-steps&quot;&gt;The 9 Steps&lt;/h2&gt;
+&lt;h4 id=&quot;1-making-peace-with-the-past&quot;&gt;1. Making Peace with the Past&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;How much have you earned in your life? Find out your total lifetime earnings—the sum total of your gross income, from the first penny you ever earned to your most recent paycheck.&lt;/li&gt;
+  &lt;li&gt;What have you got to show for it? Find out your net worth by creating a personal balance sheet of assets and liabilities—everything you own and everything you owe.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;2-being-in-the-present---tracking-your-life-energy&quot;&gt;2. Being in the Present - Tracking Your Life Energy&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;How much are you trading your life energy for? Establish the actual costs in time and money required to maintain your job, and compute your real hourly wage.&lt;/li&gt;
+  &lt;li&gt;Keep track of every cent that comes into or goes out of your life.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;3-where-is-it-all-going-monthly-tabulation&quot;&gt;3. Where Is It All Going? (Monthly Tabulation)&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Every month, total all expenses within categories generated by your own unique spending pattern. Then total income.&lt;/li&gt;
+  &lt;li&gt;Convert dollars spent in each category to “hours of life energy,” using your real hourly wage as computed in step 2.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;4-three-questions-that-will-transform-your-life&quot;&gt;4. Three Questions That Will Transform Your Life&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Did I receive fullfilment, satisfaction, and value in proportion to life energy spent?&lt;/li&gt;
+  &lt;li&gt;Is this expenditure of life energy in alignment with my values and life purpose?&lt;/li&gt;
+  &lt;li&gt;How might this expenditure change if I didn’t have to work for money?&lt;/li&gt;
+  &lt;li&gt;(Optional) What would this expense look like in a just and compassionate world?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;5-making-life-energy-visible&quot;&gt;5. Making Life Energy Visible&lt;/h4&gt;
+&lt;p&gt;Create a large Wall (or Online) Chart plotting the total monthly income and total monthly expenses from your Monthly Tabulation. Put it where you will see it every day.&lt;/p&gt;
+
+&lt;h4 id=&quot;6-valuing-your-life-energy---minimizing-spending&quot;&gt;6. Valuing Your Life Energy - Minimizing Spending&lt;/h4&gt;
+&lt;p&gt;Learn and practice intelligent use of life energy (money), which will result in lowering your expenses and increasing your savings. This will create greater fulfillment, integrity, and alignment in your life.&lt;/p&gt;
+
+&lt;h4 id=&quot;7-valuing-your-life-energy---maximizing-income&quot;&gt;7. Valuing Your Life Energy - Maximizing Income&lt;/h4&gt;
+&lt;p&gt;Respect the life energy you are putting into your job. Money is simply something you trade your life energy for. Trade it with purpose and integrity for increased earnings.&lt;/p&gt;
+
+&lt;h4 id=&quot;8-capital-and-the-crossover-point&quot;&gt;8. Capital and the Crossover Point&lt;/h4&gt;
+&lt;p&gt;Each month apply the following equation to your total accumulated capital, and post the montly independence income as a separate line on your Wall Chart:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;capital x current long-term interest rate / 12 months = monthly investment income 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;9-investing-for-fi&quot;&gt;9. Investing for FI&lt;/h4&gt;
+&lt;p&gt;Set up financial plan using the three pillars:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Capital: The income-producing core of your Financial Independence&lt;/li&gt;
+  &lt;li&gt;Cushion: Enough ready cash, earning bank interest, to cover six months of expenses&lt;/li&gt;
+  &lt;li&gt;Cache: The surplus of funds resulting from your continued pracrice of the nine steps&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Jason</name></author><category term="en" /><category term="finance" /><summary type="html">A Collection of What I am keeping track of in the book Your Life or Your Money Read more about it here Questions to asked before spending: Did I receive fullfilment, satisfaction, and value in proportion to life energy spent? Is this expenditure of life energy in alignment with my values and life purpose? How might this expenditure change if I didn’t have to work for money? What would this expense look like in a just and compassionate world? CHECKLIST: THINK BEFORE YOU SPEND Don’t go shopping. Live within your means. Take care of what you have. Wear it out. Do it yourself. Anticipate your needs. Research value, quality, durability, multiple use, and price. Buy it for less. Meet your needs differently. The 9 Steps 1. Making Peace with the Past How much have you earned in your life? Find out your total lifetime earnings—the sum total of your gross income, from the first penny you ever earned to your most recent paycheck. What have you got to show for it? Find out your net worth by creating a personal balance sheet of assets and liabilities—everything you own and everything you owe. 2. Being in the Present - Tracking Your Life Energy How much are you trading your life energy for? Establish the actual costs in time and money required to maintain your job, and compute your real hourly wage. Keep track of every cent that comes into or goes out of your life. 3. Where Is It All Going? (Monthly Tabulation) Every month, total all expenses within categories generated by your own unique spending pattern. Then total income. Convert dollars spent in each category to “hours of life energy,” using your real hourly wage as computed in step 2. 4. Three Questions That Will Transform Your Life Did I receive fullfilment, satisfaction, and value in proportion to life energy spent? Is this expenditure of life energy in alignment with my values and life purpose? How might this expenditure change if I didn’t have to work for money? (Optional) What would this expense look like in a just and compassionate world? 5. Making Life Energy Visible Create a large Wall (or Online) Chart plotting the total monthly income and total monthly expenses from your Monthly Tabulation. Put it where you will see it every day. 6. Valuing Your Life Energy - Minimizing Spending Learn and practice intelligent use of life energy (money), which will result in lowering your expenses and increasing your savings. This will create greater fulfillment, integrity, and alignment in your life. 7. Valuing Your Life Energy - Maximizing Income Respect the life energy you are putting into your job. Money is simply something you trade your life energy for. Trade it with purpose and integrity for increased earnings. 8. Capital and the Crossover Point Each month apply the following equation to your total accumulated capital, and post the montly independence income as a separate line on your Wall Chart: capital x current long-term interest rate / 12 months = monthly investment income 9. Investing for FI Set up financial plan using the three pillars: Capital: The income-producing core of your Financial Independence Cushion: Enough ready cash, earning bank interest, to cover six months of expenses Cache: The surplus of funds resulting from your continued pracrice of the nine steps</summary></entry><entry><title type="html">Regrowing My Succulents</title><link href="https://jasonthai.me/blog/2019/06/16/regrowing-my-succulents/" rel="alternate" type="text/html" title="Regrowing My Succulents" /><published>2019-06-16T00:00:00+00:00</published><updated>2019-06-16T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/06/16/regrowing-my-succulents</id><content type="html" xml:base="https://jasonthai.me/blog/2019/06/16/regrowing-my-succulents/">&lt;p&gt;This is long overdue but today I decided to trim and regrow the succulents that my wife brought me. I admit I have not been taking good care of them lately and I promised my wife I would do a better job from now on. It took about an hour to replace the soil (the old one was actually kinda gross!) and trimming the succulents. I checked out a couple of websites to make sure I trimmed correctly but one never knows. I hope they can grow back to their beautiful selves.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/succulent.jpg&quot; alt=&quot;succulents&quot; /&gt;
+Look how small and cute they are now.&lt;/p&gt;
+
+&lt;p&gt;This makes me wonder: why do we procrastinate and put off things so much. I thought about doing this a long time ago but never got to do it. I am glad I did it today. This was actually quite a self meditative activity as I was so focused on the task. I should not put things off so much anymore.&lt;/p&gt;
+
+&lt;p&gt;I have been thinking lately about how to grow myself and do something new. Perhaps taking care of plants can be one of them. Unfortunately I do not have a lot of space to grow plants. How do one improve oneself? A part of me also wants me to take it easy and not force myself to do too much. I need to find a better balance between forcing myself to do things and doing things out of interest.&lt;/p&gt;
+
+&lt;p&gt;If you read this and remember that you are supposed to do something but have not, I hope you will finish it today.&lt;/p&gt;</content><author><name>Jason</name></author><category term="en" /><category term="thoughts" /><summary type="html">This is long overdue but today I decided to trim and regrow the succulents that my wife brought me. I admit I have not been taking good care of them lately and I promised my wife I would do a better job from now on. It took about an hour to replace the soil (the old one was actually kinda gross!) and trimming the succulents. I checked out a couple of websites to make sure I trimmed correctly but one never knows. I hope they can grow back to their beautiful selves. Look how small and cute they are now. This makes me wonder: why do we procrastinate and put off things so much. I thought about doing this a long time ago but never got to do it. I am glad I did it today. This was actually quite a self meditative activity as I was so focused on the task. I should not put things off so much anymore. I have been thinking lately about how to grow myself and do something new. Perhaps taking care of plants can be one of them. Unfortunately I do not have a lot of space to grow plants. How do one improve oneself? A part of me also wants me to take it easy and not force myself to do too much. I need to find a better balance between forcing myself to do things and doing things out of interest. If you read this and remember that you are supposed to do something but have not, I hope you will finish it today.</summary></entry><entry><title type="html">Recommended Financial Tools</title><link href="https://jasonthai.me/blog/2019/06/13/financial-tools/" rel="alternate" type="text/html" title="Recommended Financial Tools" /><published>2019-06-13T00:00:00+00:00</published><updated>2019-06-13T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/06/13/financial-tools</id><content type="html" xml:base="https://jasonthai.me/blog/2019/06/13/financial-tools/">&lt;p&gt;&lt;img src=&quot;/assets/img/accounting-black-budget.jpg&quot; alt=&quot;finance&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is a list of my recommended financial tools that will enhance your experience of managing your finance:
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;h3 id=&quot;tools&quot;&gt;Tools&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://vanguard.com&quot;&gt;Vanguard&lt;/a&gt; - Financial advisor and brokerage. In my opinion this is the best broker in the market for its low expense ratio funds.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/go/wealthfront&quot;&gt;Wealthfront*&lt;/a&gt; - If you prefer a more DIFM (Do it for me) investment, Wealthfront offers some excellent options of auto investment. It also offers a cash account with high APY compared to other alternatives.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/go/robinhood&quot;&gt;Robinhood*&lt;/a&gt; - Commission-free investing app. You can purchase stocks for zero fee using the app.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.personalcapital.com&quot;&gt;Personal Capital&lt;/a&gt; - It is a free tool to manage and keep track of your investiments. You can also track your transactions, networth, asset allocation, retirement analysis and more.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mint.com&quot;&gt;Mint&lt;/a&gt; - It is another alternative to Personal Capital. It does not offer as many features as PC but less is more. The UI looks cleaner in my opinion.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/go/ynab&quot;&gt;YNAB*&lt;/a&gt; - If you prefer a more DIY budgeting tools, I highly recommend YNAB. The site also features some workshop to guide you more about budgeting.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;*These are affiliate links and should you chose to do business with them, this blog will earn a small commission.&lt;/p&gt;
+
+&lt;h3 id=&quot;other-resources&quot;&gt;Other Resources&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.bogleheads.org/wiki/Main_Page&quot;&gt;Boglehead Wiki&lt;/a&gt; - Investing advice inspired by Mr. John Bogle&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://personal.vanguard.com/pdf/s352.pdf&quot;&gt;Total-return Investing&lt;/a&gt; - Yield investing vs total return investing.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Simple-Path-Wealth-financial-independence/dp/1533667926&quot;&gt;The Simple Path to Wealth&lt;/a&gt; - This book provides a simple approach to investing.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.amazon.com/Millionaire-Next-Door-Surprising-Americas/dp/1589795474&quot;&gt;The Millionaire Next Door&lt;/a&gt; - What’s a millionaire really like and how to become one.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.madfientist.com/&quot;&gt;Mad Fientist&lt;/a&gt; - FIRE podcast.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I hope these tools will also benefit you like they do for me. Managing finance is never easy but these tools hopefully will ease you into taking a more active role in doing it.&lt;/p&gt;</content><author><name>Jason</name></author><category term="en" /><category term="finance" /><category term="blog" /><summary type="html">Here is a list of my recommended financial tools that will enhance your experience of managing your finance:</summary></entry><entry><title type="html">About Unit Tests</title><link href="https://jasonthai.me/blog/2019/06/12/about-unit-tests/" rel="alternate" type="text/html" title="About Unit Tests" /><published>2019-06-12T00:00:00+00:00</published><updated>2019-06-12T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/06/12/about-unit-tests</id><content type="html" xml:base="https://jasonthai.me/blog/2019/06/12/about-unit-tests/">&lt;p&gt;Today while trying to deploy some of my codes, I ran into an issue such that the build kept failing. Turned out that some of my unit tests were failing. The unit tests did pass before, which is why all the builds until now have been successful. How come they failed today? Upon investigating more, it turns out there is a timestamp validation in the code which has been successfully validated until now but the unit test did not cover that case. I ended up deploying a hotfix to unblock the build.&lt;/p&gt;
+
+&lt;p&gt;For more context, my unit test was similar to this one (conceptually):&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sampleTest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// This test will pass until 2020-01-01 12:00:00&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;assertTrue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;currentTimeMillis&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1577836800000&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;L&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, this test will run fine until it does not. For my specific test, the validation stopped working today.
+I learned a hard lesson today. As a code reviewer, it is important to not only look at codes but also the unit tests and see if they cover all the possible cases. Otherwise, we will have to spend a lot of time debugging issues like this.&lt;/p&gt;</content><author><name>Jason</name></author><category term="en" /><category term="blog" /><summary type="html">Today while trying to deploy some of my codes, I ran into an issue such that the build kept failing. Turned out that some of my unit tests were failing. The unit tests did pass before, which is why all the builds until now have been successful. How come they failed today? Upon investigating more, it turns out there is a timestamp validation in the code which has been successfully validated until now but the unit test did not cover that case. I ended up deploying a hotfix to unblock the build. For more context, my unit test was similar to this one (conceptually): void sampleTest() { // This test will pass until 2020-01-01 12:00:00 assertTrue(System.currentTimeMillis() &amp;lt; 1577836800000L); } As you can see, this test will run fine until it does not. For my specific test, the validation stopped working today. I learned a hard lesson today. As a code reviewer, it is important to not only look at codes but also the unit tests and see if they cover all the possible cases. Otherwise, we will have to spend a lot of time debugging issues like this.</summary></entry><entry><title type="html">Things I’ve Learned Hosting a URL Shortener Service</title><link href="https://jasonthai.me/blog/2019/06/05/thoughts-on-url-shortener-service/" rel="alternate" type="text/html" title="Things I've Learned Hosting a URL Shortener Service" /><published>2019-06-05T00:00:00+00:00</published><updated>2019-06-05T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/06/05/thoughts-on-url-shortener-service</id><content type="html" xml:base="https://jasonthai.me/blog/2019/06/05/thoughts-on-url-shortener-service/">&lt;p&gt;&lt;img src=&quot;/assets/img/tinyalias.png&quot; alt=&quot;tinyalias&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;TinyAlias is no longer in service but I am still hosting it on Heroku so you can try out its functionality. Access the heroku app here: &lt;a href=&quot;https://tinyalias.herokuapp.com&quot;&gt;https://tinyalias.herokuapp.com&lt;/a&gt; (It may take sometimes to wake up since this service is now hosted for free)&lt;/p&gt;
+
+&lt;p&gt;After hosting my own custom url shortener service &lt;a href=&quot;https://tinyalias.com&quot;&gt;TinyAlias&lt;/a&gt; for about 6 months, I learned a few things:&lt;/p&gt;
+
+&lt;p&gt;There are many available services on the internet. Some provide more functionalities than the others.
+&lt;br /&gt;
+Most people use the service for spam and phishing purposes - Same link is shortened multiple times.
+&lt;br /&gt;
+Determining if links are safe is hard - Most services are not able to provide such information.
+&lt;br /&gt;
+Links are mostly distributed through emails - Most links are images embedded in emails.
+&lt;br /&gt;
+A lot of users are robos - They can be configured to use the service in a programmatical way. 
+&lt;br /&gt;
+Links are auto rejected by various websites - They all have mechanisms to block the shortened links on their sites.
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;That said, a lot of companies use shortened links with their own vanity domains which feature thair brands to promote their service and that is a good use case for the service.
+Also it is great to send someone a short link rather than a very long one, which is the main purpose of these services.&lt;/p&gt;</content><author><name>Jason</name></author><category term="en" /><category term="blog" /><summary type="html">TinyAlias is no longer in service but I am still hosting it on Heroku so you can try out its functionality. Access the heroku app here: https://tinyalias.herokuapp.com (It may take sometimes to wake up since this service is now hosted for free) After hosting my own custom url shortener service TinyAlias for about 6 months, I learned a few things: There are many available services on the internet. Some provide more functionalities than the others. Most people use the service for spam and phishing purposes - Same link is shortened multiple times. Determining if links are safe is hard - Most services are not able to provide such information. Links are mostly distributed through emails - Most links are images embedded in emails. A lot of users are robos - They can be configured to use the service in a programmatical way. Links are auto rejected by various websites - They all have mechanisms to block the shortened links on their sites. That said, a lot of companies use shortened links with their own vanity domains which feature thair brands to promote their service and that is a good use case for the service. Also it is great to send someone a short link rather than a very long one, which is the main purpose of these services.</summary></entry></feed>
