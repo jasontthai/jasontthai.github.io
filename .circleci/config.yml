@@ -2,13 +2,28 @@ version: 2
 jobs:
   deploy:
     docker:
-      - image: circleci/ruby:2.4.3-node-browsers
+      - image: circleci/ruby:latest
         environment:
           USER_NAME: zirius
           USER_EMAIL: thaixtri@gmail.com
     steps:
       - checkout
-      - run: bundle install
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
+      - restore_cache:
+          keys:
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+            - v1-gem-cache-{{ arch }}-
+      - run: bundle install --path .bundle && bundle clean
+      - save_cache:
+          paths:
+            - ~/.bundle
+          key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+
       - run: JEKYLL_ENV=production bundle exec jekyll build
       - deploy:
           name: Deploy Release to GitHub
@@ -23,4 +38,6 @@ workflows:
       - deploy:
           filters:
             branches:
-              only: source
+              only: 
+                - source
+                - test
