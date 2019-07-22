@@ -28,7 +28,22 @@ jobs:
           USER_EMAIL: XXX <- replace with your email
     steps:
       - checkout
-      - run: bundle install
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
+      - restore_cache:
+          keys:
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+            - v1-gem-cache-{{ arch }}-
+      - run: bundle install --path .bundle && bundle clean
+      - save_cache:
+          paths:
+            - ~/.bundle
+          key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+
       - run: JEKYLL_ENV=production bundle exec jekyll build
       - deploy:
           name: Deploy Release to GitHub
@@ -46,7 +61,7 @@ workflows:
               only: source
 ```
 
-The `config.yml` file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, run `bundle install` , build the static site by executing `JEKYLL_ENV=production bundle exec jekyll build` and finally if the code is pushed to **source** branch, the script `setup-github.sh` is executed.
+The `config.yml` file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run `bundle install` , save gems cache, build the static site by executing `JEKYLL_ENV=production bundle exec jekyll build` and finally if the code is pushed to **source** branch, the script `setup-github.sh` is executed.
 
 ### Create `.circleci/setup-github.sh` with the following content:
 ```bash
