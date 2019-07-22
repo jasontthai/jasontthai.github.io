@@ -2,7 +2,12 @@
 layout: post
 title: Things I've Learned Hosting a URL Shortener Service
 tags: blog
+featured_img: /assets/img/tinyalias.png
 ---
+
+![tinyalias](/assets/img/tinyalias.png)
+
+TinyAlias is no longer in service but I am still hosting it on Heroku so you can try out its functionality. Access the heroku app here: [https://tinyalias.herokuapp.com](https://tinyalias.herokuapp.com) (It may take sometimes to wake up since this service is now hosted for free)
 
 After hosting my own custom url shortener service [TinyAlias](https://tinyalias.com) for about 6 months, I learned a few things:
 
