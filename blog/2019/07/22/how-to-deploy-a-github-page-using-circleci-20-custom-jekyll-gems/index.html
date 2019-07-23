@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>How to Deploy to Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies | Blog of Things</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="How to Deploy to Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies" />
+<meta name="author" content="Jason" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Since I have been playing with Github Pages to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view here. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Page. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Page repo. Note: this tutorial assumes that you already know how to host your static site on Github Page. Otherwise, you can check out some guides available on Github. CircleCI CircleCI is a very powerful continuous integration tool, which allows rapid builds and deployment of your projects. Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project. Deploy to Github Page with CircleCI The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it here Next step is to configure the build and deployment step so CircleCI knows what to do Create .circleci/config.yml with the following content: version: 2 jobs: deploy: docker: - image: circleci/ruby:2.4.3-node-browsers environment: USER_NAME: XXX &lt;- replace with your github username USER_EMAIL: XXX &lt;- replace with your email steps: - checkout - run: name: install dependencies command: | gem update --system gem install bundler - restore_cache: keys: - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - v1-gem-cache-{{ arch }}-{{ .Branch }}- - v1-gem-cache-{{ arch }}- - run: bundle install --path .bundle &amp;&amp; bundle clean - save_cache: paths: - ~/.bundle key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - run: JEKYLL_ENV=production bundle exec jekyll build - deploy: name: Deploy Release to GitHub command: | if [ $CIRCLE_BRANCH == &#39;source&#39; ]; then bash .circleci/deploy.sh fi workflows: version: 2 build: jobs: - deploy: filters: branches: only: source The config.yml file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run bundle install , save gems cache, build the static site by executing JEKYLL_ENV=production bundle exec jekyll build and finally if the code is pushed to source branch, the script deploy.sh is executed. Create .circleci/deploy.sh with the following content: git config user.name &quot;$USER_NAME&quot; git config user.email &quot;$USER_EMAIL&quot; git checkout master git pull origin master find . -maxdepth 1 ! -name &#39;_site&#39; ! -name &#39;.git&#39; ! -name &#39;.gitignore&#39; ! -name &#39;.circleci&#39; -exec rm -rf {} \; mv _site/* . rm -R _site/ git add -fA git commit --allow-empty -m &quot;$(git log source -1 --pretty=%B)&quot; git push -f origin master echo &quot;deployed successfully&quot; Here we are telling CircleCI to checkout the master branch of the repo. For personal website, Github Page uses master branch to render the site. By default, Github Page will build the site and use the contents under _site directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under _site that have already been built and put them in the root directory, that way Github Page can render the contents. After you have created these files, commit and push the changes to source branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on master branch. Once it’s done, your changes will be available for viewing. Added benefit: Custom Jekyll Dependencies + Plugins As I mentioned, if we let Github Page handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that jekyll-paginate-v2 is not yet supported by Github Page, but now you can take advantage of the new additional features of this dependency. Other thoughts I also thought about separating the source code of the site in a separate repo so CircleCI can read from this source repo and build and make changes to the actual Github Page repo. This provides the benefits of decoupling the source and the generated sites. For now, I leave this as an exercise so you can find out more about the functionalities of CircleCI." />
+<meta property="og:description" content="Since I have been playing with Github Pages to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view here. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Page. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Page repo. Note: this tutorial assumes that you already know how to host your static site on Github Page. Otherwise, you can check out some guides available on Github. CircleCI CircleCI is a very powerful continuous integration tool, which allows rapid builds and deployment of your projects. Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project. Deploy to Github Page with CircleCI The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it here Next step is to configure the build and deployment step so CircleCI knows what to do Create .circleci/config.yml with the following content: version: 2 jobs: deploy: docker: - image: circleci/ruby:2.4.3-node-browsers environment: USER_NAME: XXX &lt;- replace with your github username USER_EMAIL: XXX &lt;- replace with your email steps: - checkout - run: name: install dependencies command: | gem update --system gem install bundler - restore_cache: keys: - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - v1-gem-cache-{{ arch }}-{{ .Branch }}- - v1-gem-cache-{{ arch }}- - run: bundle install --path .bundle &amp;&amp; bundle clean - save_cache: paths: - ~/.bundle key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - run: JEKYLL_ENV=production bundle exec jekyll build - deploy: name: Deploy Release to GitHub command: | if [ $CIRCLE_BRANCH == &#39;source&#39; ]; then bash .circleci/deploy.sh fi workflows: version: 2 build: jobs: - deploy: filters: branches: only: source The config.yml file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run bundle install , save gems cache, build the static site by executing JEKYLL_ENV=production bundle exec jekyll build and finally if the code is pushed to source branch, the script deploy.sh is executed. Create .circleci/deploy.sh with the following content: git config user.name &quot;$USER_NAME&quot; git config user.email &quot;$USER_EMAIL&quot; git checkout master git pull origin master find . -maxdepth 1 ! -name &#39;_site&#39; ! -name &#39;.git&#39; ! -name &#39;.gitignore&#39; ! -name &#39;.circleci&#39; -exec rm -rf {} \; mv _site/* . rm -R _site/ git add -fA git commit --allow-empty -m &quot;$(git log source -1 --pretty=%B)&quot; git push -f origin master echo &quot;deployed successfully&quot; Here we are telling CircleCI to checkout the master branch of the repo. For personal website, Github Page uses master branch to render the site. By default, Github Page will build the site and use the contents under _site directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under _site that have already been built and put them in the root directory, that way Github Page can render the contents. After you have created these files, commit and push the changes to source branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on master branch. Once it’s done, your changes will be available for viewing. Added benefit: Custom Jekyll Dependencies + Plugins As I mentioned, if we let Github Page handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that jekyll-paginate-v2 is not yet supported by Github Page, but now you can take advantage of the new additional features of this dependency. Other thoughts I also thought about separating the source code of the site in a separate repo so CircleCI can read from this source repo and build and make changes to the actual Github Page repo. This provides the benefits of decoupling the source and the generated sites. For now, I leave this as an exercise so you can find out more about the functionalities of CircleCI." />
+<link rel="canonical" href="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/" />
+<meta property="og:url" content="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/" />
+<meta property="og:site_name" content="Blog of Things" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-22T00:00:00+00:00" />
+<script type="application/ld+json">
+{"description":"Since I have been playing with Github Pages to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view here. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Page. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Page repo. Note: this tutorial assumes that you already know how to host your static site on Github Page. Otherwise, you can check out some guides available on Github. CircleCI CircleCI is a very powerful continuous integration tool, which allows rapid builds and deployment of your projects. Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project. Deploy to Github Page with CircleCI The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it here Next step is to configure the build and deployment step so CircleCI knows what to do Create .circleci/config.yml with the following content: version: 2 jobs: deploy: docker: - image: circleci/ruby:2.4.3-node-browsers environment: USER_NAME: XXX &lt;- replace with your github username USER_EMAIL: XXX &lt;- replace with your email steps: - checkout - run: name: install dependencies command: | gem update --system gem install bundler - restore_cache: keys: - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - v1-gem-cache-{{ arch }}-{{ .Branch }}- - v1-gem-cache-{{ arch }}- - run: bundle install --path .bundle &amp;&amp; bundle clean - save_cache: paths: - ~/.bundle key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - run: JEKYLL_ENV=production bundle exec jekyll build - deploy: name: Deploy Release to GitHub command: | if [ $CIRCLE_BRANCH == &#39;source&#39; ]; then bash .circleci/deploy.sh fi workflows: version: 2 build: jobs: - deploy: filters: branches: only: source The config.yml file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run bundle install , save gems cache, build the static site by executing JEKYLL_ENV=production bundle exec jekyll build and finally if the code is pushed to source branch, the script deploy.sh is executed. Create .circleci/deploy.sh with the following content: git config user.name &quot;$USER_NAME&quot; git config user.email &quot;$USER_EMAIL&quot; git checkout master git pull origin master find . -maxdepth 1 ! -name &#39;_site&#39; ! -name &#39;.git&#39; ! -name &#39;.gitignore&#39; ! -name &#39;.circleci&#39; -exec rm -rf {} \\; mv _site/* . rm -R _site/ git add -fA git commit --allow-empty -m &quot;$(git log source -1 --pretty=%B)&quot; git push -f origin master echo &quot;deployed successfully&quot; Here we are telling CircleCI to checkout the master branch of the repo. For personal website, Github Page uses master branch to render the site. By default, Github Page will build the site and use the contents under _site directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under _site that have already been built and put them in the root directory, that way Github Page can render the contents. After you have created these files, commit and push the changes to source branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on master branch. Once it’s done, your changes will be available for viewing. Added benefit: Custom Jekyll Dependencies + Plugins As I mentioned, if we let Github Page handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that jekyll-paginate-v2 is not yet supported by Github Page, but now you can take advantage of the new additional features of this dependency. Other thoughts I also thought about separating the source code of the site in a separate repo so CircleCI can read from this source repo and build and make changes to the actual Github Page repo. This provides the benefits of decoupling the source and the generated sites. For now, I leave this as an exercise so you can find out more about the functionalities of CircleCI.","@type":"BlogPosting","url":"https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/","headline":"How to Deploy to Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies","datePublished":"2019-07-22T00:00:00+00:00","dateModified":"2019-07-22T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/"},"author":{"@type":"Person","name":"Jason"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://jasonthai.me/feed.xml" title="Blog of Things" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-120912817-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Blog of Things</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="https://feedburner.google.com/fb/a/mailverify?uri=jasonthai&amp;loc=en_US">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>Email</span>
+          </a>
+          <a class="page-link" href="http://feeds.feedburner.com/jasonthai">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>RSS</span>
+          </a><a class="page-link" href="/about/">About</a><a class="page-link" href="/posts/">Posts</a><a class="page-link" href="/tags/">Tags</a><a class="page-link" href="/visited-places/">Places I Visited</a></div>
+      </nav></div>
+  <div class="wrapper">
+    <div class="trigger">
+      <a class="page-link"  href="/">English</a> | 
+      <a class="page-link" href="/vi">Bài Tiếng Việt</a>
+    </div>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">How to Deploy to Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-07-22T00:00:00+00:00" itemprop="datePublished">Jul 22, 2019
+      </time>
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason</span></span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><img src="https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d" alt="jekyll" /></p>
+
+<p>Since I have been playing with <a href="https://pages.github.com/">Github Pages</a> to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view <a href="https://pages.github.com/versions/">here</a>. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Page. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Page repo.</p>
+
+<p>Note: this tutorial assumes that you already know how to host your static site on Github Page. Otherwise, you can check out some  <a href="https://help.github.com/en/categories/github-pages-basics">guides</a> available on Github.</p>
+
+<h2 id="circleci">CircleCI</h2>
+<p>CircleCI is a very  powerful continuous integration tool, which allows rapid builds and deployment of your projects.  Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project.</p>
+
+<h2 id="deploy-to-github-page-with-circleci">Deploy to Github Page with CircleCI</h2>
+<p>The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it <a href="https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories">here</a></p>
+
+<p>Next step is to configure the build and deployment step so CircleCI knows what to do</p>
+<h3 id="create--circleciconfigyml-with-the-following-content">Create  <code class="highlighter-rouge">.circleci/config.yml</code> with the following content:</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">deploy</span><span class="pi">:</span>
+    <span class="na">docker</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">circleci/ruby:2.4.3-node-browsers</span>
+        <span class="na">environment</span><span class="pi">:</span>
+          <span class="na">USER_NAME</span><span class="pi">:</span> <span class="s">XXX &lt;- replace with your github username</span>
+          <span class="na">USER_EMAIL</span><span class="pi">:</span> <span class="s">XXX &lt;- replace with your email</span>
+    <span class="na">steps</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">checkout</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">install dependencies</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">gem update --system</span>
+            <span class="s">gem install bundler</span>
+      <span class="pi">-</span> <span class="na">restore_cache</span><span class="pi">:</span>
+          <span class="na">keys</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}</span>
+            <span class="pi">-</span> <span class="s">v1-gem-cache-{{ arch }}-{{ .Branch }}-</span>
+            <span class="pi">-</span> <span class="s">v1-gem-cache-{{ arch }}-</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">bundle install --path .bundle &amp;&amp; bundle clean</span>
+      <span class="pi">-</span> <span class="na">save_cache</span><span class="pi">:</span>
+          <span class="na">paths</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="s">~/.bundle</span>
+          <span class="na">key</span><span class="pi">:</span> <span class="s">v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}</span>
+
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">JEKYLL_ENV=production bundle exec jekyll build</span>
+      <span class="pi">-</span> <span class="na">deploy</span><span class="pi">:</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Deploy Release to GitHub</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="pi">|</span>
+            <span class="s">if [ $CIRCLE_BRANCH == 'source' ]; then</span>
+              <span class="s">bash .circleci/deploy.sh</span>
+            <span class="s">fi</span>
+<span class="na">workflows</span><span class="pi">:</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">jobs</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">deploy</span><span class="pi">:</span>
+          <span class="na">filters</span><span class="pi">:</span>
+            <span class="na">branches</span><span class="pi">:</span>
+              <span class="na">only</span><span class="pi">:</span> <span class="s">source</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">config.yml</code> file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run <code class="highlighter-rouge">bundle install</code> , save gems cache, build the static site by executing <code class="highlighter-rouge">JEKYLL_ENV=production bundle exec jekyll build</code> and finally if the code is pushed to <strong>source</strong> branch, the script <code class="highlighter-rouge">deploy.sh</code> is executed.</p>
+
+<h3 id="create-circlecideploysh-with-the-following-content">Create <code class="highlighter-rouge">.circleci/deploy.sh</code> with the following content:</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git config user.name <span class="s2">"</span><span class="nv">$USER_NAME</span><span class="s2">"</span>
+git config user.email <span class="s2">"</span><span class="nv">$USER_EMAIL</span><span class="s2">"</span>
+
+git checkout master
+git pull origin master
+
+find <span class="nb">.</span> <span class="nt">-maxdepth</span> 1 <span class="o">!</span> <span class="nt">-name</span> <span class="s1">'_site'</span> <span class="o">!</span> <span class="nt">-name</span> <span class="s1">'.git'</span> <span class="o">!</span> <span class="nt">-name</span> <span class="s1">'.gitignore'</span> <span class="o">!</span> <span class="nt">-name</span> <span class="s1">'.circleci'</span> <span class="nt">-exec</span> <span class="nb">rm</span> <span class="nt">-rf</span> <span class="o">{}</span> <span class="se">\;</span>
+<span class="nb">mv </span>_site/<span class="k">*</span> <span class="nb">.</span>
+<span class="nb">rm</span> <span class="nt">-R</span> _site/
+
+git add <span class="nt">-fA</span>
+git commit <span class="nt">--allow-empty</span> <span class="nt">-m</span> <span class="s2">"</span><span class="si">$(</span>git log <span class="nb">source</span> <span class="nt">-1</span> <span class="nt">--pretty</span><span class="o">=</span>%B<span class="si">)</span><span class="s2">"</span>
+git push <span class="nt">-f</span> origin master
+
+<span class="nb">echo</span> <span class="s2">"deployed successfully"</span>
+</code></pre></div></div>
+
+<p>Here we are telling CircleCI to checkout the <strong>master</strong> branch of the repo. For personal website, Github Page uses master branch to render the site. By default, Github Page will build the site and use the contents under <code class="highlighter-rouge">_site</code> directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under <code class="highlighter-rouge">_site</code> that have already been built and put them in the root directory, that way Github Page can render the contents.</p>
+
+<p>After you have created these files, commit and push the changes to <strong>source</strong> branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on <strong>master</strong> branch. Once it’s done, your changes will be available for viewing.</p>
+
+<h3 id="added-benefit-custom-jekyll-dependencies--plugins">Added benefit: Custom Jekyll Dependencies + Plugins</h3>
+<p>As I mentioned, if we let Github Page handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that <a href="https://github.com/sverrirs/jekyll-paginate-v2">jekyll-paginate-v2</a> is not yet supported by Github Page, but now you can take advantage of the new additional features of this dependency.</p>
+
+<h2 id="other-thoughts">Other thoughts</h2>
+<p>I also thought about separating the source code of the site in a separate repo so CircleCI can read from this source repo and build and make changes to the actual Github Page repo. This provides the benefits of decoupling the source and the generated sites. For now, I leave this as an exercise so you can find out more about the functionalities of CircleCI.</p>
+
+  </div>
+
+  <div class="page-nav">
+  
+    <a class="prev" href="/blog/2019/07/18/changes-i-made-for-my-blogs-theme/">&laquo; Changes I Made for My Blog's Theme</a>
+  
+  
+</div><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/';
+      this.page.identifier = 'https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://jasons-1.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog of Things</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Jason</li><li><a class="u-email" href="mailto:thaixtri@gmail.com">thaixtri@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zirius"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zirius</span></a></li><li><a href="https://www.linkedin.com/in/jasontthai"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">jasontthai</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Jason Thai&#39;s personal page</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
