@@ -8,11 +8,11 @@ jobs:
           USER_EMAIL: thaixtri@gmail.com
     steps:
       - checkout
-      - run:
-          name: install dependencies
-          command: |
-            gem update --system
-            gem install bundler
+      # - run:
+      #     name: install dependencies
+      #     command: |
+      #       gem update --system
+      #       gem install bundler
       - restore_cache:
           keys:
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
