@@ -20,7 +20,7 @@ You can see my PR here: [https://github.com/jekyll/minima/pull/382](https://gith
 IF you view a post, at the end of the post there is are hyperlinks to the next and previous posts to save you some clicks.
 
 ### Added pagination and style each post as a card view.
-Kudos to [prashanthmadi.github.io](prashanthmadi.github.io) for adding pagination and the card view that looks really nice.
+Kudos to [prashanthmadi.github.io](http://prashanthmadi.github.io) for adding pagination and the card view that looks really nice.
 
 You can see the changes to add pagination [here](https://github.com/prashanthmadi/prashanthmadi.github.io/commit/d09b4351f0a8e34318847f14f854b5be2f06b4d6) and the card view [here](https://github.com/prashanthmadi/prashanthmadi.github.io/commit/78bc5e44c80f7bb1cbe129691701d79d3e8bdbb5#diff-891082c144b1c9ddb0047d67a7b4181f).
 
