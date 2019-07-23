@@ -41,7 +41,13 @@ deploy:
 ```
 {% endraw %}
 
-The `.travis.yml` file declares the steps for Travis CI to execute, you can see that we are telling Travis CI to build the site using the source code from branch **source** and deploy the changes on branch **master**. Configuring on Travis CI is a little simpler than CircleCI as the tool takes care of caching the dependencies under the hood.
+The `.travis.yml` file declares the steps for Travis CI to execute, you can see that we are telling Travis CI to build the site using the source code from branch **source** and deploy the changes on branch **master**. Configuring on Travis CI is a little simpler than CircleCI as the tool takes care of caching the dependencies under the hood. 
+
+After you have created these files, commit and push the changes to **source** branch. You will see a new build will start in Travis CI, which will execute all the steps mentioned above and put the new changes of your site on **master** branch. You may see something similar to this on Travis CI:
+
+![travisci-build](/assets/img/travisci-build.png)
+
+Once it's done, your changes will be available for viewing.
 
 For other configurations, you can also check out Travis CI's guide [here](https://docs.travis-ci.com/user/deployment/pages/)
 

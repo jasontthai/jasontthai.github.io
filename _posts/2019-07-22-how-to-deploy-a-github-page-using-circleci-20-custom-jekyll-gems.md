@@ -93,7 +93,12 @@ echo "deployed successfully"
 
 Here we are telling CircleCI to checkout the **master** branch of the repo. For personal website, Github Page uses master branch to render the site. By default, Github Page will build the site and use the contents under `_site` directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under `_site` that have already been built and put them in the root directory, that way Github Page can render the contents.
 
-After you have created these files, commit and push the changes to **source** branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on **master** branch. Once it's done, your changes will be available for viewing.
+After you have created these files, commit and push the changes to **source** branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on **master** branch. You may see something similar to this on CircleCI:
+
+![circleci-build](/assets/img/circleci-build.png)
+
+
+Once it's done, your changes will be available for viewing.
 
 ### Added benefit: Custom Jekyll Dependencies + Plugins
 As I mentioned, if we let Github Page handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that [jekyll-paginate-v2](https://github.com/sverrirs/jekyll-paginate-v2) is not yet supported by Github Page, but now you can take advantage of the new additional features of this dependency.
