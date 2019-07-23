@@ -18,10 +18,10 @@ jobs:
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-
             - v1-gem-cache-{{ arch }}-
-      - run: bundle install --path ~/.bundle && bundle clean
+      - run: bundle install --path ./vendor/bundle && bundle clean
       - save_cache:
           paths:
-            - ~/.bundle
+            - ./vendor/bundle
           key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
       - run: JEKYLL_ENV=production bundle exec jekyll build
