@@ -1,7 +1,7 @@
 ---
 layout: post
 title: My 10 Most Used Linux Commands
-tags: blog
+tags: tech
 ---
 
 The script to run to display the most used commands (copied from [linux.byexamples.com](https://linux.byexamples.com/archives/332/what-is-your-10-common-linux-commands/)):

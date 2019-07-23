@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Things I've Learned Hosting a URL Shortener Service
-tags: blog
+tags: tech
 featured_img: /assets/img/tinyalias.png
 ---
 

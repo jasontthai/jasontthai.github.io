@@ -1,12 +1,11 @@
 ---
 title: How to Deploy to Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies
-featured_img: >-
-  https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d
-tags: blog
+featured_img: /assets/img/circleci-logo-1200x630.png
+tags: tech
 published: true
 ---
 
-![jekyll](https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d)
+![jekyll](/assets/img/circleci-logo-1200x630.png)
 
 Since I have been playing with [Github Pages](https://pages.github.com/) to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view [here](https://pages.github.com/versions/). This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Page. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Page repo.
 

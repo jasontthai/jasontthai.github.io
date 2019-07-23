@@ -1,6 +1,6 @@
 ---
 title: Regrowing My Succulents
-tags: thoughts
+tags: blog
 featured_img: "/assets/img/succulent.jpg"
 ---
 

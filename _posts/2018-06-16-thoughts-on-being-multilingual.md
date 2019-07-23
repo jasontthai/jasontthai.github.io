@@ -1,7 +1,7 @@
 ---
 title: Thoughts on Being Multilingual
 layout: post
-tags: blog thoughts
+tags: blog
 featured_img: /assets/img/hello-1907233_1280.png
 ---
 

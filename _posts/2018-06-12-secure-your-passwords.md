@@ -1,7 +1,7 @@
 ---
 title: How to Create a Secure Password
 layout: post
-tags: blog
+tags: tech
 featured_img: /assets/img/password-checker.png
 ---
 

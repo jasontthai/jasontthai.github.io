@@ -1,7 +1,7 @@
 ---
 title: Recommended Browser Extensions
 layout: post
-tags: blog
+tags: tech
 ---
 
 ![browsers](/assets/img/browser-2457113_1280.png)
