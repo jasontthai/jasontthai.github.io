@@ -1,5 +1,5 @@
 ---
-title: How to Deploy a Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies
+title: How to Deploy to Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies
 featured_img: >-
   https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d
 tags: blog
