@@ -1,7 +1,9 @@
 ---
 title: How to Deploy a Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies
-featured_img: https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d
+featured_img: >-
+  https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d
 tags: blog
+published: true
 ---
 
 ![jekyll](https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d)
@@ -52,7 +54,7 @@ jobs:
           name: Deploy Release to GitHub
           command: |
             if [ $CIRCLE_BRANCH == 'source' ]; then
-              bash .circleci/setup-github.sh
+              bash .circleci/deploy.sh
             fi
 workflows:
   version: 2
@@ -65,9 +67,9 @@ workflows:
 ```
 {% endraw %}
 
-The `config.yml` file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run `bundle install` , save gems cache, build the static site by executing `JEKYLL_ENV=production bundle exec jekyll build` and finally if the code is pushed to **source** branch, the script `setup-github.sh` is executed.
+The `config.yml` file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run `bundle install` , save gems cache, build the static site by executing `JEKYLL_ENV=production bundle exec jekyll build` and finally if the code is pushed to **source** branch, the script `deploy.sh` is executed.
 
-### Create `.circleci/setup-github.sh` with the following content:
+### Create `.circleci/deploy.sh` with the following content:
 ```bash
 git config user.name "$USER_NAME"
 git config user.email "$USER_EMAIL"
