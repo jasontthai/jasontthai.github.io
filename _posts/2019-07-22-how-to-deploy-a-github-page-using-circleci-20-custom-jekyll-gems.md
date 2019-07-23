@@ -27,10 +27,10 @@ version: 2
 jobs:
   deploy:
     docker:
-      - image: circleci/ruby:2.4.3-node-browsers
+      - image: circleci/ruby:latest
         environment:
-          USER_NAME: XXX <- replace with your github username
-          USER_EMAIL: XXX <- replace with your email
+          USER_NAME: zirius
+          USER_EMAIL: thaixtri@gmail.com
     steps:
       - checkout
       - run:
@@ -43,13 +43,16 @@ jobs:
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-
             - v1-gem-cache-{{ arch }}-
-      - run: bundle install --path .bundle && bundle clean
+      - run: bundle install --path=vendor/bundle && bundle clean
       - save_cache:
           paths:
-            - ~/.bundle
+            - vendor/bundle
           key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 
       - run: JEKYLL_ENV=production bundle exec jekyll build
+      - run:
+          name: Test
+          command: bundle exec htmlproofer ./_site --check-html --disable-external --empty-alt-ignore
       - deploy:
           name: Deploy Release to GitHub
           command: |
@@ -63,7 +66,8 @@ workflows:
       - deploy:
           filters:
             branches:
-              only: source
+              only: 
+                - source
 ```
 {% endraw %}
 
