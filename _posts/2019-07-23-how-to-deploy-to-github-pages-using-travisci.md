@@ -1,5 +1,5 @@
 ---
-title: How to Deploy to Github Page Using Travis CI
+title: How to Deploy to Github Pages Using Travis CI
 featured_img: /assets/img/logo-travisci-wide1.jpg
 tags: tech
 published: true
@@ -7,12 +7,12 @@ published: true
 
 ![travisci](/assets/img/logo-travisci-wide1.jpg)
 
-Follow up for my post [How to Deploy to Github Page Using CircleCI 2.0 + Custom Jekyll Dependencies]({% post_url 2019-07-22-how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems %}). This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI
+Follow up for my post [How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies]({% post_url 2019-07-22-how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems %}). This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI
 
 ## Travis CI
 Travis CI is also very  powerful continuous integration tool, which allows rapid builds and deployment of your projects.  Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won't have to pay anything to use it.
 
-## Deploy to Github Page with Travis CI
+## Deploy to Github Pages with Travis CI
 The first step is to grant Travis CI access to your repo. This is done by adding a personal access key to allow read and write access so that Travis CI can read and push your changes. You can find out how to do it [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). In your Travis repo setting, set an environment variable `GITHUB_TOKEN` with the token value you've just created.
 
 Next step is to configure the build and deployment step so Travis CI knows what to do
@@ -53,4 +53,4 @@ For other configurations, you can also check out Travis CI's guide [here](https:
 
 
 ## Conclusion
-I hope this guide is also useful in helping you set up automatic build and deployment of your personal site on Github Page. Using CI tools definitely helps free you from the limitation and restriction of Github Pages.
+I hope this guide is also useful in helping you set up automatic build and deployment of your personal site on Github Pages. Using CI tools definitely helps free you from the limitation and restriction of Github Pages.
