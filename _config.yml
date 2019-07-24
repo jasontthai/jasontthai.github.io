@@ -73,6 +73,7 @@ plugins:
   - jekyll-readme-index
   - jekyll-default-layout
   - jekyll-titles-from-headings
+  - jekyll-toc
 
 # sidebar_home_link: true
 

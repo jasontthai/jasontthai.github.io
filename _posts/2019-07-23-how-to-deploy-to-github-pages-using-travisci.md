@@ -2,7 +2,7 @@
 title: How to Deploy to Github Pages Using Travis CI
 featured_img: /assets/img/logo-travisci-wide1.jpg
 tags: tech
-published: true
+toc: true
 ---
 
 ![travisci](/assets/img/logo-travisci-wide1.jpg)
@@ -16,7 +16,7 @@ Travis CI is also very  powerful continuous integration tool, which allows rapid
 The first step is to grant Travis CI access to your repo. This is done by adding a personal access key to allow read and write access so that Travis CI can read and push your changes. You can find out how to do it [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). In your Travis repo setting, set an environment variable `GITHUB_TOKEN` with the token value you've just created.
 
 Next step is to configure the build and deployment step so Travis CI knows what to do
-### Create  `.travis.yml` with the following content:
+### Create  `.travis.yml`:
 
 {% raw %}
 ```yaml

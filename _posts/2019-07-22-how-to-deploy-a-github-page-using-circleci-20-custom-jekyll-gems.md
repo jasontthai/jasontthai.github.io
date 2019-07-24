@@ -2,7 +2,7 @@
 title: How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies
 featured_img: /assets/img/circleci-logo-1200x630.png
 tags: tech
-published: true
+toc: true
 ---
 
 ![jekyll](/assets/img/circleci-logo-1200x630.png)
@@ -18,7 +18,7 @@ CircleCI is a very  powerful continuous integration tool, which allows rapid bui
 The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it [here](https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories)
 
 Next step is to configure the build and deployment step so CircleCI knows what to do
-### Create  `.circleci/config.yml` with the following content:
+### Create  `.circleci/config.yml`:
 
 {% raw %}
 ```yaml
@@ -72,7 +72,7 @@ workflows:
 
 The `config.yml` file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run `bundle install` , save gems cache, build the static site by executing `JEKYLL_ENV=production bundle exec jekyll build` and finally if the code is pushed to **source** branch, the script `deploy.sh` is executed.
 
-### Create `.circleci/deploy.sh` with the following content:
+### Create `.circleci/deploy.sh`:
 ```bash
 git config user.name "$USER_NAME"
 git config user.email "$USER_EMAIL"
