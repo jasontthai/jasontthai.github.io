@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Useful Commands for PostgreSQL and MySQL Database | Blog of Things</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="Useful Commands for PostgreSQL and MySQL Database" />
+<meta name="author" content="Jason" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A consolidated list of useful commands for PostgreSQL and MySQL from my own findings." />
+<meta property="og:description" content="A consolidated list of useful commands for PostgreSQL and MySQL from my own findings." />
+<link rel="canonical" href="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/" />
+<meta property="og:url" content="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/" />
+<meta property="og:site_name" content="Blog of Things" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-24T00:00:00+00:00" />
+<script type="application/ld+json">
+{"headline":"Useful Commands for PostgreSQL and MySQL Database","dateModified":"2019-07-24T00:00:00+00:00","description":"A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.","datePublished":"2019-07-24T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/"},"url":"https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/","author":{"@type":"Person","name":"Jason"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://jasonthai.me/feed.xml" title="Blog of Things" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-120912817-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Blog of Things</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="https://feedburner.google.com/fb/a/mailverify?uri=jasonthai&amp;loc=en_US">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>Email</span>
+          </a>
+          <a class="page-link" href="http://feeds.feedburner.com/jasonthai">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>RSS</span>
+          </a><a class="page-link" href="/about/">About</a><a class="page-link" href="/posts/">Posts</a><a class="page-link" href="/tags/">Tags</a><a class="page-link" href="/visited-places/">Places I Visited</a></div>
+      </nav></div>
+  <div class="wrapper">
+    <div class="trigger">
+      <a class="page-link"  href="/">English</a> | 
+      <a class="page-link" href="/vi">Bài Tiếng Việt</a>
+    </div>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Useful Commands for PostgreSQL and MySQL Database</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-07-24T00:00:00+00:00" itemprop="datePublished">Jul 24, 2019
+      </time>
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason</span></span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prereqs">Prereqs</a></li>
+<li class="toc-entry toc-h2"><a href="#postgresql">PostgreSQL</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#installation">Installation</a></li>
+<li class="toc-entry toc-h3"><a href="#connect-through-cli">Connect through CLI:</a></li>
+<li class="toc-entry toc-h3"><a href="#show-tables">Show tables</a></li>
+<li class="toc-entry toc-h3"><a href="#describe-tables">Describe tables</a></li>
+<li class="toc-entry toc-h3"><a href="#show-biggest-tables-and-their-sizes">Show biggest tables and their sizes</a></li>
+<li class="toc-entry toc-h3"><a href="#export-to-csv-with-header">Export to CSV with header</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#mysql">MySQL</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#installation-1">Installation</a></li>
+<li class="toc-entry toc-h3"><a href="#connect-through-cli-1">Connect through CLI:</a></li>
+<li class="toc-entry toc-h3"><a href="#show-tables-1">Show tables</a></li>
+<li class="toc-entry toc-h3"><a href="#describe-tables-1">Describe tables</a></li>
+<li class="toc-entry toc-h3"><a href="#show-biggest-tables-and-their-sizes-1">Show biggest tables and their sizes</a></li>
+<li class="toc-entry toc-h3"><a href="#export-to-csv-with-header-1">Export to CSV with header</a></li>
+</ul>
+</li>
+</ul><p><img src="/assets/img/postgresql-vs-mysql-features.jpg" alt="postgresql and mysql"></p>
+
+<p>A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.</p>
+
+<!--more-->
+
+<h2 id="prereqs">
+<a class="anchor" href="#prereqs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Prereqs</h2>
+<p><a href="https://brew.sh/">Homebrew</a></p>
+
+<h2 id="postgresql">
+<a class="anchor" href="#postgresql" aria-hidden="true"><span class="octicon octicon-link"></span></a>PostgreSQL</h2>
+
+<h3 id="installation">
+<a class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+<p><code class="highlighter-rouge">brew install postgresql</code></p>
+
+<h3 id="connect-through-cli">
+<a class="anchor" href="#connect-through-cli" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect through CLI:</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PGPASSWORD=XXX psql -h HOST -p PORT -d DATABASE -u USERNAME
+</code></pre></div></div>
+
+<h3 id="show-tables">
+<a class="anchor" href="#show-tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Show tables</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\d
+</code></pre></div></div>
+
+<h3 id="describe-tables">
+<a class="anchor" href="#describe-tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Describe tables</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\d TABLENAME
+</code></pre></div></div>
+
+<h3 id="show-biggest-tables-and-their-sizes">
+<a class="anchor" href="#show-biggest-tables-and-their-sizes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Show biggest tables and their sizes</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">nspname</span> <span class="o">||</span> <span class="s1">'.'</span> <span class="o">||</span> <span class="n">relname</span> <span class="k">AS</span> <span class="nv">"relation"</span><span class="p">,</span>
+  <span class="n">pg_size_pretty</span><span class="p">(</span><span class="n">pg_total_relation_size</span><span class="p">(</span><span class="k">C</span><span class="p">.</span><span class="n">oid</span><span class="p">))</span> <span class="k">AS</span> <span class="nv">"total_size"</span>
+<span class="k">FROM</span> <span class="n">pg_class</span> <span class="k">C</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="n">pg_namespace</span> <span class="n">N</span> <span class="k">ON</span> <span class="p">(</span><span class="n">N</span><span class="p">.</span><span class="n">oid</span> <span class="o">=</span> <span class="k">C</span><span class="p">.</span><span class="n">relnamespace</span><span class="p">)</span>
+<span class="k">WHERE</span> <span class="n">nspname</span> <span class="k">NOT</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">'pg_catalog'</span><span class="p">,</span> <span class="s1">'information_schema'</span><span class="p">)</span>
+  <span class="k">AND</span> <span class="k">C</span><span class="p">.</span><span class="n">relkind</span> <span class="o">&lt;&gt;</span> <span class="s1">'i'</span>
+  <span class="k">AND</span> <span class="n">nspname</span> <span class="o">!~</span> <span class="s1">'^pg_toast'</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">pg_total_relation_size</span><span class="p">(</span><span class="k">C</span><span class="p">.</span><span class="n">oid</span><span class="p">)</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">20</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="export-to-csv-with-header">
+<a class="anchor" href="#export-to-csv-with-header" aria-hidden="true"><span class="octicon octicon-link"></span></a>Export to CSV with header</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\copy TABLENAME TO FILENAME.csv' DELIMITER ',' CSV HEADER;
+</code></pre></div></div>
+
+<hr>
+
+<h2 id="mysql">
+<a class="anchor" href="#mysql" aria-hidden="true"><span class="octicon octicon-link"></span></a>MySQL</h2>
+
+<h3 id="installation-1">
+<a class="anchor" href="#installation-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+<p><code class="highlighter-rouge">brew install mysql</code></p>
+
+<h3 id="connect-through-cli-1">
+<a class="anchor" href="#connect-through-cli-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connect through CLI:</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mysql -h HOST -P PORT -D DATABASE -u USERNAME -pPASSWORD 
+</code></pre></div></div>
+
+<h3 id="show-tables-1">
+<a class="anchor" href="#show-tables-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Show tables</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW tables;
+</code></pre></div></div>
+
+<h3 id="describe-tables-1">
+<a class="anchor" href="#describe-tables-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Describe tables</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DESCRIBE TABLENAME
+</code></pre></div></div>
+
+<h3 id="show-biggest-tables-and-their-sizes-1">
+<a class="anchor" href="#show-biggest-tables-and-their-sizes-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Show biggest tables and their sizes</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> 
+  <span class="n">table_schema</span> <span class="k">as</span> <span class="nv">`Database`</span><span class="p">,</span> 
+  <span class="k">table_name</span> <span class="k">AS</span> <span class="nv">`Table`</span><span class="p">,</span> 
+  <span class="n">round</span><span class="p">(((</span><span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1024</span> <span class="o">/</span> <span class="mi">1024</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="nv">`Size in MB`</span> 
+<span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">TABLES</span> 
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="p">(</span><span class="n">data_length</span> <span class="o">+</span> <span class="n">index_length</span><span class="p">)</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">20</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="export-to-csv-with-header-1">
+<a class="anchor" href="#export-to-csv-with-header-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Export to CSV with header</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">TABLENAME</span>
+<span class="k">INTO</span> <span class="n">OUTFILE</span> <span class="s1">'FILENAME.csv'</span>
+<span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="k">BY</span> <span class="s1">','</span>
+<span class="n">ENCLOSED</span> <span class="k">BY</span> <span class="s1">'"'</span>
+<span class="n">LINES</span> <span class="n">TERMINATED</span> <span class="k">BY</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+  </div>
+
+  <div class="page-nav">
+  
+    <a class="prev" href="/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/">&laquo; How to Deploy to Github Pages Using Travis CI</a>
+  
+  
+</div><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/';
+      this.page.identifier = 'https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://https-jasonthai-me.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/blog/2019/07/24/useful-commands-for-postgresql-mysql/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog of Things</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Jason</li><li><a class="u-email" href="mailto:thaixtri@gmail.com">thaixtri@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zirius"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zirius</span></a></li><li><a href="https://www.linkedin.com/in/jasontthai"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">jasontthai</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Jason Thai&#39;s personal page</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
