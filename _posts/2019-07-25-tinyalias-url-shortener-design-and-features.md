@@ -103,9 +103,7 @@ img {vertical-align: middle;}
 }
 </style>
 
-I wrote about some of my thoughts about my URL shortener service TinayAlias and others here in this post [Things I've Learned Hosting a URL Shortener Service]({% post_url 2019-06-05-thoughts-on-url-shortener-service %}).
-
-Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. That's why I want to dedicate this post to mention its design and highlight a few interesting things I did for my service in terms of both backend and front end implementations. 
+After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in [Things I've Learned Hosting a URL Shortener Service]({% post_url 2019-06-05-thoughts-on-url-shortener-service %}). It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. That's why I want to dedicate this post to mention its design and highlight a few interesting things I did for my service in terms of both backend and front end implementations. 
 
 ## Screenshots
 <!-- Slideshow container -->
