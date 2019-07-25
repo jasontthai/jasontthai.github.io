@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>TinyAlias URL Shortener Design and Its Features | Blog of Things</title>
+<meta name="generator" content="Jekyll v3.8.6" />
+<meta property="og:title" content="TinyAlias URL Shortener Design and Its Features" />
+<meta name="author" content="Jason" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in Things I’ve Learned Hosting a URL Shortener Service. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. That’s why I want to dedicate this post to mention its design and highlight a few interesting things I did for my service in terms of both backend and front end implementations. Screenshots 1 / 5 2 / 5 3 / 5 4 / 5 5 / 5 &#10094; &#10095; Design Workflow The Main app handles the main logic of creating shortened URL and its metadata, user authentication, and other blocking operations. The Worker service receives a job from the job queue and executes tasks such as parsing request’s geolocation, detecting spam, expiring URL, and other non-blocking operations. The Scheduler service runs as a cron to delegate jobs to the worker service. Repo https://github.com/zirius/tinyalias Features Some function and feature highlights User authentication I added a user authentication flow that let you sign up, sign in, reset your password. Building this from scratch is quite fun. Sessions are Cookie-based and passwords are encrypted by bcrypt and stored in DB. Password protected links and link expiration Link passwords are encrypted securely and stored in DB. Scheduler service periodically sends expiration job to worker service to detect if any links have expired and marked them as invalid. Spam detection flow This is one of the more interesting backend features I added. Whenever a URL is shortened, the main app will dispatch a spam detection job to the worker service. Worker service then calls Google safebrowsing API to detect if a URL is safe and update that URL status. The scheduler also periodically dispatch spam detection jobs to recheck existing URLs. Analytics Whenever a link is clicked, the service will parse the location based on the user’s IP address. This is then aggregated to show where the links are accessed geographically. Mindful mode This is a fun feature that I added that makes the user wait for a few seconds before redirecting them to the original URL. The page also displays some quotes of the day provided by https://favqs.com News I also added a page to allow users to view trending news and get the shortened URL within the app. News is provided by News API. Conclusion Designing and implementing TinyAlias from scratch is a fun side project for me." />
+<meta property="og:description" content="After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in Things I’ve Learned Hosting a URL Shortener Service. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. That’s why I want to dedicate this post to mention its design and highlight a few interesting things I did for my service in terms of both backend and front end implementations. Screenshots 1 / 5 2 / 5 3 / 5 4 / 5 5 / 5 &#10094; &#10095; Design Workflow The Main app handles the main logic of creating shortened URL and its metadata, user authentication, and other blocking operations. The Worker service receives a job from the job queue and executes tasks such as parsing request’s geolocation, detecting spam, expiring URL, and other non-blocking operations. The Scheduler service runs as a cron to delegate jobs to the worker service. Repo https://github.com/zirius/tinyalias Features Some function and feature highlights User authentication I added a user authentication flow that let you sign up, sign in, reset your password. Building this from scratch is quite fun. Sessions are Cookie-based and passwords are encrypted by bcrypt and stored in DB. Password protected links and link expiration Link passwords are encrypted securely and stored in DB. Scheduler service periodically sends expiration job to worker service to detect if any links have expired and marked them as invalid. Spam detection flow This is one of the more interesting backend features I added. Whenever a URL is shortened, the main app will dispatch a spam detection job to the worker service. Worker service then calls Google safebrowsing API to detect if a URL is safe and update that URL status. The scheduler also periodically dispatch spam detection jobs to recheck existing URLs. Analytics Whenever a link is clicked, the service will parse the location based on the user’s IP address. This is then aggregated to show where the links are accessed geographically. Mindful mode This is a fun feature that I added that makes the user wait for a few seconds before redirecting them to the original URL. The page also displays some quotes of the day provided by https://favqs.com News I also added a page to allow users to view trending news and get the shortened URL within the app. News is provided by News API. Conclusion Designing and implementing TinyAlias from scratch is a fun side project for me." />
+<link rel="canonical" href="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" />
+<meta property="og:url" content="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" />
+<meta property="og:site_name" content="Blog of Things" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-07-25T00:00:00+00:00" />
+<script type="application/ld+json">
+{"headline":"TinyAlias URL Shortener Design and Its Features","dateModified":"2019-07-25T00:00:00+00:00","description":"After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in Things I’ve Learned Hosting a URL Shortener Service. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. That’s why I want to dedicate this post to mention its design and highlight a few interesting things I did for my service in terms of both backend and front end implementations. Screenshots 1 / 5 2 / 5 3 / 5 4 / 5 5 / 5 &#10094; &#10095; Design Workflow The Main app handles the main logic of creating shortened URL and its metadata, user authentication, and other blocking operations. The Worker service receives a job from the job queue and executes tasks such as parsing request’s geolocation, detecting spam, expiring URL, and other non-blocking operations. The Scheduler service runs as a cron to delegate jobs to the worker service. Repo https://github.com/zirius/tinyalias Features Some function and feature highlights User authentication I added a user authentication flow that let you sign up, sign in, reset your password. Building this from scratch is quite fun. Sessions are Cookie-based and passwords are encrypted by bcrypt and stored in DB. Password protected links and link expiration Link passwords are encrypted securely and stored in DB. Scheduler service periodically sends expiration job to worker service to detect if any links have expired and marked them as invalid. Spam detection flow This is one of the more interesting backend features I added. Whenever a URL is shortened, the main app will dispatch a spam detection job to the worker service. Worker service then calls Google safebrowsing API to detect if a URL is safe and update that URL status. The scheduler also periodically dispatch spam detection jobs to recheck existing URLs. Analytics Whenever a link is clicked, the service will parse the location based on the user’s IP address. This is then aggregated to show where the links are accessed geographically. Mindful mode This is a fun feature that I added that makes the user wait for a few seconds before redirecting them to the original URL. The page also displays some quotes of the day provided by https://favqs.com News I also added a page to allow users to view trending news and get the shortened URL within the app. News is provided by News API. Conclusion Designing and implementing TinyAlias from scratch is a fun side project for me.","datePublished":"2019-07-25T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/"},"url":"https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/","author":{"@type":"Person","name":"Jason"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://jasonthai.me/feed.xml" title="Blog of Things" /><script>
+if(!(window.doNotTrack === "1" || navigator.doNotTrack === "1" || navigator.doNotTrack === "yes" || navigator.msDoNotTrack === "1")) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-120912817-1', 'auto');
+  ga('send', 'pageview');
+}
+</script>
+  
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Blog of Things</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="https://feedburner.google.com/fb/a/mailverify?uri=jasonthai&amp;loc=en_US">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>Email</span>
+          </a>
+          <a class="page-link" href="http://feeds.feedburner.com/jasonthai">
+            <svg class="svg-icon orange"><use xlink:href="/assets/minima-social-icons.svg#rss"></use></svg><span>RSS</span>
+          </a><a class="page-link" href="/about/">About</a><a class="page-link" href="/posts/">Posts</a><a class="page-link" href="/tags/">Tags</a><a class="page-link" href="/visited-places/">Places I Visited</a></div>
+      </nav></div>
+  <div class="wrapper">
+    <div class="trigger">
+      <a class="page-link"  href="/">English</a> | 
+      <a class="page-link" href="/vi">Bài Tiếng Việt</a>
+    </div>
+  </div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">TinyAlias URL Shortener Design and Its Features</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-07-25T00:00:00+00:00" itemprop="datePublished">Jul 25, 2019
+      </time>
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason</span></span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#screenshots">Screenshots</a></li>
+<li class="toc-entry toc-h2"><a href="#design">Design</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#workflow">Workflow</a></li>
+<li class="toc-entry toc-h3"><a href="#repo">Repo</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#features">Features</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#user-authentication">User authentication</a></li>
+<li class="toc-entry toc-h3"><a href="#password-protected-links-and-link-expiration">Password protected links and link expiration</a></li>
+<li class="toc-entry toc-h3"><a href="#spam-detection-flow">Spam detection flow</a></li>
+<li class="toc-entry toc-h3"><a href="#analytics">Analytics</a></li>
+<li class="toc-entry toc-h3"><a href="#mindful-mode">Mindful mode</a></li>
+<li class="toc-entry toc-h3"><a href="#news">News</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#conclusion">Conclusion</a></li>
+</ul><style>
+
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prevImg, .nextImg {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.nextImg {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prevImg:hover, .nextImg:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.textImg {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertextImg {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prevImg, .nextImg,.textImg {font-size: 11px}
+}
+</style>
+
+<p>After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in <a href="/blog/2019/06/05/thoughts-on-url-shortener-service/">Things I’ve Learned Hosting a URL Shortener Service</a>. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. That’s why I want to dedicate this post to mention its design and highlight a few interesting things I did for my service in terms of both backend and front end implementations.</p>
+
+<h2 id="screenshots">
+<a class="anchor" href="#screenshots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots</h2>
+<!-- Slideshow container -->
+<div class="slideshow-container">
+
+<!-- Full-width images with number and caption text -->
+<div class="mySlides fade">
+<div class="numbertextImg">1 / 5</div>
+<img src="/assets/img/tinyalias-authentication.png" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+<div class="numbertextImg">2 / 5</div>
+<img src="/assets/img/tinyalias-password.png" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+<div class="numbertextImg">3 / 5</div>
+<img src="/assets/img/tinyalias-analytics.png" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+<div class="numbertextImg">4 / 5</div>
+<img src="/assets/img/tinyalias-mindful.png" style="width:100%">
+</div>
+
+<div class="mySlides fade">
+<div class="numbertextImg">5 / 5</div>
+<img src="/assets/img/tinyalias-news.png" style="width:100%">
+</div>
+
+<!-- Next and previous buttons -->
+<a class="prevImg" onclick="plusSlides(-1)">❮</a>
+<a class="nextImg" onclick="plusSlides(1)">❯</a>
+</div>
+<p><br></p>
+
+<!-- The dots/circles -->
+<div style="text-align:center">
+<span class="dot" onclick="currentSlide(1)"></span> 
+<span class="dot" onclick="currentSlide(2)"></span> 
+<span class="dot" onclick="currentSlide(3)"></span> 
+<span class="dot" onclick="currentSlide(4)"></span> 
+<span class="dot" onclick="currentSlide(5)"></span> 
+</div>
+
+<h2 id="design">
+<a class="anchor" href="#design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h2>
+
+<p><img src="/assets/img/tinyalias-diagram.png" alt="Design"></p>
+
+<h3 id="workflow">
+<a class="anchor" href="#workflow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Workflow</h3>
+
+<ul>
+  <li>The Main app handles the main logic of creating shortened URL and its metadata, user authentication, and other blocking operations.</li>
+  <li>The Worker service receives a job from the job queue and executes tasks such as parsing request’s geolocation, detecting spam, expiring URL, and other non-blocking operations.</li>
+  <li>The Scheduler service runs as a cron to delegate jobs to the worker service.</li>
+</ul>
+
+<h3 id="repo">
+<a class="anchor" href="#repo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repo</h3>
+<p><a href="https://github.com/zirius/tinyalias">https://github.com/zirius/tinyalias</a></p>
+
+<h2 id="features">
+<a class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<p>Some function and feature highlights</p>
+
+<h3 id="user-authentication">
+<a class="anchor" href="#user-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>User authentication</h3>
+
+<p>I added a user authentication flow that let you sign up, sign in, reset your password. Building this from scratch is quite fun. Sessions are Cookie-based and passwords are encrypted by <code class="highlighter-rouge">bcrypt</code> and stored in DB.</p>
+
+<h3 id="password-protected-links-and-link-expiration">
+<a class="anchor" href="#password-protected-links-and-link-expiration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Password protected links and link expiration</h3>
+<p>Link passwords are encrypted securely and stored in DB. Scheduler service periodically sends expiration job to worker service to detect if any links have expired and marked them as invalid.</p>
+
+<h3 id="spam-detection-flow">
+<a class="anchor" href="#spam-detection-flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spam detection flow</h3>
+<p>This is one of the more interesting backend features I added. Whenever a URL is shortened, the main app will dispatch a spam detection job to the worker service. Worker service then calls Google <a href="https://safebrowsing.google.com/">safebrowsing</a> API to detect if a URL is safe and update that URL status. The scheduler also periodically dispatch spam detection jobs to recheck existing URLs.</p>
+
+<h3 id="analytics">
+<a class="anchor" href="#analytics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analytics</h3>
+<p>Whenever a link is clicked, the service will parse the location based on the user’s IP address. This is then aggregated to show where the links are accessed geographically.</p>
+
+<h3 id="mindful-mode">
+<a class="anchor" href="#mindful-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mindful mode</h3>
+<p>This is a fun feature that I added that makes the user wait for a few seconds before redirecting them to the original URL. The page also displays some quotes of the day provided by <a href="https://favqs.com">https://favqs.com</a></p>
+
+<h3 id="news">
+<a class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>News</h3>
+<p>I also added a page to allow users to view trending news and get the shortened URL within the app. News is provided by <a href="https://newsapi.org/">News API</a>.</p>
+
+<script type="text/javascript">
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+}
+</script>
+
+<h2 id="conclusion">
+<a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
+<p>Designing and implementing TinyAlias from scratch is a fun side project for me.</p>
+
+
+  </div>
+
+  <div class="page-nav">
+  
+    <a class="prev" href="/blog/2019/07/24/useful-commands-for-postgresql-mysql/">&laquo; Useful Commands for PostgreSQL and MySQL Database</a>
+  
+  
+</div><div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = 'https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/';
+      this.page.identifier = 'https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/';
+    };
+
+    (function() {
+      var d = document, s = d.createElement('script');
+
+      s.src = 'https://https-jasonthai-me.disqus.com/embed.js';
+
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript><a class="u-url" href="/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Blog of Things</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Jason</li><li><a class="u-email" href="mailto:thaixtri@gmail.com">thaixtri@gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/zirius"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">zirius</span></a></li><li><a href="https://www.linkedin.com/in/jasontthai"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">jasontthai</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Jason Thai&#39;s personal page</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
