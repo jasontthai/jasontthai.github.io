@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-07-29T00:19:26+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">42nd Biofreeze SF Marathon - 1st Half</title><link href="https://jasonthai.me/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/" rel="alternate" type="text/html" title="42nd Biofreeze SF Marathon - 1st Half" /><published>2019-07-28T00:00:00+00:00</published><updated>2019-07-28T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/">&lt;p&gt;I finally ran my first half marathon today 07-28-19 in &lt;a href=&quot;https://www.thesfmarathon.com/&quot;&gt;The 42nd Biofreeze SF Marathon&lt;/a&gt;. This has been one of my goals of the year. Suffice to say it has been one of the best day of my life so far. Here is the result of my race:&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/half-marathon.webp&quot; alt=&quot;half marathon result&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Race Report:&lt;/p&gt;
+
+&lt;p&gt;The race started at 6:46 AM at &lt;a href=&quot;https://www.google.com/maps/place/USA/@37.793712,-122.3926053,17z/data=!3m1!4b1!4m2!3m1!1s0x80858065c94cb613:0x1471cf17c56982b1&quot;&gt;Mission Street and The Embarcadero San Francisco&lt;/a&gt;
+As soon as I started running, the adrenaline kicked in and I felt I could run faster than normal. However I still tried to keep a pace around 9 minutes / mile.  There were around 6 water stops along the race and I stopped by all of them and refueled with eletrolyte water. The first uphill around half of the race was longer and higher than expected so I was conservative in my pace and slowed down to about 13:30 minutes / mile. Following that was a long downhill which helped me recover my pace, however that had a bad affect on my ankle. Later on, I had to stop by the medic to apply some pain relief gel. This is a surprise to me as the water does provide instant energy and I felt I could run fast again right after drinking. Also I did not have to drink as much as usual. My legs start hurting quite a lot at around 10 mile in, which meant stopping by the medic again for the gel. They seemed to have instant effect but wore off quickly.  I think I could have pushed myself harder in the last 2 miles of the race. In stead I kept conserving energy and when I finished, I didn’t feel as tired as my practice run that I did a few weeks ago.&lt;/p&gt;
+
+&lt;p&gt;Some other stats about my training journey:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Training duration: 8 weeks&lt;/li&gt;
+  &lt;li&gt;Number of running hours: 24&lt;/li&gt;
+  &lt;li&gt;Number of miles: 145&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;From not being able to run much from February this year, it has been a good journey so far. Ever since I found out about &lt;a href=&quot;https://www.strava.com/athletes/39726096&quot;&gt;Strava&lt;/a&gt;, it has been the source of motivation to get me running. There are a lot of runners out there and seeing how they push themselves everyday to run harder and faster is truly wonderful. I am glad to join the running club and hoping to continue for a long time. Also thank you to my friend Tri Hoang for pushing me, it is good to have a running buddy.&lt;/p&gt;
+
+&lt;p&gt;If you want to get started in running, I suggest checking out &lt;a href=&quot;https://www.c25k.com/&quot;&gt;Couch 2 5K Program&lt;/a&gt;. This will help guide you along the way from not running to your first 5K. Get out there and start running!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="blog" /><summary type="html">I finally ran my first half marathon today 07-28-19 in The 42nd Biofreeze SF Marathon. This has been one of my goals of the year. Suffice to say it has been one of the best day of my life so far. Here is the result of my race: Race Report: The race started at 6:46 AM at Mission Street and The Embarcadero San Francisco As soon as I started running, the adrenaline kicked in and I felt I could run faster than normal. However I still tried to keep a pace around 9 minutes / mile. There were around 6 water stops along the race and I stopped by all of them and refueled with eletrolyte water. The first uphill around half of the race was longer and higher than expected so I was conservative in my pace and slowed down to about 13:30 minutes / mile. Following that was a long downhill which helped me recover my pace, however that had a bad affect on my ankle. Later on, I had to stop by the medic to apply some pain relief gel. This is a surprise to me as the water does provide instant energy and I felt I could run fast again right after drinking. Also I did not have to drink as much as usual. My legs start hurting quite a lot at around 10 mile in, which meant stopping by the medic again for the gel. They seemed to have instant effect but wore off quickly. I think I could have pushed myself harder in the last 2 miles of the race. In stead I kept conserving energy and when I finished, I didn’t feel as tired as my practice run that I did a few weeks ago. Some other stats about my training journey: Training duration: 8 weeks Number of running hours: 24 Number of miles: 145 From not being able to run much from February this year, it has been a good journey so far. Ever since I found out about Strava, it has been the source of motivation to get me running. There are a lot of runners out there and seeing how they push themselves everyday to run harder and faster is truly wonderful. I am glad to join the running club and hoping to continue for a long time. Also thank you to my friend Tri Hoang for pushing me, it is good to have a running buddy. If you want to get started in running, I suggest checking out Couch 2 5K Program. This will help guide you along the way from not running to your first 5K. Get out there and start running!</summary></entry><entry><title type="html">Apply Different Styles to Mobile vs Web View Using @media</title><link href="https://jasonthai.me/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media/" rel="alternate" type="text/html" title="Apply Different Styles to Mobile vs Web View Using @media" /><published>2019-07-27T00:00:00+00:00</published><updated>2019-07-27T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media/">&lt;p&gt;This note goes over how I render the mobile and web view of my site differently to optimize user experience on different screen sizes with the use of &lt;code class=&quot;highlighter-rouge&quot;&gt;@media&lt;/code&gt;  queries.
+&lt;!--more--&gt;
+First let’s examine how it looks on web vs mobile:&lt;/p&gt;
+
+&lt;h2 id=&quot;web-view&quot;&gt;Web View:&lt;/h2&gt;
+&lt;p&gt;This view is designed to be viewed on devices with larger screen like laptops or desktops and it includes more information such as the cover image and description of the post.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/jasonthai-web-view.webp&quot; alt=&quot;&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;mobile-view&quot;&gt;Mobile View:&lt;/h2&gt;
+&lt;p&gt;The view on mobile is optimized a lot more for information browsing. The image and description are eliminated in favor of more number of articles in the view. This makes viewing on mobile devices faster too since the browser does not have to load any images.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/jasonthai-mobile-view.webp&quot; alt=&quot;&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-using-media&quot;&gt;How to: using @media&lt;/h2&gt;
+&lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;@media&lt;/code&gt; query, we can define specific css behavior depending on certain width or height of the screen. You can learn more about it &lt;a href=&quot;https://www.w3schools.com/cssref/css3_pr_mediaquery.asp&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;For example, the following query will apply to device with screen width up to 480px&lt;/p&gt;
+&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max-width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;480px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// define css here&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;For my specific site, this is what I define:&lt;/p&gt;
+&lt;div class=&quot;language-scss highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max-width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;600px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nc&quot;&gt;.bg-img&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// hiding the cover image&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nc&quot;&gt;.excerpt&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// hiding the description&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Using @media is a simple way to apply specific styles to different media/screens. I believe there are other ways to do it too such as grid or flex view. I am going to take a look at those a different time.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">This note goes over how I render the mobile and web view of my site differently to optimize user experience on different screen sizes with the use of @media queries.</summary></entry><entry><title type="html">Customize Part of Your Life with IFTTT</title><link href="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/" rel="alternate" type="text/html" title="Customize Part of Your Life with IFTTT" /><published>2019-07-26T00:00:00+00:00</published><updated>2019-07-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/ifttt-featured.webp&quot; alt=&quot;IFTTT feature&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have been using &lt;a href=&quot;https://ifttt.com&quot;&gt;IFTTT&lt;/a&gt; to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;h2 id=&quot;what-is-ifttt&quot;&gt;What is IFTTT?&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://help.ifttt.com/hc/en-us/articles/115010325748-What-is-IFTTT-&quot;&gt;From IFTTT&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;IFTTT is the free way to do more with hundreds of the apps and devices you love, including Twitter, Dropbox, Evernote, Nest, Fitbit, Amazon Alexa, and Google Assistant.&lt;/p&gt;
+
+  &lt;p&gt;On IFTTT, we call those services. To see all of the services on IFTTT, check out our services list.
+We bring services together into Applets. Applets are specific things that can happen when you connect services — things your apps can’t do on their own.&lt;/p&gt;
+
+  &lt;p&gt;For example, you could use an Applet to sync Amazon Alexa to-dos with your Google Calendar. Or one that lets you create events in your iPhone Calendar, via Google Assistant.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Essentially you can connect service A and service B to produce some events or activities C configured in an applet.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-ifttt-work&quot;&gt;How does IFTTT work?&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://help.ifttt.com/hc/en-us/articles/115010158167-How-does-IFTTT-work-&quot;&gt;From IFTTT&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;IFTTT helps you connect all of your different apps and devices. When you sign up for a free account, you can turn on Applets that help your apps and devices work together to do specific things they couldn’t do otherwise. For example, you can back up your Instagram photos to Dropbox, have your lights turn on when you enter your home, or automatically remind a Slack channel about a meeting. There are millions of Applets to explore.&lt;/p&gt;
+
+  &lt;p&gt;Here’s how it works:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&quot;https://ifttt.com/join&quot;&gt;Create a free account.&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Browse the IFTTT website or app to find an Applet that interests you.&lt;/li&gt;
+    &lt;li&gt;Click into the Applet and turn it on.&lt;/li&gt;
+    &lt;li&gt;Connect the services that are involved in the Applet — this is only so we can use them to run Applets on your behalf. IFTTT provides a layer between different services to only allow them to do what you specifically tell them to do.&lt;/li&gt;
+    &lt;li&gt;Find more Applets, and repeat!&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I usually download the mobile app to set up and configure the applets. They are available on both &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.ifttt.ifttt&amp;amp;hl=en_US&quot;&gt;Android&lt;/a&gt; and &lt;a href=&quot;https://apps.apple.com/us/app/ifttt/id660944635&quot;&gt;iOS&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;some-applets-i-use&quot;&gt;Some Applets I use&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/YY9Mqgw5-get-the-weather-forecast-every-day-at-7-00-am?term=weather%2520underground%25208%2520AM&quot;&gt;Get weather forecast at 7 AM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/ULC789F5-get-rain-alert?term=get%2520caltrain%2520update&quot;&gt;Get rain alert&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/PRM3EF6b-get-mobile-notifications-for-new-items-in-an-rss-feed-you-choose?term=rss%252520feed&quot;&gt;Receive new AWS announcements through RSS feed&lt;/a&gt; - &lt;a href=&quot;http://aws.amazon.com/new/feed/&quot;&gt;AWS news feed&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/375373p-save-a-photo-when-detect-moviment&quot;&gt;Capture Ring security camera photo if motion is detected&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Those are just a few that I am using. There are definitely a lot of useful integrations available on IFTTT. I highly recommend you check it out. You can also build your own integration and customize them to fit with your activities.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I think IFTTT is a very powerful service that is useful to almost everyone. From various existing integrations to new ones that you can build, I am sure you will benefit from the service. Give it a try!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">I have been using IFTTT to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.</summary></entry><entry><title type="html">My Blog’s PageSpeed Insights Score</title><link href="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/" rel="alternate" type="text/html" title="My Blog's PageSpeed Insights Score" /><published>2019-07-26T00:00:00+00:00</published><updated>2019-07-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/pagespeed-full.webp&quot; alt=&quot;PageSpeed Insights&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;I have been testing how responsive my blog is and PageSpeed Insights give me a pretty good idea of the result. Certainly there are always improvements to be made but for now I am quite glad that the site is snappy.&lt;/p&gt;
+
+&lt;!--more--&gt;
+&lt;p&gt;&lt;a href=&quot;https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fjasonthai.me%2F&amp;amp;tab=desktop&quot;&gt;Check my blog’s PageSpeed Insights Score&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I also tried out &lt;a href=&quot;https://developers.google.com/web/tools/lighthouse&quot;&gt;Lighthouse&lt;/a&gt;, an open source tool to audit my site’s performance. The result is &lt;a href=&quot;/assets/js/jasonthai.me-20190726T112605.json&quot;&gt;here&lt;/a&gt; in json or you can download the file and use &lt;a href=&quot;https://googlechrome.github.io/lighthouse/viewer/&quot;&gt;Lighthouse Report Viewer&lt;/a&gt; for the graphical view.&lt;/p&gt;
+
+&lt;p&gt;Some other tools to test your site are &lt;a href=&quot;https://tools.pingdom.com&quot;&gt;Pingdom&lt;/a&gt; and &lt;a href=&quot;https://gtmetrix.com/&quot;&gt;GTmetrix&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;things-i-have-done-to-improve-speed&quot;&gt;Things I have done to improve speed&lt;/h2&gt;
+
+&lt;h3 id=&quot;leverage-cloudflare-for-its-ssl-and-cdn-service&quot;&gt;Leverage &lt;a href=&quot;https://cloudflare.com&quot;&gt;Cloudflare&lt;/a&gt; for its SSL and CDN service&lt;/h3&gt;
+&lt;p&gt;Cloudflare CDN ensures that my site is highly available and fast. Its SSL service also ensures your connection to my site is secure.&lt;/p&gt;
+
+&lt;h3 id=&quot;load-scripts-asynchronously&quot;&gt;Load scripts asynchronously&lt;/h3&gt;
+&lt;p&gt;Since scripts by default will block the rendering of the page, I use &lt;code class=&quot;highlighter-rouge&quot;&gt;async&lt;/code&gt; attribute to have them loaded asynchronously.&lt;/p&gt;
+
+&lt;h3 id=&quot;less-use-of-style-and-scripts&quot;&gt;Less use of style and scripts&lt;/h3&gt;
+&lt;p&gt;The more scripts and styles a page has, the slower it becomes. I try not to overload the site with these things.&lt;/p&gt;
+
+&lt;p&gt;I also include CSS and javascripts directly on the page if they are small to reduce HTTP calls to fetch them.&lt;/p&gt;
+
+&lt;h3 id=&quot;lazyload-images-and-webp-format&quot;&gt;Lazyload images and webp format&lt;/h3&gt;
+&lt;p&gt;I optimize the images by converting them to &lt;a href=&quot;https://developers.google.com/speed/webp/&quot;&gt;webp format&lt;/a&gt; and using &lt;a href=&quot;https://github.com/aFarkas/lazysizes&quot;&gt;lazyloading&lt;/a&gt;  so they take less time to load and render.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;To be clear, I do not think having a high score means the website is awesome. It also has to do with other factors like quality of content. That said, user experience is very important and we should not make the users wait to view our content.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Introduction I have been testing how responsive my blog is and PageSpeed Insights give me a pretty good idea of the result. Certainly there are always improvements to be made but for now I am quite glad that the site is snappy.</summary></entry><entry><title type="html">TinyAlias URL Shortener Design and Its Features</title><link href="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" rel="alternate" type="text/html" title="TinyAlias URL Shortener Design and Its Features" /><published>2019-07-25T00:00:00+00:00</published><updated>2019-07-25T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/">&lt;style&gt;
+
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next &amp; previous buttons */
+.prevImg, .nextImg {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the &quot;next button&quot; to the right */
+.nextImg {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prevImg:hover, .nextImg:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.textImg {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertextImg {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prevImg, .nextImg,.textImg {font-size: 11px}
+}
+&lt;/style&gt;
+
+&lt;p&gt;After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in &lt;a href=&quot;/blog/2019/06/05/thoughts-on-url-shortener-service/&quot;&gt;Things I’ve Learned Hosting a URL Shortener Service&lt;/a&gt;. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. This post will lay out its design and highlight a few interesting things with respect to both backend and front end implementations.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;screenshots&quot;&gt;Screenshots&lt;/h2&gt;
+&lt;!-- Slideshow container --&gt;
+&lt;div class=&quot;slideshow-container&quot;&gt;
+
+&lt;!-- Full-width images with number and caption text --&gt;
+&lt;div class=&quot;mySlides fade&quot;&gt;
+&lt;div class=&quot;numbertextImg&quot;&gt;1 / 5&lt;/div&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/tinyalias-authentication.webp&quot; alt=&quot;TinyAlias Authentication&quot; class=&quot;lazyload&quot; /&gt; 
+
+&lt;/div&gt;
+
+&lt;div class=&quot;mySlides fade&quot;&gt;
+&lt;div class=&quot;numbertextImg&quot;&gt;2 / 5&lt;/div&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/tinyalias-password.webp&quot; alt=&quot;TinyAlias Password&quot; class=&quot;lazyload&quot; /&gt; 
+
+&lt;/div&gt;
+
+&lt;div class=&quot;mySlides fade&quot;&gt;
+&lt;div class=&quot;numbertextImg&quot;&gt;3 / 5&lt;/div&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/tinyalias-analytics.webp&quot; alt=&quot;TinyAlias Analytics&quot; class=&quot;lazyload&quot; /&gt; 
+
+&lt;/div&gt;
+
+&lt;div class=&quot;mySlides fade&quot;&gt;
+&lt;div class=&quot;numbertextImg&quot;&gt;4 / 5&lt;/div&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/tinyalias-mindful.webp&quot; alt=&quot;TinyAlias Mindful&quot; class=&quot;lazyload&quot; /&gt; 
+
+&lt;/div&gt;
+
+&lt;div class=&quot;mySlides fade&quot;&gt;
+&lt;div class=&quot;numbertextImg&quot;&gt;5 / 5&lt;/div&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/tinyalias-news.webp&quot; alt=&quot;TinyAlias News&quot; class=&quot;lazyload&quot; /&gt; 
+
+&lt;/div&gt;
+
+&lt;!-- Next and previous buttons --&gt;
+&lt;a class=&quot;prevImg&quot; onclick=&quot;plusSlides(-1)&quot;&gt;&amp;#10094;&lt;/a&gt;
+&lt;a class=&quot;nextImg&quot; onclick=&quot;plusSlides(1)&quot;&gt;&amp;#10095;&lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;!-- The dots/circles --&gt;
+&lt;div style=&quot;text-align:center&quot;&gt;
+&lt;span class=&quot;dot&quot; onclick=&quot;currentSlide(1)&quot;&gt;&lt;/span&gt; 
+&lt;span class=&quot;dot&quot; onclick=&quot;currentSlide(2)&quot;&gt;&lt;/span&gt; 
+&lt;span class=&quot;dot&quot; onclick=&quot;currentSlide(3)&quot;&gt;&lt;/span&gt; 
+&lt;span class=&quot;dot&quot; onclick=&quot;currentSlide(4)&quot;&gt;&lt;/span&gt; 
+&lt;span class=&quot;dot&quot; onclick=&quot;currentSlide(5)&quot;&gt;&lt;/span&gt; 
+&lt;/div&gt;
+
+&lt;h2 id=&quot;design&quot;&gt;Design&lt;/h2&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/tinyalias-diagram.webp&quot; alt=&quot;TinyAlias Design&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;workflow&quot;&gt;Workflow&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The Main app handles the main logic of creating shortened URL and its metadata, user authentication, and other blocking operations.&lt;/li&gt;
+  &lt;li&gt;The Worker service receives a job from the job queue and executes tasks such as parsing request’s geolocation, detecting spam, expiring URL, and other non-blocking operations.&lt;/li&gt;
+  &lt;li&gt;The Scheduler service runs as a cron to delegate jobs to the worker service.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;repo&quot;&gt;Repo&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/zirius/tinyalias&quot;&gt;https://github.com/zirius/tinyalias&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;features&quot;&gt;Features&lt;/h2&gt;
+
+&lt;p&gt;Some function and feature highlights&lt;/p&gt;
+
+&lt;h3 id=&quot;user-authentication&quot;&gt;User authentication&lt;/h3&gt;
+
+&lt;p&gt;I added a user authentication flow that let you sign up, sign in, reset your password. Building this from scratch is quite fun. Sessions are Cookie-based and passwords are encrypted by &lt;code class=&quot;highlighter-rouge&quot;&gt;bcrypt&lt;/code&gt; and stored in DB.&lt;/p&gt;
+
+&lt;h3 id=&quot;password-protected-links-and-link-expiration&quot;&gt;Password protected links and link expiration&lt;/h3&gt;
+&lt;p&gt;Link passwords are encrypted securely and stored in DB. Scheduler service periodically sends expiration job to worker service to detect if any links have expired and marked them as invalid.&lt;/p&gt;
+
+&lt;h3 id=&quot;spam-detection-flow&quot;&gt;Spam detection flow&lt;/h3&gt;
+&lt;p&gt;This is one of the more interesting backend features I added. Whenever a URL is shortened, the main app will dispatch a spam detection job to the worker service. Worker service then calls Google &lt;a href=&quot;https://safebrowsing.google.com/&quot;&gt;safebrowsing&lt;/a&gt; API to detect if a URL is safe and update that URL status. The scheduler also periodically dispatch spam detection jobs to recheck existing URLs.&lt;/p&gt;
+
+&lt;h3 id=&quot;analytics&quot;&gt;Analytics&lt;/h3&gt;
+&lt;p&gt;Whenever a link is clicked, the service will parse the location based on the user’s IP address. This is then aggregated to show where the links are accessed geographically.&lt;/p&gt;
+
+&lt;h3 id=&quot;mindful-mode&quot;&gt;Mindful mode&lt;/h3&gt;
+&lt;p&gt;This is a fun feature that I added that makes the user wait for a few seconds before redirecting them to the original URL. The page also displays some quotes of the day provided by &lt;a href=&quot;https://favqs.com&quot;&gt;https://favqs.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;news&quot;&gt;News&lt;/h3&gt;
+&lt;p&gt;I also added a page to allow users to view trending news and get the shortened URL within the app. News is provided by &lt;a href=&quot;https://newsapi.org/&quot;&gt;News API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;script type=&quot;text/javascript&quot;&gt;
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName(&quot;mySlides&quot;);
+  var dots = document.getElementsByClassName(&quot;dot&quot;);
+  if (n &gt; slides.length) {slideIndex = 1}    
+  if (n &lt; 1) {slideIndex = slides.length}
+  for (i = 0; i &lt; slides.length; i++) {
+      slides[i].style.display = &quot;none&quot;;  
+  }
+  for (i = 0; i &lt; dots.length; i++) {
+      dots[i].className = dots[i].className.replace(&quot; active&quot;, &quot;&quot;);
+  }
+  slides[slideIndex-1].style.display = &quot;block&quot;;  
+  dots[slideIndex-1].className += &quot; active&quot;;
+}
+&lt;/script&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Designing and implementing TinyAlias from scratch is a fun side project for me.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in Things I’ve Learned Hosting a URL Shortener Service. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. This post will lay out its design and highlight a few interesting things with respect to both backend and front end implementations.</summary></entry><entry><title type="html">Useful Commands for PostgreSQL and MySQL Database</title><link href="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/" rel="alternate" type="text/html" title="Useful Commands for PostgreSQL and MySQL Database" /><published>2019-07-24T00:00:00+00:00</published><updated>2019-07-24T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/postgresql-vs-mysql-features.webp&quot; alt=&quot;PostgreSQL vs MySQL&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;prereqs&quot;&gt;Prereqs&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://brew.sh/&quot;&gt;Homebrew&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;postgresql&quot;&gt;PostgreSQL&lt;/h2&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew install postgresql&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;connect-through-cli&quot;&gt;Connect through CLI:&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PGPASSWORD=XXX psql -h HOST -p PORT -d DATABASE -u USERNAME
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-tables&quot;&gt;Show tables&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\d
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;describe-tables&quot;&gt;Describe tables&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\d TABLENAME
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-biggest-tables-and-their-sizes&quot;&gt;Show biggest tables and their sizes&lt;/h3&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nspname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;relname&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;relation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;pg_size_pretty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pg_total_relation_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;total_size&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_class&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;LEFT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relnamespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nspname&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'pg_catalog'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'information_schema'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relkind&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'i'&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nspname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!~&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'^pg_toast'&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_total_relation_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DESC&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;export-to-csv-with-header&quot;&gt;Export to CSV with header&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\copy TABLENAME TO FILENAME.csv' DELIMITER ',' CSV HEADER;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;mysql&quot;&gt;MySQL&lt;/h2&gt;
+
+&lt;h3 id=&quot;installation-1&quot;&gt;Installation&lt;/h3&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew install mysql&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;connect-through-cli-1&quot;&gt;Connect through CLI:&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mysql -h HOST -P PORT -D DATABASE -u USERNAME -pPASSWORD 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-tables-1&quot;&gt;Show tables&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SHOW tables;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;describe-tables-1&quot;&gt;Describe tables&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DESCRIBE TABLENAME
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-biggest-tables-and-their-sizes-1&quot;&gt;Show biggest tables and their sizes&lt;/h3&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;table_schema&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`Database`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+  &lt;span class=&quot;k&quot;&gt;table_name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`Table`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index_length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`Size in MB`&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;information_schema&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TABLES&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index_length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DESC&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;export-to-csv-with-header-1&quot;&gt;Export to CSV with header&lt;/h3&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TABLENAME&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTFILE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'FILENAME.csv'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;FIELDS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TERMINATED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;','&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ENCLOSED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;LINES&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TERMINATED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.</summary></entry><entry><title type="html">How to Deploy to Github Pages Using Travis CI</title><link href="https://jasonthai.me/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/" rel="alternate" type="text/html" title="How to Deploy to Github Pages Using Travis CI" /><published>2019-07-23T00:00:00+00:00</published><updated>2019-07-23T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/logo-travisci-wide1.webp&quot; alt=&quot;TravisCI&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Follow up for my post &lt;a href=&quot;/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/&quot;&gt;How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies&lt;/a&gt;. This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;travis-ci&quot;&gt;Travis CI&lt;/h2&gt;
+&lt;p&gt;Travis CI is also very  powerful continuous integration tool, which allows rapid builds and deployment of your projects.  Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploy-to-github-pages-with-travis-ci&quot;&gt;Deploy to Github Pages with Travis CI&lt;/h2&gt;
+&lt;p&gt;The first step is to grant Travis CI access to your repo. This is done by adding a personal access key to allow read and write access so that Travis CI can read and push your changes. You can find out how to do it &lt;a href=&quot;https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line&quot;&gt;here&lt;/a&gt;. In your Travis repo setting, set an environment variable &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_TOKEN&lt;/code&gt; with the token value you’ve just created.&lt;/p&gt;
+
+&lt;p&gt;Next step is to configure the build and deployment step so Travis CI knows what to do&lt;/p&gt;
+&lt;h3 id=&quot;create--travisyml&quot;&gt;Create  &lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt;:&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ruby&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundler&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build --destination site&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;provider&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pages&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;skip-cleanup&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;local-dir&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./site&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;target-branch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;deploy@travis-ci.org&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deployment Bot&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;github-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$GITHUB_TOKEN&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;keep-history&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt; file declares the steps for Travis CI to execute, you can see that we are telling Travis CI to build the site using the source code from branch &lt;strong&gt;source&lt;/strong&gt; and deploy the changes on branch &lt;strong&gt;master&lt;/strong&gt;. Configuring on Travis CI is a little simpler than CircleCI as the tool takes care of caching the dependencies under the hood.&lt;/p&gt;
+
+&lt;p&gt;After you have created these files, commit and push the changes to &lt;strong&gt;source&lt;/strong&gt; branch. You will see a new build will start in Travis CI, which will execute all the steps mentioned above and put the new changes of your site on &lt;strong&gt;master&lt;/strong&gt; branch. You may see something similar to this on Travis CI:&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/travisci-build.webp&quot; alt=&quot;TravisCI build&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once it’s done, your changes will be available for viewing.&lt;/p&gt;
+
+&lt;p&gt;For other configurations, you can also check out Travis CI’s guide &lt;a href=&quot;https://docs.travis-ci.com/user/deployment/pages/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I hope this guide is also useful in helping you set up automatic build and deployment of your personal site on Github Pages. Using CI tools definitely helps free you from the limitation and restriction of Github Pages.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Follow up for my post How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies. This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI</summary></entry><entry><title type="html">How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies</title><link href="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/" rel="alternate" type="text/html" title="How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies" /><published>2019-07-22T00:00:00+00:00</published><updated>2019-07-22T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/circleci-logo-1200x630.webp&quot; alt=&quot;CircleCi&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Since I have been playing with &lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt; to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view &lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;here&lt;/a&gt;. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Pages. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Pages repo.&lt;/p&gt;
+
+&lt;p&gt;Note: this tutorial assumes that you already know how to host your static site on Github Pages. Otherwise, you can check out some  &lt;a href=&quot;https://help.github.com/en/categories/github-pages-basics&quot;&gt;guides&lt;/a&gt; available on Github.&lt;/p&gt;
+
+&lt;h2 id=&quot;circleci&quot;&gt;CircleCI&lt;/h2&gt;
+&lt;p&gt;CircleCI is a very  powerful continuous integration tool, which allows rapid builds and deployment of your projects.  Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploy-to-github-pages-with-circleci&quot;&gt;Deploy to Github Pages with CircleCI&lt;/h2&gt;
+&lt;p&gt;The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it &lt;a href=&quot;https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Next step is to configure the build and deployment step so CircleCI knows what to do&lt;/p&gt;
+&lt;h3 id=&quot;create--circleciconfigyml&quot;&gt;Create  &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/config.yml&lt;/code&gt;:&lt;/h3&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;circleci/ruby:latest&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;USER_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;zirius&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;USER_EMAIL&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;thaixtri@gmail.com&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;checkout&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;install dependencies&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;gem update --system&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;gem install bundler&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;restore_cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }}&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle install --path=vendor/bundle &amp;amp;&amp;amp; bundle clean&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;save_cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;vendor/bundle&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }}&lt;/span&gt;
+
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Test&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle exec htmlproofer ./_site --check-html --disable-external --empty-alt-ignore&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy Release to GitHub&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;if [ $CIRCLE_BRANCH == 'source' ]; then&lt;/span&gt;
+              &lt;span class=&quot;s&quot;&gt;bash .circleci/deploy.sh&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;workflows&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+              &lt;span class=&quot;na&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+                &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;config.yml&lt;/code&gt; file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; , save gems cache, build the static site by executing &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/code&gt; and finally if the code is pushed to &lt;strong&gt;source&lt;/strong&gt; branch, the script &lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt; is executed.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-circlecideploysh&quot;&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/deploy.sh&lt;/code&gt;:&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config user.name &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_NAME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+git config user.email &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_EMAIL&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+git checkout master
+git pull origin master
+
+find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-maxdepth&lt;/span&gt; 1 &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'_site'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.git'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.gitignore'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.circleci'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;mv &lt;/span&gt;_site/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; _site/
+
+git add &lt;span class=&quot;nt&quot;&gt;-fA&lt;/span&gt;
+git commit &lt;span class=&quot;nt&quot;&gt;--allow-empty&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;git log &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;%B&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+git push &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deployed successfully&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we are telling CircleCI to checkout the &lt;strong&gt;master&lt;/strong&gt; branch of the repo. For personal website, Github Pages uses master branch to render the site. By default, Github Pages will build the site and use the contents under &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; that have already been built and put them in the root directory, that way Github Pages can render the contents.&lt;/p&gt;
+
+&lt;p&gt;After you have created these files, commit and push the changes to &lt;strong&gt;source&lt;/strong&gt; branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on &lt;strong&gt;master&lt;/strong&gt; branch. You may see something similar to this on CircleCI:&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/circleci-build.webp&quot; alt=&quot;CircleCi Build&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Once it’s done, your changes will be available for viewing.&lt;/p&gt;
+
+&lt;h3 id=&quot;added-benefit-custom-jekyll-dependencies--plugins&quot;&gt;Added benefit: Custom Jekyll Dependencies + Plugins&lt;/h3&gt;
+&lt;p&gt;As I mentioned, if we let Github Pages handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that &lt;a href=&quot;https://github.com/sverrirs/jekyll-paginate-v2&quot;&gt;jekyll-paginate-v2&lt;/a&gt; is not yet supported by Github Pages, but now you can take advantage of the new additional features of this dependency.&lt;/p&gt;
+
+&lt;h2 id=&quot;addendum&quot;&gt;Addendum&lt;/h2&gt;
+&lt;p&gt;If you decided to create a separate repo to store your source code and want to use CircleCI to push the generated static site to your Github Pages repo, you can replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/deploy.sh&lt;/code&gt; above with the following content:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; user.name &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_NAME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; user.email &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_EMAIL&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;COMMIT_MESSAGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;oneline &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;format:&lt;span class=&quot;s1&quot;&gt;'%h - %B'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$COMMIT_MESSAGE&lt;/span&gt;
+
+git clone &lt;span class=&quot;nv&quot;&gt;$GITHUB_PAGE_REPOSITORY_URL&lt;/span&gt; destination
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;destination
+
+git checkout master
+git pull origin master
+
+find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-maxdepth&lt;/span&gt; 1 &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'_site'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.git'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.gitignore'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; ../_site/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+
+git add &lt;span class=&quot;nt&quot;&gt;-fA&lt;/span&gt;
+git commit &lt;span class=&quot;nt&quot;&gt;--allow-empty&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$COMMIT_MESSAGE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+git push &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; origin master
+
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Deployed successfully&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In your repo setting on CircleCI, add a new environment variable &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_PAGE_REPOSITORY_URL&lt;/code&gt; which is your Github Pages repo URL.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Since I have been playing with Github Pages to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view here. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Pages. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Pages repo. Note: this tutorial assumes that you already know how to host your static site on Github Pages. Otherwise, you can check out some guides available on Github. CircleCI CircleCI is a very powerful continuous integration tool, which allows rapid builds and deployment of your projects. Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project. Deploy to Github Pages with CircleCI The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it here Next step is to configure the build and deployment step so CircleCI knows what to do Create .circleci/config.yml: version: 2 jobs: deploy: docker: - image: circleci/ruby:latest environment: USER_NAME: zirius USER_EMAIL: thaixtri@gmail.com steps: - checkout - run: name: install dependencies command: | gem update --system gem install bundler - restore_cache: keys: - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - v1-gem-cache-{{ arch }}-{{ .Branch }}- - v1-gem-cache-{{ arch }}- - run: bundle install --path=vendor/bundle &amp;amp;&amp;amp; bundle clean - save_cache: paths: - vendor/bundle key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - run: JEKYLL_ENV=production bundle exec jekyll build - run: name: Test command: bundle exec htmlproofer ./_site --check-html --disable-external --empty-alt-ignore - deploy: name: Deploy Release to GitHub command: | if [ $CIRCLE_BRANCH == 'source' ]; then bash .circleci/deploy.sh fi workflows: version: 2 build: jobs: - deploy: filters: branches: only: - source The config.yml file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run bundle install , save gems cache, build the static site by executing JEKYLL_ENV=production bundle exec jekyll build and finally if the code is pushed to source branch, the script deploy.sh is executed. Create .circleci/deploy.sh: git config user.name &quot;$USER_NAME&quot; git config user.email &quot;$USER_EMAIL&quot; git checkout master git pull origin master find . -maxdepth 1 ! -name '_site' ! -name '.git' ! -name '.gitignore' ! -name '.circleci' -exec rm -rf {} \; mv _site/* . rm -R _site/ git add -fA git commit --allow-empty -m &quot;$(git log source -1 --pretty=%B)&quot; git push -f origin master echo &quot;deployed successfully&quot; Here we are telling CircleCI to checkout the master branch of the repo. For personal website, Github Pages uses master branch to render the site. By default, Github Pages will build the site and use the contents under _site directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under _site that have already been built and put them in the root directory, that way Github Pages can render the contents. After you have created these files, commit and push the changes to source branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on master branch. You may see something similar to this on CircleCI: Once it’s done, your changes will be available for viewing. Added benefit: Custom Jekyll Dependencies + Plugins As I mentioned, if we let Github Pages handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that jekyll-paginate-v2 is not yet supported by Github Pages, but now you can take advantage of the new additional features of this dependency. Addendum If you decided to create a separate repo to store your source code and want to use CircleCI to push the generated static site to your Github Pages repo, you can replace the .circleci/deploy.sh above with the following content: git config --global user.name &quot;$USER_NAME&quot; git config --global user.email &quot;$USER_EMAIL&quot; export COMMIT_MESSAGE=\&quot;$(git log --format=oneline -1 --pretty=format:'%h - %B')\&quot; echo $COMMIT_MESSAGE git clone $GITHUB_PAGE_REPOSITORY_URL destination cd destination git checkout master git pull origin master find . -maxdepth 1 ! -name '_site' ! -name '.git' ! -name '.gitignore' -exec rm -rf {} \; mv ../_site/* . git add -fA git commit --allow-empty -m &quot;$COMMIT_MESSAGE&quot; git push -f origin master echo &quot;Deployed successfully&quot; In your repo setting on CircleCI, add a new environment variable GITHUB_PAGE_REPOSITORY_URL which is your Github Pages repo URL.</summary></entry><entry><title type="html">Bài Tiếng Việt</title><link href="https://jasonthai.me/blog/2019/07/20/bai-tieng-viet/" rel="alternate" type="text/html" title="Bài Tiếng Việt" /><published>2019-07-20T00:00:00+00:00</published><updated>2019-07-20T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/20/bai-tieng-viet</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/20/bai-tieng-viet/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;/assets/img/postage-stamps-484991_640.webp&quot; alt=&quot;Tem&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Thiệt ra cái blog này đầu tiên chỉ định viết bằng tiếng Anh thôi nhưng mà càng viết thì tui lại càng muốn nó thành cái blog tạp hóa hơn. Mò từ hỗm rài tới giờ mới ra được một cách hơi ưng ý một tí để trình bày bài viết. Cái công cụ &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; này không giống như Wordpress (wp thì cái gì cũng làm sẵn cho mình). Này thì phải mày mò viết code nhiều hơn một tí. Mà tui thì lại không có giỏi trong việc chỉnh sửa CSS cho lắm.&lt;/p&gt;
+
+&lt;p&gt;Nhưng mà mò tới giờ thì thấy cũng đã tạm ổn, chỉ cần làm cho đường link xem post nhìn bắt mắt hơn tí là được. Ăn mừng để đánh dấu sự kiện blog đã hỗ trợ 2 ngôn ngữ thôi.&lt;/p&gt;
+
+&lt;div style=&quot;width:100%;height:0;padding-bottom:100%;position:relative;&quot;&gt;&lt;iframe src=&quot;https://giphy.com/embed/rjkJD1v80CjYs&quot; width=&quot;100%&quot; height=&quot;100%&quot; style=&quot;position:absolute&quot; frameborder=&quot;0&quot; class=&quot;giphy-embed&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://giphy.com/gifs/rjkJD1v80CjYs&quot;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;À tiện thể đã ăn mừng thì xin cho tui giới thiệu luôn về &lt;a href=&quot;https://nangtrongbep.com&quot;&gt;Nắng Trong Bếp&lt;/a&gt;. Mọi người vào đây xem mấy bài viết đi tìm tuổi thơ của Vy và tui nha.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="vi" /><category term="blog" /><summary type="html">Thiệt ra cái blog này đầu tiên chỉ định viết bằng tiếng Anh thôi nhưng mà càng viết thì tui lại càng muốn nó thành cái blog tạp hóa hơn. Mò từ hỗm rài tới giờ mới ra được một cách hơi ưng ý một tí để trình bày bài viết. Cái công cụ Jekyll này không giống như Wordpress (wp thì cái gì cũng làm sẵn cho mình). Này thì phải mày mò viết code nhiều hơn một tí. Mà tui thì lại không có giỏi trong việc chỉnh sửa CSS cho lắm. Nhưng mà mò tới giờ thì thấy cũng đã tạm ổn, chỉ cần làm cho đường link xem post nhìn bắt mắt hơn tí là được. Ăn mừng để đánh dấu sự kiện blog đã hỗ trợ 2 ngôn ngữ thôi. via GIPHY À tiện thể đã ăn mừng thì xin cho tui giới thiệu luôn về Nắng Trong Bếp. Mọi người vào đây xem mấy bài viết đi tìm tuổi thơ của Vy và tui nha.</summary></entry><entry><title type="html">Changes I Made for My Blog’s Theme</title><link href="https://jasonthai.me/blog/2019/07/18/changes-i-made-for-my-blogs-theme/" rel="alternate" type="text/html" title="Changes I Made for My Blog's Theme" /><published>2019-07-18T00:00:00+00:00</published><updated>2019-07-18T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/18/changes-i-made-for-my-blogs-theme</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/18/changes-i-made-for-my-blogs-theme/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto;&quot; data-sizes=&quot;auto&quot; data-src=&quot;https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d&quot; alt=&quot;Jekyll&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The stock theme that I am currently using is from &lt;a href=&quot;https://github.com/jekyll/minima&quot;&gt;https://github.com/jekyll/minima&lt;/a&gt;. I like it for its cleanliness and simplicty as the name implies.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;But as you know I enjoy customizing things my way so I did make a few changes to make this blog a bit more to my liking (for now. After all I have switched themes a few times). Here are a couple of new additions that I added.&lt;/p&gt;
+
+&lt;h3 id=&quot;added-subscribe-feature-through-email-or-rss&quot;&gt;Added subscribe feature through email or RSS&lt;/h3&gt;
+&lt;p&gt;I am currently trying out &lt;a href=&quot;https://feedburner.google.com&quot;&gt;feedburner&lt;/a&gt; to handle subscription for the blog.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-excerpt-and-introduce-hover-effects-on-the-post&quot;&gt;Use excerpt and introduce hover effects on the post.&lt;/h3&gt;
+&lt;p&gt;If you visit my homepage, you will notice each post contains an excerpt and if you hover over the post, you’ll see a fading effect. The suggestion was made my the maintainer of Jekyll’s theme and I ended up implementing it.&lt;/p&gt;
+
+&lt;p&gt;You can see my PR here: &lt;a href=&quot;https://github.com/jekyll/minima/pull/382&quot;&gt;https://github.com/jekyll/minima/pull/382&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;added-next-and-previous-post-link&quot;&gt;Added next and previous post link&lt;/h3&gt;
+&lt;p&gt;IF you view a post, at the end of the post there is are hyperlinks to the next and previous posts to save you some clicks.&lt;/p&gt;
+
+&lt;h3 id=&quot;added-pagination-and-style-each-post-as-a-card-view&quot;&gt;Added pagination and style each post as a card view.&lt;/h3&gt;
+&lt;p&gt;Kudos to &lt;a href=&quot;http://prashanthmadi.github.io&quot;&gt;prashanthmadi.github.io&lt;/a&gt; for adding pagination and the card view that looks really nice.&lt;/p&gt;
+
+&lt;p&gt;You can see the changes to add pagination &lt;a href=&quot;https://github.com/prashanthmadi/prashanthmadi.github.io/commit/d09b4351f0a8e34318847f14f854b5be2f06b4d6&quot;&gt;here&lt;/a&gt; and the card view &lt;a href=&quot;https://github.com/prashanthmadi/prashanthmadi.github.io/commit/78bc5e44c80f7bb1cbe129691701d79d3e8bdbb5#diff-891082c144b1c9ddb0047d67a7b4181f&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Below is the snippet of my homepage changes:&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/7cc4269a6ea78743616b64a9d8c4dcef.js&quot;&gt; &lt;/script&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/2547bf7ccc911229f6dee3d3c9c27f52.js&quot;&gt; &lt;/script&gt;
+
+&lt;h3 id=&quot;added-all-posts-page-grouped-by-year-month&quot;&gt;Added all posts page grouped by year-month&lt;/h3&gt;
+&lt;p&gt;This is a nice way to view all the available posts on the same page. Here is the code to render this page:&lt;/p&gt;
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/23b552da7884e8a06805ac4f15576c1a.js&quot;&gt; &lt;/script&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">The stock theme that I am currently using is from https://github.com/jekyll/minima. I like it for its cleanliness and simplicty as the name implies.</summary></entry></feed>
