@@ -666,7 +666,8 @@ a {
   background-color: #faf5ef;
   border: 1px solid #d3d3d3;
   border-radius: .25rem;
-  margin-top: 15px; }
+  margin-top: 15px;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.19), 0 0.3rem 0.3rem -0.1rem rgba(0, 0, 0, 0.23); }
   .excerpt .post-link, .excerpt .post-meta {
     color: #672f2f; }
   .excerpt .post-excerpt {
