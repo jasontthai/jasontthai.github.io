@@ -212,3 +212,6 @@ workbox.precaching.precacheAndRoute([
     "revision": "93ed7442ee46f69c600dc3ab70d5fa86"
   }
 ])
+
+workbox.routing.registerRoute(/(\.js$|\.css$)/, new workbox.strategies.CacheFirst());
+workbox.routing.registerRoute(/^https?:.*\.(png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/, new workbox.strategies.StaleWhileRevalidate());
