@@ -1,4 +1,1 @@
-User-agent: *
-Allow: /ads.txt
-
 Sitemap: https://jasonthai.me/sitemap.xml

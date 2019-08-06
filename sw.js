@@ -8,10 +8,6 @@ if (workbox) {
 
 workbox.precaching.precacheAndRoute([
   {
-    "url": "ads.txt",
-    "revision": "d5af770eea579e1ce7e3dc14331c50d6"
-  },
-  {
     "url": "assets/css/style.css",
     "revision": "2d6e64ca388f3ed81eee7fa7090372f6"
   },
@@ -205,7 +201,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "robots.txt",
-    "revision": "7461ce9f93ac4d6fb56c9841502cbddc"
+    "revision": "2fac8a129285b1b58020ae33bd484690"
   },
   {
     "url": "workbox-config.js",
