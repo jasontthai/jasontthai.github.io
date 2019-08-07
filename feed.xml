@@ -1,4 +1,127 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-07T00:30:18+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Three Proofs Total Stock Market is Efficient</title><link href="https://jasonthai.me/blog/2019/08/04/three-proofs-total-stock-market-is-efficient/" rel="alternate" type="text/html" title="Three Proofs Total Stock Market is Efficient" /><published>2019-08-04T00:00:00+00:00</published><updated>2019-08-04T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/04/three-proofs-total-stock-market-is-efficient</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/04/three-proofs-total-stock-market-is-efficient/">&lt;p&gt;John Norstad, a retired mathematician, had presented three proofs that prove Total Stock Market (fund) is efficient. This is interesting so this note shares with you those three proofs.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-07T04:46:16+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Enable Offline Support to Websites with Workbox</title><link href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" rel="alternate" type="text/html" title="Enable Offline Support to Websites with Workbox" /><published>2019-08-06T00:00:00+00:00</published><updated>2019-08-06T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/workbox.webp&quot; alt=&quot;workbox&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Recently I have added offline support for this blog using &lt;a href=&quot;https://developers.google.com/web/tools/workbox/&quot;&gt;Workbox&lt;/a&gt;. You can test this by going offline and then browsing my blog. This note gives a walkthrough of how I did it and summarizes my findings.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;tldr&quot;&gt;TLDR&lt;/h2&gt;
+&lt;p&gt;Steps to enable offline support:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Create sw.js with
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;importScripts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precaching&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precacheAndRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Install workbox-cli with &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install workbox-cli --global&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Follow workbox wizard &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox wizard --injectManifest&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Inject &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; with what to cache &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox injectManifest workbox-config.js&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;what-is-workbox&quot;&gt;What is Workbox?&lt;/h2&gt;
+&lt;p&gt;Workbox is a set of javascript libraries that add support for caching and offline access of web apps. Workbox provides an abstract layer for developers when working with &lt;a href=&quot;https://developers.google.com/web/fundamentals/primers/service-workers/&quot;&gt;service workers&lt;/a&gt;. Some of the things workbox support like precaching, runtime caching, etc will be covered below.&lt;/p&gt;
+
+&lt;h2 id=&quot;enable-service-worker&quot;&gt;Enable service worker&lt;/h2&gt;
+&lt;p&gt;Add this script to the bottom of your website:&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// Check that service workers are supported&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;serviceWorker&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Use the window load event to keep the page load performant&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;serviceWorker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This tells the browser to wait until the window load and then register for service worker  in &lt;code class=&quot;highlighter-rouge&quot;&gt;/sw.js&lt;/code&gt; route.&lt;/p&gt;
+
+&lt;h2 id=&quot;using-workbox&quot;&gt;Using Workbox&lt;/h2&gt;
+&lt;p&gt;There are a few ways to generate service workers using Workbox. I choose to use workbox-cli as I can enable it as part of my build pipeline for my blog which is currently powered by Jekyll. If you use Node or Gulp, you can use &lt;a href=&quot;https://developers.google.com/web/tools/workbox/guides/precache-files/workbox-build&quot;&gt;workbox-build&lt;/a&gt; or if you use Webpack, there is &lt;a href=&quot;https://developers.google.com/web/tools/workbox/guides/precache-files/webpack&quot;&gt;workbox-webpack-plugin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-workbox-cli&quot;&gt;Install workbox-cli&lt;/h3&gt;
+&lt;p&gt;Install by using npm:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install workbox-cli --global&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;setup-service-worker&quot;&gt;Setup service worker&lt;/h3&gt;
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; specify the following boilerplate code:&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;importScripts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precaching&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precacheAndRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([])&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Notice we have not specified anything yet to precache. This serves as an injection point for workbox to compute and inject all the routes to be cached.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-workbox-cli-to-populate-what-to-precache&quot;&gt;Use workbox-cli to populate what to precache&lt;/h3&gt;
+&lt;p&gt;Run workbox-cli wizard&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wizard&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;injectManifest&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This command provides the option to specify what to cache by looking at all the file extensions in the website. After this is done, a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox-config.js&lt;/code&gt; will be created.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;injectManifest&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This command then uses what is specified in &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox-config.js&lt;/code&gt; and injects all the files to be cached into the injection point we specified above in &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; files.&lt;/p&gt;
+
+&lt;h3 id=&quot;manually-specify-what-to-cache-during-runtime&quot;&gt;Manually specify what to cache during runtime&lt;/h3&gt;
+&lt;p&gt;There are already a few &lt;a href=&quot;https://developers.google.com/web/tools/workbox/guides/common-recipes&quot;&gt;common recipes&lt;/a&gt; that provide examples of caching css, js, images, etc.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/sw.js&quot;&gt;I use a few from those recipes for my site&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Caching Images&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;routing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.(?:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;png|gif|jpg|jpeg|webp|svg&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strategies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;CacheFirst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;cacheName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;expiration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Plugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;maxEntries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;maxAgeSeconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 30 Days&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Cache CSS and JavaScript Files&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;routing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.(?:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;js|css&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strategies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;StaleWhileRevalidate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;cacheName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;static-resources&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// Caching Content from Multiple Origins&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;routing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;sr&quot;&gt;/.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(?:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;googleapis|gstatic&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;com/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strategies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;StaleWhileRevalidate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;add-to-build-and-automate&quot;&gt;Add to build and automate&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/&quot;&gt;Since I am using CircleCI to deploy changes of my site to Github Pages&lt;/a&gt;, I also add the workbox + service worker script generation to the build.&lt;/p&gt;
+
+&lt;p&gt;Declared &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox-config.js&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;globDirectory&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;_site/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;globPatterns&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;**/*.{html,txt,css,webp,js,json,svg,ico}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;swDest&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;_site/sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;swSrc&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;config.yml&lt;/code&gt; file I added:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;c1&quot;&gt;# -- more omitted --&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;npm install workbox-cli&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;npx workbox injectManifest workbox-config.js&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# -- more omitted --&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It is quite simple, just added two extra steps to install workbox-cli and run the same command to inject the precache routes.&lt;/p&gt;
+
+&lt;h2 id=&quot;consideration&quot;&gt;Consideration&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Using the workbox-cli, we can cache everything on the site. However, this will not work if the website contains thousands of posts and images as everything will be downloaded to the browser cache.&lt;/li&gt;
+  &lt;li&gt;Using the workbox-cli, we can only set service workers to cache our website’s assets. It will not handle caching other website’s sites. This is important because we probably use things like external fonts, javascripts, css files, etc. So we need to manually add that support to our service workers.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Recently I have added offline support for this blog using Workbox. You can test this by going offline and then browsing my blog. This note gives a walkthrough of how I did it and summarizes my findings.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/workbox.webp" /></entry><entry><title type="html">Three Proofs Total Stock Market is Efficient</title><link href="https://jasonthai.me/blog/2019/08/04/three-proofs-total-stock-market-is-efficient/" rel="alternate" type="text/html" title="Three Proofs Total Stock Market is Efficient" /><published>2019-08-04T00:00:00+00:00</published><updated>2019-08-04T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/04/three-proofs-total-stock-market-is-efficient</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/04/three-proofs-total-stock-market-is-efficient/">&lt;p&gt;John Norstad, a retired mathematician, had presented three proofs that prove Total Stock Market (fund) is efficient. This is interesting so this note shares with you those three proofs.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;You can &lt;a href=&quot;https://web.archive.org/web/20170628202816/http://www.norstad.org/finance/tsmproofs.pdf&quot;&gt;read about the proofs here&lt;/a&gt; and  &lt;a href=&quot;https://www.bogleheads.org/forum/viewtopic.php?f=10&amp;amp;t=286828&quot;&gt;join the bogleheads forum to discuss about the proofs here&lt;/a&gt;&lt;/p&gt;
@@ -642,122 +765,4 @@ function showSlides(n) {
 &lt;p&gt;For other configurations, you can also check out Travis CI’s guide &lt;a href=&quot;https://docs.travis-ci.com/user/deployment/pages/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I hope this guide is also useful in helping you set up automatic build and deployment of your personal site on Github Pages. Using CI tools definitely helps free you from the limitation and restriction of Github Pages.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Follow up for my post How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies. This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/logo-travisci-wide1.webp" /></entry><entry><title type="html">How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies</title><link href="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/" rel="alternate" type="text/html" title="How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies" /><published>2019-07-22T00:00:00+00:00</published><updated>2019-07-22T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/circleci-logo-1200x630.webp&quot; alt=&quot;CircleCi&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Since I have been playing with &lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt; to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view &lt;a href=&quot;https://pages.github.com/versions/&quot;&gt;here&lt;/a&gt;. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Pages. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Pages repo.&lt;/p&gt;
-
-&lt;p&gt;Note: this tutorial assumes that you already know how to host your static site on Github Pages. Otherwise, you can check out some  &lt;a href=&quot;https://help.github.com/en/categories/github-pages-basics&quot;&gt;guides&lt;/a&gt; available on Github.&lt;/p&gt;
-
-&lt;h2 id=&quot;circleci&quot;&gt;CircleCI&lt;/h2&gt;
-&lt;p&gt;CircleCI is a very  powerful continuous integration tool, which allows rapid builds and deployment of your projects.  Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project.&lt;/p&gt;
-
-&lt;h2 id=&quot;deploy-to-github-pages-with-circleci&quot;&gt;Deploy to Github Pages with CircleCI&lt;/h2&gt;
-&lt;p&gt;The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it &lt;a href=&quot;https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Next step is to configure the build and deployment step so CircleCI knows what to do&lt;/p&gt;
-&lt;h3 id=&quot;create--circleciconfigyml&quot;&gt;Create  &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/config.yml&lt;/code&gt;:&lt;/h3&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;docker&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;circleci/ruby:latest&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;USER_NAME&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;zirius&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;USER_EMAIL&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;thaixtri@gmail.com&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;checkout&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;install dependencies&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;gem update --system&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;gem install bundler&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;restore_cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }}&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle install --path=vendor/bundle &amp;amp;&amp;amp; bundle clean&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;save_cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;paths&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;vendor/bundle&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;key&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }}&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Test&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle exec htmlproofer ./_site --check-html --disable-external --empty-alt-ignore&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy Release to GitHub&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;if [ $CIRCLE_BRANCH == 'source' ]; then&lt;/span&gt;
-              &lt;span class=&quot;s&quot;&gt;bash .circleci/deploy.sh&lt;/span&gt;
-            &lt;span class=&quot;s&quot;&gt;fi&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;workflows&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;filters&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-            &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-              &lt;span class=&quot;na&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
-                &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;config.yml&lt;/code&gt; file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle install&lt;/code&gt; , save gems cache, build the static site by executing &lt;code class=&quot;highlighter-rouge&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/code&gt; and finally if the code is pushed to &lt;strong&gt;source&lt;/strong&gt; branch, the script &lt;code class=&quot;highlighter-rouge&quot;&gt;deploy.sh&lt;/code&gt; is executed.&lt;/p&gt;
-
-&lt;h3 id=&quot;create-circlecideploysh&quot;&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/deploy.sh&lt;/code&gt;:&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config user.name &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_NAME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-git config user.email &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_EMAIL&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-
-git checkout master
-git pull origin master
-
-find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-maxdepth&lt;/span&gt; 1 &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'_site'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.git'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.gitignore'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.circleci'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;mv &lt;/span&gt;_site/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; _site/
-
-git add &lt;span class=&quot;nt&quot;&gt;-fA&lt;/span&gt;
-git commit &lt;span class=&quot;nt&quot;&gt;--allow-empty&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;git log &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;%B&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-git push &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; origin master
-
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;deployed successfully&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Here we are telling CircleCI to checkout the &lt;strong&gt;master&lt;/strong&gt; branch of the repo. For personal website, Github Pages uses master branch to render the site. By default, Github Pages will build the site and use the contents under &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; that have already been built and put them in the root directory, that way Github Pages can render the contents.&lt;/p&gt;
-
-&lt;p&gt;After you have created these files, commit and push the changes to &lt;strong&gt;source&lt;/strong&gt; branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on &lt;strong&gt;master&lt;/strong&gt; branch. You may see something similar to this on CircleCI:&lt;/p&gt;
-
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/circleci-build.webp&quot; alt=&quot;CircleCi Build&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once it’s done, your changes will be available for viewing.&lt;/p&gt;
-
-&lt;h3 id=&quot;added-benefit-custom-jekyll-dependencies--plugins&quot;&gt;Added benefit: Custom Jekyll Dependencies + Plugins&lt;/h3&gt;
-&lt;p&gt;As I mentioned, if we let Github Pages handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that &lt;a href=&quot;https://github.com/sverrirs/jekyll-paginate-v2&quot;&gt;jekyll-paginate-v2&lt;/a&gt; is not yet supported by Github Pages, but now you can take advantage of the new additional features of this dependency.&lt;/p&gt;
-
-&lt;h2 id=&quot;addendum&quot;&gt;Addendum&lt;/h2&gt;
-&lt;p&gt;If you decided to create a separate repo to store your source code and want to use CircleCI to push the generated static site to your Github Pages repo, you can replace the &lt;code class=&quot;highlighter-rouge&quot;&gt;.circleci/deploy.sh&lt;/code&gt; above with the following content:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; user.name &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_NAME&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; user.email &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$USER_EMAIL&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;COMMIT_MESSAGE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;oneline &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--pretty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;format:&lt;span class=&quot;s1&quot;&gt;'%h - %B'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$COMMIT_MESSAGE&lt;/span&gt;
-
-git clone &lt;span class=&quot;nv&quot;&gt;$GITHUB_PAGE_REPOSITORY_URL&lt;/span&gt; destination
-&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;destination
-
-git checkout master
-git pull origin master
-
-find &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-maxdepth&lt;/span&gt; 1 &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'_site'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.git'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-name&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.gitignore'&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-exec&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{}&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;mv&lt;/span&gt; ../_site/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-
-git add &lt;span class=&quot;nt&quot;&gt;-fA&lt;/span&gt;
-git commit &lt;span class=&quot;nt&quot;&gt;--allow-empty&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$COMMIT_MESSAGE&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-git push &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; origin master
-
-&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Deployed successfully&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In your repo setting on CircleCI, add a new environment variable &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_PAGE_REPOSITORY_URL&lt;/code&gt; which is your Github Pages repo URL.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Since I have been playing with Github Pages to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies which can view here. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Pages. One of the ways is to use CircleCI for automatic build and deployment of your static site to your Github Pages repo. Note: this tutorial assumes that you already know how to host your static site on Github Pages. Otherwise, you can check out some guides available on Github. CircleCI CircleCI is a very powerful continuous integration tool, which allows rapid builds and deployment of your projects. Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it. CircleCI also supports one job build for private project so you can also use it for your personal private project. Deploy to Github Pages with CircleCI The first step is to grant CircleCI access to your repo. This is done by adding a deploy key to allow read and write access so that CircleCI can read and push your changes. You can find out how to do it here Next step is to configure the build and deployment step so CircleCI knows what to do Create .circleci/config.yml: version: 2 jobs: deploy: docker: - image: circleci/ruby:latest environment: USER_NAME: zirius USER_EMAIL: thaixtri@gmail.com steps: - checkout - run: name: install dependencies command: | gem update --system gem install bundler - restore_cache: keys: - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - v1-gem-cache-{{ arch }}-{{ .Branch }}- - v1-gem-cache-{{ arch }}- - run: bundle install --path=vendor/bundle &amp;amp;&amp;amp; bundle clean - save_cache: paths: - vendor/bundle key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum &quot;Gemfile.lock&quot; }} - run: JEKYLL_ENV=production bundle exec jekyll build - run: name: Test command: bundle exec htmlproofer ./_site --check-html --disable-external --empty-alt-ignore - deploy: name: Deploy Release to GitHub command: | if [ $CIRCLE_BRANCH == 'source' ]; then bash .circleci/deploy.sh fi workflows: version: 2 build: jobs: - deploy: filters: branches: only: - source The config.yml file declares the steps for CircleCI to execute, you can see that we are telling CircleCI to checkout the repo, update bundler, restore gems cache, run bundle install , save gems cache, build the static site by executing JEKYLL_ENV=production bundle exec jekyll build and finally if the code is pushed to source branch, the script deploy.sh is executed. Create .circleci/deploy.sh: git config user.name &quot;$USER_NAME&quot; git config user.email &quot;$USER_EMAIL&quot; git checkout master git pull origin master find . -maxdepth 1 ! -name '_site' ! -name '.git' ! -name '.gitignore' ! -name '.circleci' -exec rm -rf {} \; mv _site/* . rm -R _site/ git add -fA git commit --allow-empty -m &quot;$(git log source -1 --pretty=%B)&quot; git push -f origin master echo &quot;deployed successfully&quot; Here we are telling CircleCI to checkout the master branch of the repo. For personal website, Github Pages uses master branch to render the site. By default, Github Pages will build the site and use the contents under _site directory to render the site. However, since we are using CircleCi to build the site, we just have to copy all the contents under _site that have already been built and put them in the root directory, that way Github Pages can render the contents. After you have created these files, commit and push the changes to source branch. You will see a new build will start in CircleCI, which will execute all the steps mentioned above and put the new changes of your site on master branch. You may see something similar to this on CircleCI: Once it’s done, your changes will be available for viewing. Added benefit: Custom Jekyll Dependencies + Plugins As I mentioned, if we let Github Pages handle the build of our site, only a limited number of dependencies and plugins are supported. However, now we have switched to CircleCI and build the site ourselves, this comes with an additional benefit which is all the Jekyll dependencies and plugins are now supported. Some of you may be aware that jekyll-paginate-v2 is not yet supported by Github Pages, but now you can take advantage of the new additional features of this dependency. Addendum If you decided to create a separate repo to store your source code and want to use CircleCI to push the generated static site to your Github Pages repo, you can replace the .circleci/deploy.sh above with the following content: git config --global user.name &quot;$USER_NAME&quot; git config --global user.email &quot;$USER_EMAIL&quot; export COMMIT_MESSAGE=\&quot;$(git log --format=oneline -1 --pretty=format:'%h - %B')\&quot; echo $COMMIT_MESSAGE git clone $GITHUB_PAGE_REPOSITORY_URL destination cd destination git checkout master git pull origin master find . -maxdepth 1 ! -name '_site' ! -name '.git' ! -name '.gitignore' -exec rm -rf {} \; mv ../_site/* . git add -fA git commit --allow-empty -m &quot;$COMMIT_MESSAGE&quot; git push -f origin master echo &quot;Deployed successfully&quot; In your repo setting on CircleCI, add a new environment variable GITHUB_PAGE_REPOSITORY_URL which is your Github Pages repo URL.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/circleci-logo-1200x630.webp" /></entry></feed>
+&lt;p&gt;I hope this guide is also useful in helping you set up automatic build and deployment of your personal site on Github Pages. Using CI tools definitely helps free you from the limitation and restriction of Github Pages.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Follow up for my post How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies. This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/logo-travisci-wide1.webp" /></entry></feed>

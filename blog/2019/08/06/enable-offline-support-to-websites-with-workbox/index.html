@@ -3,18 +3,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Tags | Jason’s Notes</title>
+<title>Enable Offline Support to Websites with Workbox | Jason’s Notes</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="Enable Offline Support to Websites with Workbox" />
 <meta name="author" content="Jason Thai" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Jason Thai’s personal page" />
-<meta property="og:description" content="Jason Thai’s personal page" />
-<link rel="canonical" href="https://jasonthai.me/tags/" />
-<meta property="og:url" content="https://jasonthai.me/tags/" />
+<meta name="description" content="A note of what Workbox is and how to use it to enable offline access for websites" />
+<meta property="og:description" content="A note of what Workbox is and how to use it to enable offline access for websites" />
+<link rel="canonical" href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" />
+<meta property="og:url" content="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" />
 <meta property="og:site_name" content="Jason’s Notes" />
+<meta property="og:image" content="https://jasonthai.me/assets/img/workbox.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-06T00:00:00+00:00" />
 <script type="application/ld+json">
-{"headline":"Tags","description":"Jason Thai’s personal page","@type":"WebPage","url":"https://jasonthai.me/tags/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
+{"headline":"Enable Offline Support to Websites with Workbox","dateModified":"2019-08-06T00:00:00+00:00","description":"A note of what Workbox is and how to use it to enable offline access for websites","datePublished":"2019-08-06T00:00:00+00:00","@type":"BlogPosting","image":"https://jasonthai.me/assets/img/workbox.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/"},"url":"https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
   <style>
@@ -74,310 +77,189 @@ ga('send', 'pageview');
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <header class="post-header">
-        <h1 class="post-title">
-            Tags
-        </h1>
-    </header>
-    <div class="post-content">
-        <!-- See https://blog.lanyonm.org/articles/2013/11/21/alphabetize-jekyll-page-tags-pure-liquid.html -->
-<!-- With added pipe to handle lack of sort_natural -->
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Enable Offline Support to Websites with Workbox</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-08-06T00:00:00+00:00" itemprop="datePublished">Aug 6, 2019
+      </time>
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason Thai</span></span>
+      • <span>
+      
+        <a href="/tags/#tech">#tech</a> 
+       
+      </span>
+  </header>
 
-<!-- site_tags: tech|tech,blog|blog,finance|finance -->
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#tldr">TLDR</a></li>
+<li class="toc-entry toc-h2"><a href="#what-is-workbox">What is Workbox?</a></li>
+<li class="toc-entry toc-h2"><a href="#enable-service-worker">Enable service worker</a></li>
+<li class="toc-entry toc-h2"><a href="#using-workbox">Using Workbox</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#install-workbox-cli">Install workbox-cli</a></li>
+<li class="toc-entry toc-h3"><a href="#setup-service-worker">Setup service worker</a></li>
+<li class="toc-entry toc-h3"><a href="#use-workbox-cli-to-populate-what-to-precache">Use workbox-cli to populate what to precache</a></li>
+<li class="toc-entry toc-h3"><a href="#manually-specify-what-to-cache-during-runtime">Manually specify what to cache during runtime</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#add-to-build-and-automate">Add to build and automate</a></li>
+<li class="toc-entry toc-h2"><a href="#consideration">Consideration</a></li>
+</ul>
+<p><img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/workbox.webp" alt="workbox"></p>
 
-<!-- tag_words: blog|blogfinance|financetech|tech -->
+<p>Recently I have added offline support for this blog using <a href="https://developers.google.com/web/tools/workbox/">Workbox</a>. You can test this by going offline and then browsing my blog. This note gives a walkthrough of how I did it and summarizes my findings.
+<!--more--></p>
 
-<div id="tags-page">
-  <div class="tags-list">
-    
-    
-    <a href="#blog" class="tag-link">
-      <span>Blog</span>
-      <span>7</span>
-    </a>  | 
-    
-    
-    <a href="#finance" class="tag-link">
-      <span>Finance</span>
-      <span>4</span>
-    </a>  | 
-    
-    
-    <a href="#tech" class="tag-link">
-      <span>Tech</span>
-      <span>15</span>
-    </a>  | 
-    
+<h2 id="tldr">
+<a class="anchor" href="#tldr" aria-hidden="true"><span class="octicon octicon-link"></span></a>TLDR</h2>
+<p>Steps to enable offline support:</p>
+<ul>
+  <li>Create sw.js with
+    <div class="language-javascript highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="nx">importScripts</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">workbox</span><span class="p">.</span><span class="nx">precaching</span><span class="p">.</span><span class="nx">precacheAndRoute</span><span class="p">([]);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Install workbox-cli with <code class="highlighter-rouge">npm install workbox-cli --global</code>
+</li>
+  <li>Follow workbox wizard <code class="highlighter-rouge">workbox wizard --injectManifest</code>
+</li>
+  <li>Inject <code class="highlighter-rouge">sw.js</code> with what to cache <code class="highlighter-rouge">workbox injectManifest workbox-config.js</code>
+</li>
+</ul>
+
+<h2 id="what-is-workbox">
+<a class="anchor" href="#what-is-workbox" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is Workbox?</h2>
+<p>Workbox is a set of javascript libraries that add support for caching and offline access of web apps. Workbox provides an abstract layer for developers when working with <a href="https://developers.google.com/web/fundamentals/primers/service-workers/">service workers</a>. Some of the things workbox support like precaching, runtime caching, etc will be covered below.</p>
+
+<h2 id="enable-service-worker">
+<a class="anchor" href="#enable-service-worker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enable service worker</h2>
+<p>Add this script to the bottom of your website:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>
+<span class="c1">// Check that service workers are supported</span>
+<span class="k">if</span> <span class="p">(</span><span class="dl">'</span><span class="s1">serviceWorker</span><span class="dl">'</span> <span class="k">in</span> <span class="nb">navigator</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Use the window load event to keep the page load performant</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">load</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nb">navigator</span><span class="p">.</span><span class="nx">serviceWorker</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="dl">'</span><span class="s1">/sw.js</span><span class="dl">'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+<p>This tells the browser to wait until the window load and then register for service worker  in <code class="highlighter-rouge">/sw.js</code> route.</p>
+
+<h2 id="using-workbox">
+<a class="anchor" href="#using-workbox" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Workbox</h2>
+<p>There are a few ways to generate service workers using Workbox. I choose to use workbox-cli as I can enable it as part of my build pipeline for my blog which is currently powered by Jekyll. If you use Node or Gulp, you can use <a href="https://developers.google.com/web/tools/workbox/guides/precache-files/workbox-build">workbox-build</a> or if you use Webpack, there is <a href="https://developers.google.com/web/tools/workbox/guides/precache-files/webpack">workbox-webpack-plugin</a>.</p>
+
+<h3 id="install-workbox-cli">
+<a class="anchor" href="#install-workbox-cli" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install workbox-cli</h3>
+<p>Install by using npm:</p>
+
+<p><code class="highlighter-rouge">npm install workbox-cli --global</code></p>
+
+<h3 id="setup-service-worker">
+<a class="anchor" href="#setup-service-worker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setup service worker</h3>
+<p>In <code class="highlighter-rouge">sw.js</code> specify the following boilerplate code:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">importScripts</span><span class="p">(</span><span class="dl">'</span><span class="s1">https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js</span><span class="dl">'</span><span class="p">);</span>
+<span class="nx">workbox</span><span class="p">.</span><span class="nx">precaching</span><span class="p">.</span><span class="nx">precacheAndRoute</span><span class="p">([])</span> 
+</code></pre></div></div>
+<p>Notice we have not specified anything yet to precache. This serves as an injection point for workbox to compute and inject all the routes to be cached.</p>
+
+<h3 id="use-workbox-cli-to-populate-what-to-precache">
+<a class="anchor" href="#use-workbox-cli-to-populate-what-to-precache" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use workbox-cli to populate what to precache</h3>
+<p>Run workbox-cli wizard</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">workbox</span> <span class="nx">wizard</span> <span class="o">--</span><span class="nx">injectManifest</span>
+</code></pre></div></div>
+<p>This command provides the option to specify what to cache by looking at all the file extensions in the website. After this is done, a new file called <code class="highlighter-rouge">workbox-config.js</code> will be created.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">workbox</span> <span class="nx">injectManifest</span> <span class="nx">workbox</span><span class="o">-</span><span class="nx">config</span><span class="p">.</span><span class="nx">js</span>
+</code></pre></div></div>
+<p>This command then uses what is specified in <code class="highlighter-rouge">workbox-config.js</code> and injects all the files to be cached into the injection point we specified above in <code class="highlighter-rouge">sw.js</code> files.</p>
+
+<h3 id="manually-specify-what-to-cache-during-runtime">
+<a class="anchor" href="#manually-specify-what-to-cache-during-runtime" aria-hidden="true"><span class="octicon octicon-link"></span></a>Manually specify what to cache during runtime</h3>
+<p>There are already a few <a href="https://developers.google.com/web/tools/workbox/guides/common-recipes">common recipes</a> that provide examples of caching css, js, images, etc.</p>
+
+<p><a href="https://jasonthai.me/sw.js">I use a few from those recipes for my site</a>:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Caching Images</span>
+<span class="nx">workbox</span><span class="p">.</span><span class="nx">routing</span><span class="p">.</span><span class="nx">registerRoute</span><span class="p">(</span>
+  <span class="sr">/</span><span class="se">\.(?:</span><span class="sr">png|gif|jpg|jpeg|webp|svg</span><span class="se">)</span><span class="sr">$/</span><span class="p">,</span>
+  <span class="k">new</span> <span class="nx">workbox</span><span class="p">.</span><span class="nx">strategies</span><span class="p">.</span><span class="nx">CacheFirst</span><span class="p">({</span>
+    <span class="na">cacheName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">images</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+      <span class="k">new</span> <span class="nx">workbox</span><span class="p">.</span><span class="nx">expiration</span><span class="p">.</span><span class="nx">Plugin</span><span class="p">({</span>
+        <span class="na">maxEntries</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="na">maxAgeSeconds</span><span class="p">:</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span> <span class="c1">// 30 Days</span>
+      <span class="p">}),</span>
+    <span class="p">],</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+
+<span class="c1">// Cache CSS and JavaScript Files</span>
+<span class="nx">workbox</span><span class="p">.</span><span class="nx">routing</span><span class="p">.</span><span class="nx">registerRoute</span><span class="p">(</span>
+  <span class="sr">/</span><span class="se">\.(?:</span><span class="sr">js|css</span><span class="se">)</span><span class="sr">$/</span><span class="p">,</span>
+  <span class="k">new</span> <span class="nx">workbox</span><span class="p">.</span><span class="nx">strategies</span><span class="p">.</span><span class="nx">StaleWhileRevalidate</span><span class="p">({</span>
+    <span class="na">cacheName</span><span class="p">:</span> <span class="dl">'</span><span class="s1">static-resources</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">})</span>
+<span class="p">);</span>
+
+<span class="c1">// Caching Content from Multiple Origins</span>
+<span class="nx">workbox</span><span class="p">.</span><span class="nx">routing</span><span class="p">.</span><span class="nx">registerRoute</span><span class="p">(</span>
+  <span class="sr">/.*</span><span class="se">(?:</span><span class="sr">googleapis|gstatic</span><span class="se">)\.</span><span class="sr">com/</span><span class="p">,</span>
+  <span class="k">new</span> <span class="nx">workbox</span><span class="p">.</span><span class="nx">strategies</span><span class="p">.</span><span class="nx">StaleWhileRevalidate</span><span class="p">(),</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="add-to-build-and-automate">
+<a class="anchor" href="#add-to-build-and-automate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Add to build and automate</h2>
+<p><a href="/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/">Since I am using CircleCI to deploy changes of my site to Github Pages</a>, I also add the workbox + service worker script generation to the build.</p>
+
+<p>Declared <code class="highlighter-rouge">workbox-config.js</code>:</p>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">globDirectory</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">_site/</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">globPatterns</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">**/*.{html,txt,css,webp,js,json,svg,ico}</span><span class="dl">"</span>
+  <span class="p">],</span>
+  <span class="dl">"</span><span class="s2">swDest</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">_site/sw.js</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">swSrc</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">sw.js</span><span class="dl">"</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>In <code class="highlighter-rouge">config.yml</code> file I added:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="c1"># -- more omitted --</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">JEKYLL_ENV=production bundle exec jekyll build</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npm install workbox-cli</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">npx workbox injectManifest workbox-config.js</span>
+      <span class="c1"># -- more omitted --</span>
+</code></pre></div></div>
+
+<p>It is quite simple, just added two extra steps to install workbox-cli and run the same command to inject the precache routes.</p>
+
+<h2 id="consideration">
+<a class="anchor" href="#consideration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consideration</h2>
+<ul>
+  <li>Using the workbox-cli, we can cache everything on the site. However, this will not work if the website contains thousands of posts and images as everything will be downloaded to the browser cache.</li>
+  <li>Using the workbox-cli, we can only set service workers to cache our website’s assets. It will not handle caching other website’s sites. This is important because we probably use things like external fonts, javascripts, css files, etc. So we need to manually add that support to our service workers.</li>
+</ul>
+
   </div>
 
-  <hr/>
-
-  <div class="posts-by-tag">
-    
-    
-    <div id="blog" class="posts-for-tag">
-      <h2>Blog</h2>
-      <ul class="posts-list">
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/08/02/what-im-up-to-in-july-2019/">
-                What I'm up to in July 2019
-              </a>
-                <small>02 Aug 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/">
-                42nd Biofreeze SF Marathon - 1st Half
-              </a>
-                <small>28 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/20/bai-tieng-viet/">
-                Bài Tiếng Việt
-              </a>
-                <small>20 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/16/the-existence-of-anniversaries/">
-                The Existence of Anniversaries
-              </a>
-                <small>16 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/06/16/regrowing-my-succulents/">
-                Regrowing My Succulents
-              </a>
-                <small>16 Jun 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2018/07/15/dear-wife/">
-                Dear Wife!
-              </a>
-                <small>15 Jul 2018</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2018/06/16/thoughts-on-being-multilingual/">
-                Thoughts on Being Multilingual
-              </a>
-                <small>16 Jun 2018</small>
-            <!-- </h3> -->
-          </li>
-        
-      </ul>
-    </div>
-    
-    
-    <div id="finance" class="posts-for-tag">
-      <h2>Finance</h2>
-      <ul class="posts-list">
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/08/04/three-proofs-total-stock-market-is-efficient/">
-                Three Proofs Total Stock Market is Efficient
-              </a>
-                <small>04 Aug 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/15/so-you-have-some-money/">
-                So You Have Some Money
-              </a>
-                <small>15 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/06/30/your-life-or-your-money/">
-                Your Life or Your Money
-              </a>
-                <small>30 Jun 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/06/13/financial-tools/">
-                Recommended Financial Tools
-              </a>
-                <small>13 Jun 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-      </ul>
-    </div>
-    
-    
-    <div id="tech" class="posts-for-tag">
-      <h2>Tech</h2>
-      <ul class="posts-list">
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">
-                Enable Offline Support to Websites with Workbox
-              </a>
-                <small>06 Aug 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media/">
-                Apply Different Styles to Mobile vs Web View Using @media
-              </a>
-                <small>27 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/">
-                My Blog's PageSpeed Insights Score
-              </a>
-                <small>26 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">
-                Customize Part of Your Life with IFTTT
-              </a>
-                <small>26 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/25/tinyalias-url-shortener-design-and-features/">
-                TinyAlias URL Shortener Design and Its Features
-              </a>
-                <small>25 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/24/useful-commands-for-postgresql-mysql/">
-                Useful Commands for PostgreSQL and MySQL Database
-              </a>
-                <small>24 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/">
-                How to Deploy to Github Pages Using Travis CI
-              </a>
-                <small>23 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/">
-                How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies
-              </a>
-                <small>22 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/07/18/changes-i-made-for-my-blogs-theme/">
-                Changes I Made for My Blog's Theme
-              </a>
-                <small>18 Jul 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/06/12/about-unit-tests/">
-                About Unit Tests
-              </a>
-                <small>12 Jun 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2019/06/05/thoughts-on-url-shortener-service/">
-                Things I've Learned Hosting a URL Shortener Service
-              </a>
-                <small>05 Jun 2019</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2018/09/03/10-most-used-linux-commands/">
-                My 10 Most Used Linux Commands
-              </a>
-                <small>03 Sep 2018</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/">
-                How to Create an Interactive Map With Mapbox and Leafletjs
-              </a>
-                <small>13 Jun 2018</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2018/06/12/secure-your-passwords/">
-                How to Create a Secure Password
-              </a>
-                <small>12 Jun 2018</small>
-            <!-- </h3> -->
-          </li>
-        
-          <li>
-            <!-- <h3> -->
-              <a href="/blog/2018/06/10/browser-extensions/">
-                Recommended Browser Extensions
-              </a>
-                <small>10 Jun 2018</small>
-            <!-- </h3> -->
-          </li>
-        
-      </ul>
-    </div>
-    
-  </div>
+  <div class="page-nav">
+  
+    <a class="prev" href="/blog/2019/08/04/three-proofs-total-stock-market-is-efficient/">&laquo; Three Proofs Total Stock Market is Efficient</a>
+  
+  
 </div>
-    </div>
+
+  <div id="commento"></div>
+  <script src="https://commento.jasonthai.me/js/commento.js"></script><a class="u-url" href="/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" hidden></a>
 </article>
+
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/"></data>

@@ -168,6 +168,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "b271321badd92b935b235dd33860641a"
   },
   {
+    "url": "assets/img/workbox.webp",
+    "revision": "1013955747d181bbca054f4fc7b952e9"
+  },
+  {
     "url": "assets/js/countries.js",
     "revision": "9655c6e2fc0472433407ff8a50d4c35c"
   },
@@ -293,7 +297,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/04/three-proofs-total-stock-market-is-efficient/index.html",
-    "revision": "674bf720f28079fe07e5bfcb3ad41443"
+    "revision": "3dc3bda9f373a139b59d04b0f562ac56"
+  },
+  {
+    "url": "blog/2019/08/06/enable-offline-support-to-websites-with-workbox/index.html",
+    "revision": "a80f96b0489b01ee6f9745bdfa81aec7"
   },
   {
     "url": "default/index.html",
@@ -317,7 +325,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "cc68d717829e44a7151e732fe9d965e3"
+    "revision": "e3b33ce2873d3231b0b940d171aa0baf"
   },
   {
     "url": "package-lock.json",
@@ -325,15 +333,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "151024e3344e2b8c1d870c90f25ab491"
+    "revision": "a7d87c07326d9f07c89065b8da95e9b1"
   },
   {
     "url": "page/3/index.html",
-    "revision": "118960e7358d35d75253b6d9a042a4cb"
+    "revision": "37cb09449a8868758b3d74e1da0b7068"
   },
   {
     "url": "posts/index.html",
-    "revision": "44d319abd8838ae490b72caa942b0d36"
+    "revision": "99966c1764fc32889ca5c322758ba99f"
   },
   {
     "url": "redirects.json",
@@ -345,7 +353,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "6c8b14b71f11a77a741867930ff7e358"
+    "revision": "97a49b3fcd30b9eab55487b4cf6ab1d1"
   },
   {
     "url": "vi/index.html",
@@ -359,7 +367,7 @@ workbox.precaching.precacheAndRoute([
     "url": "workbox-config.js",
     "revision": "ea01ee827d6da686aa3dbb09fb2783a0"
   }
-])
+]);
 
 // Caching Images
 workbox.routing.registerRoute(
