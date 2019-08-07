@@ -333,7 +333,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "package-lock.json",
-    "revision": "6da598e2dc428f55ee1a57aa044133e3"
+    "revision": "7a5a55a6e35564973c00f87780223714"
   },
   {
     "url": "page/2/index.html",
