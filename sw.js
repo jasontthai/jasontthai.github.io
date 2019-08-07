@@ -265,7 +265,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/index.html",
-    "revision": "8931d03998ea9f9c668bc1777a8df220"
+    "revision": "b5bab0796b8bf1dfb2e799fffdc61ff6"
   },
   {
     "url": "blog/2019/07/24/useful-commands-for-postgresql-mysql/index.html",
@@ -301,7 +301,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/06/enable-offline-support-to-websites-with-workbox/index.html",
-    "revision": "826c9c98fb1e103885921bc6064e598c"
+    "revision": "a61ea767e242e844a08bc8e79cedb0ae"
   },
   {
     "url": "default/index.html",
