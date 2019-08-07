@@ -301,7 +301,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/06/enable-offline-support-to-websites-with-workbox/index.html",
-    "revision": "a61ea767e242e844a08bc8e79cedb0ae"
+    "revision": "42d1cd348ae2319cf833f21c942eeb06"
   },
   {
     "url": "default/index.html",
