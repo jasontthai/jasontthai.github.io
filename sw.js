@@ -180,10 +180,6 @@ workbox.precaching.precacheAndRoute([
     "revision": "7af09e786b16f198cd1961e7d73b0568"
   },
   {
-    "url": "assets/js/jasonthai.me-20190726T112605.json",
-    "revision": "c0d4bdf9c151c8ddcf1d40148cb57b19"
-  },
-  {
     "url": "assets/js/lazysizes.min.js",
     "revision": "149ff45fc6c2f13e892e438a58abb77f"
   },
@@ -328,14 +324,6 @@ workbox.precaching.precacheAndRoute([
     "revision": "2303144724cc0c7b5c8d5df24087f7c3"
   },
   {
-    "url": "manifest.json",
-    "revision": "341768a8729bf2202ecffa5f36da3560"
-  },
-  {
-    "url": "package-lock.json",
-    "revision": "7a5a55a6e35564973c00f87780223714"
-  },
-  {
     "url": "page/2/index.html",
     "revision": "4934a1c2bfb2a60565c637131db5e516"
   },
@@ -346,10 +334,6 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "posts/index.html",
     "revision": "d0b9325be55ba945f77f782098c15a40"
-  },
-  {
-    "url": "redirects.json",
-    "revision": "b45bb3f153aeb6a887f6db9b1f1e491c"
   },
   {
     "url": "robots.txt",
@@ -369,7 +353,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "workbox-config.js",
-    "revision": "ea01ee827d6da686aa3dbb09fb2783a0"
+    "revision": "26e97502855d8c37863bb3bd7214381d"
   }
 ]);
 
