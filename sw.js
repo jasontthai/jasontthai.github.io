@@ -373,7 +373,7 @@ workbox.routing.registerRoute(
 
 // Cache CSS and JavaScript Files
 workbox.routing.registerRoute(
-  /\.(?:js|css)$/,
+  /\.(?:js|json|css)$/,
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'static-resources',
   })
