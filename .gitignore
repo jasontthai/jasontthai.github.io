@@ -1,3 +1,5 @@
-_site
-.sass-cache
-*.gem
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+package-lock.json
