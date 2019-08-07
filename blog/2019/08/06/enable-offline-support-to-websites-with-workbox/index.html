@@ -106,7 +106,7 @@ ga('send', 'pageview');
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#add-to-build-and-automate">Add to build and automate</a></li>
-<li class="toc-entry toc-h2"><a href="#consideration">Consideration</a></li>
+<li class="toc-entry toc-h2"><a href="#considerations">Considerations</a></li>
 </ul>
 <p><img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/workbox.webp" alt="workbox"></p>
 
@@ -240,8 +240,8 @@ ga('send', 'pageview');
 
 <p>It is quite simple, just added two extra steps to install workbox-cli and run the same command to inject the precache routes.</p>
 
-<h2 id="consideration">
-<a class="anchor" href="#consideration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Consideration</h2>
+<h2 id="considerations">
+<a class="anchor" href="#considerations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Considerations</h2>
 <ul>
   <li>Using the workbox-cli, we can cache everything on the site. However, this will not work if the website contains thousands of posts and images as everything will be downloaded to the browser cache.</li>
   <li>Using the workbox-cli, we can only set service workers to cache our website’s assets. It will not handle caching other website’s sites. This is important because we probably use things like external fonts, javascripts, css files, etc. So we need to manually add that support to our service workers.</li>
