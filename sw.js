@@ -313,11 +313,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/06/enable-offline-support-to-websites-with-workbox/index.html",
-    "revision": "8c273f6a8583cc3cf4db9fab9eed2d29"
+    "revision": "baca9a9aede246298c7574a0df023844"
   },
   {
-    "url": "blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/index.html",
-    "revision": "a33df8f582c7f42ecf69c10a795cc170"
+    "url": "blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/index.html",
+    "revision": "d3bc16bf386979114b97a9b87a54992a"
   },
   {
     "url": "default/index.html",
@@ -341,7 +341,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "ba2318cfeb4f993b99d854917d1c9964"
+    "revision": "fe7989a3717303a5d0e3226400f92765"
   },
   {
     "url": "manifest.json",
@@ -357,7 +357,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "posts/index.html",
-    "revision": "2ef68ae1c0d2d7f7b2685e83337d7ca6"
+    "revision": "21add32b0d71e80a425b3889fdc5df9a"
   },
   {
     "url": "redirects.json",
@@ -369,7 +369,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "474c97f524e45255b1455c8b330ed930"
+    "revision": "acf36c20e88d045e34761144bc155772"
   },
   {
     "url": "vi/index.html",
