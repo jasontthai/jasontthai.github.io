@@ -317,7 +317,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/index.html",
-    "revision": "d3bc16bf386979114b97a9b87a54992a"
+    "revision": "cb32d15b1256ea61cd51db6fa2d64b1d"
   },
   {
     "url": "default/index.html",
