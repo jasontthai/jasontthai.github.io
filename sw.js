@@ -56,6 +56,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "4efd97ebc1d2dd027859682d794f2e3d"
   },
   {
+    "url": "assets/img/devtool-audits.webp",
+    "revision": "da9dbf21238d4ff002f34ae753eb6ca6"
+  },
+  {
     "url": "assets/img/half-marathon-cover.webp",
     "revision": "3b1e1e0e323820931dbb1ba9bca2e00a"
   },
@@ -118,6 +122,14 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "assets/img/puuung-traveling.webp",
     "revision": "61bb1a6dfa4933cdd2e8437a5814de7e"
+  },
+  {
+    "url": "assets/img/pwa-logo.webp",
+    "revision": "ff1103cc4d47d959894096e1823a1818"
+  },
+  {
+    "url": "assets/img/pwa.webp",
+    "revision": "22b0a6f0e5ad27392ffa8a50ea6f7ede"
   },
   {
     "url": "assets/img/responsive-media-queries.webp",
@@ -301,7 +313,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/06/enable-offline-support-to-websites-with-workbox/index.html",
-    "revision": "b1d7ece2f4cf152310f5b89d3e1d4571"
+    "revision": "8c273f6a8583cc3cf4db9fab9eed2d29"
+  },
+  {
+    "url": "blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/index.html",
+    "revision": "a33df8f582c7f42ecf69c10a795cc170"
   },
   {
     "url": "default/index.html",
@@ -325,7 +341,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "2303144724cc0c7b5c8d5df24087f7c3"
+    "revision": "ba2318cfeb4f993b99d854917d1c9964"
   },
   {
     "url": "manifest.json",
@@ -333,15 +349,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "4934a1c2bfb2a60565c637131db5e516"
+    "revision": "ac5ae958145bd2fcbb76c7c932b9dc18"
   },
   {
     "url": "page/3/index.html",
-    "revision": "0b61299a15767aa92304cda65c514af2"
+    "revision": "b8d4f4b14b005aac87981cbb7e1d8f9c"
   },
   {
     "url": "posts/index.html",
-    "revision": "d0b9325be55ba945f77f782098c15a40"
+    "revision": "2ef68ae1c0d2d7f7b2685e83337d7ca6"
   },
   {
     "url": "redirects.json",
@@ -353,7 +369,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "36189c19165af3e9d4e4b4cd83028b8d"
+    "revision": "474c97f524e45255b1455c8b330ed930"
   },
   {
     "url": "vi/index.html",

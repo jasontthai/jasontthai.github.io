@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-07T18:31:08+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Enable Offline Support to Websites with Workbox</title><link href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" rel="alternate" type="text/html" title="Enable Offline Support to Websites with Workbox" /><published>2019-08-06T00:00:00+00:00</published><updated>2019-08-06T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/workbox.webp&quot; alt=&quot;workbox&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-08T00:18:06+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">I Turned My Blog to a Progressive Web App</title><link href="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/" rel="alternate" type="text/html" title="I Turned My Blog to a Progressive Web App" /><published>2019-08-07T00:00:00+00:00</published><updated>2019-08-07T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/">&lt;p&gt;I recently create a post of &lt;a href=&quot;https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/&quot;&gt;how to enable offline support to websites with Workbox&lt;/a&gt; and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.
+&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;The first thing is to check what is needed to be done in order to be a PWA. We can do that by using Google Chrome’s developer tools’ audit.&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/devtool-audits.webp&quot; alt=&quot;Dev Tool Audits&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Give it a run, and see who well your website is doing.&lt;/p&gt;
+
+&lt;p&gt;Now let’s dive in the steps to turn my blog to a PWA.&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites:&lt;/h2&gt;
+&lt;p&gt;Make sure have completed registering the worker service. Details are covered in the post I mentioned above.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-manifestjson&quot;&gt;Create manifest.json&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/Manifest&quot;&gt;Web App Manifest&lt;/a&gt; is a JSON file designed to describe a Web Application. Below is what I declared for my site:&lt;/p&gt;
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;short_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Jason's Notes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Jason's Notes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;icons&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/assets/img/android-chrome-192x192.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;image/png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sizes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;192x192&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;src&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/assets/img/android-chrome-512x512.png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;type&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;image/png&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sizes&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;512x512&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;start_url&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;index.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;background_color&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#fdfdfd&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;display&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;standalone&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;scope&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;theme_color&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;#faf5ef&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Above are the minimum fields you should declare for your manifest. Make sure you fill all of them.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-meta-tags&quot;&gt;Add meta tags:&lt;/h2&gt;
+&lt;p&gt;I also added the required meta tags for a PWA:&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;width=device-width, initial-scale=1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;manifest&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/manifest.json&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;apple-touch-icon&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/assets/img/apple-touch-icon.png&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;theme-color&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;#faf5ef&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;verify-through-audits&quot;&gt;Verify through Audits&lt;/h2&gt;
+&lt;p&gt;If you have completed all the above steps, verify using the audits tool again and hopefully you’ll be greeted with this screen:&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/pwa.webp&quot; alt=&quot;PWA&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;more-ways-to-verify&quot;&gt;More ways to verify&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;If you open the menu on chrome browser, you’ll see the option to install your wpa as an app on your desktop.&lt;/li&gt;
+  &lt;li&gt;View the site on browser and you can be asked to add this site as an app.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Using PWA, we ensure our site is viewable no matter what network condition is. I hope you’ll be able to turn your site to a PWA to improve your visitors’ experience.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">I recently create a post of how to enable offline support to websites with Workbox and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/pwa-logo.webp" /></entry><entry><title type="html">Enable Offline Support to Websites with Workbox</title><link href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" rel="alternate" type="text/html" title="Enable Offline Support to Websites with Workbox" /><published>2019-08-06T00:00:00+00:00</published><updated>2019-08-06T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/workbox.webp&quot; alt=&quot;workbox&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently I have added offline support for this blog using &lt;a href=&quot;https://developers.google.com/web/tools/workbox/&quot;&gt;Workbox&lt;/a&gt;. You can test this by going offline and then browsing my blog. This note gives a walkthrough of how I did it and summarizes my findings.
 &lt;!--more--&gt;&lt;/p&gt;
@@ -722,50 +782,4 @@ function showSlides(n) {
 &lt;span class=&quot;n&quot;&gt;FIELDS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TERMINATED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;','&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;ENCLOSED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;LINES&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TERMINATED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/postgresql-vs-mysql-features.webp" /></entry><entry><title type="html">How to Deploy to Github Pages Using Travis CI</title><link href="https://jasonthai.me/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/" rel="alternate" type="text/html" title="How to Deploy to Github Pages Using Travis CI" /><published>2019-07-23T00:00:00+00:00</published><updated>2019-07-23T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/logo-travisci-wide1.webp&quot; alt=&quot;TravisCI&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Follow up for my post &lt;a href=&quot;https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/&quot;&gt;How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies&lt;/a&gt;. This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;travis-ci&quot;&gt;Travis CI&lt;/h2&gt;
-&lt;p&gt;Travis CI is also very  powerful continuous integration tool, which allows rapid builds and deployment of your projects.  Open source projects are supported and get free builds so as long as your static website is located on a public repository on Github, you won’t have to pay anything to use it.&lt;/p&gt;
-
-&lt;h2 id=&quot;deploy-to-github-pages-with-travis-ci&quot;&gt;Deploy to Github Pages with Travis CI&lt;/h2&gt;
-&lt;p&gt;The first step is to grant Travis CI access to your repo. This is done by adding a personal access key to allow read and write access so that Travis CI can read and push your changes. You can find out how to do it &lt;a href=&quot;https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line&quot;&gt;here&lt;/a&gt;. In your Travis repo setting, set an environment variable &lt;code class=&quot;highlighter-rouge&quot;&gt;GITHUB_TOKEN&lt;/code&gt; with the token value you’ve just created.&lt;/p&gt;
-
-&lt;p&gt;Next step is to configure the build and deployment step so Travis CI knows what to do&lt;/p&gt;
-&lt;h3 id=&quot;create--travisyml&quot;&gt;Create  &lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt;:&lt;/h3&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;language&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ruby&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundler&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;only&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build --destination site&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;provider&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;pages&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;skip-cleanup&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;local-dir&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./site&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;target-branch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;email&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;deploy@travis-ci.org&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deployment Bot&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;github-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$GITHUB_TOKEN&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;keep-history&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;branch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;source&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;.travis.yml&lt;/code&gt; file declares the steps for Travis CI to execute, you can see that we are telling Travis CI to build the site using the source code from branch &lt;strong&gt;source&lt;/strong&gt; and deploy the changes on branch &lt;strong&gt;master&lt;/strong&gt;. Configuring on Travis CI is a little simpler than CircleCI as the tool takes care of caching the dependencies under the hood.&lt;/p&gt;
-
-&lt;p&gt;After you have created these files, commit and push the changes to &lt;strong&gt;source&lt;/strong&gt; branch. You will see a new build will start in Travis CI, which will execute all the steps mentioned above and put the new changes of your site on &lt;strong&gt;master&lt;/strong&gt; branch. You may see something similar to this on Travis CI:&lt;/p&gt;
-
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/travisci-build.webp&quot; alt=&quot;TravisCI build&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once it’s done, your changes will be available for viewing.&lt;/p&gt;
-
-&lt;p&gt;For other configurations, you can also check out Travis CI’s guide &lt;a href=&quot;https://docs.travis-ci.com/user/deployment/pages/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I hope this guide is also useful in helping you set up automatic build and deployment of your personal site on Github Pages. Using CI tools definitely helps free you from the limitation and restriction of Github Pages.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">Follow up for my post How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies. This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/logo-travisci-wide1.webp" /></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jason Thai</name></author><category term="en" /><category term="tech" /><summary type="html">A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/postgresql-vs-mysql-features.webp" /></entry></feed>

@@ -3,18 +3,21 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Posts | Jason’s Notes</title>
+<title>I Turned My Blog to a Progressive Web App | Jason’s Notes</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="Posts" />
+<meta property="og:title" content="I Turned My Blog to a Progressive Web App" />
 <meta name="author" content="Jason Thai" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Jason Thai’s personal page" />
-<meta property="og:description" content="Jason Thai’s personal page" />
-<link rel="canonical" href="https://jasonthai.me/posts/" />
-<meta property="og:url" content="https://jasonthai.me/posts/" />
+<meta name="description" content="A note of how I turn my blog into a progressive web app" />
+<meta property="og:description" content="A note of how I turn my blog into a progressive web app" />
+<link rel="canonical" href="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/" />
+<meta property="og:url" content="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/" />
 <meta property="og:site_name" content="Jason’s Notes" />
+<meta property="og:image" content="https://jasonthai.me/assets/img/pwa-logo.webp" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-08-07T00:00:00+00:00" />
 <script type="application/ld+json">
-{"headline":"Posts","description":"Jason Thai’s personal page","@type":"WebPage","url":"https://jasonthai.me/posts/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
+{"headline":"I Turned My Blog to a Progressive Web App","dateModified":"2019-08-07T00:00:00+00:00","description":"A note of how I turn my blog into a progressive web app","datePublished":"2019-08-07T00:00:00+00:00","@type":"BlogPosting","image":"https://jasonthai.me/assets/img/pwa-logo.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/"},"url":"https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
   <link rel="manifest" href="/manifest.json">
@@ -77,222 +80,97 @@ ga('send', 'pageview');
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <header class="post-header">
-        <h1 class="post-title">
-            Posts
-        </h1>
-    </header>
-    <div class="post-content">
-        
-<h3>
-    2019 August
-</h3>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">I Turned My Blog to a Progressive Web App</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2019-08-07T00:00:00+00:00" itemprop="datePublished">Aug 7, 2019
+      </time>
+      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason Thai</span></span>
+      • <span>
+      
+        <a href="/tags/#tech">#tech</a> 
+       
+      </span>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>I recently create a post of <a href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">how to enable offline support to websites with Workbox</a> and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.
+<!--more--></p>
+
+<p>The first thing is to check what is needed to be done in order to be a PWA. We can do that by using Google Chrome’s developer tools’ audit.</p>
+
+<p><img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/devtool-audits.webp" alt="Dev Tool Audits" /></p>
+
+<p>Give it a run, and see who well your website is doing.</p>
+
+<p>Now let’s dive in the steps to turn my blog to a PWA.</p>
+
+<h2 id="prerequisites">Prerequisites:</h2>
+<p>Make sure have completed registering the worker service. Details are covered in the post I mentioned above.</p>
+
+<h2 id="create-manifestjson">Create manifest.json</h2>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/Manifest">Web App Manifest</a> is a JSON file designed to describe a Web Application. Below is what I declared for my site:</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"short_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jason's Notes"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jason's Notes"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"icons"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/assets/img/android-chrome-192x192.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sizes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"192x192"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"src"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/assets/img/android-chrome-512x512.png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/png"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sizes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"512x512"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"start_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index.html"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"background_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#fdfdfd"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standalone"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"theme_color"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#faf5ef"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>Above are the minimum fields you should declare for your manifest. Make sure you fill all of them.</p>
+
+<h2 id="add-meta-tags">Add meta tags:</h2>
+<p>I also added the required meta tags for a PWA:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"manifest"</span> <span class="na">href=</span><span class="s">"/manifest.json"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"apple-touch-icon"</span> <span class="na">href=</span><span class="s">"/assets/img/apple-touch-icon.png"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"theme-color"</span> <span class="na">content=</span><span class="s">"#faf5ef"</span> <span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h2 id="verify-through-audits">Verify through Audits</h2>
+<p>If you have completed all the above steps, verify using the audits tool again and hopefully you’ll be greeted with this screen:</p>
+
+<p><img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/pwa.webp" alt="PWA" /></p>
+
+<h2 id="more-ways-to-verify">More ways to verify</h2>
 <ul>
-    
-    <li>
-        <a href="/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/">
-            I Turned My Blog to a Progressive Web App
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">
-            Enable Offline Support to Websites with Workbox
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/08/04/three-proofs-total-stock-market-is-efficient/">
-            Three Proofs Total Stock Market is Efficient
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/08/02/what-im-up-to-in-july-2019/">
-            What I'm up to in July 2019
-        </a>
-    </li>
-    
+  <li>If you open the menu on chrome browser, you’ll see the option to install your wpa as an app on your desktop.</li>
+  <li>View the site on browser and you can be asked to add this site as an app.</li>
 </ul>
 
-<h3>
-    2019 July
-</h3>
-<ul>
-    
-    <li>
-        <a href="/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/">
-            42nd Biofreeze SF Marathon - 1st Half
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media/">
-            Apply Different Styles to Mobile vs Web View Using @media
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/">
-            My Blog's PageSpeed Insights Score
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">
-            Customize Part of Your Life with IFTTT
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/25/tinyalias-url-shortener-design-and-features/">
-            TinyAlias URL Shortener Design and Its Features
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/24/useful-commands-for-postgresql-mysql/">
-            Useful Commands for PostgreSQL and MySQL Database
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/">
-            How to Deploy to Github Pages Using Travis CI
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/">
-            How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/20/bai-tieng-viet/">
-            Bài Tiếng Việt
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/18/changes-i-made-for-my-blogs-theme/">
-            Changes I Made for My Blog's Theme
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/16/the-existence-of-anniversaries/">
-            The Existence of Anniversaries
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/07/15/so-you-have-some-money/">
-            So You Have Some Money
-        </a>
-    </li>
-    
-</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Using PWA, we ensure our site is viewable no matter what network condition is. I hope you’ll be able to turn your site to a PWA to improve your visitors’ experience.</p>
 
-<h3>
-    2019 June
-</h3>
-<ul>
-    
-    <li>
-        <a href="/blog/2019/06/30/your-life-or-your-money/">
-            Your Life or Your Money
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/06/16/regrowing-my-succulents/">
-            Regrowing My Succulents
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/06/13/financial-tools/">
-            Recommended Financial Tools
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/06/12/about-unit-tests/">
-            About Unit Tests
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2019/06/05/thoughts-on-url-shortener-service/">
-            Things I've Learned Hosting a URL Shortener Service
-        </a>
-    </li>
-    
-</ul>
+  </div>
 
-<h3>
-    2018 September
-</h3>
-<ul>
-    
-    <li>
-        <a href="/blog/2018/09/03/10-most-used-linux-commands/">
-            My 10 Most Used Linux Commands
-        </a>
-    </li>
-    
-</ul>
+  <div class="page-nav">
+  
+    <a class="prev" href="/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">&laquo; Enable Offline Support to Websites with Workbox</a>
+  
+  
+</div>
 
-<h3>
-    2018 July
-</h3>
-<ul>
-    
-    <li>
-        <a href="/blog/2018/07/15/dear-wife/">
-            Dear Wife!
-        </a>
-    </li>
-    
-</ul>
-
-<h3>
-    2018 June
-</h3>
-<ul>
-    
-    <li>
-        <a href="/blog/2018/06/16/thoughts-on-being-multilingual/">
-            Thoughts on Being Multilingual
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/">
-            How to Create an Interactive Map With Mapbox and Leafletjs
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2018/06/12/secure-your-passwords/">
-            How to Create a Secure Password
-        </a>
-    </li>
-    
-    <li>
-        <a href="/blog/2018/06/10/browser-extensions/">
-            Recommended Browser Extensions
-        </a>
-    </li>
-    
-</ul>
-
-
-    </div>
+  <div id="commento"></div>
+  <script src="https://commento.jasonthai.me/js/commento.js"></script><a class="u-url" href="/blog/2019/08/07/i-turned-my-blog-to-a-web-progress-app/" hidden></a>
 </article>
+
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/"></data>
