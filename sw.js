@@ -360,6 +360,18 @@ workbox.precaching.precacheAndRoute([
     "revision": "d45dae1c4971840baa50643d92208269"
   },
   {
+    "url": "go/robinhood.html",
+    "revision": "32133c2962246945ebe1f74834e6ddc8"
+  },
+  {
+    "url": "go/wealthfront.html",
+    "revision": "ec7844f03947933239687924c1513d9f"
+  },
+  {
+    "url": "go/ynab.html",
+    "revision": "7b93db56d77f59ed3ce5a7000a2f6f0e"
+  },
+  {
     "url": "index.html",
     "revision": "8955e55a53f1f3cb2194d61ee468155c"
   },
@@ -393,7 +405,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "redirects.json",
-    "revision": "f5b723552e45e9a41ff000ad44d805f2"
+    "revision": "fd0a32dac593b4e8f0fe81de386acd75"
   },
   {
     "url": "robots.txt",
