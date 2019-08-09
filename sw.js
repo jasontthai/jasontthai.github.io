@@ -213,7 +213,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/lunr/lunr-store.js",
-    "revision": "0dd86aed3354f0d73a5563c38197e0ac"
+    "revision": "69da308b6c9266fd9a0d735af2f5dbad"
   },
   {
     "url": "assets/js/lunr/lunr.js",
@@ -269,7 +269,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/06/30/your-life-or-your-money/index.html",
-    "revision": "70aaf5fd79e0f00975930005fd924121"
+    "revision": "586ad3db58bbcd29b3e6cfa76a393b1c"
   },
   {
     "url": "blog/2019/07/15/so-you-have-some-money/index.html",
@@ -289,7 +289,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/index.html",
-    "revision": "e235ef28d738f20fec78b20b32e66f42"
+    "revision": "c7c4d051f498d27a4f396115ca4f9639"
   },
   {
     "url": "blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/index.html",
