@@ -3,21 +3,20 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>TinyAlias URL Shortener Design and Its Features | Jason’s Notes</title>
+<title>Page 2 of 3 for Jason’s Notes - page 2 | Jason’s Notes</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="TinyAlias URL Shortener Design and Its Features" />
+<meta property="og:title" content="Jason’s Notes - page 2" />
 <meta name="author" content="Jason Thai" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="How to design a tinyurl service" />
-<meta property="og:description" content="How to design a tinyurl service" />
-<link rel="canonical" href="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" />
-<meta property="og:url" content="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" />
+<meta name="description" content="Jason Thai’s personal page" />
+<meta property="og:description" content="Jason Thai’s personal page" />
+<link rel="canonical" href="https://jasonthai.me/page/2/" />
+<meta property="og:url" content="https://jasonthai.me/page/2/" />
 <meta property="og:site_name" content="Jason’s Notes" />
-<meta property="og:image" content="https://jasonthai.me/assets/img/tinyalias.webp" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-07-25T00:00:00+00:00" />
+<link rel="prev" href="https://jasonthai.me/" />
+<link rel="next" href="https://jasonthai.me/page/3/" />
 <script type="application/ld+json">
-{"headline":"TinyAlias URL Shortener Design and Its Features","dateModified":"2019-07-25T00:00:00+00:00","description":"How to design a tinyurl service","datePublished":"2019-07-25T00:00:00+00:00","@type":"BlogPosting","image":"https://jasonthai.me/assets/img/tinyalias.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/"},"url":"https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
+{"headline":"Jason’s Notes - page 2","description":"Jason Thai’s personal page","@type":"WebPage","url":"https://jasonthai.me/page/2/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <!-- <link rel="stylesheet" href="https://jasonthai.me/assets/css/style.css"> -->
   <link rel="manifest" href="/manifest.json">
@@ -83,296 +82,230 @@ ga('send', 'pageview');
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">TinyAlias URL Shortener Design and Its Features</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2019-07-25T00:00:00+00:00" itemprop="datePublished">Jul 25, 2019
-      </time>
-      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason Thai</span></span>
-      • <span>
-      
-        <a href="/tags/#tech">#tech</a> 
-       
-      </span>
-  </header>
-
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#screenshots">Screenshots</a></li>
-<li class="toc-entry toc-h2"><a href="#design">Design</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#workflow">Workflow</a></li>
-<li class="toc-entry toc-h3"><a href="#repo">Repo</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#features">Features</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#user-authentication">User authentication</a></li>
-<li class="toc-entry toc-h3"><a href="#password-protected-links-and-link-expiration">Password protected links and link expiration</a></li>
-<li class="toc-entry toc-h3"><a href="#spam-detection-flow">Spam detection flow</a></li>
-<li class="toc-entry toc-h3"><a href="#analytics">Analytics</a></li>
-<li class="toc-entry toc-h3"><a href="#mindful-mode">Mindful mode</a></li>
-<li class="toc-entry toc-h3"><a href="#news">News</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#conclusion">Conclusion</a></li>
-</ul><style>
-
-.mySlides {display: none}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-/* Next & previous buttons */
-.prevImg, .nextImg {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.nextImg {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prevImg:hover, .nextImg:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.textImg {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertextImg {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prevImg, .nextImg,.textImg {font-size: 11px}
-}
-</style>
-
-<p>After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in <a href="/blog/2019/06/05/thoughts-on-url-shortener-service/">Things I’ve Learned Hosting a URL Shortener Service</a>. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. This post will lay out its design and highlight a few interesting things with respect to both backend and front end implementations.</p>
-
-<!--more-->
-
-<h2 id="screenshots">
-<a class="anchor" href="#screenshots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots</h2>
-<!-- Slideshow container -->
-<div class="slideshow-container">
-
-<!-- Full-width images with number and caption text -->
-<div class="mySlides fade">
-<div class="numbertextImg">1 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-authentication.webp" alt="TinyAlias Authentication">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">2 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-password.webp" alt="TinyAlias Password">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">3 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-analytics.webp" alt="TinyAlias Analytics">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">4 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-mindful.webp" alt="TinyAlias Mindful">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">5 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-news.webp" alt="TinyAlias News">
-
-</div>
-
-<!-- Next and previous buttons -->
-<a class="prevImg" onclick="plusSlides(-1)">❮</a>
-<a class="nextImg" onclick="plusSlides(1)">❯</a>
-</div>
-<p><br></p>
-
-<!-- The dots/circles -->
-<div style="text-align:center">
-<span class="dot" onclick="currentSlide(1)"></span> 
-<span class="dot" onclick="currentSlide(2)"></span> 
-<span class="dot" onclick="currentSlide(3)"></span> 
-<span class="dot" onclick="currentSlide(4)"></span> 
-<span class="dot" onclick="currentSlide(5)"></span> 
-</div>
-
-<h2 id="design">
-<a class="anchor" href="#design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h2>
-
-<p><img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-diagram.webp" alt="TinyAlias Design"></p>
-
-<h3 id="workflow">
-<a class="anchor" href="#workflow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Workflow</h3>
-
-<ul>
-  <li>The Main app handles the main logic of creating shortened URL and its metadata, user authentication, and other blocking operations.</li>
-  <li>The Worker service receives a job from the job queue and executes tasks such as parsing request’s geolocation, detecting spam, expiring URL, and other non-blocking operations.</li>
-  <li>The Scheduler service runs as a cron to delegate jobs to the worker service.</li>
-</ul>
-
-<h3 id="repo">
-<a class="anchor" href="#repo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repo</h3>
-<p><a href="https://github.com/zirius/tinyalias">https://github.com/zirius/tinyalias</a></p>
-
-<h2 id="features">
-<a class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
-
-<p>Some function and feature highlights</p>
-
-<h3 id="user-authentication">
-<a class="anchor" href="#user-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>User authentication</h3>
-
-<p>I added a user authentication flow that let you sign up, sign in, reset your password. Building this from scratch is quite fun. Sessions are Cookie-based and passwords are encrypted by <code class="highlighter-rouge">bcrypt</code> and stored in DB.</p>
-
-<h3 id="password-protected-links-and-link-expiration">
-<a class="anchor" href="#password-protected-links-and-link-expiration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Password protected links and link expiration</h3>
-<p>Link passwords are encrypted securely and stored in DB. Scheduler service periodically sends expiration job to worker service to detect if any links have expired and marked them as invalid.</p>
-
-<h3 id="spam-detection-flow">
-<a class="anchor" href="#spam-detection-flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spam detection flow</h3>
-<p>This is one of the more interesting backend features I added. Whenever a URL is shortened, the main app will dispatch a spam detection job to the worker service. Worker service then calls Google <a href="https://safebrowsing.google.com/">safebrowsing</a> API to detect if a URL is safe and update that URL status. The scheduler also periodically dispatch spam detection jobs to recheck existing URLs.</p>
-
-<h3 id="analytics">
-<a class="anchor" href="#analytics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analytics</h3>
-<p>Whenever a link is clicked, the service will parse the location based on the user’s IP address. This is then aggregated to show where the links are accessed geographically.</p>
-
-<h3 id="mindful-mode">
-<a class="anchor" href="#mindful-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mindful mode</h3>
-<p>This is a fun feature that I added that makes the user wait for a few seconds before redirecting them to the original URL. The page also displays some quotes of the day provided by <a href="https://favqs.com">https://favqs.com</a></p>
-
-<h3 id="news">
-<a class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>News</h3>
-<p>I also added a page to allow users to view trending news and get the shortened URL within the app. News is provided by <a href="https://newsapi.org/">News API</a>.</p>
-
-<script type="text/javascript">
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
-
-<h2 id="conclusion">
-<a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
-<p>Designing and implementing TinyAlias from scratch is a fun side project for me.</p>
+<div class="home">
+    <!--<h1 class="page-heading">
+        Jason's Notes - page 2
+    </h1>-->
+    
+    <div class="pagination" style="text-align: center">
+        
+        <a class="previous" href="/">
+            « Previous
+        </a>
+        
+        <span class="page_number">
+            Page: 2 of 3
+        </span>
+        
+        <a class="next" href="/page/3/">
+            Next »
+        </a>
+        
+    </div>
+    
+    <ul class="post-list"><li class="excerpt"><a href="/blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/logo-travisci-wide1.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            How to Deploy to Github Pages Using Travis CI
+                        </span>
+                        <span class="post-meta">
+                            Jul 23, 2019
+                        </span><p>
+                            
 
 
-  </div>
+Follow up for my post How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies. This is a guide to set up automatic build and deployment using Travis CI as opposed to CircleCI
 
-  <div class="page-nav">
-  
-    <a class="prev" href="/blog/2019/07/24/useful-commands-for-postgresql-mysql/">&laquo; Useful Commands for PostgreSQL and MySQL Database</a>
-  
-  
-    <a class="next" href="/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">Customize Part of Your Life with IFTTT &raquo;</a>
-  
-</div>
 
-  <div id="commento"></div>
-  <script src="https://commento.jasonthai.me/js/commento.js"></script><a class="u-url" href="/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" hidden></a>
-</article>
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/circleci-logo-1200x630.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            How to Deploy to Github Pages Using CircleCI 2.0 + Custom Jekyll Dependencies
+                        </span>
+                        <span class="post-meta">
+                            Jul 22, 2019
+                        </span><p>
+                            Since I have been playing with Github Pages to host my own website, I notice although there is a lot of automation out of the box to host the static website, Github only supports a few jekyll dependencies. This makes it restricting when you want to use a custom Jekyll gem or your own plugin. After doing a bit of research, I have figured out a way to also enable automatic deployment of your own site while also has the ability to use your own dependencies not supported yet by Github Pages. One of the ways is to use CircleCI...
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/07/18/changes-i-made-for-my-blogs-theme/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="https://repository-images.githubusercontent.com/65252/f2b7c780-70b6-11e9-85d2-f4bda8708a2d">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            Changes I Made for My Blog&#39;s Theme
+                        </span>
+                        <span class="post-meta">
+                            Jul 18, 2019
+                        </span><p>
+                            
+
+
+The stock theme that I am currently using is from https://github.com/jekyll/minima. I like it for its cleanliness and simplicty as the name implies.
+
+
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/07/16/the-existence-of-anniversaries/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/3years_featured.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            The Existence of Anniversaries
+                        </span>
+                        <span class="post-meta">
+                            Jul 16, 2019
+                        </span><p>
+                            Definition of anniversary from Merriam-Webster: 1: The annual recurrence of a date marking a notable event // a wedding anniversary broadly : a date that follows such an event by a specified period of time measured in units other than years // the 6-month anniversary of the accident 2: The celebration of an anniversary How do you celebrate anniversaries? Do you go to a fancy restaurant or prepare an intimate meal at home? Either option is great. What is important is that you get to spend some quality time with your loved one to celebrate the special day that you...
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/07/15/so-you-have-some-money/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/money-matters-1173105.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            So You Have Some Money
+                        </span>
+                        <span class="post-meta">
+                            Jul 15, 2019
+                        </span><p>
+                            
+
+
+To San and Vy,
+
+I know both of you do not like to talk about money. After all you are usually busy or have better things to do - Vy with your internship and thesis and San with your part time job and rotation. This is why I write this post so at least you have some place to read about it when you have the time. And I promise I will keep this short and easy to understand. After all, we do have to talk about this and it is better to do it now than later.
+
+
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/06/30/your-life-or-your-money/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/blur-close-up-environment-401213.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            Your Life or Your Money
+                        </span>
+                        <span class="post-meta">
+                            Jun 30, 2019
+                        </span><p>
+                            A Collection of What I am keeping track of in the book Your Life or Your Money Read more about it here Questions to asked before spending: Did I receive fullfilment, satisfaction, and value in proportion to life energy spent? Is this expenditure of life energy in alignment with my values and life purpose? How might this expenditure change if I didn’t have to work for money? What would this expense look like in a just and compassionate world? CHECKLIST: THINK BEFORE YOU SPEND Don’t go shopping. Live within your means. Take care of what you have. Wear it out....
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/06/16/regrowing-my-succulents/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/succulent.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            Regrowing My Succulents
+                        </span>
+                        <span class="post-meta">
+                            Jun 16, 2019
+                        </span><p>
+                            This is long overdue but today I decided to trim and regrow the succulents that my wife brought me. I admit I have not been taking good care of them lately and I promised my wife I would do a better job from now on. It took about an hour to replace the soil (the old one was actually kinda gross!) and trimming the succulents. I checked out a couple of websites to make sure I trimmed correctly but one never knows. I hope they can grow back to their beautiful selves. Look how small and cute they are now....
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/06/13/financial-tools/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/accounting-black-budget.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            Recommended Financial Tools
+                        </span>
+                        <span class="post-meta">
+                            Jun 13, 2019
+                        </span><p>
+                            
+
+
+Here is a list of my recommended financial tools that will enhance your experience of managing your finance:
+
+
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/06/12/about-unit-tests/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            About Unit Tests
+                        </span>
+                        <span class="post-meta">
+                            Jun 12, 2019
+                        </span><p>
+                            Today while trying to deploy some of my codes, I ran into an issue such that the build kept failing. Turned out that some of my unit tests were failing. The unit tests did pass before, which is why all the builds until now have been successful. How come they failed today? Upon investigating more, it turns out there is a timestamp validation in the code which has been successfully validated until now but the unit test did not cover that case. I ended up deploying a hotfix to unblock the build. For more context, my unit test was similar...
+                        </p></div>
+                </div>
+            </a>
+        </li><li class="excerpt"><a href="/blog/2019/06/05/thoughts-on-url-shortener-service/">
+                <div>
+                    <div class="bg-img lazyload" data-bg="/assets/img/tinyalias.webp">
+                    </div>
+                    <div class="post-excerpt">
+                        <span class="post-link">
+                            Things I&#39;ve Learned Hosting a URL Shortener Service
+                        </span>
+                        <span class="post-meta">
+                            Jun 5, 2019
+                        </span><p>
+                            TinyAlias is no longer in service but I am still hosting it on Heroku so you can try out its functionality. Access the heroku app here: https://tinyalias.herokuapp.com (It may take sometimes to wake up since this service is now hosted for free). You can also view the source code here: https://github.com/zirius/tinyalias After hosting my own custom url shortener service TinyAlias for about 6 months, I learned a few things: There are many available services on the internet. Some provide more functionalities than the others. Most people use the service for spam and phishing purposes - Same link is shortened multiple...
+                        </p></div>
+                </div>
+            </a>
+        </li></ul>
+    
+    <div class="pagination" style="text-align: center">
+        
+        <a class="previous" href="/">
+            « Previous
+        </a>
+        
+        <span class="page_number">
+            Page: 2 of 3
+        </span>
+        
+        <a class="next" href="/page/3/">
+            Next »
+        </a>
+        
+    </div>
+    
+    <p class="feed-subscribe">
+        <a href="http://feeds.feedburner.com/jasonthai">
+            <svg class="svg-icon orange">
+                <use xlink:href="/assets/minima-social-icons.svg#rss">
+                </use>
+            </svg>
+            <span>
+                Subscribe
+            </span>
+        </a>
+    </p></div>
 
       </div>
     </main><footer class="site-footer h-card">

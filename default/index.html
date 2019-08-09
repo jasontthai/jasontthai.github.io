@@ -3,21 +3,18 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>TinyAlias URL Shortener Design and Its Features | Jason’s Notes</title>
+<title>Jason’s Notes | Jason Thai’s personal page</title>
 <meta name="generator" content="Jekyll v3.8.6" />
-<meta property="og:title" content="TinyAlias URL Shortener Design and Its Features" />
+<meta property="og:title" content="Jason’s Notes" />
 <meta name="author" content="Jason Thai" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="How to design a tinyurl service" />
-<meta property="og:description" content="How to design a tinyurl service" />
-<link rel="canonical" href="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" />
-<meta property="og:url" content="https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" />
+<meta name="description" content="Jason Thai’s personal page" />
+<meta property="og:description" content="Jason Thai’s personal page" />
+<link rel="canonical" href="https://jasonthai.me/default/" />
+<meta property="og:url" content="https://jasonthai.me/default/" />
 <meta property="og:site_name" content="Jason’s Notes" />
-<meta property="og:image" content="https://jasonthai.me/assets/img/tinyalias.webp" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-07-25T00:00:00+00:00" />
 <script type="application/ld+json">
-{"headline":"TinyAlias URL Shortener Design and Its Features","dateModified":"2019-07-25T00:00:00+00:00","description":"How to design a tinyurl service","datePublished":"2019-07-25T00:00:00+00:00","@type":"BlogPosting","image":"https://jasonthai.me/assets/img/tinyalias.webp","mainEntityOfPage":{"@type":"WebPage","@id":"https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/"},"url":"https://jasonthai.me/blog/2019/07/25/tinyalias-url-shortener-design-and-features/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
+{"headline":"Jason’s Notes","description":"Jason Thai’s personal page","@type":"WebPage","url":"https://jasonthai.me/default/","author":{"@type":"Person","name":"Jason Thai"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <!-- <link rel="stylesheet" href="https://jasonthai.me/assets/css/style.css"> -->
   <link rel="manifest" href="/manifest.json">
@@ -83,297 +80,51 @@ ga('send', 'pageview');
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+        <article class="post">
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">TinyAlias URL Shortener Design and Its Features</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2019-07-25T00:00:00+00:00" itemprop="datePublished">Jul 25, 2019
-      </time>
-      • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Jason Thai</span></span>
-      • <span>
-      
-        <a href="/tags/#tech">#tech</a> 
-       
-      </span>
-  </header>
+    <header class="post-header">
+        <h1 class="post-title">
+            
+        </h1>
+    </header>
+    <div class="post-content">
+        <p>You can use the <a href="https://github.com/zirius/zirius.github.io/edit/master/index.md">editor on GitHub</a> to maintain and preview the content for your website in Markdown files.</p>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul class="section-nav">
-<li class="toc-entry toc-h2"><a href="#screenshots">Screenshots</a></li>
-<li class="toc-entry toc-h2"><a href="#design">Design</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#workflow">Workflow</a></li>
-<li class="toc-entry toc-h3"><a href="#repo">Repo</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#features">Features</a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#user-authentication">User authentication</a></li>
-<li class="toc-entry toc-h3"><a href="#password-protected-links-and-link-expiration">Password protected links and link expiration</a></li>
-<li class="toc-entry toc-h3"><a href="#spam-detection-flow">Spam detection flow</a></li>
-<li class="toc-entry toc-h3"><a href="#analytics">Analytics</a></li>
-<li class="toc-entry toc-h3"><a href="#mindful-mode">Mindful mode</a></li>
-<li class="toc-entry toc-h3"><a href="#news">News</a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#conclusion">Conclusion</a></li>
-</ul><style>
+<p>Whenever you commit to this repository, GitHub Pages will run <a href="https://jekyllrb.com/">Jekyll</a> to rebuild the pages in your site, from the content in your Markdown files.</p>
 
-.mySlides {display: none}
-img {vertical-align: middle;}
+<h3 id="markdown">Markdown</h3>
 
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
+<p>Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for</p>
 
-/* Next & previous buttons */
-.prevImg, .nextImg {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Syntax highlighted code block
 
-/* Position the "next button" to the right */
-.nextImg {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
+<span class="gh"># Header 1</span>
+<span class="gu">## Header 2</span>
+<span class="gu">### Header 3</span>
+<span class="p">
+-</span> Bulleted
+<span class="p">-</span> List
+<span class="p">
+1.</span> Numbered
+<span class="p">2.</span> List
 
-/* On hover, add a black background color with a little bit see-through */
-.prevImg:hover, .nextImg:hover {
-  background-color: rgba(0,0,0,0.8);
-}
+<span class="gs">**Bold**</span> and _Italic_ and <span class="sb">`Code`</span> text
 
-/* Caption text */
-.textImg {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
+<span class="p">[</span><span class="nv">Link</span><span class="p">](</span><span class="sx">url</span><span class="p">)</span> and !<span class="p">[</span><span class="nv">Image</span><span class="p">](</span><span class="sx">src</span><span class="p">)</span>
+</code></pre></div></div>
 
-/* Number text (1/3 etc) */
-.numbertextImg {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
+<p>For more details see <a href="https://guides.github.com/features/mastering-markdown/">GitHub Flavored Markdown</a>.</p>
 
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
+<h3 id="jekyll-themes">Jekyll Themes</h3>
 
-.active, .dot:hover {
-  background-color: #717171;
-}
+<p>Your Pages site will use the layout and styles from the Jekyll theme you have selected in your <a href="https://github.com/zirius/zirius.github.io/settings">repository settings</a>. The name of this theme is saved in the Jekyll <code class="highlighter-rouge">_config.yml</code> configuration file.</p>
 
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
+<h3 id="support-or-contact">Support or Contact</h3>
 
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
+<p>Having trouble with Pages? Check out our <a href="https://help.github.com/categories/github-pages-basics/">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
 
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prevImg, .nextImg,.textImg {font-size: 11px}
-}
-</style>
-
-<p>After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in <a href="/blog/2019/06/05/thoughts-on-url-shortener-service/">Things I’ve Learned Hosting a URL Shortener Service</a>. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. This post will lay out its design and highlight a few interesting things with respect to both backend and front end implementations.</p>
-
-<!--more-->
-
-<h2 id="screenshots">
-<a class="anchor" href="#screenshots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots</h2>
-<!-- Slideshow container -->
-<div class="slideshow-container">
-
-<!-- Full-width images with number and caption text -->
-<div class="mySlides fade">
-<div class="numbertextImg">1 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-authentication.webp" alt="TinyAlias Authentication">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">2 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-password.webp" alt="TinyAlias Password">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">3 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-analytics.webp" alt="TinyAlias Analytics">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">4 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-mindful.webp" alt="TinyAlias Mindful">
-
-</div>
-
-<div class="mySlides fade">
-<div class="numbertextImg">5 / 5</div>
-
-<img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-news.webp" alt="TinyAlias News">
-
-</div>
-
-<!-- Next and previous buttons -->
-<a class="prevImg" onclick="plusSlides(-1)">❮</a>
-<a class="nextImg" onclick="plusSlides(1)">❯</a>
-</div>
-<p><br></p>
-
-<!-- The dots/circles -->
-<div style="text-align:center">
-<span class="dot" onclick="currentSlide(1)"></span> 
-<span class="dot" onclick="currentSlide(2)"></span> 
-<span class="dot" onclick="currentSlide(3)"></span> 
-<span class="dot" onclick="currentSlide(4)"></span> 
-<span class="dot" onclick="currentSlide(5)"></span> 
-</div>
-
-<h2 id="design">
-<a class="anchor" href="#design" aria-hidden="true"><span class="octicon octicon-link"></span></a>Design</h2>
-
-<p><img style="display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;" src="https://jasonthai.me/assets/img/tinyalias-diagram.webp" alt="TinyAlias Design"></p>
-
-<h3 id="workflow">
-<a class="anchor" href="#workflow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Workflow</h3>
-
-<ul>
-  <li>The Main app handles the main logic of creating shortened URL and its metadata, user authentication, and other blocking operations.</li>
-  <li>The Worker service receives a job from the job queue and executes tasks such as parsing request’s geolocation, detecting spam, expiring URL, and other non-blocking operations.</li>
-  <li>The Scheduler service runs as a cron to delegate jobs to the worker service.</li>
-</ul>
-
-<h3 id="repo">
-<a class="anchor" href="#repo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Repo</h3>
-<p><a href="https://github.com/zirius/tinyalias">https://github.com/zirius/tinyalias</a></p>
-
-<h2 id="features">
-<a class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
-
-<p>Some function and feature highlights</p>
-
-<h3 id="user-authentication">
-<a class="anchor" href="#user-authentication" aria-hidden="true"><span class="octicon octicon-link"></span></a>User authentication</h3>
-
-<p>I added a user authentication flow that let you sign up, sign in, reset your password. Building this from scratch is quite fun. Sessions are Cookie-based and passwords are encrypted by <code class="highlighter-rouge">bcrypt</code> and stored in DB.</p>
-
-<h3 id="password-protected-links-and-link-expiration">
-<a class="anchor" href="#password-protected-links-and-link-expiration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Password protected links and link expiration</h3>
-<p>Link passwords are encrypted securely and stored in DB. Scheduler service periodically sends expiration job to worker service to detect if any links have expired and marked them as invalid.</p>
-
-<h3 id="spam-detection-flow">
-<a class="anchor" href="#spam-detection-flow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spam detection flow</h3>
-<p>This is one of the more interesting backend features I added. Whenever a URL is shortened, the main app will dispatch a spam detection job to the worker service. Worker service then calls Google <a href="https://safebrowsing.google.com/">safebrowsing</a> API to detect if a URL is safe and update that URL status. The scheduler also periodically dispatch spam detection jobs to recheck existing URLs.</p>
-
-<h3 id="analytics">
-<a class="anchor" href="#analytics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Analytics</h3>
-<p>Whenever a link is clicked, the service will parse the location based on the user’s IP address. This is then aggregated to show where the links are accessed geographically.</p>
-
-<h3 id="mindful-mode">
-<a class="anchor" href="#mindful-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mindful mode</h3>
-<p>This is a fun feature that I added that makes the user wait for a few seconds before redirecting them to the original URL. The page also displays some quotes of the day provided by <a href="https://favqs.com">https://favqs.com</a></p>
-
-<h3 id="news">
-<a class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>News</h3>
-<p>I also added a page to allow users to view trending news and get the shortened URL within the app. News is provided by <a href="https://newsapi.org/">News API</a>.</p>
-
-<script type="text/javascript">
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
-
-<h2 id="conclusion">
-<a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h2>
-<p>Designing and implementing TinyAlias from scratch is a fun side project for me.</p>
-
-
-  </div>
-
-  <div class="page-nav">
-  
-    <a class="prev" href="/blog/2019/07/24/useful-commands-for-postgresql-mysql/">&laquo; Useful Commands for PostgreSQL and MySQL Database</a>
-  
-  
-    <a class="next" href="/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">Customize Part of Your Life with IFTTT &raquo;</a>
-  
-</div>
-
-  <div id="commento"></div>
-  <script src="https://commento.jasonthai.me/js/commento.js"></script><a class="u-url" href="/blog/2019/07/25/tinyalias-url-shortener-design-and-features/" hidden></a>
+    </div>
 </article>
-
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/"></data>
