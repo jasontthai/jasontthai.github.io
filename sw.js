@@ -388,6 +388,14 @@ workbox.precaching.precacheAndRoute([
     "revision": "56e4c43907197e7bcad268eb14807666"
   },
   {
+    "url": "posts.html",
+    "revision": "d8fce29b5566b0c20bce7137e92aff1b"
+  },
+  {
+    "url": "redirects.json",
+    "revision": "f5b723552e45e9a41ff000ad44d805f2"
+  },
+  {
     "url": "robots.txt",
     "revision": "2fac8a129285b1b58020ae33bd484690"
   },
