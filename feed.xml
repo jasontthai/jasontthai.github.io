@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-10T11:19:47-07:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason's personal page</subtitle><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><entry><title type="html">I Turned My Blog into a Progressive Web App</title><link href="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/" rel="alternate" type="text/html" title="I Turned My Blog into a Progressive Web App" /><published>2019-08-07T00:00:00-07:00</published><updated>2019-08-07T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/">&lt;p&gt;I recently create a post of &lt;a href=&quot;https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/&quot;&gt;how to enable offline support to websites with Workbox&lt;/a&gt; and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-10T16:01:54-07:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason's personal page</subtitle><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><entry><title type="html">I Turned My Blog into a Progressive Web App</title><link href="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/" rel="alternate" type="text/html" title="I Turned My Blog into a Progressive Web App" /><published>2019-08-07T00:00:00-07:00</published><updated>2019-08-07T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/">&lt;p&gt;I recently create a post of &lt;a href=&quot;https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/&quot;&gt;how to enable offline support to websites with Workbox&lt;/a&gt; and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;The first thing is to check what is needed to be done in order to be a PWA. We can do that by using Google Chrome’s developer tools’ audit.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/devtool-audits.webp&quot; alt=&quot;Dev Tool Audits&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/devtool-audits.webp&quot; alt=&quot;Dev Tool Audits&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Give it a run, and see who well your website is doing.&lt;/p&gt;
 
@@ -49,7 +49,7 @@
 &lt;h2 id=&quot;verify-through-audits&quot;&gt;Verify through Audits&lt;/h2&gt;
 &lt;p&gt;If you have completed all the above steps, verify using the audits tool again and hopefully you’ll be greeted with this screen:&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/pwa.webp&quot; alt=&quot;PWA&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/pwa.webp&quot; alt=&quot;PWA&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;more-ways-to-verify&quot;&gt;More ways to verify&lt;/h2&gt;
 &lt;ul&gt;
@@ -58,7 +58,7 @@
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Using PWA, we ensure our site is viewable no matter what network condition is. I hope you’ll be able to turn your site to a PWA to improve your visitors’ experience.&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">A note of how I turn my blog into a progressive web app</summary></entry><entry><title type="html">Enable Offline Support to Websites with Workbox</title><link href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" rel="alternate" type="text/html" title="Enable Offline Support to Websites with Workbox" /><published>2019-08-06T00:00:00-07:00</published><updated>2019-08-06T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/workbox.webp&quot; alt=&quot;workbox&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Using PWA, we ensure our site is viewable no matter what network condition is. I hope you’ll be able to turn your site to a PWA to improve your visitors’ experience.&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">A note of how I turn my blog into a progressive web app</summary></entry><entry><title type="html">Enable Offline Support to Websites with Workbox</title><link href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" rel="alternate" type="text/html" title="Enable Offline Support to Websites with Workbox" /><published>2019-08-06T00:00:00-07:00</published><updated>2019-08-06T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/workbox.webp&quot; alt=&quot;workbox&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Recently I have added offline support for this blog using &lt;a href=&quot;https://developers.google.com/web/tools/workbox/&quot;&gt;Workbox&lt;/a&gt;. You can test this by going offline and then browsing my blog. This note gives a walkthrough of how I did it and summarizes my findings.
 &lt;!--more--&gt;&lt;/p&gt;
@@ -193,7 +193,7 @@
 
 &lt;p&gt;If you are wondering about the asset allocation that I am following, here is the breakdown:&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/asset-allocation.webp&quot; alt=&quot;Asset Allocation&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/asset-allocation.webp&quot; alt=&quot;Asset Allocation&quot; /&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;401K: 100% &lt;a href=&quot;https://investor.vanguard.com/mutual-funds/profile/VFFVX&quot;&gt;Vanguard Target Retirement 2055 Fund (VFFVX)&lt;/a&gt;&lt;/li&gt;
@@ -206,7 +206,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/tags#finance&quot;&gt;Checkout some of my other finance’s notes&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">John Norstad, a retired mathematician, had presented three proofs that prove Total Stock Market (fund) is efficient. This is interesting so this note shares with you those three proofs.</summary></entry><entry><title type="html">What I’m up to in July 2019</title><link href="https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019/" rel="alternate" type="text/html" title="What I'm up to in July 2019" /><published>2019-08-02T00:00:00-07:00</published><updated>2019-08-02T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/the-month-july.webp&quot; alt=&quot;July&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/tags#finance&quot;&gt;Checkout some of my other finance’s notes&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">John Norstad, a retired mathematician, had presented three proofs that prove Total Stock Market (fund) is efficient. This is interesting so this note shares with you those three proofs.</summary></entry><entry><title type="html">What I’m up to in July 2019</title><link href="https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019/" rel="alternate" type="text/html" title="What I'm up to in July 2019" /><published>2019-08-02T00:00:00-07:00</published><updated>2019-08-02T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/the-month-july.webp&quot; alt=&quot;July&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;First post of what I am hoping will be a series. Here I will update what has been happening with me in the month.&lt;/p&gt;
 
@@ -350,7 +350,7 @@ Share &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/&quot;
 
 &lt;p&gt;I also ran my first half marathon. You can view more detail about it in this &lt;a href=&quot;/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><category term="Blog" /><summary type="html">First post of what I am hoping will be a series. Here I will update what has been happening with me in the month.</summary></entry><entry><title type="html">42nd Biofreeze SF Marathon - 1st Half</title><link href="https://jasonthai.me/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/" rel="alternate" type="text/html" title="42nd Biofreeze SF Marathon - 1st Half" /><published>2019-07-28T00:00:00-07:00</published><updated>2019-07-28T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/">&lt;p&gt;I finally ran my first half marathon today 07-28-19 in &lt;a href=&quot;https://www.thesfmarathon.com/&quot;&gt;The 42nd Biofreeze SF Marathon&lt;/a&gt;. This has been one of my goals of the year. Suffice to say it has been one of the best day of my life so far. Here is the result of my race:&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/half-marathon.webp&quot; alt=&quot;half marathon result&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/half-marathon.webp&quot; alt=&quot;half marathon result&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Race Report:&lt;/p&gt;
 
@@ -373,12 +373,12 @@ First let’s examine how it looks on web vs mobile:&lt;/p&gt;
 &lt;h2 id=&quot;web-view&quot;&gt;Web View:&lt;/h2&gt;
 &lt;p&gt;This view is designed to be viewed on devices with larger screen like laptops or desktops and it includes more information such as the cover image and description of the post.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/jasonthai-web-view.webp&quot; alt=&quot;&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/jasonthai-web-view.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;mobile-view&quot;&gt;Mobile View:&lt;/h2&gt;
 &lt;p&gt;The view on mobile is optimized a lot more for information browsing. The image and description are eliminated in favor of more number of articles in the view. This makes viewing on mobile devices faster too since the browser does not have to load any images.&lt;/p&gt;
 
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/jasonthai-mobile-view.webp&quot; alt=&quot;&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/jasonthai-mobile-view.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;how-to-using-media&quot;&gt;How to: using @media&lt;/h2&gt;
 &lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;@media&lt;/code&gt; query, we can define specific css behavior depending on certain width or height of the screen. You can learn more about it &lt;a href=&quot;https://www.w3schools.com/cssref/css3_pr_mediaquery.asp&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
@@ -402,7 +402,7 @@ First let’s examine how it looks on web vs mobile:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Using @media is a simple way to apply specific styles to different media/screens. I believe there are other ways to do it too such as grid or flex view. I am going to take a look at those a different time.&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">a brief walkthrough of how to use @media queries to apply styles to mobile and web view</summary></entry><entry><title type="html">Customize Part of Your Life with IFTTT</title><link href="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/" rel="alternate" type="text/html" title="Customize Part of Your Life with IFTTT" /><published>2019-07-26T00:00:00-07:00</published><updated>2019-07-26T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/ifttt-featured.webp&quot; alt=&quot;IFTTT feature&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Using @media is a simple way to apply specific styles to different media/screens. I believe there are other ways to do it too such as grid or flex view. I am going to take a look at those a different time.&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">a brief walkthrough of how to use @media queries to apply styles to mobile and web view</summary></entry><entry><title type="html">Customize Part of Your Life with IFTTT</title><link href="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/" rel="alternate" type="text/html" title="Customize Part of Your Life with IFTTT" /><published>2019-07-26T00:00:00-07:00</published><updated>2019-07-26T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/ifttt-featured.webp&quot; alt=&quot;IFTTT feature&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I have been using &lt;a href=&quot;https://ifttt.com&quot;&gt;IFTTT&lt;/a&gt; to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.
 &lt;!--more--&gt;&lt;/p&gt;
@@ -448,7 +448,7 @@ We bring services together into Applets. Applets are specific things that can ha
 &lt;p&gt;Those are just a few that I am using. There are definitely a lot of useful integrations available on IFTTT. I highly recommend you check it out. You can also build your own integration and customize them to fit with your activities.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I think IFTTT is a very powerful service that is useful to almost everyone. From various existing integrations to new ones that you can build, I am sure you will benefit from the service. Give it a try!&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">I have been using IFTTT to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.</summary></entry><entry><title type="html">My Blog’s PageSpeed Insights Score</title><link href="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/" rel="alternate" type="text/html" title="My Blog's PageSpeed Insights Score" /><published>2019-07-26T00:00:00-07:00</published><updated>2019-07-26T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/pagespeed-full.webp&quot; alt=&quot;PageSpeed Insights&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;I think IFTTT is a very powerful service that is useful to almost everyone. From various existing integrations to new ones that you can build, I am sure you will benefit from the service. Give it a try!&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">I have been using IFTTT to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.</summary></entry><entry><title type="html">My Blog’s PageSpeed Insights Score</title><link href="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/" rel="alternate" type="text/html" title="My Blog's PageSpeed Insights Score" /><published>2019-07-26T00:00:00-07:00</published><updated>2019-07-26T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/pagespeed-full.webp&quot; alt=&quot;PageSpeed Insights&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 
@@ -589,35 +589,40 @@ img {vertical-align: middle;}
 &lt;div class=&quot;mySlides fade&quot;&gt;
 &lt;div class=&quot;numbertextImg&quot;&gt;1 / 5&lt;/div&gt;
 
-&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/tinyalias-authentication.webp&quot; alt=&quot;TinyAlias Authentication&quot; class=&quot;lazyload&quot; /&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/tinyalias-authentication.webp&quot; alt=&quot;TinyAlias Authentication&quot; /&gt;
+
 
 &lt;/div&gt;
 
 &lt;div class=&quot;mySlides fade&quot;&gt;
 &lt;div class=&quot;numbertextImg&quot;&gt;2 / 5&lt;/div&gt;
 
-&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/tinyalias-password.webp&quot; alt=&quot;TinyAlias Password&quot; class=&quot;lazyload&quot; /&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/tinyalias-password.webp&quot; alt=&quot;TinyAlias Password&quot; /&gt;
+
 
 &lt;/div&gt;
 
 &lt;div class=&quot;mySlides fade&quot;&gt;
 &lt;div class=&quot;numbertextImg&quot;&gt;3 / 5&lt;/div&gt;
 
-&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/tinyalias-analytics.webp&quot; alt=&quot;TinyAlias Analytics&quot; class=&quot;lazyload&quot; /&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/tinyalias-analytics.webp&quot; alt=&quot;TinyAlias Analytics&quot; /&gt;
+
 
 &lt;/div&gt;
 
 &lt;div class=&quot;mySlides fade&quot;&gt;
 &lt;div class=&quot;numbertextImg&quot;&gt;4 / 5&lt;/div&gt;
 
-&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/tinyalias-mindful.webp&quot; alt=&quot;TinyAlias Mindful&quot; class=&quot;lazyload&quot; /&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/tinyalias-mindful.webp&quot; alt=&quot;TinyAlias Mindful&quot; /&gt;
+
 
 &lt;/div&gt;
 
 &lt;div class=&quot;mySlides fade&quot;&gt;
 &lt;div class=&quot;numbertextImg&quot;&gt;5 / 5&lt;/div&gt;
 
-&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/tinyalias-news.webp&quot; alt=&quot;TinyAlias News&quot; class=&quot;lazyload&quot; /&gt;
+&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/tinyalias-news.webp&quot; alt=&quot;TinyAlias News&quot; /&gt;
+
 
 &lt;/div&gt;
 
@@ -638,7 +643,7 @@ img {vertical-align: middle;}
 
 &lt;h2 id=&quot;design&quot;&gt;Design&lt;/h2&gt;
 
-&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/tinyalias-diagram.webp&quot; alt=&quot;TinyAlias Design&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/tinyalias-diagram.webp&quot; alt=&quot;TinyAlias Design&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;workflow&quot;&gt;Workflow&lt;/h3&gt;
 
@@ -704,7 +709,7 @@ function showSlides(n) {
 &lt;/script&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Designing and implementing TinyAlias from scratch is a fun side project for me.&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">How to design a tinyurl service</summary></entry><entry><title type="html">Useful Commands for PostgreSQL and MySQL Database</title><link href="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/" rel="alternate" type="text/html" title="Useful Commands for PostgreSQL and MySQL Database" /><published>2019-07-24T00:00:00-07:00</published><updated>2019-07-24T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; data-src=&quot;https://jasonthai.me/assets/img/postgresql-vs-mysql-features.webp&quot; alt=&quot;PostgreSQL vs MySQL&quot; class=&quot;lazyload&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Designing and implementing TinyAlias from scratch is a fun side project for me.&lt;/p&gt;</content><author><name>Jason Thai</name><email>&amp;#104;&amp;#101;&amp;#121;&amp;#064;&amp;#106;&amp;#097;&amp;#115;&amp;#111;&amp;#110;&amp;#116;&amp;#104;&amp;#097;&amp;#105;&amp;#046;&amp;#109;&amp;#101;</email></author><summary type="html">How to design a tinyurl service</summary></entry><entry><title type="html">Useful Commands for PostgreSQL and MySQL Database</title><link href="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/" rel="alternate" type="text/html" title="Useful Commands for PostgreSQL and MySQL Database" /><published>2019-07-24T00:00:00-07:00</published><updated>2019-07-24T00:00:00-07:00</updated><id>https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/postgresql-vs-mysql-features.webp&quot; alt=&quot;PostgreSQL vs MySQL&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.&lt;/p&gt;
 
