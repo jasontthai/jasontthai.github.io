@@ -322,8 +322,7 @@ table {
   @media screen and (max-width: 800px) {
     .site-sidebar {
       position: relative;
-      max-width: 100%;
-      display: contents; } }
+      width: 100%; } }
 
 .author-profile {
   display: block;
