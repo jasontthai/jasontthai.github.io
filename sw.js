@@ -13,7 +13,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "about/index.html",
-    "revision": "a213a0c38edd95d6a53f68e6d9226c1b"
+    "revision": "5f1e8cb8dda11c6bc9a6f4a3d100f848"
   },
   {
     "url": "assets/css/style.css",
@@ -329,7 +329,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "categories/index.html",
-    "revision": "53a0b41e5408103ad6d3b703b5adf24a"
+    "revision": "97e42c5467d6482bb14c2e4a63660347"
   },
   {
     "url": "default/index.html",
@@ -381,7 +381,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "f4c46f3386f1b1a0d0ce38a0e434bd0e"
+    "revision": "4c8be9dea2a976037f67d6f71c380da9"
   },
   {
     "url": "vi/index.html",
@@ -389,7 +389,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "visited-places/index.html",
-    "revision": "3c37109952d51a716ef7847b5a9cf5ab"
+    "revision": "8caa6950f9515465e5adb7dc577d7fd3"
   },
   {
     "url": "workbox-config.js",
