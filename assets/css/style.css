@@ -311,7 +311,7 @@ table {
     width: -webkit-calc(100% - (30px / 2));
     width: calc(100% - (30px / 2)); } }
 .site-sidebar {
-  margin-top: 30px;
+  padding-top: 30px;
   margin-right: 15px;
   float: left;
   position: -webkit-sticky;
