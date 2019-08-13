@@ -337,7 +337,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/12/how-to-host-commento-on-apache-webserver/index.html",
-    "revision": "53baec908994cf36843ca39b03617981"
+    "revision": "2351848958eba8944da12b8dd9d58695"
   },
   {
     "url": "categories/index.html",
