@@ -9,11 +9,11 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "404.html",
-    "revision": "c996024b6b1e81058107da2b175c610e"
+    "revision": "b9e771f51b9692f93399ec2b15fb88f2"
   },
   {
     "url": "about/index.html",
-    "revision": "e1afed421a60be4a9674c2f45c30a173"
+    "revision": "da4f309c1244b368c54e0b6586e6f3bc"
   },
   {
     "url": "assets/css/style.css",
@@ -281,7 +281,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/07/18/changes-i-made-for-my-blogs-theme/index.html",
-    "revision": "d526ede3f50bb6256c5caa474e9d4ad4"
+    "revision": "41757329162bae313806e0cce11e034e"
   },
   {
     "url": "blog/2019/07/20/bai-tieng-viet/index.html",
@@ -341,11 +341,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "categories/index.html",
-    "revision": "a8c393781408dfed4a818f408f618217"
+    "revision": "5a7d6925613e2941942e059376b9ba0a"
   },
   {
     "url": "default/index.html",
-    "revision": "5b46c89fde1acafed3ef3d2814454c39"
+    "revision": "623a1693537d5970620577381f142cc7"
   },
   {
     "url": "favicon.ico",
@@ -365,7 +365,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "912abfbea41924ae1ee191911d0545a9"
+    "revision": "37eed8267d2d454c02e7ed20a7e0a20e"
   },
   {
     "url": "manifest.json",
@@ -373,15 +373,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "68413bc64142ff39e20d833ce7a6dca1"
+    "revision": "2c721746de306216442700f69dd95c17"
   },
   {
     "url": "page/3/index.html",
-    "revision": "c98e5d3d36eadd97acca5cf15ab9db39"
+    "revision": "68d1ca2404056d3c1a01cf3ccf318e3f"
   },
   {
     "url": "posts/index.html",
-    "revision": "7bd362f4965e89b0f515439e67b0998b"
+    "revision": "f71c21220abbdeda3d3377325577e805"
   },
   {
     "url": "redirects.json",
@@ -393,15 +393,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "8a6647f2eb59f229c7fe7cafc2476af8"
+    "revision": "e20dc14cc5e29edc5685956edc181758"
   },
   {
     "url": "vi/index.html",
-    "revision": "c700f932579fc2e7a512a6f8285bae60"
+    "revision": "a41dc809e2b728de4afa6de2fe88fbe0"
   },
   {
     "url": "visited-places/index.html",
-    "revision": "c9f7ed6f1a0df0c8ad3a22b2a3ac8eac"
+    "revision": "24451dd0a6b11d2466351627e5e8c917"
   },
   {
     "url": "workbox-config.js",
