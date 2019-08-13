@@ -355,7 +355,28 @@ table {
 .author-description {
   margin-top: 10px;
   margin-bottom: 10px;
-  color: #7b7b7b; }
+  color: #828282; }
+
+.newsletter-section {
+  padding: 0.5rem;
+  background-color: #f2f2f2; }
+
+.newsletter-form {
+  display: flex; }
+  .newsletter-form input[type=email] {
+    width: 100%;
+    max-width: 400px;
+    margin-right: 0.5rem;
+    border: 2px solid #ccc; }
+  .newsletter-form input[type=submit] {
+    background-color: #00a79d;
+    padding: .6rem .9rem;
+    font-weight: 600;
+    color: #ffffff; }
+  .newsletter-form input {
+    display: block;
+    border-radius: 4px;
+    padding: 0.75rem; }
 
 /**
  * Page content
