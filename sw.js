@@ -17,7 +17,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/style.css",
-    "revision": "391f78bdec2455893593117c521ed7e4"
+    "revision": "ec8e61cfafbcbed0e70884e81297bd07"
   },
   {
     "url": "assets/css/syntax.css",
@@ -221,7 +221,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/main.css",
-    "revision": "a0b2611f7c470bfd09605a75f7f5016d"
+    "revision": "dfcc74730454b5d3ec187ea1e59beb6c"
   },
   {
     "url": "assets/minima-social-icons.svg",
