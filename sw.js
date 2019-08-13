@@ -9,11 +9,11 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "404.html",
-    "revision": "b9e771f51b9692f93399ec2b15fb88f2"
+    "revision": "7a7c0c1f1c7bf3ab39c1cf51e765da8b"
   },
   {
     "url": "about/index.html",
-    "revision": "da4f309c1244b368c54e0b6586e6f3bc"
+    "revision": "769c6a3ebd2db6b4346313c47b9467bf"
   },
   {
     "url": "assets/css/style.css",
@@ -281,7 +281,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/07/18/changes-i-made-for-my-blogs-theme/index.html",
-    "revision": "41757329162bae313806e0cce11e034e"
+    "revision": "d526ede3f50bb6256c5caa474e9d4ad4"
   },
   {
     "url": "blog/2019/07/20/bai-tieng-viet/index.html",
@@ -341,11 +341,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "categories/index.html",
-    "revision": "5a7d6925613e2941942e059376b9ba0a"
+    "revision": "22607f2aec660e0800d7cfd93518ee75"
   },
   {
     "url": "default/index.html",
-    "revision": "623a1693537d5970620577381f142cc7"
+    "revision": "ca4771b78240e83c95d7b56e48c517e6"
   },
   {
     "url": "favicon.ico",
@@ -365,7 +365,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "37eed8267d2d454c02e7ed20a7e0a20e"
+    "revision": "d0b5e112deca45a8f2d95de9fc517c62"
   },
   {
     "url": "manifest.json",
@@ -373,15 +373,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "2c721746de306216442700f69dd95c17"
+    "revision": "44c2c6085d0bacf58537b7855cc2ceb6"
   },
   {
     "url": "page/3/index.html",
-    "revision": "68d1ca2404056d3c1a01cf3ccf318e3f"
+    "revision": "80247e7bd3f8e973bc478ab6235cb5cd"
   },
   {
     "url": "posts/index.html",
-    "revision": "f71c21220abbdeda3d3377325577e805"
+    "revision": "d915cad80475ff7c3f35d777c0e8e1e7"
   },
   {
     "url": "redirects.json",
@@ -393,15 +393,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "e20dc14cc5e29edc5685956edc181758"
+    "revision": "6d7f995e07dd2e4cc650bbbd501b0f9d"
   },
   {
     "url": "vi/index.html",
-    "revision": "a41dc809e2b728de4afa6de2fe88fbe0"
+    "revision": "b00117b315f571967f2faffee35f8460"
   },
   {
     "url": "visited-places/index.html",
-    "revision": "24451dd0a6b11d2466351627e5e8c917"
+    "revision": "00e64981afb0fa3338a8a0fc521bfc2d"
   },
   {
     "url": "workbox-config.js",
