@@ -666,7 +666,8 @@ a {
     padding-right: 15px;
     padding-left: 15px; }
   .excerpt .post-link {
-    padding-top: 15px; }
+    padding-top: 15px;
+    text-decoration: underline; }
   .excerpt p {
     text-decoration: none;
     color: #111;
@@ -675,7 +676,10 @@ a {
     .excerpt {
       box-shadow: unset;
       border: unset;
-      background-color: unset; } }
+      background-color: unset; }
+      .excerpt .post-excerpt {
+        padding-right: unset;
+        padding-left: unset; } }
 
 .post-list li {
   margin-top: 15px; }
