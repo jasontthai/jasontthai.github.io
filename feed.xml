@@ -1,4 +1,151 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-12T23:47:13+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">I Turned My Blog into a Progressive Web App</title><link href="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/" rel="alternate" type="text/html" title="I Turned My Blog into a Progressive Web App" /><published>2019-08-07T00:00:00+00:00</published><updated>2019-08-07T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/">&lt;p&gt;I recently create a post of &lt;a href=&quot;https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/&quot;&gt;how to enable offline support to websites with Workbox&lt;/a&gt; and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-13T03:08:00+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">How to host Commento on Apache Webserver</title><link href="https://jasonthai.me/blog/2019/08/12/how-to-host-commento-on-apache-webserver/" rel="alternate" type="text/html" title="How to host Commento on Apache Webserver" /><published>2019-08-12T00:00:00+00:00</published><updated>2019-08-12T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/12/how-to-host-commento-on-apache-webserver</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/12/how-to-host-commento-on-apache-webserver/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/commento-logo.webp&quot; alt=&quot;Commento Logo&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I recently switched from using Disqus comment system to Commento. The reason is that I am in favor of a non-tracking and lightweight system which Commento satisfies. This note will go over the steps to host Commento using Apache webserver.&lt;/p&gt;
+
+&lt;h2 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;A few things you will need:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;A server. If you have not got one, I recommended using &lt;a href=&quot;https://m.do.co/c/c544762f5c36&quot;&gt;Digital Ocean&lt;/a&gt;. A $5 droplet is sufficient.&lt;/li&gt;
+  &lt;li&gt;A domain which has an A record point to your server’s IP. I am hosting the service on &lt;a href=&quot;https://commento.jasonthai.me&quot;&gt;https://commento.jasonthai.me&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;When you create a VPS, you will be asked which OS to install. I chose to use Ubuntu 18.04 as there are a lot of tutorials online for Ubuntu to help you get started.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-commento&quot;&gt;Setting up Commento&lt;/h2&gt;
+&lt;h3 id=&quot;install-apache2&quot;&gt;Install Apache2&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04-quickstart&quot;&gt;Follow this tutorial on Digital Ocean to help you get started setting up Apache&lt;/a&gt;
+It contains all the necessary information to help you get started on your first server.&lt;/p&gt;
+
+&lt;h3 id=&quot;install-postgresql&quot;&gt;Install PostgreSQL&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04&quot;&gt;Follow this tutorial to install PostgreSQL on your VPS&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I chose to create a new user &lt;code class=&quot;highlighter-rouge&quot;&gt;commento&lt;/code&gt; and database &lt;code class=&quot;highlighter-rouge&quot;&gt;commento&lt;/code&gt; so that I can use it later.&lt;/p&gt;
+
+&lt;p&gt;To allow the new user to access the database without any password, I made the following change to &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/postgresql/10/main/pg_hba.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# &quot;local&quot; is for Unix domain socket connections only
+local   all             all                                     trust &amp;lt;- by default it is ident which required password input
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I also made the following change to &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/postgresql/10/main/postgresql.conf&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// uncommented
+listen_addresses = 'localhost'        # what IP address(es) to listen on;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This is to allow using &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost&lt;/code&gt; as the default host for connecting to postgres database on the server.&lt;/p&gt;
+
+&lt;h3 id=&quot;installing-commento&quot;&gt;Installing Commento&lt;/h3&gt;
+&lt;p&gt;In the following section, I use &lt;strong&gt;commento.jasonthai.me&lt;/strong&gt; as my subdomain to host Commento, you can just replace it with whatever domain you will be using&lt;/p&gt;
+
+&lt;p&gt;Enter the following commands:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;wget https://commento-release.s3.amazonaws.com/commento-linux-amd64-v1.7.0.tar.gz&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mkdir /usr/share/commento&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tar xvf commento-linux-amd64-v1.7.0.tar.gz -C /usr/share/commento&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Create a new file &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/systemd/system/commento.service&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[&lt;span class=&quot;n&quot;&gt;Unit&lt;/span&gt;]
+&lt;span class=&quot;n&quot;&gt;Description&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;Commento&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;daemon&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;After&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;network&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;postgresql&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;
+
+[&lt;span class=&quot;n&quot;&gt;Service&lt;/span&gt;]
+&lt;span class=&quot;n&quot;&gt;Type&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;simple&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ExecStart&lt;/span&gt;=/&lt;span class=&quot;n&quot;&gt;usr&lt;/span&gt;/&lt;span class=&quot;n&quot;&gt;bin&lt;/span&gt;/&lt;span class=&quot;n&quot;&gt;commento&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_ORIGIN&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;https&lt;/span&gt;://&lt;span class=&quot;n&quot;&gt;commento&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;jasonthai&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;me&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_PORT&lt;/span&gt;=&lt;span class=&quot;m&quot;&gt;8080&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_POSTGRES&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;postgres&lt;/span&gt;://&lt;span class=&quot;n&quot;&gt;commento&lt;/span&gt;@&lt;span class=&quot;n&quot;&gt;localhost&lt;/span&gt;:&lt;span class=&quot;m&quot;&gt;5432&lt;/span&gt;/&lt;span class=&quot;n&quot;&gt;commento&lt;/span&gt;?&lt;span class=&quot;n&quot;&gt;sslmode&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;disable&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_STATIC&lt;/span&gt;=/&lt;span class=&quot;n&quot;&gt;usr&lt;/span&gt;/&lt;span class=&quot;n&quot;&gt;share&lt;/span&gt;/&lt;span class=&quot;n&quot;&gt;commento&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_FORBID_NEW_OWNERS&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;true&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_SMTP_HOST&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;ENTER&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;YOUR&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VALUE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HERE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_SMTP_PORT&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;ENTER&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;YOUR&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VALUE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HERE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_SMTP_USERNAME&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;ENTER&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;YOUR&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VALUE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HERE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_SMTP_PASSWORD&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;ENTER&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;YOUR&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;VALUE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HERE&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_SMTP_FROM_ADDRESS&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;no&lt;/span&gt;-&lt;span class=&quot;n&quot;&gt;reply&lt;/span&gt;@&lt;span class=&quot;n&quot;&gt;commento&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Set Google OAuth credentials
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_GOOGLE_KEY&lt;/span&gt;=
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_GOOGLE_SECRET&lt;/span&gt;=
+
+&lt;span class=&quot;c&quot;&gt;# Set Github OAuth credentials
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_GITHUB_KEY&lt;/span&gt;=
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_GITHUB_SECRET&lt;/span&gt;=
+
+&lt;span class=&quot;c&quot;&gt;# Set Twitter OAuth credentials
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_TWITTER_KEY&lt;/span&gt;=
+&lt;span class=&quot;n&quot;&gt;Environment&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;COMMENTO_TWITTER_SECRET&lt;/span&gt;=
+[&lt;span class=&quot;n&quot;&gt;Install&lt;/span&gt;]
+&lt;span class=&quot;n&quot;&gt;WantedBy&lt;/span&gt;=&lt;span class=&quot;n&quot;&gt;multi&lt;/span&gt;-&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;apache-config&quot;&gt;Apache Config&lt;/h3&gt;
+&lt;p&gt;In the following section, I use &lt;strong&gt;commento.jasonthai.me&lt;/strong&gt; as my subdomain to host Commento, you can just replace the it with whatever domain you will be using.&lt;/p&gt;
+
+&lt;p&gt;Create a new file &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/apache2/sites-available/commento.jasonthai.me.conf:&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;language-apache highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; *:80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;    &lt;span class=&quot;nc&quot;&gt;ServerAdmin&lt;/span&gt; webmaster@localhost
+    &lt;span class=&quot;nc&quot;&gt;ServerName&lt;/span&gt; commento.jasonthai.me
+    &lt;span class=&quot;nc&quot;&gt;ServerAlias&lt;/span&gt; commento.jasonthai.me
+    &lt;span class=&quot;nc&quot;&gt;DocumentRoot&lt;/span&gt; /usr/share/commento
+
+    &lt;span class=&quot;nc&quot;&gt;ProxyPreserveHost&lt;/span&gt; On
+    &lt;span class=&quot;nc&quot;&gt;ProxyPass&lt;/span&gt; / http://127.0.0.1:8080/
+    &lt;span class=&quot;nc&quot;&gt;ProxyPassReverse&lt;/span&gt; / http://127.0.0.1:8080/
+&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Note: the above conf assumes you are not using any TLS/SSL certificates and we are exposing Commento through port 80 which is the default port you can access from your browser. If you choose to enable HTTPS for commento,  &lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04&quot;&gt;follow this tutorial to enable HTTPS on your server&lt;/a&gt;. This will greatly enhance the security of your Commento service.&lt;/p&gt;
+
+&lt;p&gt;After running the letsencript certbot, the apache config will look something like this instead:&lt;/p&gt;
+&lt;div class=&quot;language-apache highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; *:80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RewriteEngine&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;on&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;RewriteCond&lt;/span&gt; %{SERVER_NAME} =commento.jasonthai.me
+&lt;span class=&quot;nc&quot;&gt;RewriteRule&lt;/span&gt; ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt; *:443&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;    &lt;span class=&quot;nc&quot;&gt;ServerAdmin&lt;/span&gt; webmaster@localhost
+    &lt;span class=&quot;nc&quot;&gt;ServerName&lt;/span&gt; commento.jasonthai.me
+    &lt;span class=&quot;nc&quot;&gt;ServerAlias&lt;/span&gt; commento.jasonthai.me
+    &lt;span class=&quot;nc&quot;&gt;DocumentRoot&lt;/span&gt; /usr/share/commento
+
+    &lt;span class=&quot;nc&quot;&gt;ProxyPreserveHost&lt;/span&gt; On
+    &lt;span class=&quot;nc&quot;&gt;ProxyPass&lt;/span&gt; / http://127.0.0.1:8080/
+    &lt;span class=&quot;nc&quot;&gt;ProxyPassReverse&lt;/span&gt; / http://127.0.0.1:8080/
+
+    &lt;span class=&quot;nc&quot;&gt;ErrorLog&lt;/span&gt; ${APACHE_LOG_DIR}/error.log
+    &lt;span class=&quot;nc&quot;&gt;CustomLog&lt;/span&gt; ${APACHE_LOG_DIR}/access.log combined
+&lt;span class=&quot;nc&quot;&gt;SSLCertificateFile&lt;/span&gt; /etc/letsencrypt/live/commento.jasonthai.me/fullchain.pem
+&lt;span class=&quot;nc&quot;&gt;SSLCertificateKeyFile&lt;/span&gt; /etc/letsencrypt/live/commento.jasonthai.me/privkey.pem
+&lt;span class=&quot;nc&quot;&gt;Include&lt;/span&gt; /etc/letsencrypt/options-ssl-apache.conf
+&lt;span class=&quot;p&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;VirtualHost&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;&amp;gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;running-commento&quot;&gt;Running Commento&lt;/h3&gt;
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl start commento&lt;/code&gt; to start commento service.&lt;/p&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;systemctl enable commento&lt;/code&gt; to enable commento as a background service.&lt;/p&gt;
+
+&lt;p&gt;After setting everything up, you can go to the domain that you set up to access Commento. If it works, you’ll be greeted with something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/commento.webp&quot; alt=&quot;Commento&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;adding-commento-to-your-site&quot;&gt;Adding Commento to Your Site&lt;/h2&gt;
+&lt;p&gt;Put this to where you want the comments to show up:&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;div&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;commento&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;defer&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://YOUR-DOMAIN-HERE/js/commento.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You should be seeing something similar to my site if everything works correctly.&lt;/p&gt;
+
+&lt;h2 id=&quot;other-ways-to-host-commento&quot;&gt;Other ways to host Commento&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://oct8l.gitlab.io/posts/2018/129/setting-up-commento-with-hugo/&quot;&gt;Using Nginx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/fidiego/commento-heroku&quot;&gt;Using Heroku&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Introduction I recently switched from using Disqus comment system to Commento. The reason is that I am in favor of a non-tracking and lightweight system which Commento satisfies. This note will go over the steps to host Commento using Apache webserver. Prerequisites A few things you will need: A server. If you have not got one, I recommended using Digital Ocean. A $5 droplet is sufficient. A domain which has an A record point to your server’s IP. I am hosting the service on https://commento.jasonthai.me When you create a VPS, you will be asked which OS to install. I chose to use Ubuntu 18.04 as there are a lot of tutorials online for Ubuntu to help you get started. Setting up Commento Install Apache2 Follow this tutorial on Digital Ocean to help you get started setting up Apache It contains all the necessary information to help you get started on your first server. Install PostgreSQL Follow this tutorial to install PostgreSQL on your VPS I chose to create a new user commento and database commento so that I can use it later. To allow the new user to access the database without any password, I made the following change to /etc/postgresql/10/main/pg_hba.conf: # TYPE DATABASE USER ADDRESS METHOD # &quot;local&quot; is for Unix domain socket connections only local all all trust &amp;lt;- by default it is ident which required password input I also made the following change to /etc/postgresql/10/main/postgresql.conf: // uncommented listen_addresses = 'localhost' # what IP address(es) to listen on; This is to allow using localhost as the default host for connecting to postgres database on the server. Installing Commento In the following section, I use commento.jasonthai.me as my subdomain to host Commento, you can just replace it with whatever domain you will be using Enter the following commands: wget https://commento-release.s3.amazonaws.com/commento-linux-amd64-v1.7.0.tar.gz mkdir /usr/share/commento tar xvf commento-linux-amd64-v1.7.0.tar.gz -C /usr/share/commento Create a new file /etc/systemd/system/commento.service: [Unit] Description=Commento daemon service After=network.target postgresql.service [Service] Type=simple ExecStart=/usr/bin/commento Environment=COMMENTO_ORIGIN=https://commento.jasonthai.me Environment=COMMENTO_PORT=8080 Environment=COMMENTO_POSTGRES=postgres://commento@localhost:5432/commento?sslmode=disable Environment=COMMENTO_STATIC=/usr/share/commento Environment=COMMENTO_FORBID_NEW_OWNERS=true Environment=COMMENTO_SMTP_HOST=ENTER YOUR VALUE HERE Environment=COMMENTO_SMTP_PORT=ENTER YOUR VALUE HERE Environment=COMMENTO_SMTP_USERNAME=ENTER YOUR VALUE HERE Environment=COMMENTO_SMTP_PASSWORD=ENTER YOUR VALUE HERE Environment=COMMENTO_SMTP_FROM_ADDRESS=no-reply@commento.io # Set Google OAuth credentials Environment=COMMENTO_GOOGLE_KEY= Environment=COMMENTO_GOOGLE_SECRET= # Set Github OAuth credentials Environment=COMMENTO_GITHUB_KEY= Environment=COMMENTO_GITHUB_SECRET= # Set Twitter OAuth credentials Environment=COMMENTO_TWITTER_KEY= Environment=COMMENTO_TWITTER_SECRET= [Install] WantedBy=multi-user.target Apache Config In the following section, I use commento.jasonthai.me as my subdomain to host Commento, you can just replace the it with whatever domain you will be using. Create a new file /etc/apache2/sites-available/commento.jasonthai.me.conf: &amp;lt;VirtualHost *:80&amp;gt; ServerAdmin webmaster@localhost ServerName commento.jasonthai.me ServerAlias commento.jasonthai.me DocumentRoot /usr/share/commento ProxyPreserveHost On ProxyPass / http://127.0.0.1:8080/ ProxyPassReverse / http://127.0.0.1:8080/ &amp;lt;/VirtualHost&amp;gt; Note: the above conf assumes you are not using any TLS/SSL certificates and we are exposing Commento through port 80 which is the default port you can access from your browser. If you choose to enable HTTPS for commento, follow this tutorial to enable HTTPS on your server. This will greatly enhance the security of your Commento service. After running the letsencript certbot, the apache config will look something like this instead: &amp;lt;VirtualHost *:80&amp;gt; RewriteEngine on RewriteCond %{SERVER_NAME} =commento.jasonthai.me RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent] &amp;lt;/VirtualHost&amp;gt; &amp;lt;VirtualHost *:443&amp;gt; ServerAdmin webmaster@localhost ServerName commento.jasonthai.me ServerAlias commento.jasonthai.me DocumentRoot /usr/share/commento ProxyPreserveHost On ProxyPass / http://127.0.0.1:8080/ ProxyPassReverse / http://127.0.0.1:8080/ ErrorLog ${APACHE_LOG_DIR}/error.log CustomLog ${APACHE_LOG_DIR}/access.log combined SSLCertificateFile /etc/letsencrypt/live/commento.jasonthai.me/fullchain.pem SSLCertificateKeyFile /etc/letsencrypt/live/commento.jasonthai.me/privkey.pem Include /etc/letsencrypt/options-ssl-apache.conf &amp;lt;/VirtualHost&amp;gt; Running Commento Run systemctl start commento to start commento service. Run systemctl enable commento to enable commento as a background service. After setting everything up, you can go to the domain that you set up to access Commento. If it works, you’ll be greeted with something like this: Adding Commento to Your Site Put this to where you want the comments to show up: &amp;lt;div id=&quot;commento&quot;&amp;gt;&amp;lt;/div&amp;gt; &amp;lt;script defer src=&quot;https://YOUR-DOMAIN-HERE/js/commento.js&quot;&amp;gt; &amp;lt;/script&amp;gt; You should be seeing something similar to my site if everything works correctly. Other ways to host Commento Using Nginx Using Heroku</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/commento-logo.webp" /></entry><entry><title type="html">I Turned My Blog into a Progressive Web App</title><link href="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/" rel="alternate" type="text/html" title="I Turned My Blog into a Progressive Web App" /><published>2019-08-07T00:00:00+00:00</published><updated>2019-08-07T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/">&lt;p&gt;I recently create a post of &lt;a href=&quot;https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/&quot;&gt;how to enable offline support to websites with Workbox&lt;/a&gt; and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.
 &lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;The first thing is to check what is needed to be done in order to be a PWA. We can do that by using Google Chrome’s developer tools’ audit.&lt;/p&gt;
@@ -704,82 +851,4 @@ function showSlides(n) {
 &lt;/script&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Designing and implementing TinyAlias from scratch is a fun side project for me.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in Things I’ve Learned Hosting a URL Shortener Service. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. This post will lay out its design and highlight a few interesting things with respect to both backend and front end implementations.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/tinyalias.webp" /></entry><entry><title type="html">Useful Commands for PostgreSQL and MySQL Database</title><link href="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/" rel="alternate" type="text/html" title="Useful Commands for PostgreSQL and MySQL Database" /><published>2019-07-24T00:00:00+00:00</published><updated>2019-07-24T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/24/useful-commands-for-postgresql-mysql/">&lt;p&gt;&lt;img style=&quot;display: block; margin-left: auto; margin-right: auto; max-width: 100%; height: auto;&quot; src=&quot;https://jasonthai.me/assets/img/postgresql-vs-mysql-features.webp&quot; alt=&quot;PostgreSQL vs MySQL&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;h2 id=&quot;prereqs&quot;&gt;Prereqs&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://brew.sh/&quot;&gt;Homebrew&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;postgresql&quot;&gt;PostgreSQL&lt;/h2&gt;
-
-&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew install postgresql&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;connect-through-cli&quot;&gt;Connect through CLI:&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;PGPASSWORD=XXX psql -h HOST -p PORT -d DATABASE -u USERNAME
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-tables&quot;&gt;Show tables&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\d
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;describe-tables&quot;&gt;Describe tables&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\d TABLENAME
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-biggest-tables-and-their-sizes&quot;&gt;Show biggest tables and their sizes&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nspname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;relname&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;relation&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;pg_size_pretty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pg_total_relation_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;total_size&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_class&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;LEFT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;JOIN&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;N&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;N&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relnamespace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nspname&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;IN&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'pg_catalog'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'information_schema'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relkind&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'i'&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;AND&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nspname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!~&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'^pg_toast'&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pg_total_relation_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;C&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DESC&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;export-to-csv-with-header&quot;&gt;Export to CSV with header&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;\copy TABLENAME TO FILENAME.csv' DELIMITER ',' CSV HEADER;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;mysql&quot;&gt;MySQL&lt;/h2&gt;
-
-&lt;h3 id=&quot;installation-1&quot;&gt;Installation&lt;/h3&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;brew install mysql&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;connect-through-cli-1&quot;&gt;Connect through CLI:&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mysql -h HOST -P PORT -D DATABASE -u USERNAME -pPASSWORD 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-tables-1&quot;&gt;Show tables&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SHOW tables;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;describe-tables-1&quot;&gt;Describe tables&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DESCRIBE TABLENAME
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;show-biggest-tables-and-their-sizes-1&quot;&gt;Show biggest tables and their sizes&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; 
-  &lt;span class=&quot;n&quot;&gt;table_schema&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`Database`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;k&quot;&gt;table_name&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`Table`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
-  &lt;span class=&quot;n&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index_length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`Size in MB`&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;information_schema&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TABLES&lt;/span&gt; 
-&lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index_length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DESC&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;LIMIT&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;export-to-csv-with-header-1&quot;&gt;Export to CSV with header&lt;/h3&gt;
-&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TABLENAME&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTFILE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'FILENAME.csv'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;FIELDS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TERMINATED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;','&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;ENCLOSED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&quot;'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;LINES&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TERMINATED&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">A consolidated list of useful commands for PostgreSQL and MySQL from my own findings.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/postgresql-vs-mysql-features.webp" /></entry></feed>
+&lt;p&gt;Designing and implementing TinyAlias from scratch is a fun side project for me.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">After I wrote some of my thoughts about my URL shortener service TinayAlias and others here in Things I’ve Learned Hosting a URL Shortener Service. It occured to me I did not mention much about what my service had to offer. Even though TinyAlias is no longer operational, I feel the service did provide some interesting features compared to others. This post will lay out its design and highlight a few interesting things with respect to both backend and front end implementations.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/tinyalias.webp" /></entry></feed>

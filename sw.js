@@ -60,6 +60,14 @@ workbox.precaching.precacheAndRoute([
     "revision": "4efd97ebc1d2dd027859682d794f2e3d"
   },
   {
+    "url": "assets/img/commento-logo.webp",
+    "revision": "0887ae3f52c161c74d8ca74dbb342ecb"
+  },
+  {
+    "url": "assets/img/commento.webp",
+    "revision": "4b4020361b37988244fb2481957dcca8"
+  },
+  {
     "url": "assets/img/devtool-audits.webp",
     "revision": "da9dbf21238d4ff002f34ae753eb6ca6"
   },
@@ -325,11 +333,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/index.html",
-    "revision": "023eb50f1f6fb378ab01dbb0a0ce27c5"
+    "revision": "37483ce3136af276ece998283274ecb2"
+  },
+  {
+    "url": "blog/2019/08/12/how-to-host-commento-on-apache-webserver/index.html",
+    "revision": "51233177134403f1256dc5833f389dff"
   },
   {
     "url": "categories/index.html",
-    "revision": "97e42c5467d6482bb14c2e4a63660347"
+    "revision": "843cd6aeb5dede8420c8159632a1e0da"
   },
   {
     "url": "default/index.html",
@@ -353,7 +365,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "c7c1d991161c2ac97dcec10d0886c166"
+    "revision": "fbc2002b876074ce36578ba1459f22fd"
   },
   {
     "url": "manifest.json",
@@ -361,15 +373,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "639eed14893cceb5ad697e04499830d2"
+    "revision": "f493599a33a1e2199bec9cc47df61668"
   },
   {
     "url": "page/3/index.html",
-    "revision": "1ca3da4395abd370dd277bb4a8f23a37"
+    "revision": "b067d896252e227a56006be1fd591e69"
   },
   {
     "url": "posts/index.html",
-    "revision": "83b3e121d62132af333e4e2800b9e60f"
+    "revision": "b5407dc690665f5ac8ae18cfa7b9762d"
   },
   {
     "url": "redirects.json",
@@ -381,7 +393,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "4c8be9dea2a976037f67d6f71c380da9"
+    "revision": "6b7ec8e756415e7140b63e86e6a26aeb"
   },
   {
     "url": "vi/index.html",
