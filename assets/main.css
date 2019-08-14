@@ -312,12 +312,12 @@ table {
     width: calc(100% - (30px / 2)); } }
 .site-sidebar {
   padding-top: 30px;
-  margin-right: 15px;
+  margin-right: 50px;
   float: left;
   position: -webkit-sticky;
   position: sticky;
   justify-content: space-between;
-  width: calc(300px - 1em);
+  width: calc(300px - 2em);
   top: 0; }
   @media screen and (max-width: 800px) {
     .site-sidebar {
