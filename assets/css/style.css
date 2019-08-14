@@ -372,7 +372,11 @@ table {
     background-color: #00a79d;
     border: none;
     padding: .6rem .6rem;
-    color: #ffffff; }
+    color: #ffffff;
+    cursor: pointer;
+    opacity: 0.6; }
+    .newsletter-form input[type=submit]:hover {
+      opacity: 1; }
   .newsletter-form input {
     display: block;
     border-radius: 4px;
