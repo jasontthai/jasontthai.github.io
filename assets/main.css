@@ -370,7 +370,8 @@ table {
     border: 2px solid #ccc; }
   .newsletter-form input[type=submit] {
     background-color: #00a79d;
-    padding: .6rem .9rem;
+    border: none;
+    padding: .6rem .6rem;
     color: #ffffff; }
   .newsletter-form input {
     display: block;

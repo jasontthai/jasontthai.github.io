@@ -9,15 +9,15 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "404.html",
-    "revision": "db5514d799a82e92588b68ba94f67926"
+    "revision": "cc6b049054a72271b12b6e4e0871177a"
   },
   {
     "url": "about/index.html",
-    "revision": "8d8acc22d70a9c8a7afc74b135d3cce7"
+    "revision": "3c30b6809a786842b0a4b346a0c4b100"
   },
   {
     "url": "assets/css/style.css",
-    "revision": "9eeec32d8011548511b23d5816d936eb"
+    "revision": "ccb84dbe3b36c1d5bb05547282fe9ab5"
   },
   {
     "url": "assets/css/syntax.css",
@@ -221,7 +221,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/main.css",
-    "revision": "0da5bf363fb1e93181d213ada5ee1965"
+    "revision": "a492db4a07d1805f8a7ade754dcbce5b"
   },
   {
     "url": "assets/minima-social-icons.svg",
@@ -341,11 +341,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "categories/index.html",
-    "revision": "c25447eb7f52bdb26794ed4f295110ba"
+    "revision": "1fc23e99a8fecde2e65806f3ab7688c6"
   },
   {
     "url": "default/index.html",
-    "revision": "87eb0e96d95088d4ba793c63c34502f9"
+    "revision": "acfdf58eaf0f12f5f48c83f50657dd9b"
   },
   {
     "url": "favicon.ico",
@@ -365,7 +365,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "6c78b2c4a51d5d1d9b523b247ce02111"
+    "revision": "85abc45033676e048ac1b4b51e73c1e7"
   },
   {
     "url": "manifest.json",
@@ -373,15 +373,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "0e28c0d642a1058713748271fbd92341"
+    "revision": "ac50568ac85c4c53b2bdbc196261ced6"
   },
   {
     "url": "page/3/index.html",
-    "revision": "f5f36debc3dc58f7699ef3f4959ec7c6"
+    "revision": "c23d961a4d9ca583fa07ceca2bf49078"
   },
   {
     "url": "posts/index.html",
-    "revision": "de3a687c9c05844ced2b63c8a47f5d30"
+    "revision": "05aa871824b5189f5c46a16dda9bdfd8"
   },
   {
     "url": "redirects.json",
@@ -393,15 +393,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "904a7baa9c9b4308345f0967d23ad55c"
+    "revision": "a96ac784cfa1e62945660cc6c1eda660"
   },
   {
     "url": "vi/index.html",
-    "revision": "7052b1c1edc6b8d12fbd58333c67e668"
+    "revision": "5ffd518833b62e43db25a6a8cc28d68d"
   },
   {
     "url": "visited-places/index.html",
-    "revision": "7cf441b6bd768755ccc8cb63c15261ba"
+    "revision": "dd85b7a1fa6eecc423b5fd13186fd354"
   },
   {
     "url": "workbox-config.js",
