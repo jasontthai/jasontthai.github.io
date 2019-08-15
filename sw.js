@@ -9,11 +9,11 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "404.html",
-    "revision": "cc6b049054a72271b12b6e4e0871177a"
+    "revision": "cfee2354499ecb59a368b52923c4be90"
   },
   {
     "url": "about/index.html",
-    "revision": "3c30b6809a786842b0a4b346a0c4b100"
+    "revision": "e74358e51a8c83596a63f066eb271a18"
   },
   {
     "url": "assets/css/style.css",
@@ -229,123 +229,123 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2018/06/10/browser-extensions/index.html",
-    "revision": "8f45ef7967896395753be8383a9a7189"
+    "revision": "c971b0900f92bc21e56b7a52e0800fb8"
   },
   {
     "url": "blog/2018/06/12/secure-your-passwords/index.html",
-    "revision": "bc90254f63ec54e1d1673a8a5473663a"
+    "revision": "3dc0f8e4a3028cdc480c9558edfc9259"
   },
   {
     "url": "blog/2018/06/13/how-to-create-interactive-map-with-mapbox-and-leafletjs/index.html",
-    "revision": "2e34cc914a0537379f2dedc3641ce4b9"
+    "revision": "da15b2e665d88804520a8542a0c151d7"
   },
   {
     "url": "blog/2018/06/16/thoughts-on-being-multilingual/index.html",
-    "revision": "c738675d47d8a64ea6d384d55d16fa06"
+    "revision": "39e1983cd80e78d1a9fc9d58c527c66b"
   },
   {
     "url": "blog/2018/07/15/dear-wife/index.html",
-    "revision": "383ba82329367997ffefccf076de8dee"
+    "revision": "eec60faaf1d603b1147c96be8c629e7c"
   },
   {
     "url": "blog/2018/09/03/10-most-used-linux-commands/index.html",
-    "revision": "e6756da0cec41549f0dc7b4d0e9c1867"
+    "revision": "81b9ad7702e0bb791373fb3274a9e627"
   },
   {
     "url": "blog/2019/06/05/thoughts-on-url-shortener-service/index.html",
-    "revision": "adec1de5ac0270a0f126ed900f138dff"
+    "revision": "36ea0d185f571a8f05273cbde8f5563d"
   },
   {
     "url": "blog/2019/06/12/about-unit-tests/index.html",
-    "revision": "74cdcfbe83e6614507ce99bb65a7550a"
+    "revision": "da16bffd5c51e53b90d9a7fa14a62ee5"
   },
   {
     "url": "blog/2019/06/13/financial-tools/index.html",
-    "revision": "22b91a208721872c0416301238d32f73"
+    "revision": "10a44f5d011b32ba20bc882ef71d7d6f"
   },
   {
     "url": "blog/2019/06/16/regrowing-my-succulents/index.html",
-    "revision": "9cb87d3fdfba7317cb3550db322016f5"
+    "revision": "bea50cd3b00442e29da621bb87a8d1c0"
   },
   {
     "url": "blog/2019/06/30/your-life-or-your-money/index.html",
-    "revision": "1618f2cd8b22d0dd40b7ad27d7cb2b4f"
+    "revision": "60d62e3d1184f4e326ce177f46ff2e9e"
   },
   {
     "url": "blog/2019/07/15/so-you-have-some-money/index.html",
-    "revision": "2b95f819586b7dd2b08a1a8cb6de7c22"
+    "revision": "1113be7d3f7bdacf32b746d3fe770043"
   },
   {
     "url": "blog/2019/07/16/the-existence-of-anniversaries/index.html",
-    "revision": "07c99d37aa8e6b98132f11f008a6b621"
+    "revision": "014630825ea7298b84bbd9d079bda227"
   },
   {
     "url": "blog/2019/07/18/changes-i-made-for-my-blogs-theme/index.html",
-    "revision": "d526ede3f50bb6256c5caa474e9d4ad4"
+    "revision": "1c5890232e3f6d486290a6e532682093"
   },
   {
     "url": "blog/2019/07/20/bai-tieng-viet/index.html",
-    "revision": "c6b05881b566e050b78066ad6263e998"
+    "revision": "5c1db21db40c63839b9ba9c5afa52bac"
   },
   {
     "url": "blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/index.html",
-    "revision": "305111c9b4462fbebc679e8b9bffd6ae"
+    "revision": "ec7aab8a3074890d7c2a47d8de06ab37"
   },
   {
     "url": "blog/2019/07/23/how-to-deploy-to-github-pages-using-travisci/index.html",
-    "revision": "625ee5d5f962eb721c2be76e381996a6"
+    "revision": "feb22f685fc48848a226286c0d06df57"
   },
   {
     "url": "blog/2019/07/24/useful-commands-for-postgresql-mysql/index.html",
-    "revision": "4ce3372d31bd0bfbd66b3e4e236165bd"
+    "revision": "e01d4c7165f6e713798ea477a8a08fb1"
   },
   {
     "url": "blog/2019/07/25/tinyalias-url-shortener-design-and-features/index.html",
-    "revision": "b9428538be15eae8776b09dace611387"
+    "revision": "c7ebf3f0fb5564366ba86f66042b0f0d"
   },
   {
     "url": "blog/2019/07/26/customize-part-of-your-life-with-ifttt/index.html",
-    "revision": "d9b8457f5cc37d31a48f41601bb9f2c4"
+    "revision": "e3f2b538ca6a934408eb65f7116758a5"
   },
   {
     "url": "blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/index.html",
-    "revision": "2f3d33d67314bf866fa9d153397ad681"
+    "revision": "1ee5a1ee8067758f0b66bf0ba16b1cde"
   },
   {
     "url": "blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media/index.html",
-    "revision": "a63bff415a74faa81451937f28e86aec"
+    "revision": "beb869f9e6462c1ae3e6e7bd572de96f"
   },
   {
     "url": "blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/index.html",
-    "revision": "3338ade3af4d87f0d361ae35fa99c5a9"
+    "revision": "54c8645626320e3573980d81e44e31af"
   },
   {
     "url": "blog/2019/08/02/what-im-up-to-in-july-2019/index.html",
-    "revision": "9b5e6eda114eab0e6c3ed089d8960f59"
+    "revision": "2980104d2effa9203ea6a668a3deb598"
   },
   {
     "url": "blog/2019/08/04/three-proofs-total-stock-market-is-efficient/index.html",
-    "revision": "4b78b525b2787e75263f0351abde9fb1"
+    "revision": "9fda6393349186eb9ea6ee11f8beced0"
   },
   {
     "url": "blog/2019/08/06/enable-offline-support-to-websites-with-workbox/index.html",
-    "revision": "bafad121a39dd6057358e7242df60fbf"
+    "revision": "9c2906ad8216128ad5c2fb58d1042b6b"
   },
   {
     "url": "blog/2019/08/07/i-turned-my-blog-into-a-web-progress-app/index.html",
-    "revision": "37483ce3136af276ece998283274ecb2"
+    "revision": "a9404642c9618089a50a119e54504e35"
   },
   {
     "url": "blog/2019/08/12/how-to-host-commento-on-apache-webserver/index.html",
-    "revision": "559cd1188c49511ae1570b883f3f896f"
+    "revision": "2ff31dbb7ded63407eaf75ba2d299c4b"
   },
   {
     "url": "categories/index.html",
-    "revision": "1fc23e99a8fecde2e65806f3ab7688c6"
+    "revision": "7156a48500b4bd1c5986030f5db7de26"
   },
   {
     "url": "default/index.html",
-    "revision": "acfdf58eaf0f12f5f48c83f50657dd9b"
+    "revision": "78a95994898d3fb8cd8c36ce3e465ba6"
   },
   {
     "url": "favicon.ico",
@@ -365,23 +365,23 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "85abc45033676e048ac1b4b51e73c1e7"
+    "revision": "99401eb3c2de13e8c4dbeda011887611"
   },
   {
     "url": "manifest.json",
-    "revision": "f9f57bbea68b2e15be9061eb6798d06a"
+    "revision": "341768a8729bf2202ecffa5f36da3560"
   },
   {
     "url": "page/2/index.html",
-    "revision": "ac50568ac85c4c53b2bdbc196261ced6"
+    "revision": "eeb271a0c293807b9f411bb2b884ed74"
   },
   {
     "url": "page/3/index.html",
-    "revision": "c23d961a4d9ca583fa07ceca2bf49078"
+    "revision": "74adadcfe69e8b98fa6b5c06fd6a59de"
   },
   {
     "url": "posts/index.html",
-    "revision": "05aa871824b5189f5c46a16dda9bdfd8"
+    "revision": "09916592b2214bee7782f444137154cd"
   },
   {
     "url": "redirects.json",
@@ -393,15 +393,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "a96ac784cfa1e62945660cc6c1eda660"
+    "revision": "2bfa858a069b670a3d2c27938576422b"
   },
   {
     "url": "vi/index.html",
-    "revision": "5ffd518833b62e43db25a6a8cc28d68d"
+    "revision": "931e353f603b8f06a44c998811ede55c"
   },
   {
     "url": "visited-places/index.html",
-    "revision": "dd85b7a1fa6eecc423b5fd13186fd354"
+    "revision": "7de2529ef8dbdc3fe82bb1c5f35c8ee5"
   },
   {
     "url": "workbox-config.js",
