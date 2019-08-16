@@ -9,15 +9,15 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "404.html",
-    "revision": "499a0c8168124aab75d2ced8f62abe68"
+    "revision": "40061d042e8f81919a130a9f3969ea4c"
   },
   {
     "url": "about/index.html",
-    "revision": "3c2aaf8632935f11829142fef7b5dafc"
+    "revision": "f049b0897f0678fbd2271b2e12b3c6bb"
   },
   {
     "url": "assets/css/style.css",
-    "revision": "b79e513ddf08e9dc4125cd1566831385"
+    "revision": "134f8014ae3038836c486dd1c954117a"
   },
   {
     "url": "assets/img/3years_featured.webp",
@@ -337,11 +337,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "categories/index.html",
-    "revision": "c52a256f1393a6a3dbc531ad9571795b"
+    "revision": "d0a9e647e976f341032f8e2e80b7abd1"
   },
   {
     "url": "default/index.html",
-    "revision": "96bae6fd91ff855c8a1475ff26da84f0"
+    "revision": "a286ae836660072c707f51bdf2acdd46"
   },
   {
     "url": "favicon.ico",
@@ -361,7 +361,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "0d83998bda955edc7bd776812af12448"
+    "revision": "4c9016e8793cab4b455869b0e57026c1"
   },
   {
     "url": "manifest.json",
@@ -369,15 +369,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "8ef1bd69a23e89824824b3a1dbab02aa"
+    "revision": "c0bc67b11f15fefc970c02b5f977cc1b"
   },
   {
     "url": "page/3/index.html",
-    "revision": "5c01331904a4f422d5ec02bca0b28f23"
+    "revision": "b2c360fc2db9a599320747dfa9bc1864"
   },
   {
     "url": "posts/index.html",
-    "revision": "5bedd4bc34aa6b792f00174ce671a2a6"
+    "revision": "97c190b06a7f308fe3366cd937b57872"
   },
   {
     "url": "redirects.json",
@@ -389,15 +389,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "92f60afde241c48d450f22f1363cccb6"
+    "revision": "cf4fb551b7ff66381ea6eac5f0933989"
   },
   {
     "url": "vi/index.html",
-    "revision": "8ac1e63e21ba58c069abcb2ac850406d"
+    "revision": "49d6eccfe805e87d8253280a6dd4050d"
   },
   {
     "url": "visited-places/index.html",
-    "revision": "15d98c4b4af3640c7628a57bbe5c4517"
+    "revision": "5bacf50d074c8c3eff8bfb71ed3678b1"
   },
   {
     "url": "workbox-config.js",

@@ -6930,3 +6930,11 @@ a {
 
 a:hover {
   color: black; }
+
+.sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0; }
+  @media screen and (max-width: 800px) {
+    .sticky {
+      position: relative; } }
