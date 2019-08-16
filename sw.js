@@ -37,7 +37,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/img/blur-chart-data.webp",
-    "revision": "1b5f133eb62d240f5de0aaaae015ca8a"
+    "revision": "4f756f89e12450e7666e4f44dd6a4a2a"
   },
   {
     "url": "assets/img/blur-close-up-environment-401213.webp",
@@ -97,7 +97,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/img/money-matters-1173105.webp",
-    "revision": "b1a4cdabcc05f8a73e35ace110804e2d"
+    "revision": "8ef781245b4ac76a7c29b066a63119fb"
   },
   {
     "url": "assets/img/pagespeed-featured.webp",
@@ -113,7 +113,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/img/postage-stamps-484991_640.webp",
-    "revision": "fb28067eeef90e00ae79b6085b890547"
+    "revision": "c308e4700c49e2d3cfbcb2624793429f"
   },
   {
     "url": "assets/img/postgresql-vs-mysql-features.webp",
@@ -361,7 +361,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "5e0d0eead3c607dd7c4221128d983113"
+    "revision": "840e18f51b8b933d35b6ce2746fcba77"
   },
   {
     "url": "manifest.json",
@@ -369,11 +369,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "ad436b9e4adb224f7d5d94d970242796"
+    "revision": "754a4c6aad585ce201de65243d1adbb5"
   },
   {
     "url": "page/3/index.html",
-    "revision": "14d3466b42b0a79f01031e70321cd4c7"
+    "revision": "ccbbab244e2e6fc04c3bf54b6bd217a1"
   },
   {
     "url": "posts/index.html",
