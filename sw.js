@@ -397,7 +397,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "visited-places/index.html",
-    "revision": "9c5456908ed4cbb8a45b13a8a0a807f0"
+    "revision": "bb324db9d475beb79e57fbfc37448095"
   },
   {
     "url": "workbox-config.js",
