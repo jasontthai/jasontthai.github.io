@@ -17,7 +17,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/css/style.css",
-    "revision": "134f8014ae3038836c486dd1c954117a"
+    "revision": "6118e6b5ae26923af9497d1d9cfc0039"
   },
   {
     "url": "assets/img/3years_featured.webp",
