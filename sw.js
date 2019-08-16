@@ -9,11 +9,11 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "404.html",
-    "revision": "40061d042e8f81919a130a9f3969ea4c"
+    "revision": "4dd14ad19d6f4f619fbad6ec5182f5ad"
   },
   {
     "url": "about/index.html",
-    "revision": "f049b0897f0678fbd2271b2e12b3c6bb"
+    "revision": "fea45598b464458705d26c111795f52e"
   },
   {
     "url": "assets/css/style.css",
@@ -337,11 +337,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "categories/index.html",
-    "revision": "d0a9e647e976f341032f8e2e80b7abd1"
+    "revision": "7d7ee9990f446ff421fb54f32d55b9bd"
   },
   {
     "url": "default/index.html",
-    "revision": "a286ae836660072c707f51bdf2acdd46"
+    "revision": "bd1e7e454f0ce18f941a04d8b2dbf9bf"
   },
   {
     "url": "favicon.ico",
@@ -361,7 +361,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "4c9016e8793cab4b455869b0e57026c1"
+    "revision": "5e0d0eead3c607dd7c4221128d983113"
   },
   {
     "url": "manifest.json",
@@ -369,15 +369,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "c0bc67b11f15fefc970c02b5f977cc1b"
+    "revision": "ad436b9e4adb224f7d5d94d970242796"
   },
   {
     "url": "page/3/index.html",
-    "revision": "b2c360fc2db9a599320747dfa9bc1864"
+    "revision": "14d3466b42b0a79f01031e70321cd4c7"
   },
   {
     "url": "posts/index.html",
-    "revision": "97c190b06a7f308fe3366cd937b57872"
+    "revision": "369398ae95321f7111ad2794d92f4365"
   },
   {
     "url": "redirects.json",
@@ -389,15 +389,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "cf4fb551b7ff66381ea6eac5f0933989"
+    "revision": "5ba26543279431485b064ae802dad9b7"
   },
   {
     "url": "vi/index.html",
-    "revision": "49d6eccfe805e87d8253280a6dd4050d"
+    "revision": "2aea93d353dcb7d9f63cef20f6922db0"
   },
   {
     "url": "visited-places/index.html",
-    "revision": "5bacf50d074c8c3eff8bfb71ed3678b1"
+    "revision": "f7212e7715f131328437801e26831ac9"
   },
   {
     "url": "workbox-config.js",
