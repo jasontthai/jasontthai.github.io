@@ -385,7 +385,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "7252611159bae48b13b6108f769b98e6"
+    "revision": "08eadb5c87f5fa32e171383d0ed2642f"
   },
   {
     "url": "manifest.json",
@@ -393,11 +393,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "e83fa0b04150a004549bf6899ec8bc6f"
+    "revision": "d78e03ac96007e140188dbad07610648"
   },
   {
     "url": "page/3/index.html",
-    "revision": "c87ce25578cc1e19b9c9703885044f9e"
+    "revision": "774d0b3c6f4abbd76b19c20663fd7470"
   },
   {
     "url": "posts/index.html",
@@ -417,7 +417,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "vi/index.html",
-    "revision": "fb93d967df97d512416efa63c18c098a"
+    "revision": "07f072f0f7170ec2aaccae089f267478"
   },
   {
     "url": "visited-places/index.html",
