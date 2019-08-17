@@ -108,6 +108,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "8df6f2d17d3071f96b23153170ffd7e4"
   },
   {
+    "url": "assets/img/jekyll.webp",
+    "revision": "94c8e78f30078316a6ddda9dd8a9db25"
+  },
+  {
     "url": "assets/img/logo-travisci-wide1.webp",
     "revision": "a84c54dd4f2caedc916a9f45149958c1"
   },
@@ -293,7 +297,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/07/18/changes-i-made-for-my-blogs-theme/index.html",
-    "revision": "52aa8222fdcc8aed8b48a5788f7200ce"
+    "revision": "0708dda4a7fea9a1c0e181a3c8c89a70"
   },
   {
     "url": "blog/2019/07/20/bai-tieng-viet/index.html",
@@ -385,7 +389,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "daac7b2398e60972cdf30edf117594e9"
+    "revision": "494997dbf6e2fafda48f8edb0104d211"
   },
   {
     "url": "page/3/index.html",
