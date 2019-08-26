@@ -413,7 +413,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/index.html",
-    "revision": "81b141dc74a8f84b318c27964ce7ac9e"
+    "revision": "9bd2836e7684d2291a10950aa91558ed"
   },
   {
     "url": "categories/index.html",
