@@ -84,6 +84,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "da9dbf21238d4ff002f34ae753eb6ca6"
   },
   {
+    "url": "assets/img/google-syndication.webp",
+    "revision": "e7eb12b6b2c003b73e2b8736df8f5287"
+  },
+  {
     "url": "assets/img/half-marathon-cover.webp",
     "revision": "3b1e1e0e323820931dbb1ba9bca2e00a"
   },
@@ -120,6 +124,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "8ef781245b4ac76a7c29b066a63119fb"
   },
   {
+    "url": "assets/img/openvpn-pihole.webp",
+    "revision": "33720589b83b55186336012f43b99095"
+  },
+  {
     "url": "assets/img/pagespeed-featured.webp",
     "revision": "986b659fabd25c6f2a28ebc3b704de88"
   },
@@ -130,6 +138,50 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "assets/img/password-checker.webp",
     "revision": "44530d2e9aa5ac1b4ca9e1a8e024f482"
+  },
+  {
+    "url": "assets/img/pi-hole-stats.webp",
+    "revision": "b040ba001354f0e1902d41999668638d"
+  },
+  {
+    "url": "assets/img/pihole-step-1.webp",
+    "revision": "9152696559d1638af34e6239b273cb1b"
+  },
+  {
+    "url": "assets/img/pihole-step-10.webp",
+    "revision": "e482f97b6751c7c323afe47a8488652e"
+  },
+  {
+    "url": "assets/img/pihole-step-2.webp",
+    "revision": "421b68fa9d3cbd808e93c9fb8f3a8bc5"
+  },
+  {
+    "url": "assets/img/pihole-step-3.webp",
+    "revision": "3cfa97e27f610f9249339363d1eff179"
+  },
+  {
+    "url": "assets/img/pihole-step-4.webp",
+    "revision": "30d3f1c239918155afb9b4f4a0d6e9d6"
+  },
+  {
+    "url": "assets/img/pihole-step-5.webp",
+    "revision": "73e7184ccd475c36bb9da29e7ae1d150"
+  },
+  {
+    "url": "assets/img/pihole-step-6.webp",
+    "revision": "335c270cfc57c567887cf9060965e943"
+  },
+  {
+    "url": "assets/img/pihole-step-7.webp",
+    "revision": "711bafd0bf5fee759a7d3a5209bb3e0e"
+  },
+  {
+    "url": "assets/img/pihole-step-8.webp",
+    "revision": "4fad234e32dc1b004840a3ea2feb99c9"
+  },
+  {
+    "url": "assets/img/pihole-step-9.webp",
+    "revision": "42b1458b82c0e622da386868d36f2a40"
   },
   {
     "url": "assets/img/postage-stamps-484991_640.webp",
@@ -357,7 +409,11 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/12/how-to-host-commento-on-apache-webserver/index.html",
-    "revision": "5abcf2b8a93468ad3a77d8f4ba641490"
+    "revision": "753337b5dc18ccef4d46615b83784cac"
+  },
+  {
+    "url": "blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/index.html",
+    "revision": "81b141dc74a8f84b318c27964ce7ac9e"
   },
   {
     "url": "categories/index.html",
@@ -385,7 +441,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "d07ed538f41993561d502eddb451c89a"
+    "revision": "5d93316fce55bebef0bff84a4d7953d2"
   },
   {
     "url": "manifest.json",
@@ -393,15 +449,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "25613dc214790ceee7a07ebe9591e133"
+    "revision": "3daf2d96c2ec1188469edfc98d1529b6"
   },
   {
     "url": "page/3/index.html",
-    "revision": "6be3d94251f5b2db2cb88b4283ec339a"
+    "revision": "bb93f1518665bbeb6cd147accaeec2b9"
   },
   {
     "url": "posts/index.html",
-    "revision": "fc4970e036eef97a1b894d14bf976bcb"
+    "revision": "20e8afa1ca1c0f86ee2df5a14ba98d88"
   },
   {
     "url": "redirects.json",
@@ -413,7 +469,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "b3efd7dce69b3245c64dc2d51b73fe8b"
+    "revision": "35b99c8bc42d78dd4268a0ca9a0bce14"
   },
   {
     "url": "vi/index.html",
