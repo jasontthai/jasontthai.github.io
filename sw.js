@@ -417,7 +417,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "categories/index.html",
-    "revision": "543a68fdf76c7137cadffd3e1f44bf1c"
+    "revision": "06f4dad6b52c89e7954e46fe184834e4"
   },
   {
     "url": "default/index.html",
