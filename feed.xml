@@ -1,4 +1,136 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-08-26T03:22:14+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS</title><link href="https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/" rel="alternate" type="text/html" title="How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS" /><published>2019-08-25T00:00:00+00:00</published><updated>2019-08-25T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-09-01T16:34:17+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">What I’m up to in August 2019</title><link href="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/" rel="alternate" type="text/html" title="What I'm up to in August 2019" /><published>2019-09-01T00:00:00+00:00</published><updated>2019-09-01T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/">&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/month-of-august.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/month-of-august.jpg&quot; alt=&quot;August&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;p&gt;This month has been busy. I have been learning more about self-hosting software and doing some tinkering with them.&lt;/p&gt;
+
+&lt;p&gt;Currently I am checking out these 2 subreddits:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://reddit.com/r/selfhosted&quot;&gt;https://reddit.com/r/selfhosted&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://reddit.com/r/homelab&quot;&gt;https://reddit.com/r/homelab&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These subs give me some motivation of creating my home server to store data and share with families and friends. But that will be the next step as I am using a cloud provider to do my hosting.&lt;/p&gt;
+
+&lt;p&gt;What I am hosting:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://bitwarden.com&quot;&gt;Bitwarden&lt;/a&gt; - Opensource password manager. I decided to delete my Lastpass’s account and use a self-hosted Bitwarden instance to manage my passwords. So far so good. I keep my data.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nextcloud.com&quot;&gt;Nextcloud&lt;/a&gt; - Productivity platform (Gsuite replacement). I use this to sync my files across computers. The platform offers a lot more than just file syncing. I haven’t explored much but it looks promising. Another file syncing alternative is &lt;a href=&quot;https://seafile.com&quot;&gt;Seafile&lt;/a&gt; which people say is more reliable.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://plex.tv&quot;&gt;Plex&lt;/a&gt; - Media organizer. I am also exploring hosting my media so I can view them everywhere. Another popular alternative is &lt;a href=&quot;https://github.com/jellyfin/jellyfin&quot;&gt;Jellyfin&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://tt-rss.org&quot;&gt;TT-RSS&lt;/a&gt; - RSS feeds&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://firefly-iii.org/&quot;&gt;Firefly-III&lt;/a&gt; - Budget app. I am also trying out this budget app. It is quite different from my &lt;a href=&quot;https://www.youneedabudget.com/&quot;&gt;YNAB&lt;/a&gt; and needs taking used too. So far I am more pleased with the latter one.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you want to try out these services, let me know and I can give you access to them.&lt;/p&gt;
+
+&lt;p&gt;Moving on…
+I am still reading about finance this month. They are easy to understand and are a nice complement to the ones I read in July. I highly recommend these books.&lt;/p&gt;
+
+&lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
+  .gr_custom_container_1567354622 {
+    /* customize your Goodreads widget container here*/
+    border: 1px solid gray;
+    border-radius:10px;
+    padding: 10px 5px 10px 5px;
+    background-color: #FFFFFF;
+    color: #000000;
+    width: 300px
+  }
+  .gr_custom_header_1567354622 {
+    /* customize your Goodreads header here*/
+    border-bottom: 1px solid gray;
+    width: 100%;
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: 120%
+  }
+  .gr_custom_each_container_1567354622 {
+    /* customize each individual book container here */
+    width: 100%;
+    clear: both;
+    margin-bottom: 10px;
+    overflow: auto;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #aaa;
+  }
+  .gr_custom_book_container_1567354622 {
+    /* customize your book covers here */
+    overflow: hidden;
+    height: 60px;
+      float: left;
+      margin-right: 4px;
+      width: 39px;
+  }
+  .gr_custom_author_1567354622 {
+    /* customize your author names here */
+    font-size: 10px;
+  }
+  .gr_custom_tags_1567354622 {
+    /* customize your tags here */
+    font-size: 10px;
+    color: gray;
+  }
+  .gr_custom_rating_1567354622 {
+    /* customize your rating stars here */
+    float: right;
+  }
+&lt;/style&gt;
+
+&lt;div align=&quot;center&quot; id=&quot;gr_custom_widget_1567354622&quot;&gt;
+          &lt;div class=&quot;gr_custom_container_1567354622&quot;&gt;
+    &lt;h2 class=&quot;gr_custom_header_1567354622&quot;&gt;
+    &lt;a style=&quot;text-decoration: none;&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/list/54938708-jason-thai?shelf=august-2019&amp;amp;utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;Jason&amp;#39;s bookshelf: august-2019&lt;/a&gt;
+    &lt;/h2&gt;
+      &lt;div class=&quot;gr_custom_each_container_1567354622&quot;&gt;
+          &lt;div class=&quot;gr_custom_book_container_1567354622&quot;&gt;
+            &lt;a title=&quot;The Bogleheads' Guide to Investing&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960404866?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;&lt;img alt=&quot;The Bogleheads' Guide to Investing&quot; border=&quot;0&quot; src=&quot;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388380454l/381355._SY75_.jpg&quot; /&gt;&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_rating_1567354622&quot;&gt;
+            &lt;span class=&quot; staticStars notranslate&quot;&gt;&lt;img src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_title_1567354622&quot;&gt;
+            &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960404866?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;The Bogleheads' Guide to Investing&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_author_1567354622&quot;&gt;
+            by &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/author/show/66008.Taylor_Larimore&quot;&gt;Taylor Larimore&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_tags_1567354622&quot;&gt;
+            tagged:
+            august-2019
+          &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;gr_custom_each_container_1567354622&quot;&gt;
+          &lt;div class=&quot;gr_custom_book_container_1567354622&quot;&gt;
+            &lt;a title=&quot;The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960405014?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;&lt;img alt=&quot;The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk&quot; border=&quot;0&quot; src=&quot;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1528428190l/36809342._SY75_.jpg&quot; /&gt;&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_rating_1567354622&quot;&gt;
+            &lt;span class=&quot; staticStars notranslate&quot;&gt;&lt;img src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_title_1567354622&quot;&gt;
+            &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960405014?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_author_1567354622&quot;&gt;
+            by &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/author/show/66008.Taylor_Larimore&quot;&gt;Taylor Larimore&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;gr_custom_tags_1567354622&quot;&gt;
+            tagged:
+            august-2019
+          &lt;/div&gt;
+      &lt;/div&gt;
+  &lt;br style=&quot;clear: both&quot; /&gt;
+  &lt;center&gt;
+    &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/&quot;&gt;&lt;img alt=&quot;goodreads.com&quot; style=&quot;border:0&quot; src=&quot;https://www.goodreads.com/images/widget/widget_logo.gif&quot; /&gt;&lt;/a&gt;
+  &lt;/center&gt;
+  &lt;noscript&gt;
+    Share &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/&quot;&gt;book reviews&lt;/a&gt; and ratings with Jason, and even join a &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/group&quot;&gt;book club&lt;/a&gt; on Goodreads.
+  &lt;/noscript&gt;
+  &lt;/div&gt;
+
+      &lt;/div&gt;
+&lt;script src=&quot;https://www.goodreads.com/review/custom_widget/54938708.Jason's%20bookshelf:%20august-2019?cover_position=left&amp;amp;cover_size=small&amp;amp;num_books=5&amp;amp;order=a&amp;amp;shelf=august-2019&amp;amp;show_author=1&amp;amp;show_cover=1&amp;amp;show_rating=1&amp;amp;show_review=1&amp;amp;show_tags=1&amp;amp;show_title=1&amp;amp;sort=date_added&amp;amp;widget_bg_color=FFFFFF&amp;amp;widget_bg_transparent=&amp;amp;widget_border_width=1&amp;amp;widget_id=1567354622&amp;amp;widget_text_color=000000&amp;amp;widget_title_size=medium&amp;amp;widget_width=medium&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">This month has been busy. I have been learning more about self-hosting software and doing some tinkering with them. Currently I am checking out these 2 subreddits: https://reddit.com/r/selfhosted https://reddit.com/r/homelab These subs give me some motivation of creating my home server to store data and share with families and friends. But that will be the next step as I am using a cloud provider to do my hosting. What I am hosting: Bitwarden - Opensource password manager. I decided to delete my Lastpass’s account and use a self-hosted Bitwarden instance to manage my passwords. So far so good. I keep my data. Nextcloud - Productivity platform (Gsuite replacement). I use this to sync my files across computers. The platform offers a lot more than just file syncing. I haven’t explored much but it looks promising. Another file syncing alternative is Seafile which people say is more reliable. Plex - Media organizer. I am also exploring hosting my media so I can view them everywhere. Another popular alternative is Jellyfin TT-RSS - RSS feeds Firefly-III - Budget app. I am also trying out this budget app. It is quite different from my YNAB and needs taking used too. So far I am more pleased with the latter one. If you want to try out these services, let me know and I can give you access to them. Moving on… I am still reading about finance this month. They are easy to understand and are a nice complement to the ones I read in July. I highly recommend these books. Jason&amp;#39;s bookshelf: august-2019 The Bogleheads' Guide to Investing by Taylor Larimore tagged: august-2019 The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk by Taylor Larimore tagged: august-2019 Share book reviews and ratings with Jason, and even join a book club on Goodreads. Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/month-of-august.jpg" /></entry><entry><title type="html">How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS</title><link href="https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/" rel="alternate" type="text/html" title="How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS" /><published>2019-08-25T00:00:00+00:00</published><updated>2019-08-25T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;I have been playing around with setting up my own &lt;a href=&quot;https://openvpn.net&quot;&gt;OpenVPN server&lt;/a&gt; lately and also found out &lt;a href=&quot;https://pi-hole.net&quot;&gt;Pi-hole&lt;/a&gt;.  OpenVPN provides a way to set up a VPN that I can self manage and Pi-hole is a network wide ad blocking system. The two combined services provide a good way to make your web browsing experience more secure and ad-free.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://docs.pi-hole.net/guides/vpn/setup-openvpn-server/&quot;&gt;I followed the guide on Pi-hole to set up a VPN server&lt;/a&gt; but I found out that some information is missing depending on the type of VPS you have such as whether your VPS is a NAT VPS or not. Below is the documented steps of all my findings.&lt;/p&gt;
@@ -879,37 +1011,4 @@ We bring services together into Applets. Applets are specific things that can ha
 &lt;p&gt;Those are just a few that I am using. There are definitely a lot of useful integrations available on IFTTT. I highly recommend you check it out. You can also build your own integration and customize them to fit with your activities.&lt;/p&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I think IFTTT is a very powerful service that is useful to almost everyone. From various existing integrations to new ones that you can build, I am sure you will benefit from the service. Give it a try!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I have been using IFTTT to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/ifttt-featured.png" /></entry><entry><title type="html">My Blog’s PageSpeed Insights Score</title><link href="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/" rel="alternate" type="text/html" title="My Blog's PageSpeed Insights Score" /><published>2019-07-26T00:00:00+00:00</published><updated>2019-07-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/my-blog-pagespeed-insights-score-jasonthai-me/">&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pagespeed-full.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pagespeed-full.png&quot; alt=&quot;PageSpeed Insights&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-
-&lt;p&gt;I have been testing how responsive my blog is and PageSpeed Insights give me a pretty good idea of the result. Certainly there are always improvements to be made but for now I am quite glad that the site is snappy.&lt;/p&gt;
-
-&lt;!--more--&gt;
-&lt;p&gt;&lt;a href=&quot;https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fjasonthai.me%2F&amp;amp;tab=desktop&quot;&gt;Check my blog’s PageSpeed Insights Score&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I also tried out &lt;a href=&quot;https://developers.google.com/web/tools/lighthouse&quot;&gt;Lighthouse&lt;/a&gt;, an open source tool to audit my site’s performance. The result is &lt;a href=&quot;/assets/js/jasonthai.me-20190726T112605.json&quot;&gt;here&lt;/a&gt; in json or you can download the file and use &lt;a href=&quot;https://googlechrome.github.io/lighthouse/viewer/&quot;&gt;Lighthouse Report Viewer&lt;/a&gt; for the graphical view.&lt;/p&gt;
-
-&lt;p&gt;Some other tools to test your site are &lt;a href=&quot;https://tools.pingdom.com&quot;&gt;Pingdom&lt;/a&gt; and &lt;a href=&quot;https://gtmetrix.com/&quot;&gt;GTmetrix&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;things-i-have-done-to-improve-speed&quot;&gt;Things I have done to improve speed&lt;/h2&gt;
-
-&lt;h3 id=&quot;leverage-cloudflare-for-its-ssl-and-cdn-service&quot;&gt;Leverage &lt;a href=&quot;https://cloudflare.com&quot;&gt;Cloudflare&lt;/a&gt; for its SSL and CDN service&lt;/h3&gt;
-&lt;p&gt;Cloudflare CDN ensures that my site is highly available and fast. Its SSL service also ensures your connection to my site is secure.&lt;/p&gt;
-
-&lt;h3 id=&quot;load-scripts-asynchronously&quot;&gt;Load scripts asynchronously&lt;/h3&gt;
-&lt;p&gt;Since scripts by default will block the rendering of the page, I use &lt;code class=&quot;highlighter-rouge&quot;&gt;async&lt;/code&gt; attribute to have them loaded asynchronously.&lt;/p&gt;
-
-&lt;h3 id=&quot;less-use-of-style-and-scripts&quot;&gt;Less use of style and scripts&lt;/h3&gt;
-&lt;p&gt;The more scripts and styles a page has, the slower it becomes. I try not to overload the site with these things.&lt;/p&gt;
-
-&lt;p&gt;I also include CSS and javascripts directly on the page if they are small to reduce HTTP calls to fetch them.&lt;/p&gt;
-
-&lt;h3 id=&quot;lazyload-images-and-webp-format&quot;&gt;Lazyload images and webp format&lt;/h3&gt;
-&lt;p&gt;I optimize the images by converting them to &lt;a href=&quot;https://developers.google.com/speed/webp/&quot;&gt;webp format&lt;/a&gt; and using &lt;a href=&quot;https://github.com/aFarkas/lazysizes&quot;&gt;lazyloading&lt;/a&gt;  so they take less time to load and render.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;To be clear, I do not think having a high score means the website is awesome. It also has to do with other factors like quality of content. That said, user experience is very important and we should not make the users wait to view our content.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Introduction I have been testing how responsive my blog is and PageSpeed Insights give me a pretty good idea of the result. Certainly there are always improvements to be made but for now I am quite glad that the site is snappy.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/pagespeed-featured.png" /></entry></feed>
+&lt;p&gt;I think IFTTT is a very powerful service that is useful to almost everyone. From various existing integrations to new ones that you can build, I am sure you will benefit from the service. Give it a try!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I have been using IFTTT to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/ifttt-featured.png" /></entry></feed>
