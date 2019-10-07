@@ -232,6 +232,14 @@ workbox.precaching.precacheAndRoute([
     "revision": "a3442a8d8657a936f2ee2a4c59d6573d"
   },
   {
+    "url": "assets/img/the-month-october.webp",
+    "revision": "635047d5c73f896a5089c37a727964cb"
+  },
+  {
+    "url": "assets/img/the-month-september.webp",
+    "revision": "14009dd367de026fe0659b4da19db659"
+  },
+  {
     "url": "assets/img/tinyalias-analytics.webp",
     "revision": "a868ece8de2192b99641132ae283f569"
   },
@@ -421,11 +429,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/09/01/what-im-up-to-in-august-2019/index.html",
-    "revision": "ff20ffa772cdecdf017b15b4ef0b760b"
+    "revision": "145709a9260d03105ece0b6691fddec4"
+  },
+  {
+    "url": "blog/2019/10/07/what-im-up-to-in-september-2019/index.html",
+    "revision": "576381b2e4dfe5c0be18adc278863bae"
   },
   {
     "url": "categories/index.html",
-    "revision": "57b0d97ed5883940af84ed5c93952def"
+    "revision": "d9ef71a0ca283e8a3b1c2bcdb429a4a4"
   },
   {
     "url": "default/index.html",
@@ -449,7 +461,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "e11d6495faf878d6f655473ddaead72d"
+    "revision": "5369e689b9c25df212bd9aa3af5d4690"
   },
   {
     "url": "manifest.json",
@@ -457,15 +469,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "a881893b54fd0115fac61eb9988f3553"
+    "revision": "c9536d2ee666aa435927da9fc6b823d0"
   },
   {
     "url": "page/3/index.html",
-    "revision": "74e0d8d52150cf82615e61d76fa2e73e"
+    "revision": "3f98434982b0609b4c2fc3e48e4bfea1"
+  },
+  {
+    "url": "page/4/index.html",
+    "revision": "49e6228aff2f5af1262e41ef14c16240"
   },
   {
     "url": "posts/index.html",
-    "revision": "04a19757322fc450f6f87f5ed3df8b6c"
+    "revision": "1385177a50b7a860ac3f58aa0ffa682d"
   },
   {
     "url": "redirects.json",
@@ -477,7 +493,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "af38aa56bed585bbe92d360f9cd0e04b"
+    "revision": "970568e6e48f83842536ac28bec3f986"
   },
   {
     "url": "vi/index.html",

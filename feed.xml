@@ -1,4 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-09-08T06:29:10+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">What I’m up to in August 2019</title><link href="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/" rel="alternate" type="text/html" title="What I'm up to in August 2019" /><published>2019-09-01T00:00:00+00:00</published><updated>2019-09-01T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/">&lt;picture&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-10-07T20:20:02+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">What I’m up to in September 2019</title><link href="https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019/" rel="alternate" type="text/html" title="What I'm up to in September 2019" /><published>2019-10-07T00:00:00+00:00</published><updated>2019-10-07T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019/">&lt;p&gt;Vy finally came back after doing internship in Hanoi. It has a brief yet long 3 months for us. We also moved in the new apartment and although it took a while, we reached to a point where everything was set up. We bought a new dining table, 2 chairs, a new bed and some other kitchen items. We did a lot of things together for the first time too like baking. Vy and I managed to successfully bake a coffee cake. We also decided to eat at home more and I started cooking a bit.&lt;/p&gt;
+
+&lt;p&gt;We spent quite a bit of money during this month as the cost of moving and buying things for the new place. As a result, I skipped one cycle of investing. Hopefully this will resume this coming month of October.&lt;/p&gt;
+
+&lt;p&gt;I did not run so much in September and my legs are getting itchy. Hopefully I’ll run again soon in the new area.&lt;/p&gt;
+
+&lt;p&gt;This upcoming month of October is the &lt;a href=&quot;https://www.dhs.gov/national-cyber-security-awareness-month&quot;&gt;Cybersecurity Awareness Month&lt;/a&gt;, please spend sometime going over your online presence, updating your passwords. That’s all folks.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">Vy finally came back after doing internship in Hanoi. It has a brief yet long 3 months for us. We also moved in the new apartment and although it took a while, we reached to a point where everything was set up. We bought a new dining table, 2 chairs, a new bed and some other kitchen items. We did a lot of things together for the first time too like baking. Vy and I managed to successfully bake a coffee cake. We also decided to eat at home more and I started cooking a bit. We spent quite a bit of money during this month as the cost of moving and buying things for the new place. As a result, I skipped one cycle of investing. Hopefully this will resume this coming month of October. I did not run so much in September and my legs are getting itchy. Hopefully I’ll run again soon in the new area. This upcoming month of October is the Cybersecurity Awareness Month, please spend sometime going over your online presence, updating your passwords. That’s all folks.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/the-month-september.jpg" /></entry><entry><title type="html">What I’m up to in August 2019</title><link href="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/" rel="alternate" type="text/html" title="What I'm up to in August 2019" /><published>2019-09-01T00:00:00+00:00</published><updated>2019-09-01T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/">&lt;picture&gt;
     &lt;source srcset=&quot;https://jasonthai.me/assets/img/month-of-august.webp&quot; type=&quot;image/webp&quot; /&gt;
     &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/month-of-august.jpg&quot; alt=&quot;August&quot; /&gt;
 &lt;/picture&gt;
@@ -962,53 +968,4 @@ First let’s examine how it looks on web vs mobile:&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Using @media is a simple way to apply specific styles to different media/screens. I believe there are other ways to do it too such as grid or flex view. I am going to take a look at those a different time.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">This note goes over how I render the mobile and web view of my site differently to optimize user experience on different screen sizes with the use of @media queries.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/responsive-media-queries.png" /></entry><entry><title type="html">Customize Part of Your Life with IFTTT</title><link href="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/" rel="alternate" type="text/html" title="Customize Part of Your Life with IFTTT" /><published>2019-07-26T00:00:00+00:00</published><updated>2019-07-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/26/customize-part-of-your-life-with-ifttt/">&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/ifttt-featured.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/ifttt-featured.png&quot; alt=&quot;IFTTT feature&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;p&gt;I have been using &lt;a href=&quot;https://ifttt.com&quot;&gt;IFTTT&lt;/a&gt; to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.
-&lt;!--more--&gt;&lt;/p&gt;
-&lt;h2 id=&quot;what-is-ifttt&quot;&gt;What is IFTTT?&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://help.ifttt.com/hc/en-us/articles/115010325748-What-is-IFTTT-&quot;&gt;From IFTTT&lt;/a&gt;:&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;IFTTT is the free way to do more with hundreds of the apps and devices you love, including Twitter, Dropbox, Evernote, Nest, Fitbit, Amazon Alexa, and Google Assistant.&lt;/p&gt;
-
-  &lt;p&gt;On IFTTT, we call those services. To see all of the services on IFTTT, check out our services list.
-We bring services together into Applets. Applets are specific things that can happen when you connect services — things your apps can’t do on their own.&lt;/p&gt;
-
-  &lt;p&gt;For example, you could use an Applet to sync Amazon Alexa to-dos with your Google Calendar. Or one that lets you create events in your iPhone Calendar, via Google Assistant.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Essentially you can connect service A and service B to produce some events or activities C configured in an applet.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-does-ifttt-work&quot;&gt;How does IFTTT work?&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://help.ifttt.com/hc/en-us/articles/115010158167-How-does-IFTTT-work-&quot;&gt;From IFTTT&lt;/a&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;IFTTT helps you connect all of your different apps and devices. When you sign up for a free account, you can turn on Applets that help your apps and devices work together to do specific things they couldn’t do otherwise. For example, you can back up your Instagram photos to Dropbox, have your lights turn on when you enter your home, or automatically remind a Slack channel about a meeting. There are millions of Applets to explore.&lt;/p&gt;
-
-  &lt;p&gt;Here’s how it works:&lt;/p&gt;
-
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href=&quot;https://ifttt.com/join&quot;&gt;Create a free account.&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;Browse the IFTTT website or app to find an Applet that interests you.&lt;/li&gt;
-    &lt;li&gt;Click into the Applet and turn it on.&lt;/li&gt;
-    &lt;li&gt;Connect the services that are involved in the Applet — this is only so we can use them to run Applets on your behalf. IFTTT provides a layer between different services to only allow them to do what you specifically tell them to do.&lt;/li&gt;
-    &lt;li&gt;Find more Applets, and repeat!&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I usually download the mobile app to set up and configure the applets. They are available on both &lt;a href=&quot;https://play.google.com/store/apps/details?id=com.ifttt.ifttt&amp;amp;hl=en_US&quot;&gt;Android&lt;/a&gt; and &lt;a href=&quot;https://apps.apple.com/us/app/ifttt/id660944635&quot;&gt;iOS&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;some-applets-i-use&quot;&gt;Some Applets I use&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/YY9Mqgw5-get-the-weather-forecast-every-day-at-7-00-am?term=weather%2520underground%25208%2520AM&quot;&gt;Get weather forecast at 7 AM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/ULC789F5-get-rain-alert?term=get%2520caltrain%2520update&quot;&gt;Get rain alert&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/PRM3EF6b-get-mobile-notifications-for-new-items-in-an-rss-feed-you-choose?term=rss%252520feed&quot;&gt;Receive new AWS announcements through RSS feed&lt;/a&gt; - &lt;a href=&quot;http://aws.amazon.com/new/feed/&quot;&gt;AWS news feed&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ifttt.com/applets/375373p-save-a-photo-when-detect-moviment&quot;&gt;Capture Ring security camera photo if motion is detected&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Those are just a few that I am using. There are definitely a lot of useful integrations available on IFTTT. I highly recommend you check it out. You can also build your own integration and customize them to fit with your activities.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;I think IFTTT is a very powerful service that is useful to almost everyone. From various existing integrations to new ones that you can build, I am sure you will benefit from the service. Give it a try!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I have been using IFTTT to automate a part of my life and I figure it is useful not just to me but to others as well. This post lists some of the useful applets I use to improve my day to day activities.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/ifttt-featured.png" /></entry></feed>
+&lt;p&gt;Using @media is a simple way to apply specific styles to different media/screens. I believe there are other ways to do it too such as grid or flex view. I am going to take a look at those a different time.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">This note goes over how I render the mobile and web view of my site differently to optimize user experience on different screen sizes with the use of @media queries.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/responsive-media-queries.png" /></entry></feed>
