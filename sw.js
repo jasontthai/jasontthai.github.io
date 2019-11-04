@@ -128,6 +128,18 @@ workbox.precaching.precacheAndRoute([
     "revision": "7f1431b91f2e0338c6a480bcb5f27486"
   },
   {
+    "url": "assets/img/nextcloud-setup.webp",
+    "revision": "240c2367a15bb69f0884fe68955699f7"
+  },
+  {
+    "url": "assets/img/nextcloud.webp",
+    "revision": "7313bfafcc5271c6dc535743d84c61ca"
+  },
+  {
+    "url": "assets/img/NextcloudLogo.webp",
+    "revision": "d598fae1834f90569f9ce1309ae492e5"
+  },
+  {
     "url": "assets/img/openvpn-pihole.webp",
     "revision": "33720589b83b55186336012f43b99095"
   },
@@ -433,11 +445,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/10/07/what-im-up-to-in-september-2019/index.html",
-    "revision": "576381b2e4dfe5c0be18adc278863bae"
+    "revision": "5bd5f06c9a2d6d38e069258f4e1a813d"
+  },
+  {
+    "url": "blog/2019/11/03/deploy-nextcloud-with-docker-compose/index.html",
+    "revision": "9ebaa4df9523893e125f0e1bbbba6350"
   },
   {
     "url": "categories/index.html",
-    "revision": "07bd765d2e76d01f558f13c02fbf6d52"
+    "revision": "c061e250b97c55f0ee10ef6b01cee826"
   },
   {
     "url": "default/index.html",
@@ -461,7 +477,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "84f560fc25544cb9e0dee0345b53786b"
+    "revision": "1421f9ef792b58d50e98d799b9ba4db3"
   },
   {
     "url": "manifest.json",
@@ -469,19 +485,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "26678c760c1251c20f86c034e9777c6d"
+    "revision": "f64eb5580332dd17591045f7b8877274"
   },
   {
     "url": "page/3/index.html",
-    "revision": "c1d1b3a8ddc94547e0d9751b830e37f9"
+    "revision": "510a60bb4faa0a51d7075c79ce858645"
   },
   {
     "url": "page/4/index.html",
-    "revision": "2980d31653863258ad8f344f9b0a3efe"
+    "revision": "1da3b5210470555813d6bb8095f46424"
   },
   {
     "url": "posts/index.html",
-    "revision": "a97c29da20d1746905a7d7efac8542de"
+    "revision": "5be9ec1e90891d0cab173914085ce9e9"
   },
   {
     "url": "redirects.json",
@@ -493,7 +509,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "d9e51761a468d23366b438c7570cd68c"
+    "revision": "6fd906afd3ac4028b290fe08fcfe19dc"
   },
   {
     "url": "vi/index.html",

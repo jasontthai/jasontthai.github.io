@@ -1,4 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-10-16T17:49:41+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">What I’m up to in September 2019</title><link href="https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019/" rel="alternate" type="text/html" title="What I'm up to in September 2019" /><published>2019-10-07T00:00:00+00:00</published><updated>2019-10-07T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019/">&lt;p&gt;Vy finally came back after doing internship in Hanoi. It has a brief yet long 3 months for us. We also moved in the new apartment and although it took a while, we reached to a point where everything was set up. We bought a new dining table, 2 chairs, a new bed and some other kitchen items. We did a lot of things together for the first time too like baking. Vy and I managed to successfully bake a coffee cake. We also decided to eat at home more and I started cooking a bit.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-11-04T00:31:06+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Deploy Nextcloud With Docker Compose in Ubuntu 18.04</title><link href="https://jasonthai.me/blog/2019/11/03/deploy-nextcloud-with-docker-compose/" rel="alternate" type="text/html" title="Deploy Nextcloud With Docker Compose in Ubuntu 18.04" /><published>2019-11-03T00:00:00+00:00</published><updated>2019-11-03T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/11/03/deploy-nextcloud-with-docker-compose</id><content type="html" xml:base="https://jasonthai.me/blog/2019/11/03/deploy-nextcloud-with-docker-compose/">&lt;p&gt;In one of the previous posts, I mentioned using &lt;a href=&quot;https://nextcloud.com/&quot;&gt;Nextcloud&lt;/a&gt; as a self-hosted cloud platform. This post goes into details how I set up my instance.&lt;/p&gt;
+
+&lt;h2 id=&quot;install-docker-and-docker-compose&quot;&gt;Install Docker and Docker-Compose&lt;/h2&gt;
+&lt;p&gt;To install docker, run:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To install docker-compose, run:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;docker-composeyml&quot;&gt;docker-compose.yml&lt;/h2&gt;
+&lt;p&gt;Create this &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; with following contents:&lt;/p&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mariadb&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;--transaction-isolation=READ-COMMITTED --binlog-format=ROW&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/opt/nextcloud-db:/var/lib/mysql&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_ROOT_PASSWORD=ENTER MYSQL PASSWORD&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_PASSWORD=ENTER MYSQL PASSWORD&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_DATABASE=nextcloud&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_USER=nextcloud&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;redis&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis:alpine&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nextcloud:apache&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;8080:80&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;REDIS_HOST=redis&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/opt/nextcloud-data:/var/www/html&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;cron&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nextcloud:apache&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/opt/nextcloud-data:/var/www/html&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;entrypoint&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/cron.sh&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose -f docker-compose.yml up -d&lt;/code&gt; to start all necessary containers.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up&quot;&gt;Setting Up&lt;/h2&gt;
+
+&lt;p&gt;Browse to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt; and you’ll see a set up page like this:&lt;/p&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/nextcloud-setup.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/nextcloud-setup.png&quot; alt=&quot;Setup&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;p&gt;Fill in the fills as the following:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Database user: nextcloud&lt;/li&gt;
+  &lt;li&gt;Database password: Enter your password in &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; file&lt;/li&gt;
+  &lt;li&gt;Database name: nextcloud&lt;/li&gt;
+  &lt;li&gt;Database host: db&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After setting up nextcloud, you will see something like:&lt;/p&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/nextcloud.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/nextcloud.jpeg&quot; alt=&quot;Nextcloud&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;h2 id=&quot;modify-upload-max-filesize&quot;&gt;Modify Upload Max Filesize&lt;/h2&gt;
+&lt;p&gt;By default, Nextcloud only allows uploading file up to 2MB which is not very useful. We can modify the max filesize by adding &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/nextcloud-data/.htaccess&lt;/code&gt; with following:&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;&lt;span class=&quot;n&quot;&gt;IfModule&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mod_php7&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&amp;gt;
+...
+&lt;span class=&quot;n&quot;&gt;php_value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;upload_max_filesize&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;php_value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_max_size&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;
+&amp;lt;/&lt;span class=&quot;n&quot;&gt;IfModule&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">In one of the previous posts, I mentioned using Nextcloud as a self-hosted cloud platform. This post goes into details how I set up my instance. Install Docker and Docker-Compose To install docker, run: curl -fsSL https://get.docker.com -o get-docker.sh sh get-docker.sh To install docker-compose, run: sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose sudo chmod +x /usr/local/bin/docker-compose docker-compose.yml Create this docker-compose.yml with following contents: version: '3' services: db: image: mariadb command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW restart: always volumes: - /opt/nextcloud-db:/var/lib/mysql environment: - MYSQL_ROOT_PASSWORD=ENTER MYSQL PASSWORD - MYSQL_PASSWORD=ENTER MYSQL PASSWORD - MYSQL_DATABASE=nextcloud - MYSQL_USER=nextcloud redis: image: redis:alpine restart: always app: image: nextcloud:apache ports: - 8080:80 environment: - REDIS_HOST=redis depends_on: - db - redis volumes: - /opt/nextcloud-data:/var/www/html restart: always cron: image: nextcloud:apache restart: always volumes: - /opt/nextcloud-data:/var/www/html entrypoint: /cron.sh depends_on: - db - redis Run docker-compose -f docker-compose.yml up -d to start all necessary containers. Setting Up Browse to http://localhost:8080 and you’ll see a set up page like this: Fill in the fills as the following: Database user: nextcloud Database password: Enter your password in docker-compose.yml file Database name: nextcloud Database host: db After setting up nextcloud, you will see something like: Modify Upload Max Filesize By default, Nextcloud only allows uploading file up to 2MB which is not very useful. We can modify the max filesize by adding /opt/nextcloud-data/.htaccess with following: &amp;lt;IfModule mod_php7.c&amp;gt; ... php_value upload_max_filesize 16G php_value post_max_size 16G &amp;lt;/IfModule&amp;gt;</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/NextcloudLogo.png" /></entry><entry><title type="html">What I’m up to in September 2019</title><link href="https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019/" rel="alternate" type="text/html" title="What I'm up to in September 2019" /><published>2019-10-07T00:00:00+00:00</published><updated>2019-10-07T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/10/07/what-im-up-to-in-september-2019/">&lt;p&gt;Vy finally came back after doing internship in Hanoi. It has a brief yet long 3 months for us. We also moved in the new apartment and although it took a while, we reached to a point where everything was set up. We bought a new dining table, 2 chairs, a new bed and some other kitchen items. We did a lot of things together for the first time too like baking. Vy and I managed to successfully bake a coffee cake. We also decided to eat at home more and I started cooking a bit.&lt;/p&gt;
 
 &lt;p&gt;We spent quite a bit of money during this month as the cost of moving and buying things for the new place. As a result, I skipped one cycle of investing. Hopefully this will resume this coming month of October.&lt;/p&gt;
 
@@ -926,46 +1013,4 @@ As soon as I started running, the adrenaline kicked in and I felt I could run fa
 
 &lt;p&gt;From not being able to run much from February this year, it has been a good journey so far. Ever since I found out about &lt;a href=&quot;https://www.strava.com/athletes/39726096&quot;&gt;Strava&lt;/a&gt;, it has been the source of motivation to get me running. There are a lot of runners out there and seeing how they push themselves everyday to run harder and faster is truly wonderful. I am glad to join the running club and hoping to continue for a long time. Also thank you to my friend Tri Hoang for pushing me, it is good to have a running buddy.&lt;/p&gt;
 
-&lt;p&gt;If you want to get started in running, I suggest checking out &lt;a href=&quot;https://www.c25k.com/&quot;&gt;Couch 2 5K Program&lt;/a&gt;. This will help guide you along the way from not running to your first 5K. Get out there and start running!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">I finally ran my first half marathon today 07-28-19 in The 42nd Biofreeze SF Marathon. This has been one of my goals of the year. Suffice to say it has been one of the best day of my life so far. Here is the result of my race: Race Report: The race started at 6:46 AM at Mission Street and The Embarcadero San Francisco As soon as I started running, the adrenaline kicked in and I felt I could run faster than normal. However I still tried to keep a pace around 9 minutes / mile. There were around 6 water stops along the race and I stopped by all of them and refueled with eletrolyte water. The first uphill around half of the race was longer and higher than expected so I was conservative in my pace and slowed down to about 13:30 minutes / mile. Following that was a long downhill which helped me recover my pace, however that had a bad affect on my ankle. Later on, I had to stop by the medic to apply some pain relief gel. This is a surprise to me as the water does provide instant energy and I felt I could run fast again right after drinking. Also I did not have to drink as much as usual. My legs start hurting quite a lot at around 10 mile in, which meant stopping by the medic again for the gel. They seemed to have instant effect but wore off quickly. I think I could have pushed myself harder in the last 2 miles of the race. In stead I kept conserving energy and when I finished, I didn’t feel as tired as my practice run that I did a few weeks ago. Some other stats about my training journey: Training duration: 8 weeks Number of running hours: 24 Number of miles: 145 From not being able to run much from February this year, it has been a good journey so far. Ever since I found out about Strava, it has been the source of motivation to get me running. There are a lot of runners out there and seeing how they push themselves everyday to run harder and faster is truly wonderful. I am glad to join the running club and hoping to continue for a long time. Also thank you to my friend Tri Hoang for pushing me, it is good to have a running buddy. If you want to get started in running, I suggest checking out Couch 2 5K Program. This will help guide you along the way from not running to your first 5K. Get out there and start running!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/half-marathon-cover.png" /></entry><entry><title type="html">Apply Different Styles to Mobile vs Web View Using @media</title><link href="https://jasonthai.me/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media/" rel="alternate" type="text/html" title="Apply Different Styles to Mobile vs Web View Using @media" /><published>2019-07-27T00:00:00+00:00</published><updated>2019-07-27T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media</id><content type="html" xml:base="https://jasonthai.me/blog/2019/07/27/apply-different-styles-to-mobile-vs-web-view-using-media/">&lt;p&gt;This note goes over how I render the mobile and web view of my site differently to optimize user experience on different screen sizes with the use of &lt;code class=&quot;highlighter-rouge&quot;&gt;@media&lt;/code&gt;  queries.
-&lt;!--more--&gt;
-First let’s examine how it looks on web vs mobile:&lt;/p&gt;
-
-&lt;h2 id=&quot;web-view&quot;&gt;Web View:&lt;/h2&gt;
-&lt;p&gt;This view is designed to be viewed on devices with larger screen like laptops or desktops and it includes more information such as the cover image and description of the post.&lt;/p&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/jasonthai-web-view.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/jasonthai-web-view.png&quot; alt=&quot;&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;h2 id=&quot;mobile-view&quot;&gt;Mobile View:&lt;/h2&gt;
-&lt;p&gt;The view on mobile is optimized a lot more for information browsing. The image and description are eliminated in favor of more number of articles in the view. This makes viewing on mobile devices faster too since the browser does not have to load any images.&lt;/p&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/jasonthai-mobile-view.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/jasonthai-mobile-view.png&quot; alt=&quot;&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;h2 id=&quot;how-to-using-media&quot;&gt;How to: using @media&lt;/h2&gt;
-&lt;p&gt;Using &lt;code class=&quot;highlighter-rouge&quot;&gt;@media&lt;/code&gt; query, we can define specific css behavior depending on certain width or height of the screen. You can learn more about it &lt;a href=&quot;https://www.w3schools.com/cssref/css3_pr_mediaquery.asp&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;For example, the following query will apply to device with screen width up to 480px&lt;/p&gt;
-&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max-width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;480px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;define&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;css&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;here&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;For my specific site, this is what I define:&lt;/p&gt;
-&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;screen&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max-width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;600px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nc&quot;&gt;.bg-img&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;err&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;hiding&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;cover&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;image&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;nc&quot;&gt;.excerpt&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;err&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;hiding&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;description&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Using @media is a simple way to apply specific styles to different media/screens. I believe there are other ways to do it too such as grid or flex view. I am going to take a look at those a different time.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">This note goes over how I render the mobile and web view of my site differently to optimize user experience on different screen sizes with the use of @media queries.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/responsive-media-queries.png" /></entry></feed>
+&lt;p&gt;If you want to get started in running, I suggest checking out &lt;a href=&quot;https://www.c25k.com/&quot;&gt;Couch 2 5K Program&lt;/a&gt;. This will help guide you along the way from not running to your first 5K. Get out there and start running!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">I finally ran my first half marathon today 07-28-19 in The 42nd Biofreeze SF Marathon. This has been one of my goals of the year. Suffice to say it has been one of the best day of my life so far. Here is the result of my race: Race Report: The race started at 6:46 AM at Mission Street and The Embarcadero San Francisco As soon as I started running, the adrenaline kicked in and I felt I could run faster than normal. However I still tried to keep a pace around 9 minutes / mile. There were around 6 water stops along the race and I stopped by all of them and refueled with eletrolyte water. The first uphill around half of the race was longer and higher than expected so I was conservative in my pace and slowed down to about 13:30 minutes / mile. Following that was a long downhill which helped me recover my pace, however that had a bad affect on my ankle. Later on, I had to stop by the medic to apply some pain relief gel. This is a surprise to me as the water does provide instant energy and I felt I could run fast again right after drinking. Also I did not have to drink as much as usual. My legs start hurting quite a lot at around 10 mile in, which meant stopping by the medic again for the gel. They seemed to have instant effect but wore off quickly. I think I could have pushed myself harder in the last 2 miles of the race. In stead I kept conserving energy and when I finished, I didn’t feel as tired as my practice run that I did a few weeks ago. Some other stats about my training journey: Training duration: 8 weeks Number of running hours: 24 Number of miles: 145 From not being able to run much from February this year, it has been a good journey so far. Ever since I found out about Strava, it has been the source of motivation to get me running. There are a lot of runners out there and seeing how they push themselves everyday to run harder and faster is truly wonderful. I am glad to join the running club and hoping to continue for a long time. Also thank you to my friend Tri Hoang for pushing me, it is good to have a running buddy. If you want to get started in running, I suggest checking out Couch 2 5K Program. This will help guide you along the way from not running to your first 5K. Get out there and start running!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/half-marathon-cover.png" /></entry></feed>
