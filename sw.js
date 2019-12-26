@@ -72,6 +72,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "4efd97ebc1d2dd027859682d794f2e3d"
   },
   {
+    "url": "assets/img/cloud-server.webp",
+    "revision": "40e2848063865a05449e4dea3e0c1513"
+  },
+  {
     "url": "assets/img/commento-logo.webp",
     "revision": "0887ae3f52c161c74d8ca74dbb342ecb"
   },
@@ -449,11 +453,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/11/03/deploy-nextcloud-with-docker-compose/index.html",
-    "revision": "103123ea797280e419b09f094a61576f"
+    "revision": "348469d517d63af39054ec98eb9e8a3c"
+  },
+  {
+    "url": "blog/2019/12/26/december-list-of-selfhosted-apps/index.html",
+    "revision": "7d3833df89c8d8cd4c12529f713c4d2f"
   },
   {
     "url": "categories/index.html",
-    "revision": "473edf1fb35016df3c1def66ffab2426"
+    "revision": "a42f5c73953179621aed7860aed41cce"
   },
   {
     "url": "default/index.html",
@@ -477,7 +485,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "e2438c88c0de2c04ada2493d865ba986"
+    "revision": "8139ee009b0369af9749d3be25ad3bad"
   },
   {
     "url": "manifest.json",
@@ -485,19 +493,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "37d1e3687534c016bc92688807785cb7"
+    "revision": "03d1238c8a1123ab53f3e072ec60b537"
   },
   {
     "url": "page/3/index.html",
-    "revision": "17704b584021e0e97e946e3feab739af"
+    "revision": "ccbd5a4e37f0a72f98d9259f4467f473"
   },
   {
     "url": "page/4/index.html",
-    "revision": "f1fc1439a14d17d408f259db2f715dc2"
+    "revision": "502c7301ccaef2ab6bd468aa33d569e2"
   },
   {
     "url": "posts/index.html",
-    "revision": "b4fc6c1b368ccc42ca94404b91bd1333"
+    "revision": "412e6b40b029ba6b1fe6c26b23acc42f"
   },
   {
     "url": "redirects.json",
@@ -509,7 +517,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "ef8b2a99439c7df942341a47e6152913"
+    "revision": "94fe6538787a4e66584ce53439915801"
   },
   {
     "url": "vi/index.html",
