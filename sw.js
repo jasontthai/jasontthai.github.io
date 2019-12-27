@@ -536,7 +536,7 @@ workbox.precaching.precacheAndRoute([
 // Caching Images
 workbox.routing.registerRoute(
   /\.(?:png|gif|jpg|jpeg|webp|svg)$/,
-  new workbox.strategies.NetworkFirst({
+  new workbox.strategies.CacheFirst({
     cacheName: 'images',
     plugins: [
       new workbox.expiration.Plugin({
