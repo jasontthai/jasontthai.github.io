@@ -1,4 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2019-12-30T19:20:28+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">December List of Selfhosted Apps</title><link href="https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps/" rel="alternate" type="text/html" title="December List of Selfhosted Apps" /><published>2019-12-26T00:00:00+00:00</published><updated>2019-12-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps</id><content type="html" xml:base="https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps/">&lt;p&gt;This is probably the last post of December 2019. I wish everyone has had a good year so far and an exciting 2020.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-01-03T19:04:25+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Free Public xBrowserSync Service</title><link href="https://jasonthai.me/blog/2020/01/03/free-public-xbrowsersync-service/" rel="alternate" type="text/html" title="Free Public xBrowserSync Service" /><published>2020-01-03T00:00:00+00:00</published><updated>2020-01-03T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/01/03/free-public-xbrowsersync-service</id><content type="html" xml:base="https://jasonthai.me/blog/2020/01/03/free-public-xbrowsersync-service/">&lt;p&gt;TL;DR: My xbrowsersync service API can be accessed through: &lt;a href=&quot;https://xbrowsersync.jasonthai.me&quot;&gt;https://xbrowsersync.jasonthai.me&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Before using xBrowserSync, I do not have a good way of consolidating all my bookmarks. xBrowserSync helps me sync all my bookmarks across different browsers like Chrome, Firefox, Brave, etc.&lt;/p&gt;
+
+&lt;p&gt;After you have downloaded the &lt;a href=&quot;https://www.xbrowsersync.org/#download&quot;&gt;extension for your browser&lt;/a&gt;, you can either use the default provided xbrowsersync service or you can update to my service in the setting:&lt;/p&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/xbrowsersync-setting.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/xbrowsersync-setting.jpeg&quot; alt=&quot;xbrowsersync setting&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;p&gt;From &lt;a href=&quot;https://xbrowsersync.org&quot;&gt;https://xbrowsersync.org&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;xBrowserSync is a free and open-source alternative to browser syncing tools offered by companies like Google, Firefox, Opera and others. The project was born out of a concern for the over-reliance on services provided by big tech, who collect as much personal data as they can and have demonstrated that they do not respect their user’s privacy . Now, with the proliferation of open-source code and projects it’s easier than ever to create tools and services that allow users to take back control of their data!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;xBrowserSync respects your privacy and gives you complete anonymity. No sign up is required and no personal data is ever collected. To start syncing simply download xBrowserSync for your desktop browser or mobile platform, enter an encryption password and click Create New Sync! You’ll receive an anonymous sync ID which identifies your data and can be used to access your data on other browsers and devices.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;xBrowserSync does not only sync but also enhances your productivity by enriching your native browser bookmarks with the addition of descriptions and tags, and an intuitive search interface enables you to find, modify and share bookmarks quickly and easily. xBrowserSync even adds descriptions and tags to new bookmarks for you automatically. And don’t ever worry about losing your data thanks to the included back up and restore functionality.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+
+  &lt;p&gt;The xBrowserSync desktop browser web extension syncs your browser data between desktop browsers. It works with the browser’s native bookmarking features so you can keep using the native tools whilst always staying in sync. If you like to organise your bookmarks into folders don’t worry, xBrowserSync respects your bookmark hierarchy and syncs it across your browsers.&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">TL;DR: My xbrowsersync service API can be accessed through: https://xbrowsersync.jasonthai.me Before using xBrowserSync, I do not have a good way of consolidating all my bookmarks. xBrowserSync helps me sync all my bookmarks across different browsers like Chrome, Firefox, Brave, etc. After you have downloaded the extension for your browser, you can either use the default provided xbrowsersync service or you can update to my service in the setting: From https://xbrowsersync.org: xBrowserSync is a free and open-source alternative to browser syncing tools offered by companies like Google, Firefox, Opera and others. The project was born out of a concern for the over-reliance on services provided by big tech, who collect as much personal data as they can and have demonstrated that they do not respect their user’s privacy . Now, with the proliferation of open-source code and projects it’s easier than ever to create tools and services that allow users to take back control of their data! xBrowserSync respects your privacy and gives you complete anonymity. No sign up is required and no personal data is ever collected. To start syncing simply download xBrowserSync for your desktop browser or mobile platform, enter an encryption password and click Create New Sync! You’ll receive an anonymous sync ID which identifies your data and can be used to access your data on other browsers and devices. xBrowserSync does not only sync but also enhances your productivity by enriching your native browser bookmarks with the addition of descriptions and tags, and an intuitive search interface enables you to find, modify and share bookmarks quickly and easily. xBrowserSync even adds descriptions and tags to new bookmarks for you automatically. And don’t ever worry about losing your data thanks to the included back up and restore functionality. The xBrowserSync desktop browser web extension syncs your browser data between desktop browsers. It works with the browser’s native bookmarking features so you can keep using the native tools whilst always staying in sync. If you like to organise your bookmarks into folders don’t worry, xBrowserSync respects your bookmark hierarchy and syncs it across your browsers.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/xbrowsersync.png" /></entry><entry><title type="html">December List of Selfhosted Apps</title><link href="https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps/" rel="alternate" type="text/html" title="December List of Selfhosted Apps" /><published>2019-12-26T00:00:00+00:00</published><updated>2019-12-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps</id><content type="html" xml:base="https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps/">&lt;p&gt;This is probably the last post of December 2019. I wish everyone has had a good year so far and an exciting 2020.&lt;/p&gt;
 
 &lt;p&gt;I have been playing around with selfhosting some more and here is the list of apps I am currently hosting:&lt;/p&gt;
 &lt;ul&gt;
@@ -887,149 +918,4 @@ listen_addresses = 'localhost'        # what IP address(es) to listen on;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/tags#finance&quot;&gt;Checkout some of my other finance’s notes&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="finance" /><category term="en" /><summary type="html">John Norstad, a retired mathematician, had presented three proofs that prove Total Stock Market (fund) is efficient. This is interesting so this note shares with you those three proofs.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/blur-chart-data.png" /></entry><entry><title type="html">What I’m up to in July 2019</title><link href="https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019/" rel="alternate" type="text/html" title="What I'm up to in July 2019" /><published>2019-08-02T00:00:00+00:00</published><updated>2019-08-02T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/02/what-im-up-to-in-july-2019/">&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/the-month-july.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/the-month-july.jpg&quot; alt=&quot;July&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;p&gt;First post of what I am hoping will be a series. Here I will update what has been happening with me in the month.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;July has not been kind for Vy. She was sick for almost two weeks. This month was also our anniversary month. What a bummer! The good news is Vy is welcoming August with good health.&lt;/p&gt;
-
-&lt;p&gt;I finally paid off my car loan! Some more stats:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Loan date: July 2014 to July 2019&lt;/li&gt;
-  &lt;li&gt;Total amount: &lt;span style=&quot;color: green&quot;&gt;$2,000&lt;/span&gt; (down payment) + &lt;span style=&quot;color: green&quot;&gt;$28,168.33&lt;/span&gt; (0% finance) = &lt;span style=&quot;color: green&quot;&gt;$30,168.33&lt;/span&gt;&lt;/li&gt;
-  &lt;li&gt;Current value: &lt;span style=&quot;color: green&quot;&gt;$12,831.00&lt;/span&gt;&lt;/li&gt;
-  &lt;li&gt;Depreciation %: &lt;span style=&quot;color: red&quot;&gt;57.47%&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;My reading list heavily focused on personal finance this month. I got a lot of motivations to write a few of my posts based on these books. They are certainly good reads (pun-intended) so I recommend it to everyone.&lt;/p&gt;
-
-&lt;!-- Show static HTML/CSS as a placeholder in case js is not enabled - javascript include will override this if things work --&gt;
-&lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
-.gr_custom_container_1563424843 {
-/* customize your Goodreads widget container here*/
-border: 1px solid gray;
-border-radius:10px;
-padding: 10px 5px 10px 5px;
-background-color: #FFFFFF;
-color: #000000;
-width: 300px
-}
-.gr_custom_header_1563424843 {
-/* customize your Goodreads header here*/
-border-bottom: 1px solid gray;
-width: 100%;
-margin-bottom: 5px;
-text-align: center;
-font-size: 120%
-}
-.gr_custom_each_container_1563424843 {
-/* customize each individual book container here */
-width: 100%;
-clear: both;
-margin-bottom: 10px;
-overflow: auto;
-padding-bottom: 4px;
-border-bottom: 1px solid #aaa;
-}
-.gr_custom_book_container_1563424843 {
-/* customize your book covers here */
-overflow: hidden;
-height: 60px;
-float: left;
-margin-right: 4px;
-width: 39px;
-}
-.gr_custom_author_1563424843 {
-/* customize your author names here */
-font-size: 10px;
-}
-.gr_custom_tags_1563424843 {
-/* customize your tags here */
-font-size: 10px;
-color: gray;
-}
-.gr_custom_rating_1563424843 {
-/* customize your rating stars here */
-float: right;
-}
-&lt;/style&gt;
-
-&lt;div align=&quot;center&quot; id=&quot;gr_custom_widget_1563424843&quot;&gt;
-    &lt;div class=&quot;gr_custom_container_1563424843&quot;&gt;
-&lt;h2 class=&quot;gr_custom_header_1563424843&quot;&gt;
-&lt;a style=&quot;text-decoration: none;&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/list/54938708-jason-thai?shelf=july-2019&amp;amp;utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;Jason&amp;#39;s bookshelf: july-2019&lt;/a&gt;
-&lt;/h2&gt;
-&lt;div class=&quot;gr_custom_each_container_1563424843&quot;&gt;
-    &lt;div class=&quot;gr_custom_book_container_1563424843&quot;&gt;
-      &lt;a title=&quot;The Simple Path to Wealth: Your road map to financial independence and a rich, free life&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2849979605?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;&lt;img alt=&quot;The Simple Path to Wealth: Your road map to financial independence and a rich, free life&quot; border=&quot;0&quot; src=&quot;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1466299641l/30646587._SY75_.jpg&quot; /&gt;&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_rating_1563424843&quot;&gt;
-      &lt;span class=&quot; staticStars notranslate&quot; title=&quot;it was amazing&quot;&gt;&lt;img alt=&quot;it was amazing&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_title_1563424843&quot;&gt;
-      &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2849979605?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;The Simple Path to Wealth: Your road map to financial independence and a rich, free life&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_author_1563424843&quot;&gt;
-      by &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/author/show/2936728.J_L_Collins&quot;&gt;J.L. Collins&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_tags_1563424843&quot;&gt;
-      tagged:
-      july-2019
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;gr_custom_each_container_1563424843&quot;&gt;
-    &lt;div class=&quot;gr_custom_book_container_1563424843&quot;&gt;
-      &lt;a title=&quot;The Millionaire Next Door: The Surprising Secrets of America's Wealthy&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2854902772?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;&lt;img alt=&quot;The Millionaire Next Door: The Surprising Secrets of America's Wealthy&quot; border=&quot;0&quot; src=&quot;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1384821256l/18841345._SY75_.jpg&quot; /&gt;&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_rating_1563424843&quot;&gt;
-      &lt;span class=&quot; staticStars notranslate&quot; title=&quot;really liked it&quot;&gt;&lt;img alt=&quot;really liked it&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_title_1563424843&quot;&gt;
-      &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2854902772?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;The Millionaire Next Door: The Surprising Secrets of America's Wealthy&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_author_1563424843&quot;&gt;
-      by &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/author/show/659.Thomas_J_Stanley&quot;&gt;Thomas J. Stanley&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_tags_1563424843&quot;&gt;
-      tagged:
-      july-2019
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;gr_custom_each_container_1563424843&quot;&gt;
-    &lt;div class=&quot;gr_custom_book_container_1563424843&quot;&gt;
-      &lt;a title=&quot;Your Money or Your Life&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2875598945?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;&lt;img alt=&quot;Your Money or Your Life&quot; border=&quot;0&quot; src=&quot;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1547451646l/43560266._SY75_.jpg&quot; /&gt;&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_rating_1563424843&quot;&gt;
-      &lt;span class=&quot; staticStars notranslate&quot; title=&quot;it was amazing&quot;&gt;&lt;img alt=&quot;it was amazing&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_active.png&quot; /&gt;&lt;/span&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_title_1563424843&quot;&gt;
-      &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2875598945?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;Your Money or Your Life&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_author_1563424843&quot;&gt;
-      by &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/author/show/44527.Vicki_Robin&quot;&gt;Vicki Robin&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;gr_custom_tags_1563424843&quot;&gt;
-      tagged:
-      july-2019
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;br style=&quot;clear: both&quot; /&gt;
-&lt;center&gt;
-&lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/&quot;&gt;&lt;img alt=&quot;goodreads.com&quot; style=&quot;border:0&quot; src=&quot;https://www.goodreads.com/images/widget/widget_logo.gif&quot; /&gt;&lt;/a&gt;
-&lt;/center&gt;
-&lt;noscript&gt;
-Share &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/&quot;&gt;book reviews&lt;/a&gt; and ratings with Jason, and even join a &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/group&quot;&gt;book club&lt;/a&gt; on Goodreads.
-&lt;/noscript&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;script src=&quot;https://www.goodreads.com/review/custom_widget/54938708.Jason's%20bookshelf:%20july-2019?cover_position=left&amp;amp;cover_size=small&amp;amp;num_books=5&amp;amp;order=a&amp;amp;shelf=july-2019&amp;amp;show_author=1&amp;amp;show_cover=1&amp;amp;show_rating=1&amp;amp;show_review=1&amp;amp;show_tags=1&amp;amp;show_title=1&amp;amp;sort=date_added&amp;amp;widget_bg_color=FFFFFF&amp;amp;widget_bg_transparent=&amp;amp;widget_border_width=1&amp;amp;widget_id=1563424843&amp;amp;widget_text_color=000000&amp;amp;widget_title_size=medium&amp;amp;widget_width=medium&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;I also ran my first half marathon. You can view more detail about it in this &lt;a href=&quot;/blog/2019/07/28/42nd-biofreeze-sf-marathon-1st-half/&quot;&gt;post&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">First post of what I am hoping will be a series. Here I will update what has been happening with me in the month.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/the-month-july.jpg" /></entry></feed>
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/tags#finance&quot;&gt;Checkout some of my other finance’s notes&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="finance" /><category term="en" /><summary type="html">John Norstad, a retired mathematician, had presented three proofs that prove Total Stock Market (fund) is efficient. This is interesting so this note shares with you those three proofs.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/blur-chart-data.png" /></entry></feed>
