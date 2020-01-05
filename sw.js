@@ -313,7 +313,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/js/ga-lite.min.js",
-    "revision": "9dcb2c0e4c42113d6aeedecc83f1a771"
+    "revision": "51cbcd88389cf398b2f920d3d4c9ba79"
   },
   {
     "url": "assets/js/jasonthai.me-20190726T112605.json",
