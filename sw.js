@@ -529,7 +529,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "services/index.html",
-    "revision": "2791bb23e5e478aace315fdf7c578d4e"
+    "revision": "94866b693280cba9f0f6ae9281f46b14"
   },
   {
     "url": "tags/index.html",
