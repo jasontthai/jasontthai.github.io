@@ -33,23 +33,7 @@ Client name: pihole
 
 Okay, that was all I needed. We are ready to set up your OpenVPN server now
 Press any key to continue...
-</span></code></pre></div></div><h3 id="start-openvpn"> <a class="anchor" href="#start-openvpn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start OpenVPN</h3><p>I had to modify the existing OpenVPN service in <code class="highlighter-rouge">/lib/systemd/system/openvpn.service</code> with the following:</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># This service is actually a systemd target,</span>
-<span class="c"># but we are using a service since targets cannot be reloaded.</span>
-
-<span class="o">[</span>Unit]
-<span class="nv">Description</span><span class="o">=</span>OpenVPN service
-<span class="nv">After</span><span class="o">=</span>network.target
-
-<span class="o">[</span>Service]
-<span class="nv">Type</span><span class="o">=</span>oneshot
-<span class="nv">RemainAfterExit</span><span class="o">=</span><span class="nb">yes
-</span><span class="nv">ExecStart</span><span class="o">=</span>/bin/true
-<span class="nv">ExecReload</span><span class="o">=</span>/bin/true
-<span class="nv">WorkingDirectory</span><span class="o">=</span>/etc/openvpn/server
-
-<span class="o">[</span>Install]
-<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
-</code></pre></div></div><p>Also modify OpenVPN server’s configuration in <code class="highlighter-rouge">/etc/openvpn/server/server.conf</code>: remove all the existing <code class="highlighter-rouge">push "dhcp-option DNS x.x.x.x</code> and add <code class="highlighter-rouge">push "dhcp-optioni DNS 10.8.0.1"</code></p><p>Restart OpenVPN services:</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl daemon-reload
+</span></code></pre></div></div><h3 id="start-openvpn"> <a class="anchor" href="#start-openvpn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Start OpenVPN</h3><p>Modify OpenVPN server’s configuration in <code class="highlighter-rouge">/etc/openvpn/server/server.conf</code>: remove all the existing <code class="highlighter-rouge">push "dhcp-option DNS x.x.x.x</code> and add <code class="highlighter-rouge">push "dhcp-optioni DNS 10.8.0.1"</code></p><p>Restart OpenVPN services:</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl daemon-reload
 systemctl restart openvpn // Jason<span class="s1">'s notes: just restarting openvpn does not change the configuration for OpenVPN server.
 systemctl restart openvpn-server@server.service
 </span></code></pre></div></div><p>Notes: if you are behind a NAT, you will also need to do the following:</p><div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip r | <span class="nb">grep </span>default
