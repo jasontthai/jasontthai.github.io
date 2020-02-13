@@ -240,6 +240,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "40df0f31f890356b4d6b23e39e4d157d"
   },
   {
+    "url": "assets/img/scripts.webp",
+    "revision": "b3de0f727754b9edb00b47c1b3a78cb5"
+  },
+  {
     "url": "assets/img/succulent.webp",
     "revision": "53a18d3ed541a8bde79d3c868344ced8"
   },
@@ -469,11 +473,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/01/03/free-public-xbrowsersync-service/index.html",
-    "revision": "9b07bd317f03c4012f8d12f7c63630ef"
+    "revision": "16eaeff0b99dea3d498bdea11d0eb91b"
+  },
+  {
+    "url": "blog/2020/02/12/setup-shell-script-for-debian-based-servers/index.html",
+    "revision": "4342bd79449745ca483b3dab9daf23b4"
   },
   {
     "url": "categories/index.html",
-    "revision": "bbf772a4f634d81bd0c923437684bd51"
+    "revision": "0412a0294ce1afbed57001bfc4ad59e6"
   },
   {
     "url": "default/index.html",
@@ -497,7 +505,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "e8927222553a1e100fac2bccd33e788d"
+    "revision": "a8063c7333d62b0e39164c4e73088bd2"
   },
   {
     "url": "manifest.json",
@@ -505,19 +513,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "bc552dc94d8eab15525393e725382412"
+    "revision": "2aa625736c357e7443b4dfd01be7bbcd"
   },
   {
     "url": "page/3/index.html",
-    "revision": "f5ebee72ca9f7cf662b07a265203b94b"
+    "revision": "b875c4afd0d0dac5b237630a61679847"
   },
   {
     "url": "page/4/index.html",
-    "revision": "fd8463b2047567fc505091a5d9deb73d"
+    "revision": "1188528d565bc4f3a296cc82841bdcb6"
   },
   {
     "url": "posts/index.html",
-    "revision": "00e348a2be733a78de9aa68206043197"
+    "revision": "53386b20999278f1bebeb76c8147b4a3"
   },
   {
     "url": "redirects.json",
@@ -533,7 +541,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "e74521b89f5edff1f9c1373f814fb651"
+    "revision": "55c2eaead2ae40a2c759ca18cf7b8904"
   },
   {
     "url": "vi/index.html",
