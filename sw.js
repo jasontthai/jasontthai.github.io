@@ -473,15 +473,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/01/03/free-public-xbrowsersync-service/index.html",
-    "revision": "16eaeff0b99dea3d498bdea11d0eb91b"
+    "revision": "472d3d0ee81cdc1879c6277dfa0b1abf"
   },
   {
-    "url": "blog/2020/02/12/setup-shell-script-for-debian-based-servers/index.html",
-    "revision": "4342bd79449745ca483b3dab9daf23b4"
+    "url": "blog/2020/02/12/setup-shell-script-for-linux-based-servers/index.html",
+    "revision": "03faf8bafeacd87fd627790c84859dab"
   },
   {
     "url": "categories/index.html",
-    "revision": "0412a0294ce1afbed57001bfc4ad59e6"
+    "revision": "0587638d70b2d5fc64a489b3bfa8122c"
   },
   {
     "url": "default/index.html",
@@ -505,7 +505,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "a8063c7333d62b0e39164c4e73088bd2"
+    "revision": "14c1f1b90c2b53c838167c357a2ec5d5"
   },
   {
     "url": "manifest.json",
@@ -525,7 +525,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "posts/index.html",
-    "revision": "53386b20999278f1bebeb76c8147b4a3"
+    "revision": "0e8dc43784387f026b4ef6c85dd46bdd"
   },
   {
     "url": "redirects.json",
@@ -541,7 +541,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "55c2eaead2ae40a2c759ca18cf7b8904"
+    "revision": "74ef51dfcbb84d66a7283460ff99249e"
   },
   {
     "url": "vi/index.html",
