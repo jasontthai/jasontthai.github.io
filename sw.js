@@ -477,7 +477,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/02/12/setup-shell-script-for-linux-based-servers/index.html",
-    "revision": "03faf8bafeacd87fd627790c84859dab"
+    "revision": "23a1bfae3b0b993bc42e4d1a6f1599b9"
   },
   {
     "url": "categories/index.html",
