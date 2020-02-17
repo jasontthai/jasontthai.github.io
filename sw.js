@@ -469,7 +469,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/12/26/december-list-of-selfhosted-apps/index.html",
-    "revision": "74241be3d0c683a5991d31db41445fa4"
+    "revision": "6965c3f2c0472b6dcf7ec6999429f74f"
   },
   {
     "url": "blog/2020/01/03/free-public-xbrowsersync-service/index.html",
