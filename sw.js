@@ -244,6 +244,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "b3de0f727754b9edb00b47c1b3a78cb5"
   },
   {
+    "url": "assets/img/ssh.webp",
+    "revision": "d90cccfc987fdac96bcd2c7f22cb27d6"
+  },
+  {
     "url": "assets/img/succulent.webp",
     "revision": "53a18d3ed541a8bde79d3c868344ced8"
   },
@@ -481,7 +485,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/02/19/better-ssh-keys-management-with-authorizedkeyscommand/index.html",
-    "revision": "d0ad0412a7e252c251e6467eaf81559b"
+    "revision": "511b3aedce9cbddbbd59fdcfe646441e"
   },
   {
     "url": "categories/index.html",
@@ -509,7 +513,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "881dd3ca9d6941704d5a0bde44f8a1b0"
+    "revision": "e4967e5b8262f10c293aeb2ac13d15f8"
   },
   {
     "url": "manifest.json",
