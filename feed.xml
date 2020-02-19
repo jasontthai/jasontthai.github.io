@@ -1,4 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-02-18T01:04:02+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Setup Shell Script for Linux-based Servers</title><link href="https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers/" rel="alternate" type="text/html" title="Setup Shell Script for Linux-based Servers" /><published>2020-02-12T00:00:00+00:00</published><updated>2020-02-12T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers</id><content type="html" xml:base="https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers/">&lt;p&gt;Since I have a few Linux servers that are running RHEL, Debian or Ubuntu OS, I want to have an automatic and convenient way to quickly set up and get them running.  Specifically I want to do a the following things for a fresh server:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-02-19T21:37:32+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Better SSH Keys Management with AuthorizedKeysCommand</title><link href="https://jasonthai.me/blog/2020/02/19/better-ssh-keys-management-with-authorizedkeyscommand/" rel="alternate" type="text/html" title="Better SSH Keys Management with AuthorizedKeysCommand" /><published>2020-02-19T00:00:00+00:00</published><updated>2020-02-19T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/02/19/better-ssh-keys-management-with-authorizedkeyscommand</id><content type="html" xml:base="https://jasonthai.me/blog/2020/02/19/better-ssh-keys-management-with-authorizedkeyscommand/">&lt;p&gt;I usually use authorized_key files to store SSH public keys in order to access my servers . However once I start to have multiple servers, I realize manually managing SSH keys is nightmare.&lt;/p&gt;
+
+&lt;p&gt;Recently I found out a better way to manage these SSH keys
+In /etc/ssh/sshd_config file there are 2 configurations:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;AuthorizedKeysCommand /keys.sh
+AuthorizedKeysCommandUser nobody
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can use &lt;strong&gt;AuthorizedKeysCommand&lt;/strong&gt; to point to an script that returns all the SSH keys. In this case, my script is:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+curl https://raw.githubusercontent.com/jasontthai/keys/master/&lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Name this file &lt;code class=&quot;highlighter-rouge&quot;&gt;key.sh&lt;/code&gt; and make it executable: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod a+x /keys.sh&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The public keys are stored in a Github repo which can be updated any time. The structure of the repo is this:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;keys/
+├── user1
+├── user2
+├── user3
+└── user4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;When I login with  user1, the server will get user1’s public keys from Github and validates it agaisnt user1’s private key.&lt;/p&gt;
+
+&lt;p&gt;There are a few problems with this approach:  I rely on an external service to retrieve the public keys. If Github goes offline, I will be unable to login to my servers at all. This also adds latency to the login step as we need to retrieve the keys over the internet. So I should think about some caching mechanism in case this happens.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I usually use authorized_key files to store SSH public keys in order to access my servers . However once I start to have multiple servers, I realize manually managing SSH keys is nightmare. Recently I found out a better way to manage these SSH keys In /etc/ssh/sshd_config file there are 2 configurations: AuthorizedKeysCommand /keys.sh AuthorizedKeysCommandUser nobody We can use AuthorizedKeysCommand to point to an script that returns all the SSH keys. In this case, my script is: #!/bin/bash curl https://raw.githubusercontent.com/jasontthai/keys/master/$1 Name this file key.sh and make it executable: chmod a+x /keys.sh The public keys are stored in a Github repo which can be updated any time. The structure of the repo is this: keys/ ├── user1 ├── user2 ├── user3 └── user4 When I login with user1, the server will get user1’s public keys from Github and validates it agaisnt user1’s private key. There are a few problems with this approach: I rely on an external service to retrieve the public keys. If Github goes offline, I will be unable to login to my servers at all. This also adds latency to the login step as we need to retrieve the keys over the internet. So I should think about some caching mechanism in case this happens.</summary></entry><entry><title type="html">Setup Shell Script for Linux-based Servers</title><link href="https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers/" rel="alternate" type="text/html" title="Setup Shell Script for Linux-based Servers" /><published>2020-02-12T00:00:00+00:00</published><updated>2020-02-12T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers</id><content type="html" xml:base="https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers/">&lt;p&gt;Since I have a few Linux servers that are running RHEL, Debian or Ubuntu OS, I want to have an automatic and convenient way to quickly set up and get them running.  Specifically I want to do a the following things for a fresh server:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Upgrade the server’s packages to the latest version&lt;/li&gt;
@@ -815,133 +839,4 @@ listen_addresses = 'localhost'        # what IP address(es) to listen on;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Using PWA, we ensure our site is viewable no matter what network condition is. I hope you’ll be able to turn your site to a PWA to improve your visitors’ experience.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I recently create a post of how to enable offline support to websites with Workbox and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/pwa-logo.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/pwa-logo.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Enable Offline Support to Websites with Workbox</title><link href="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/" rel="alternate" type="text/html" title="Enable Offline Support to Websites with Workbox" /><published>2019-08-06T00:00:00+00:00</published><updated>2019-08-06T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/06/enable-offline-support-to-websites-with-workbox/">&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/workbox.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/workbox.png&quot; alt=&quot;workbox&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;p&gt;Recently I have added offline support for this blog using &lt;a href=&quot;https://developers.google.com/web/tools/workbox/&quot;&gt;Workbox&lt;/a&gt;. You can test this by going offline and then browsing my blog. This note gives a walkthrough of how I did it and summarizes my findings.
-&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;tldr&quot;&gt;TLDR&lt;/h2&gt;
-&lt;p&gt;Steps to enable offline support:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Enable service worker&lt;/li&gt;
-  &lt;li&gt;Create sw.js with
-    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;importScripts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precaching&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precacheAndRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Install workbox-cli with &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install workbox-cli --global&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Follow workbox wizard &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox wizard --injectManifest&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Inject &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; with what to cache &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox injectManifest workbox-config.js&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;what-is-workbox&quot;&gt;What is Workbox?&lt;/h2&gt;
-&lt;p&gt;Workbox is a set of javascript libraries that add support for caching and offline access of web apps. Workbox provides an abstract layer for developers when working with &lt;a href=&quot;https://developers.google.com/web/fundamentals/primers/service-workers/&quot;&gt;service workers&lt;/a&gt;. Some of the things workbox support like precaching, runtime caching, etc will be covered below.&lt;/p&gt;
-
-&lt;p&gt;Does your browser support workbox and service workers? &lt;a href=&quot;https://love2dev.com/blog/what-browsers-support-service-workers/&quot;&gt;Check here&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;enable-service-worker&quot;&gt;Enable service worker&lt;/h2&gt;
-&lt;p&gt;Add this script to the bottom of your website:&lt;/p&gt;
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Check that service workers are supported&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;serviceWorker&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// Use the window load event to keep the page load performant&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;serviceWorker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;register&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This tells the browser to wait until the window load and then register for service worker  in &lt;code class=&quot;highlighter-rouge&quot;&gt;/sw.js&lt;/code&gt; route.&lt;/p&gt;
-
-&lt;h2 id=&quot;using-workbox&quot;&gt;Using Workbox&lt;/h2&gt;
-&lt;p&gt;There are a few ways to generate service workers using Workbox. I choose to use workbox-cli as I can enable it as part of my build pipeline for my blog which is currently powered by Jekyll. If you use Node or Gulp, you can use &lt;a href=&quot;https://developers.google.com/web/tools/workbox/guides/precache-files/workbox-build&quot;&gt;workbox-build&lt;/a&gt; or if you use Webpack, there is &lt;a href=&quot;https://developers.google.com/web/tools/workbox/guides/precache-files/webpack&quot;&gt;workbox-webpack-plugin&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;install-workbox-cli&quot;&gt;Install workbox-cli&lt;/h3&gt;
-&lt;p&gt;Install by using npm:&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install workbox-cli --global&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;setup-service-worker&quot;&gt;Setup service worker&lt;/h3&gt;
-&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; specify the following boilerplate code:&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;importScripts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precaching&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;precacheAndRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([])&lt;/span&gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Notice we have not specified anything yet to precache. This serves as an injection point for workbox to compute and inject all the routes to be cached.&lt;/p&gt;
-
-&lt;h3 id=&quot;use-workbox-cli-to-populate-what-to-precache&quot;&gt;Use workbox-cli to populate what to precache&lt;/h3&gt;
-&lt;p&gt;Run workbox-cli wizard&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wizard&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;injectManifest&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This command provides the option to specify what to cache by looking at all the file extensions in the website. After this is done, a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox-config.js&lt;/code&gt; will be created.&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;injectManifest&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;js&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;This command then uses what is specified in &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox-config.js&lt;/code&gt; and injects all the files to be cached into the injection point we specified above in &lt;code class=&quot;highlighter-rouge&quot;&gt;sw.js&lt;/code&gt; files.&lt;/p&gt;
-
-&lt;h3 id=&quot;manually-specify-what-to-cache-during-runtime&quot;&gt;Manually specify what to cache during runtime&lt;/h3&gt;
-&lt;p&gt;There are already a few &lt;a href=&quot;https://developers.google.com/web/tools/workbox/guides/common-recipes&quot;&gt;common recipes&lt;/a&gt; that provide examples of caching css, js, images, etc.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/sw.js&quot;&gt;I use a few from those recipes for my site&lt;/a&gt;:&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Caching Images&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;routing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.(?:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;png|gif|jpg|jpeg|webp|svg&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strategies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;CacheFirst&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;cacheName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;plugins&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;expiration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Plugin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;maxEntries&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;maxAgeSeconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;60&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 30 Days&lt;/span&gt;
-      &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Cache CSS and JavaScript Files&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;routing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.(?:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;js|css&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strategies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;StaleWhileRevalidate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;cacheName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;static-resources&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Caching Content from Multiple Origins&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;routing&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;registerRoute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-  &lt;span class=&quot;sr&quot;&gt;/.*&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;(?:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;googleapis|gstatic&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;)\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;com/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;workbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;strategies&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;StaleWhileRevalidate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;add-to-build-and-automate&quot;&gt;Add to build and automate&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2019/07/22/how-to-deploy-a-github-page-using-circleci-20-custom-jekyll-gems/&quot;&gt;Since I am using CircleCI to deploy changes of my site to Github Pages&lt;/a&gt;, I also add the workbox + service worker script generation to the build.&lt;/p&gt;
-
-&lt;p&gt;Declared &lt;code class=&quot;highlighter-rouge&quot;&gt;workbox-config.js&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;globDirectory&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;_site/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;globPatterns&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;**/*.{html,txt,css,webp,js,json,svg,ico}&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
-  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;swDest&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;_site/sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;swSrc&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;sw.js&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;In &lt;code class=&quot;highlighter-rouge&quot;&gt;config.yml&lt;/code&gt; file I added:&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;      &lt;span class=&quot;c1&quot;&gt;# -- more omitted --&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JEKYLL_ENV=production bundle exec jekyll build&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;npm install workbox-cli&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;npx workbox injectManifest workbox-config.js&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;# -- more omitted --&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It is quite simple, just added two extra steps to install workbox-cli and run the same command to inject the precache routes.&lt;/p&gt;
-
-&lt;h2 id=&quot;considerations&quot;&gt;Considerations&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Using the workbox-cli, we can cache everything on the site. However, this will not work if the website contains thousands of posts and images as everything will be downloaded to the browser cache.&lt;/li&gt;
-  &lt;li&gt;Using the workbox-cli, we can only set service workers to cache our website’s assets. It will not handle caching other website’s sites. This is important because we probably use things like external fonts, javascripts, css files, etc. So we need to manually add that support to our service workers.&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Recently I have added offline support for this blog using Workbox. You can test this by going offline and then browsing my blog. This note gives a walkthrough of how I did it and summarizes my findings.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/workbox.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/workbox.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;Using PWA, we ensure our site is viewable no matter what network condition is. I hope you’ll be able to turn your site to a PWA to improve your visitors’ experience.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I recently create a post of how to enable offline support to websites with Workbox and turns out it already covers half of the work of turning my blog into a progressive web app (PWA). This note will cover the rest to fully convert a regular website to a PWA.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/pwa-logo.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/pwa-logo.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

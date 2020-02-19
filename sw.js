@@ -477,11 +477,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/02/12/setup-shell-script-for-linux-based-servers/index.html",
-    "revision": "6ad312d9cf9b3c7dc73a517308eaaa2d"
+    "revision": "c33c54cbdcc75a4ca8fdbe212f8efe55"
+  },
+  {
+    "url": "blog/2020/02/19/better-ssh-keys-management-with-authorizedkeyscommand/index.html",
+    "revision": "d0ad0412a7e252c251e6467eaf81559b"
   },
   {
     "url": "categories/index.html",
-    "revision": "ed5e977ccdbdbb7ead40eb27dd9952ea"
+    "revision": "5c4d5494761806f9214ed752025d5af8"
   },
   {
     "url": "default/index.html",
@@ -505,7 +509,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "f6f44e147940b2f66002a8953d92c53c"
+    "revision": "881dd3ca9d6941704d5a0bde44f8a1b0"
   },
   {
     "url": "manifest.json",
@@ -513,19 +517,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "be5c20d4d41789688b720b2122fc215d"
+    "revision": "6f204b1b5ed7ab6a0c5395289b6786d6"
   },
   {
     "url": "page/3/index.html",
-    "revision": "e2c3731a8a13d3eeb0535e7d4a1d3c87"
+    "revision": "72a3288cf6a0aabc0c38d9b130b364c0"
   },
   {
     "url": "page/4/index.html",
-    "revision": "8b84af00800a19550b894349ce2290e7"
+    "revision": "0772315ca4597e6e56ecd483d41e721a"
   },
   {
     "url": "posts/index.html",
-    "revision": "1d84a6bfc89e7d1153fe520bce64da9e"
+    "revision": "8f9ff6e24f91f4060cedeceb5f389447"
   },
   {
     "url": "redirects.json",
@@ -541,7 +545,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "0e8b711502fd239e8dcfc1120fe4b2c1"
+    "revision": "88c20563aa87047faf2e0bf8b2dca5ad"
   },
   {
     "url": "vi/index.html",
