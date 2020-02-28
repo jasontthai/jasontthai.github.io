@@ -244,6 +244,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "b3de0f727754b9edb00b47c1b3a78cb5"
   },
   {
+    "url": "assets/img/spark.webp",
+    "revision": "0f6a3eabefaf69e2e3ff69c3f8c22a8d"
+  },
+  {
     "url": "assets/img/ssh.webp",
     "revision": "d90cccfc987fdac96bcd2c7f22cb27d6"
   },
@@ -485,11 +489,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/02/19/better-ssh-keys-management-with-authorizedkeyscommand/index.html",
-    "revision": "511b3aedce9cbddbbd59fdcfe646441e"
+    "revision": "296f91146718b962986cee2eeb60ae5c"
+  },
+  {
+    "url": "blog/2020/02/27/some-notes-on-apache-spark-memory-management/index.html",
+    "revision": "7288aec1117f791c8918914fd131df53"
   },
   {
     "url": "categories/index.html",
-    "revision": "5c4d5494761806f9214ed752025d5af8"
+    "revision": "03590edde023fd4ab92160694a41ce35"
   },
   {
     "url": "default/index.html",
@@ -513,7 +521,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "e4967e5b8262f10c293aeb2ac13d15f8"
+    "revision": "2fee562f0d69b8adacc200d0da17f8d3"
   },
   {
     "url": "manifest.json",
@@ -521,19 +529,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "6f204b1b5ed7ab6a0c5395289b6786d6"
+    "revision": "f692fdf356dd3f4ed3c2ef8c2b5f07c2"
   },
   {
     "url": "page/3/index.html",
-    "revision": "72a3288cf6a0aabc0c38d9b130b364c0"
+    "revision": "868ac77deb49d8e0fb35ec9c38487f91"
   },
   {
     "url": "page/4/index.html",
-    "revision": "0772315ca4597e6e56ecd483d41e721a"
+    "revision": "9e5ad11b7b6012bdf6e2618091c9f5cb"
   },
   {
     "url": "posts/index.html",
-    "revision": "8f9ff6e24f91f4060cedeceb5f389447"
+    "revision": "f9a88559e831a55b61df0a90a1f7d805"
   },
   {
     "url": "redirects.json",
@@ -549,7 +557,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "88c20563aa87047faf2e0bf8b2dca5ad"
+    "revision": "ac940b6018a726da3f91c6a168230507"
   },
   {
     "url": "vi/index.html",
