@@ -493,7 +493,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/02/27/some-notes-on-apache-spark-memory-management/index.html",
-    "revision": "7288aec1117f791c8918914fd131df53"
+    "revision": "37753f928dbffbac824b9e9b3d0f6c16"
   },
   {
     "url": "categories/index.html",
