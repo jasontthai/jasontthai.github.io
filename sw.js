@@ -349,7 +349,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2018/06/10/browser-extensions/index.html",
-    "revision": "d896a0586f9ab76d57087b7a7b0331ad"
+    "revision": "892dd86492165ba576980334fbd7aed5"
   },
   {
     "url": "blog/2018/06/12/secure-your-passwords/index.html",
