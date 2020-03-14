@@ -88,6 +88,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "da9dbf21238d4ff002f34ae753eb6ca6"
   },
   {
+    "url": "assets/img/foldingathome.webp",
+    "revision": "65a5c8c8854814c0bb72fd2798f4cd81"
+  },
+  {
     "url": "assets/img/google-syndication.webp",
     "revision": "e7eb12b6b2c003b73e2b8736df8f5287"
   },
@@ -493,11 +497,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/02/27/some-notes-on-apache-spark-memory-management/index.html",
-    "revision": "6b204824cfe5db4b6e9ee9ed4fd9609d"
+    "revision": "144c974541f26fd1e2e707216fb722f2"
+  },
+  {
+    "url": "blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19/index.html",
+    "revision": "23c0d63011d00a91e3159c5f1e86af63"
   },
   {
     "url": "categories/index.html",
-    "revision": "03590edde023fd4ab92160694a41ce35"
+    "revision": "0a7d8f3da4fae8004b376b418b8f66d3"
   },
   {
     "url": "default/index.html",
@@ -521,7 +529,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "2fee562f0d69b8adacc200d0da17f8d3"
+    "revision": "2d0f74d12e02586a6ed92a27a45e73a7"
   },
   {
     "url": "manifest.json",
@@ -529,19 +537,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "f692fdf356dd3f4ed3c2ef8c2b5f07c2"
+    "revision": "af2052aaa8d960bf950b213d3b19ecc2"
   },
   {
     "url": "page/3/index.html",
-    "revision": "868ac77deb49d8e0fb35ec9c38487f91"
+    "revision": "cfdbc41a893be1342cfbdae21111687c"
   },
   {
     "url": "page/4/index.html",
-    "revision": "9e5ad11b7b6012bdf6e2618091c9f5cb"
+    "revision": "04d296b5a8b87fbe10297a0f02bebe27"
   },
   {
     "url": "posts/index.html",
-    "revision": "f9a88559e831a55b61df0a90a1f7d805"
+    "revision": "b7ad61334a976cff9a3fc4a214fdafb9"
   },
   {
     "url": "redirects.json",
@@ -557,7 +565,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "ac940b6018a726da3f91c6a168230507"
+    "revision": "d2c49fe99c3847256901c5e6b24c7a6a"
   },
   {
     "url": "vi/index.html",
