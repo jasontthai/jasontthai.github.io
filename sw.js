@@ -9,11 +9,11 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "404.html",
-    "revision": "e30fd89e1c111b3a8a23980d14febe55"
+    "revision": "311941cd20309d2b3a747bf9368c3194"
   },
   {
     "url": "about/index.html",
-    "revision": "b97f134ac31753ea77b997ffd5471b3e"
+    "revision": "9ba63a1c99f99d2ead3576942aac0bf7"
   },
   {
     "url": "assets/css/style.css",
@@ -533,15 +533,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/index.html",
-    "revision": "f69e64bb9854f4e21373f545f78ab77f"
+    "revision": "bdb0a3f5e341ca74c4620ba9b4da2a10"
   },
   {
     "url": "categories/index.html",
-    "revision": "00ecdeb00c0efe7c0bf49b4b0b7f5c63"
+    "revision": "14e93d2dd00065a6775838a5eaf48a73"
   },
   {
     "url": "default/index.html",
-    "revision": "430dd939dac7d694946c9eab05ac4607"
+    "revision": "47d2664d06f89b94ccb8a06f20f33f50"
   },
   {
     "url": "favicon.ico",
@@ -561,7 +561,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "5f994a43aa5f9a67530de798ba7fbc10"
+    "revision": "4fc46195db378b01c62f35ba8ab9415d"
   },
   {
     "url": "manifest.json",
@@ -569,19 +569,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "dd6f87f8e26ef624d90563a06d50d0fb"
+    "revision": "d6bf481b45b6a1c9922b33f5c0a4b546"
   },
   {
     "url": "page/3/index.html",
-    "revision": "70e6b694baa705855676f39acc791734"
+    "revision": "055f5b4d3d8499e9d4af765573d95e21"
   },
   {
     "url": "page/4/index.html",
-    "revision": "a9c9516e6ef32506f486d5bfde757615"
+    "revision": "217964482bae08ddbfad26ceb7ec1ad6"
   },
   {
     "url": "posts/index.html",
-    "revision": "bcc620c507b7696b4f5d6eeda55718d8"
+    "revision": "9c0005409906ffcaec1abc0ff5fce7ad"
   },
   {
     "url": "redirects.json",
@@ -593,19 +593,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "services/index.html",
-    "revision": "fa67f8e6fd8d62f48adb73c91562c21c"
+    "revision": "20c77eeb032144fb5928f1ba031f7e2a"
   },
   {
     "url": "tags/index.html",
-    "revision": "479a9d01aa5640ef28bf5b1c22f01fef"
+    "revision": "75ba3bd5ee54a93f435d51b28fd96247"
   },
   {
     "url": "vi/index.html",
-    "revision": "59116780f309a06268147da4ccfa198f"
+    "revision": "fd5baed1f90f0aa39afff6cce7a797b8"
   },
   {
     "url": "visited-places/index.html",
-    "revision": "6287eb6310b3e48000fba00a6089ee5f"
+    "revision": "59a2a2848957b7d30425317666c75127"
   },
   {
     "url": "workbox-config.js",
