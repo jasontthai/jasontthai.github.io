@@ -533,7 +533,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/index.html",
-    "revision": "a4f3331b1ee142e430e0323a800e1c67"
+    "revision": "f69e64bb9854f4e21373f545f78ab77f"
   },
   {
     "url": "categories/index.html",
