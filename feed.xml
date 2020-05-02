@@ -1,4 +1,195 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-04-28T02:43:40+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Donate Compute Power to Folding@Home to Find Cures For Covid-19</title><link href="https://jasonthai.me/blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19/" rel="alternate" type="text/html" title="Donate Compute Power to Folding@Home to Find Cures For Covid-19" /><published>2020-03-14T00:00:00+00:00</published><updated>2020-03-14T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19</id><content type="html" xml:base="https://jasonthai.me/blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19/">&lt;p&gt;If you have not heard of Folding@Home, it is basically a software you can download to your computer and uses part of the computer power to help scientists run models and find cures for various diseases.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-05-02T00:11:08+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">How to Setup Wireguard + Pi-hole on Debian 10 / Ubuntu 18.04</title><link href="https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/" rel="alternate" type="text/html" title="How to Setup Wireguard + Pi-hole on Debian 10 / Ubuntu 18.04" /><published>2020-05-01T00:00:00+00:00</published><updated>2020-05-01T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804</id><content type="html" xml:base="https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/">&lt;blockquote&gt;
+  &lt;p&gt;WireGuard® is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable. It is currently under heavy development, but already it might be regarded as the most secure, easiest to use, and simplest VPN solution in the industry.
+&lt;a href=&quot;https://www.wireguard.com/&quot;&gt;https://www.wireguard.com&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Follow up for my post &lt;a href=&quot;https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/&quot;&gt;How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS&lt;/a&gt;. This is a guide to set up wireguard + pi-hole for your own private ad blocking VPN.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;h3 id=&quot;wireguard-setup&quot;&gt;Wireguard Setup&lt;/h3&gt;
+&lt;p&gt;Run these scripts:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://git.io/wireguard &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; wireguard-install.sh &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; bash wireguard-install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Follow this setup:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Welcome to this WireGuard road warrior installer!
+
+I need to ask you a few questions before starting setup.
+You can use the default options and just press enter &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;you are ok with them.
+
+What IPv4 address should the WireGuard server use?
+     1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Your IPv4 address should show up here
+     2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; other &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;IP
+IPv4 address &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1]: 1
+
+What port &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;you want WireGuard listening to?
+Port &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;51820]: 51820
+
+Tell me a name &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the first client.
+Client name &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;client]: client
+
+Which DNS &lt;span class=&quot;k&quot;&gt;do &lt;/span&gt;you want to use &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;this client?
+   1&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Current system resolvers
+   2&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 1.1.1.1
+   3&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; Google
+   4&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; OpenDNS
+   5&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; NTT
+   6&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; AdGuard
+DNS &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;1]: 2
+
+We are ready to &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;up your WireGuard server now.
+
+Press any key to &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;start-wireguard&quot;&gt;Start Wireguard&lt;/h3&gt;
+&lt;p&gt;Wireguard should start automatically after you ran the script. If not you can check by&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systemctl status wg-quick@wg0.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Restart Wireguard services:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systemctl restart wg-quick@wg0.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;pi-hole-setup&quot;&gt;Pi-hole Setup&lt;/h3&gt;
+&lt;p&gt;Note down  Wireguard’s IP:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ip a show dev wg0
+10.7.0.1/24 // note this address
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note down your default  gateway IP address:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ip r | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;default
+default via XXX.XXX.XXX.XXX dev eth0 onlink // not this address
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run this script:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-sSL&lt;/span&gt; https://install.pi-hole.net | bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Follow the instruction to set up pi-hole:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Installing dependencies&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-wireguard-1.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-wireguard-1.png&quot; alt=&quot;step 1&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The following step is important, make sure to select &lt;code class=&quot;highlighter-rouge&quot;&gt;wg0&lt;/code&gt; as the interface&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-wireguard-2.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-wireguard-2.png&quot; alt=&quot;step 2&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Choose the DNS provider Pi-hole will use.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-wireguard-3.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-wireguard-3.png&quot; alt=&quot;step 3&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Choose the protocols available to you&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-wireguard-4.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-wireguard-4.png&quot; alt=&quot;step 4&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This following step is important, make sure to choose &lt;code class=&quot;highlighter-rouge&quot;&gt;no&lt;/code&gt; so we can assign our internal address which is &lt;code class=&quot;highlighter-rouge&quot;&gt;10.7.0.1&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-wireguard-5.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-wireguard-5.png&quot; alt=&quot;step 5&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;10.7.0.1/24&lt;/code&gt;. This is the static address VPN will use to talk to Pi-hole&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-wireguard-6.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-wireguard-6.png&quot; alt=&quot;step 6&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Enter the ipv4-gateway you noted down&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-wireguard-7.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-wireguard-7.png&quot; alt=&quot;step 7&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;There are a few more steps but I just choose the default settings.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;test-dns-settings&quot;&gt;Test DNS settings&lt;/h3&gt;
+&lt;p&gt;Run this script&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;host google.com 10.7.0.1
+
+&lt;span class=&quot;c&quot;&gt;# Output from host google.com 10.7.0.1&lt;/span&gt;
+google.com has address 172.217.0.46
+google.com has IPv6 address 2607:f8b0:4005:80b::200e
+google.com mail is handled by 10 aspmx.l.google.com.
+google.com mail is handled by 20 alt1.aspmx.l.google.com.
+google.com mail is handled by 30 alt2.aspmx.l.google.com.
+google.com mail is handled by 40 alt3.aspmx.l.google.com.
+google.com mail is handled by 50 alt4.aspmx.l.google.com.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Our Wireguard + Pi-hole still see google.com’s public IPs properly&lt;/p&gt;
+
+&lt;p&gt;This time run&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;host pagead2.googlesyndication.com
+
+&lt;span class=&quot;c&quot;&gt;# Output from host pagead2.googlesyndication.com&lt;/span&gt;
+pagead2.googlesyndication.com has address 0.0.0.0
+pagead2.googlesyndication.com has IPv6 address ::
+pagead2.googlesyndication.com is an &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;pagead46.l.doubleclick.net.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Pi-hole blocked &lt;code class=&quot;highlighter-rouge&quot;&gt;pagead2.googlesyndication.com&lt;/code&gt; as the domain is in its blacklist.&lt;/p&gt;
+
+&lt;h3 id=&quot;generate-wireguard-client-config-file&quot;&gt;Generate Wireguard Client Config File&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Run `bash wireguard-install.sh`
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;test-from-browser&quot;&gt;Test From Browser&lt;/h3&gt;
+&lt;p&gt;After connecting to your VPN using Wireguard client. Go to this address &lt;a href=&quot;http://pagead2.googlesyndication.com&quot;&gt;http://pagead2.googlesyndication.com&lt;/a&gt;, if everything works correctly you will see this:&lt;/p&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/google-syndication.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/google-syndication.png&quot; alt=&quot;google syndication&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;h3 id=&quot;pi-hole-statistics&quot;&gt;Pi-hole Statistics&lt;/h3&gt;
+&lt;p&gt;You can go to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://pi.hole/admin&lt;/code&gt; once you are connected to the VPN and see some of Pi-hole’s stats. The result is mind-boggling. Almost half of my traffic is to serve ads.&lt;/p&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pi-hole-stats.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pi-hole-stats.png&quot; alt=&quot;Pi-hole stats&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Pi-hole is a good solution to fight against ads on the internet. You should give it a try. That said not all ads are bad. Some creators are reliant on ads as their source of income. If you have someone you support, consider whitelisting the ads for the good cause.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Nyr/wireguard-install&quot;&gt;https://github.com/Nyr/wireguard-install&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pi-hole.net/&quot;&gt;https://pi-hole.net/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">WireGuard® is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable. It is currently under heavy development, but already it might be regarded as the most secure, easiest to use, and simplest VPN solution in the industry. https://www.wireguard.com Introduction Follow up for my post How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS. This is a guide to set up wireguard + pi-hole for your own private ad blocking VPN. Installation Wireguard Setup Run these scripts: wget https://git.io/wireguard -O wireguard-install.sh &amp;amp;&amp;amp; bash wireguard-install.sh Follow this setup: Welcome to this WireGuard road warrior installer! I need to ask you a few questions before starting setup. You can use the default options and just press enter if you are ok with them. What IPv4 address should the WireGuard server use? 1) Your IPv4 address should show up here 2) other local IP IPv4 address [1]: 1 What port do you want WireGuard listening to? Port [51820]: 51820 Tell me a name for the first client. Client name [client]: client Which DNS do you want to use for this client? 1) Current system resolvers 2) 1.1.1.1 3) Google 4) OpenDNS 5) NTT 6) AdGuard DNS [1]: 2 We are ready to set up your WireGuard server now. Press any key to continue... Start Wireguard Wireguard should start automatically after you ran the script. If not you can check by systemctl status wg-quick@wg0.service Restart Wireguard services: systemctl restart wg-quick@wg0.service Pi-hole Setup Note down Wireguard’s IP: ip a show dev wg0 10.7.0.1/24 // note this address Note down your default gateway IP address: ip r | grep default default via XXX.XXX.XXX.XXX dev eth0 onlink // not this address Run this script: curl -sSL https://install.pi-hole.net | bash Follow the instruction to set up pi-hole: Installing dependencies The following step is important, make sure to select wg0 as the interface Choose the DNS provider Pi-hole will use. Choose the protocols available to you This following step is important, make sure to choose no so we can assign our internal address which is 10.7.0.1. Enter 10.7.0.1/24. This is the static address VPN will use to talk to Pi-hole Enter the ipv4-gateway you noted down There are a few more steps but I just choose the default settings. Test DNS settings Run this script host google.com 10.7.0.1 # Output from host google.com 10.7.0.1 google.com has address 172.217.0.46 google.com has IPv6 address 2607:f8b0:4005:80b::200e google.com mail is handled by 10 aspmx.l.google.com. google.com mail is handled by 20 alt1.aspmx.l.google.com. google.com mail is handled by 30 alt2.aspmx.l.google.com. google.com mail is handled by 40 alt3.aspmx.l.google.com. google.com mail is handled by 50 alt4.aspmx.l.google.com. Our Wireguard + Pi-hole still see google.com’s public IPs properly This time run host pagead2.googlesyndication.com # Output from host pagead2.googlesyndication.com pagead2.googlesyndication.com has address 0.0.0.0 pagead2.googlesyndication.com has IPv6 address :: pagead2.googlesyndication.com is an alias for pagead46.l.doubleclick.net. Pi-hole blocked pagead2.googlesyndication.com as the domain is in its blacklist. Generate Wireguard Client Config File Run `bash wireguard-install.sh` Test From Browser After connecting to your VPN using Wireguard client. Go to this address http://pagead2.googlesyndication.com, if everything works correctly you will see this: Pi-hole Statistics You can go to http://pi.hole/admin once you are connected to the VPN and see some of Pi-hole’s stats. The result is mind-boggling. Almost half of my traffic is to serve ads. Conclusion Pi-hole is a good solution to fight against ads on the internet. You should give it a try. That said not all ads are bad. Some creators are reliant on ads as their source of income. If you have someone you support, consider whitelisting the ads for the good cause. References https://github.com/Nyr/wireguard-install https://pi-hole.net/</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/openvpn-pihole.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/openvpn-pihole.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Donate Compute Power to Folding@Home to Find Cures For Covid-19</title><link href="https://jasonthai.me/blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19/" rel="alternate" type="text/html" title="Donate Compute Power to Folding@Home to Find Cures For Covid-19" /><published>2020-03-14T00:00:00+00:00</published><updated>2020-03-14T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19</id><content type="html" xml:base="https://jasonthai.me/blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19/">&lt;p&gt;If you have not heard of Folding@Home, it is basically a software you can download to your computer and uses part of the computer power to help scientists run models and find cures for various diseases.&lt;/p&gt;
 
 &lt;p&gt;I suggest you take a look at their website to learn more: &lt;a href=&quot;https://foldingathome.org/&quot;&gt;https://foldingathome.org/&lt;/a&gt;. Currently they are looking for more compute power to combat against Covid-19(20). Please help out however you can.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">If you have not heard of Folding@Home, it is basically a software you can download to your computer and uses part of the computer power to help scientists run models and find cures for various diseases. I suggest you take a look at their website to learn more: https://foldingathome.org/. Currently they are looking for more compute power to combat against Covid-19(20). Please help out however you can.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/foldingathome.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/foldingathome.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Some Notes on Apache Spark Memory Management</title><link href="https://jasonthai.me/blog/2020/02/27/some-notes-on-apache-spark-memory-management/" rel="alternate" type="text/html" title="Some Notes on Apache Spark Memory Management" /><published>2020-02-27T00:00:00+00:00</published><updated>2020-02-27T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/02/27/some-notes-on-apache-spark-memory-management</id><content type="html" xml:base="https://jasonthai.me/blog/2020/02/27/some-notes-on-apache-spark-memory-management/">&lt;h2 id=&quot;important-configurations&quot;&gt;Important configurations:&lt;/h2&gt;
 &lt;ul&gt;
@@ -477,233 +668,4 @@ I am still reading about finance this month. They are easy to understand and are
       &lt;/div&gt;
 &lt;script src=&quot;https://www.goodreads.com/review/custom_widget/54938708.Jason's%20bookshelf:%20august-2019?cover_position=left&amp;amp;cover_size=small&amp;amp;num_books=5&amp;amp;order=a&amp;amp;shelf=august-2019&amp;amp;show_author=1&amp;amp;show_cover=1&amp;amp;show_rating=1&amp;amp;show_review=1&amp;amp;show_tags=1&amp;amp;show_title=1&amp;amp;sort=date_added&amp;amp;widget_bg_color=FFFFFF&amp;amp;widget_bg_transparent=&amp;amp;widget_border_width=1&amp;amp;widget_id=1567354622&amp;amp;widget_text_color=000000&amp;amp;widget_title_size=medium&amp;amp;widget_width=medium&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
 
-&lt;p&gt;Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">This month has been busy. I have been learning more about self-hosting software and doing some tinkering with them. Currently I am checking out these 2 subreddits: https://reddit.com/r/selfhosted https://reddit.com/r/homelab These subs give me some motivation of creating my home server to store data and share with families and friends. But that will be the next step as I am using a cloud provider to do my hosting. What I am hosting: Bitwarden - Opensource password manager. I decided to delete my Lastpass’s account and use a self-hosted Bitwarden instance to manage my passwords. So far so good. I keep my data. Nextcloud - Productivity platform (Gsuite replacement). I use this to sync my files across computers. The platform offers a lot more than just file syncing. I haven’t explored much but it looks promising. Another file syncing alternative is Seafile which people say is more reliable. Plex - Media organizer. I am also exploring hosting my media so I can view them everywhere. Another popular alternative is Jellyfin TT-RSS - RSS feeds Firefly-III - Budget app. I am also trying out this budget app. It is quite different from my YNAB and needs taking used too. So far I am more pleased with the latter one. If you want to try out these services, let me know and I can give you access to them. Moving on… I am still reading about finance this month. They are easy to understand and are a nice complement to the ones I read in July. I highly recommend these books. Jason&amp;#39;s bookshelf: august-2019 The Bogleheads' Guide to Investing by Taylor Larimore tagged: august-2019 The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk by Taylor Larimore tagged: august-2019 Share book reviews and ratings with Jason, and even join a book club on Goodreads. Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/month-of-august.jpg" /><media:content medium="image" url="https://jasonthai.me/assets/img/month-of-august.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS</title><link href="https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/" rel="alternate" type="text/html" title="How to host OpenVPN and Pi-hole on Ubuntu 18.04 VPS" /><published>2019-08-25T00:00:00+00:00</published><updated>2019-08-25T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps</id><content type="html" xml:base="https://jasonthai.me/blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-&lt;p&gt;I have been playing around with setting up my own &lt;a href=&quot;https://openvpn.net&quot;&gt;OpenVPN server&lt;/a&gt; lately and also found out &lt;a href=&quot;https://pi-hole.net&quot;&gt;Pi-hole&lt;/a&gt;.  OpenVPN provides a way to set up a VPN that I can self manage and Pi-hole is a network wide ad blocking system. The two combined services provide a good way to make your web browsing experience more secure and ad-free.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://docs.pi-hole.net/guides/vpn/setup-openvpn-server/&quot;&gt;I followed the guide on Pi-hole to set up a VPN server&lt;/a&gt; but I found out that some information is missing depending on the type of VPS you have such as whether your VPS is a NAT VPS or not. Below is the documented steps of all my findings.&lt;/p&gt;
-
-&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
-
-&lt;h3 id=&quot;openvpn-setup&quot;&gt;OpenVPN Setup&lt;/h3&gt;
-&lt;p&gt;Run these scripts:&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget https://git.io/vpn &lt;span class=&quot;nt&quot;&gt;-O&lt;/span&gt; openvpn-install.sh
-&lt;span class=&quot;nb&quot;&gt;chmod &lt;/span&gt;755 openvpn-install.sh
-./openvpn-install.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Follow this setup:&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Welcome to this quick OpenVPN &lt;span class=&quot;s2&quot;&gt;&quot;road warrior&quot;&lt;/span&gt; installer
-
-I need to ask you a few questions before starting the setup
-You can leave the default options and just press enter &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;you are ok with them
-
-First I need to know the IPv4 address of the network interface you want OpenVPN
-listening to.
-IP address: 10.8.0.1 // Jason&lt;span class=&quot;s1&quot;&gt;'s notes: if you are behind NAT, just put your  ipv4 IP address
-
-Which protocol do you want for OpenVPN connections?
-   1) UDP (recommended)
-   2) TCP
-Protocol [1-2]: 1
-
-What port do you want OpenVPN listening to?
-Port: 1194
-
-Which DNS do you want to use with the VPN?
-   1) Current system resolvers
-   2) Google
-   3) OpenDNS
-   4) NTT
-   5) Hurricane Electric
-   6) Verisign
-DNS [1-6]: 1
-
-Finally, tell me your name for the client certificate
-Please, use one word only, no special characters
-Client name: pihole
-
-Okay, that was all I needed. We are ready to set up your OpenVPN server now
-Press any key to continue...
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;start-openvpn&quot;&gt;Start OpenVPN&lt;/h3&gt;
-&lt;p&gt;Modify OpenVPN server’s configuration in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/openvpn/server/server.conf&lt;/code&gt;:
-remove all the existing &lt;code class=&quot;highlighter-rouge&quot;&gt;push &quot;dhcp-option DNS x.x.x.x&lt;/code&gt; and add &lt;code class=&quot;highlighter-rouge&quot;&gt;push &quot;dhcp-option DNS 10.8.0.1&quot;&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Restart OpenVPN services:&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systemctl daemon-reload
-systemctl restart openvpn // Jason&lt;span class=&quot;s1&quot;&gt;'s notes: just restarting openvpn does not change the configuration for OpenVPN server.
-systemctl restart openvpn-server@server.service
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Notes: if you are behind a NAT, you will also need to do the following:&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ip r | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;default
-
-&lt;span class=&quot;c&quot;&gt;# Output from ip r | grep default&lt;/span&gt;
-default via x.x.x.x dev eth0 onlink
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Note the value after &lt;code class=&quot;highlighter-rouge&quot;&gt;dev&lt;/code&gt; in this case it is &lt;code class=&quot;highlighter-rouge&quot;&gt;eth0&lt;/code&gt;
-Run  this:&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iptables &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; nat &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; POSTROUTING  &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; 10.8.0.0/24 &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &amp;lt;value you got from above&amp;gt; &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; MASQUERADE
-
-&lt;span class=&quot;c&quot;&gt;# Example:&lt;/span&gt;
-iptables &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; nat &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; POSTROUTING &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; 10.8.0.0/24 &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; eth0 &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; MASQUERADE
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;pi-hole-setup&quot;&gt;Pi-hole Setup&lt;/h3&gt;
-&lt;p&gt;Run this script:&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-sSL&lt;/span&gt; https://install.pi-hole.net | bash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Follow the instruction to set up pi-hole:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Installing dependencies&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-1.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-1.png&quot; alt=&quot;step 1&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Some instruction&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-2.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-2.png&quot; alt=&quot;step 2&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Some information&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-3.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-3.png&quot; alt=&quot;step 3&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;This informs we need a &lt;strong&gt;static IP address&lt;/strong&gt; in order the the whole thing to work&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-4.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-4.png&quot; alt=&quot;step 4&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The following step is important, make sure to select &lt;code class=&quot;highlighter-rouge&quot;&gt;tun0&lt;/code&gt; as the interface&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-5.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-5.png&quot; alt=&quot;step 5&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Choose the DNS provider Pi-hole will use. This is interesting. Essentially we will set up pi-hole as a DNS OpenVPN server will use, and within Pi-hole it will use the DNS setting below to make outbound requests.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-6.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-6.png&quot; alt=&quot;step 6&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Choose the protocols available to you&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-7.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-7.png&quot; alt=&quot;step 7&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;This following step is important, make sure to choose &lt;code class=&quot;highlighter-rouge&quot;&gt;no&lt;/code&gt; so we can assign our internal address which is &lt;code class=&quot;highlighter-rouge&quot;&gt;10.8.0.1&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-8.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-8.png&quot; alt=&quot;step 8&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;10.8.0.1/24&lt;/code&gt;. This is the static address VPN will use to talk to Pi-hole&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-9.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-9.png&quot; alt=&quot;step 9&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Enter the ipv4-gateway. I just leave this as is.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pihole-step-10.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pihole-step-10.png&quot; alt=&quot;step 10&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;There are a few more steps but I just choose the default settings.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;test-dns-settings&quot;&gt;Test DNS settings&lt;/h3&gt;
-&lt;p&gt;Run this script&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;host google.com 10.8.0.1
-
-&lt;span class=&quot;c&quot;&gt;# Output from host google.com 10.8.0.1&lt;/span&gt;
-google.com has address 172.217.0.46
-google.com has IPv6 address 2607:f8b0:4005:80b::200e
-google.com mail is handled by 10 aspmx.l.google.com.
-google.com mail is handled by 20 alt1.aspmx.l.google.com.
-google.com mail is handled by 30 alt2.aspmx.l.google.com.
-google.com mail is handled by 40 alt3.aspmx.l.google.com.
-google.com mail is handled by 50 alt4.aspmx.l.google.com.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Our OpenVPN + Pi-hole still see google.com’s public IPs properly&lt;/p&gt;
-
-&lt;p&gt;This time run&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;host pagead2.googlesyndication.com
-
-&lt;span class=&quot;c&quot;&gt;# Output from host pagead2.googlesyndication.com&lt;/span&gt;
-pagead2.googlesyndication.com has address 0.0.0.0
-pagead2.googlesyndication.com has IPv6 address ::
-pagead2.googlesyndication.com is an &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;pagead46.l.doubleclick.net.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Pi-hole blocked &lt;code class=&quot;highlighter-rouge&quot;&gt;pagead2.googlesyndication.com&lt;/code&gt; as the domain is in its blacklist.&lt;/p&gt;
-
-&lt;h3 id=&quot;firewall-setup&quot;&gt;Firewall Setup&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://docs.pi-hole.net/guides/vpn/firewall/&quot;&gt;I followed Pi-hole’s setup&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;generate-openvpn-client-config-file&quot;&gt;Generate OpenVPN Client Config File&lt;/h3&gt;
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;./openvpn-install.sh&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;test-from-browser&quot;&gt;Test From Browser&lt;/h3&gt;
-&lt;p&gt;After connecting to your VPN using OpenVPN client. Go to this address &lt;a href=&quot;http://pagead2.googlesyndication.com&quot;&gt;http://pagead2.googlesyndication.com&lt;/a&gt;, if everything works correctly you will see this:&lt;/p&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/google-syndication.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/google-syndication.png&quot; alt=&quot;google syndication&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;h3 id=&quot;pi-hole-statistics&quot;&gt;Pi-hole Statistics&lt;/h3&gt;
-&lt;p&gt;You can go to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://pi.hole/admin&lt;/code&gt; once you are connected to the VPN and see some of Pi-hole’s stats. The result is mind-boggling. Almost half of my traffic is to serve ads.&lt;/p&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/pi-hole-stats.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/pi-hole-stats.png&quot; alt=&quot;Pi-hole stats&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Pi-hole is a good solution to fight against ads on the internet. You should give it a try. That said not all ads are bad. Some creators are reliant on ads as their source of income. If you have someone you support, consider whitelisting the ads for the good cause.&lt;/p&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.pi-hole.net/guides/vpn/overview/&quot;&gt;https://docs.pi-hole.net/guides/vpn/overview/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.digitalocean.com/community/tutorials/how-to-block-advertisements-at-the-dns-level-using-pi-hole-and-openvpn-on-ubuntu-16-04&quot;&gt;https://www.digitalocean.com/community/tutorials/how-to-block-advertisements-at-the-dns-level-using-pi-hole-and-openvpn-on-ubuntu-16-04&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://wiki.openvz.org/VPN_via_the_TUN/TAP_device&quot;&gt;https://wiki.openvz.org/VPN_via_the_TUN/TAP_device&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Introduction I have been playing around with setting up my own OpenVPN server lately and also found out Pi-hole. OpenVPN provides a way to set up a VPN that I can self manage and Pi-hole is a network wide ad blocking system. The two combined services provide a good way to make your web browsing experience more secure and ad-free. I followed the guide on Pi-hole to set up a VPN server but I found out that some information is missing depending on the type of VPS you have such as whether your VPS is a NAT VPS or not. Below is the documented steps of all my findings. Installation OpenVPN Setup Run these scripts: wget https://git.io/vpn -O openvpn-install.sh chmod 755 openvpn-install.sh ./openvpn-install.sh Follow this setup: Welcome to this quick OpenVPN &quot;road warrior&quot; installer I need to ask you a few questions before starting the setup You can leave the default options and just press enter if you are ok with them First I need to know the IPv4 address of the network interface you want OpenVPN listening to. IP address: 10.8.0.1 // Jason's notes: if you are behind NAT, just put your ipv4 IP address Which protocol do you want for OpenVPN connections? 1) UDP (recommended) 2) TCP Protocol [1-2]: 1 What port do you want OpenVPN listening to? Port: 1194 Which DNS do you want to use with the VPN? 1) Current system resolvers 2) Google 3) OpenDNS 4) NTT 5) Hurricane Electric 6) Verisign DNS [1-6]: 1 Finally, tell me your name for the client certificate Please, use one word only, no special characters Client name: pihole Okay, that was all I needed. We are ready to set up your OpenVPN server now Press any key to continue... Start OpenVPN Modify OpenVPN server’s configuration in /etc/openvpn/server/server.conf: remove all the existing push &quot;dhcp-option DNS x.x.x.x and add push &quot;dhcp-option DNS 10.8.0.1&quot; Restart OpenVPN services: systemctl daemon-reload systemctl restart openvpn // Jason's notes: just restarting openvpn does not change the configuration for OpenVPN server. systemctl restart openvpn-server@server.service Notes: if you are behind a NAT, you will also need to do the following: ip r | grep default # Output from ip r | grep default default via x.x.x.x dev eth0 onlink Note the value after dev in this case it is eth0 Run this: iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o &amp;lt;value you got from above&amp;gt; -j MASQUERADE # Example: iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE Pi-hole Setup Run this script: curl -sSL https://install.pi-hole.net | bash Follow the instruction to set up pi-hole: Installing dependencies Some instruction Some information This informs we need a static IP address in order the the whole thing to work The following step is important, make sure to select tun0 as the interface Choose the DNS provider Pi-hole will use. This is interesting. Essentially we will set up pi-hole as a DNS OpenVPN server will use, and within Pi-hole it will use the DNS setting below to make outbound requests. Choose the protocols available to you This following step is important, make sure to choose no so we can assign our internal address which is 10.8.0.1. Enter 10.8.0.1/24. This is the static address VPN will use to talk to Pi-hole Enter the ipv4-gateway. I just leave this as is. There are a few more steps but I just choose the default settings. Test DNS settings Run this script host google.com 10.8.0.1 # Output from host google.com 10.8.0.1 google.com has address 172.217.0.46 google.com has IPv6 address 2607:f8b0:4005:80b::200e google.com mail is handled by 10 aspmx.l.google.com. google.com mail is handled by 20 alt1.aspmx.l.google.com. google.com mail is handled by 30 alt2.aspmx.l.google.com. google.com mail is handled by 40 alt3.aspmx.l.google.com. google.com mail is handled by 50 alt4.aspmx.l.google.com. Our OpenVPN + Pi-hole still see google.com’s public IPs properly This time run host pagead2.googlesyndication.com # Output from host pagead2.googlesyndication.com pagead2.googlesyndication.com has address 0.0.0.0 pagead2.googlesyndication.com has IPv6 address :: pagead2.googlesyndication.com is an alias for pagead46.l.doubleclick.net. Pi-hole blocked pagead2.googlesyndication.com as the domain is in its blacklist. Firewall Setup I followed Pi-hole’s setup Generate OpenVPN Client Config File Run ./openvpn-install.sh Test From Browser After connecting to your VPN using OpenVPN client. Go to this address http://pagead2.googlesyndication.com, if everything works correctly you will see this: Pi-hole Statistics You can go to http://pi.hole/admin once you are connected to the VPN and see some of Pi-hole’s stats. The result is mind-boggling. Almost half of my traffic is to serve ads. Conclusion Pi-hole is a good solution to fight against ads on the internet. You should give it a try. That said not all ads are bad. Some creators are reliant on ads as their source of income. If you have someone you support, consider whitelisting the ads for the good cause. References https://docs.pi-hole.net/guides/vpn/overview/ https://www.digitalocean.com/community/tutorials/how-to-block-advertisements-at-the-dns-level-using-pi-hole-and-openvpn-on-ubuntu-16-04 https://wiki.openvz.org/VPN_via_the_TUN/TAP_device</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/openvpn-pihole.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/openvpn-pihole.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">This month has been busy. I have been learning more about self-hosting software and doing some tinkering with them. Currently I am checking out these 2 subreddits: https://reddit.com/r/selfhosted https://reddit.com/r/homelab These subs give me some motivation of creating my home server to store data and share with families and friends. But that will be the next step as I am using a cloud provider to do my hosting. What I am hosting: Bitwarden - Opensource password manager. I decided to delete my Lastpass’s account and use a self-hosted Bitwarden instance to manage my passwords. So far so good. I keep my data. Nextcloud - Productivity platform (Gsuite replacement). I use this to sync my files across computers. The platform offers a lot more than just file syncing. I haven’t explored much but it looks promising. Another file syncing alternative is Seafile which people say is more reliable. Plex - Media organizer. I am also exploring hosting my media so I can view them everywhere. Another popular alternative is Jellyfin TT-RSS - RSS feeds Firefly-III - Budget app. I am also trying out this budget app. It is quite different from my YNAB and needs taking used too. So far I am more pleased with the latter one. If you want to try out these services, let me know and I can give you access to them. Moving on… I am still reading about finance this month. They are easy to understand and are a nice complement to the ones I read in July. I highly recommend these books. Jason&amp;#39;s bookshelf: august-2019 The Bogleheads' Guide to Investing by Taylor Larimore tagged: august-2019 The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk by Taylor Larimore tagged: august-2019 Share book reviews and ratings with Jason, and even join a book club on Goodreads. Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/month-of-august.jpg" /><media:content medium="image" url="https://jasonthai.me/assets/img/month-of-august.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

@@ -208,6 +208,34 @@ workbox.precaching.precacheAndRoute([
     "revision": "42b1458b82c0e622da386868d36f2a40"
   },
   {
+    "url": "assets/img/pihole-wireguard-1.webp",
+    "revision": "d16aca2f0444f41fc249cfbc07b4c167"
+  },
+  {
+    "url": "assets/img/pihole-wireguard-2.webp",
+    "revision": "95cb4b702a788c55cee0777f67bda257"
+  },
+  {
+    "url": "assets/img/pihole-wireguard-3.webp",
+    "revision": "ce130ea031e17a8473bf9e0a826fe362"
+  },
+  {
+    "url": "assets/img/pihole-wireguard-4.webp",
+    "revision": "d55b5d6d04cc753823c0c40b5d96da8d"
+  },
+  {
+    "url": "assets/img/pihole-wireguard-5.webp",
+    "revision": "6c70ca2ba991c8fa0c9371fb852da7c5"
+  },
+  {
+    "url": "assets/img/pihole-wireguard-6.webp",
+    "revision": "8f19c2e64be491903e140bb2d791f9a4"
+  },
+  {
+    "url": "assets/img/pihole-wireguard-7.webp",
+    "revision": "89b1e341504a95c535b6d3fc3da86b32"
+  },
+  {
     "url": "assets/img/postage-stamps-484991_640.webp",
     "revision": "c308e4700c49e2d3cfbcb2624793429f"
   },
@@ -465,7 +493,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2019/08/25/how-to-host-openvpn-and-pi-hole-on-ubuntu-1804-vps/index.html",
-    "revision": "14365606ba9d5ef8b7417275972f306d"
+    "revision": "4c9df7b534f8fbbbca2aa4adee450463"
   },
   {
     "url": "blog/2019/09/01/what-im-up-to-in-august-2019/index.html",
@@ -501,11 +529,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/03/14/donate-compute-power-to-foldinghome-to-cures-for-covid-19/index.html",
-    "revision": "563141c26bf7cc570f7053b0d4ee5acd"
+    "revision": "c7c4cef12b93b49acb19dcad07308e1b"
+  },
+  {
+    "url": "blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/index.html",
+    "revision": "a4f3331b1ee142e430e0323a800e1c67"
   },
   {
     "url": "categories/index.html",
-    "revision": "018e7c86f053cf04ea68f5141f15bd34"
+    "revision": "00ecdeb00c0efe7c0bf49b4b0b7f5c63"
   },
   {
     "url": "default/index.html",
@@ -529,7 +561,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "dbe11f21fb3132daa485106b21dc4bbc"
+    "revision": "5f994a43aa5f9a67530de798ba7fbc10"
   },
   {
     "url": "manifest.json",
@@ -537,19 +569,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "9df951f35b8534af3af2d7a5d7106725"
+    "revision": "dd6f87f8e26ef624d90563a06d50d0fb"
   },
   {
     "url": "page/3/index.html",
-    "revision": "28a8a658c325a7300ae754dca7ca9abf"
+    "revision": "70e6b694baa705855676f39acc791734"
   },
   {
     "url": "page/4/index.html",
-    "revision": "c5f884cbfceabe6f7fdd6df4891b5893"
+    "revision": "a9c9516e6ef32506f486d5bfde757615"
   },
   {
     "url": "posts/index.html",
-    "revision": "b89a7c0dbf06616e81b6fd660f2d66df"
+    "revision": "bcc620c507b7696b4f5d6eeda55718d8"
   },
   {
     "url": "redirects.json",
@@ -565,7 +597,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "17ed28884d3edb85902af86ef41917a4"
+    "revision": "479a9d01aa5640ef28bf5b1c22f01fef"
   },
   {
     "url": "vi/index.html",
