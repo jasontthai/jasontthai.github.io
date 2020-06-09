@@ -1,4 +1,398 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-05-11T15:55:23+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">How to Setup Wireguard + Pi-hole on Debian 10 / Ubuntu 18.04</title><link href="https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/" rel="alternate" type="text/html" title="How to Setup Wireguard + Pi-hole on Debian 10 / Ubuntu 18.04" /><published>2020-05-01T00:00:00+00:00</published><updated>2020-05-01T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804</id><content type="html" xml:base="https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-06-09T17:39:23+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">[High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers</title><link href="https://jasonthai.me/blog/2020/06/08/high-availability-series-part-i-set-up-and-secure-mariadb-on-debian-servers/" rel="alternate" type="text/html" title="[High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers" /><published>2020-06-08T00:00:00+00:00</published><updated>2020-06-08T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/06/08/high-availability-series-part-i-set-up-and-secure-mariadb-on-debian-servers</id><content type="html" xml:base="https://jasonthai.me/blog/2020/06/08/high-availability-series-part-i-set-up-and-secure-mariadb-on-debian-servers/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;First part of the series covers how to set up and secure MariaDB.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;MariaDB is a community-developed, commercially supported fork of the MySQL relational database management system, intended to remain free and open-source software under the GNU General Public License
+&lt;a href=&quot;https://en.wikipedia.org/wiki/MariaDB&quot;&gt;https://en.wikipedia.org/wiki/MariaDB&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The series will guide through how to set up a Galera cluster with 3 nodes, secure connection between them, and finally set up HAProxy as a load balancer to the webservers where each webserver talks to a particular MariaDB instance on the same server. This purpose is to have a highly available and endurable system which is expected to run continuously without failure for a long time. This only covers horizontal scaling of different nodes. Vertical scaling may be covered in the future.&lt;/p&gt;
+
+&lt;h1 id=&quot;set-up-mariadb&quot;&gt;Set up MariaDB&lt;/h1&gt;
+&lt;p&gt;Install MariaDB packages:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;mariadb-server mariadb-backup
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run the security script:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we&lt;span class=&quot;s1&quot;&gt;'ll need the current
+password for the root user.  If you'&lt;/span&gt;ve just installed MariaDB, and
+you haven&lt;span class=&quot;s1&quot;&gt;'t set the root password yet, the password will be blank,
+so you should just press enter here.
+
+Enter current password for root (enter for none):
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+Set root password? [Y/n] Y
+New password:
+Re-enter new password:
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] Y
+ ... Success!
+
+Normally, root should only be allowed to connect from '&lt;/span&gt;localhost&lt;span class=&quot;s1&quot;&gt;'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] Y
+ ... Success!
+
+By default, MariaDB comes with a database named '&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] Y
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] Y
+ ... Success!
+
+Cleaning up...
+
+All done!  If you'&lt;/span&gt;ve completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;using MariaDB!
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+&lt;h1 id=&quot;set-up-ssl-for-mariadb&quot;&gt;Set up SSL for MariaDB&lt;/h1&gt;
+&lt;h2 id=&quot;create-ca-certificate&quot;&gt;Create CA Certificate&lt;/h2&gt;
+&lt;p&gt;Make a directory named certs in /etc/mysql/ directory using the mkdir command:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /etc/mysql
+&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo mkdir &lt;/span&gt;certs
+&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;certs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: Common Name value used for the server and client certificates/keys must each differ from the Common Name value used for the CA certificate. To avoid any issues, set it as follows:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;CA common Name : MariaDB admin&lt;/li&gt;
+  &lt;li&gt;Server common Name: MariaDB server&lt;/li&gt;
+  &lt;li&gt;Client common Name: MariaDB client&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Type the following command to create a new CA key:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl genrsa 2048 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ca-key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;OR&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl genrsa 4096 &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; ca-key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Generating RSA private key, 2048 bit long modulus &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2 primes&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+.......+++++
+..............................................................+++++
+e is 65537 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0x010001&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;Type the following command to generate the certificate using that key:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl req &lt;span class=&quot;nt&quot;&gt;-new&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-x509&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-nodes&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365000 &lt;span class=&quot;nt&quot;&gt;-key&lt;/span&gt; ca-key.pem &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; ca-cert.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt;, the field will be left blank.
+&lt;span class=&quot;nt&quot;&gt;-----&lt;/span&gt;
+Country Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2 letter code&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AU]:
+State or Province Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;full name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Some-State]:
+Locality Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, city&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+Organization Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, company&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Internet Widgits Pty Ltd]:
+Organizational Unit Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, section&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+Common Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g. server FQDN or YOUR name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:MariaDB admin
+Email Address &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;Now there should be two files as follows:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ls&lt;/span&gt; /etc/mysql/certs
+ca-cert.pem – Certificate file &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the Certificate Authority &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CA&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+ca-key.pem – Key file &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the Certificate Authority &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;CA&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Let’s use both files to generate the server and client certificates.&lt;/p&gt;
+&lt;h2 id=&quot;create-the-server-ssl-certificate&quot;&gt;Create the server SSL certificate&lt;/h2&gt;
+&lt;p&gt;To create the server key, run:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl req &lt;span class=&quot;nt&quot;&gt;-newkey&lt;/span&gt; rsa:2048 &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365000 &lt;span class=&quot;nt&quot;&gt;-nodes&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-keyout&lt;/span&gt; server-key.pem &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; server-req.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Generating a RSA private key
+.........................................................................................................................................+++++
+...........................................................+++++
+writing new private key to &lt;span class=&quot;s1&quot;&gt;'server-key.pem'&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-----&lt;/span&gt;
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt;, the field will be left blank.
+&lt;span class=&quot;nt&quot;&gt;-----&lt;/span&gt;
+Country Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2 letter code&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AU]:
+State or Province Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;full name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Some-State]:
+Locality Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, city&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+Organization Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, company&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Internet Widgits Pty Ltd]:
+Organizational Unit Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, section&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+Common Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g. server FQDN or YOUR name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:MariaDB server
+Email Address &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+
+Please enter the following &lt;span class=&quot;s1&quot;&gt;'extra'&lt;/span&gt; attributes
+to be sent with your certificate request
+A challenge password &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+An optional company name &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;Next process the server RSA key, enter:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl rsa &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; server-key.pem &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; server-key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;writing RSA key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;Finally sign the server certificate, run:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl x509 &lt;span class=&quot;nt&quot;&gt;-req&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; server-req.pem &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365000 &lt;span class=&quot;nt&quot;&gt;-CA&lt;/span&gt; ca-cert.pem &lt;span class=&quot;nt&quot;&gt;-CAkey&lt;/span&gt; ca-key.pem &lt;span class=&quot;nt&quot;&gt;-set_serial&lt;/span&gt; 01 &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; server-cert.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Signature ok
+&lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;C &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; AU, ST &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Some-State, O &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; Internet Widgits Pty Ltd, CN &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; MariaDB server
+Getting CA Private Key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;Now you should have these two additional files:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/etc/mysql/certs/server-cert.pem – MariaDB server certificate file.
+/etc/mysql/certs/server-key.pem – MariaDB server key file.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;create-the-client-tlsssl-certificate&quot;&gt;Create the client TLS/SSL certificate&lt;/h2&gt;
+&lt;p&gt;To create the client key, run:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl req &lt;span class=&quot;nt&quot;&gt;-newkey&lt;/span&gt; rsa:2048 &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365000 &lt;span class=&quot;nt&quot;&gt;-nodes&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-keyout&lt;/span&gt; client-key.pem &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; client-req.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Generating a RSA private key
+.......................................+++++
+...............+++++
+writing new private key to &lt;span class=&quot;s1&quot;&gt;'client-key.pem'&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;-----&lt;/span&gt;
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter &lt;span class=&quot;s1&quot;&gt;'.'&lt;/span&gt;, the field will be left blank.
+&lt;span class=&quot;nt&quot;&gt;-----&lt;/span&gt;
+Country Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2 letter code&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;AU]:
+State or Province Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;full name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Some-State]:
+Locality Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, city&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+Organization Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, company&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Internet Widgits Pty Ltd]:
+Organizational Unit Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;eg, section&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+Common Name &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;e.g. server FQDN or YOUR name&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:Mariadb client
+Email Address &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+
+Please enter the following &lt;span class=&quot;s1&quot;&gt;'extra'&lt;/span&gt; attributes
+to be sent with your certificate request
+A challenge password &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+An optional company name &lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt;:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+
+&lt;p&gt;Next, process client RSA key, enter:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl rsa &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; client-key.pem &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; client-key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;writing RSA key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+&lt;p&gt;Finally, sign the client certificate, run:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;openssl x509 &lt;span class=&quot;nt&quot;&gt;-req&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-in&lt;/span&gt; client-req.pem &lt;span class=&quot;nt&quot;&gt;-days&lt;/span&gt; 365000 &lt;span class=&quot;nt&quot;&gt;-CA&lt;/span&gt; ca-cert.pem &lt;span class=&quot;nt&quot;&gt;-CAkey&lt;/span&gt; ca-key.pem &lt;span class=&quot;nt&quot;&gt;-set_serial&lt;/span&gt; 01 &lt;span class=&quot;nt&quot;&gt;-out&lt;/span&gt; client-cert.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Signature ok
+&lt;span class=&quot;nv&quot;&gt;subject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/C&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;AU/ST&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Some-State/O&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Internet Widgits Pty Ltd/CN&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;MariaDB client
+Getting CA Private Key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+&lt;h2 id=&quot;verify-the-certificates&quot;&gt;Verify the certificates&lt;/h2&gt;
+&lt;p&gt;Type the following command to verify the certificates to make sure everything was created correctly:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; openssl verify &lt;span class=&quot;nt&quot;&gt;-CAfile&lt;/span&gt; ca-cert.pem server-cert.pem client-cert.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;details&gt;
+    &lt;summary&gt;Sample output:
+&lt;/summary&gt;
+    
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server-cert.pem: OK
+client-cert.pem: OK
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;/details&gt;
+&lt;h2 id=&quot;configure-ssl-for-mariadb-server&quot;&gt;Configure SSL for MariaDB Server&lt;/h2&gt;
+&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/50-server.cnf&lt;/code&gt; and add the following lines in [mysqld] section:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssl-ca&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/ca-cert.pem
+ssl-cert&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/server-cert.pem
+ssl-key&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/server-key.pem
+bind-address            &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;      
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Give permission to mysql so it can read the certs properly:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo chown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-Rv&lt;/span&gt; mysql:root /etc/mysql/certs/
+
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/server-key.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/client-req.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/server-req.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/ca-key.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/server-cert.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/client-cert.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/ca-cert.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/client-key.pem'&lt;/span&gt; from root:root to mysql:root
+changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/'&lt;/span&gt; from root:root to mysql:root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Then, restart MariaDB service to apply the changes:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Next, log in to MariaDB shell and check SSL variable:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Enter your root password, then run the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MariaDB &lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;none&lt;span class=&quot;o&quot;&gt;)]&amp;gt;&lt;/span&gt; SHOW VARIABLES LIKE &lt;span class=&quot;s1&quot;&gt;'%ssl%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You will see that SSL variables are now enabled:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;+---------------------+----------------------------------+
+| Variable_name       | Value                            |
++---------------------+----------------------------------+
+| have_openssl        | NO                               |
+| have_ssl            | YES                              |
+| ssl_ca              | /etc/mysql/certs/ca-cert.pem     |
+| ssl_capath          |                                  |
+| ssl_cert            | /etc/mysql/certs/server-cert.pem |
+| ssl_cipher          |                                  |
+| ssl_crl             |                                  |
+| ssl_crlpath         |                                  |
+| ssl_key             | /etc/mysql/certs/server-key.pem  |
+| version_ssl_library | YaSSL 2.4.4                      |
++---------------------+----------------------------------+
+10 rows &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.001 sec&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;configure-ssl-for-mariadb-client&quot;&gt;Configure SSL for MariaDB Client&lt;/h2&gt;
+&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/50-client.cnf&lt;/code&gt; and add the following lines in [client] section:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssl-ca&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/ca-cert.pem
+ssl-cert&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/client-cert.pem
+ssl-key&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/client-key.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;verify-secure-connection&quot;&gt;Verify Secure Connection&lt;/h2&gt;
+&lt;p&gt;Log in to MariaDB shell:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, check the status of connection with the following command:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;MariaDB &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysql]&amp;gt; status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Detail about secure connection should be displayed like so:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;--------------&lt;/span&gt;
+mysql  Ver 15.1 Distrib 10.3.22-MariaDB, &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;debian-linux-gnu &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;x86_64&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; using readline 5.2
+
+Connection &lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;:		282
+Current database:
+Current user:		root@localhost
+SSL:			Cipher &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;use is DHE-RSA-AES256-SHA
+Current pager:		stdout
+Using outfile:		&lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;
+Using delimiter:	&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+Server:			MariaDB
+Server version:		10.3.22-MariaDB-0+deb10u1 Debian 10
+Protocol version:	10
+Connection:		Localhost via UNIX socket
+Server characterset:	utf8mb4
+Db     characterset:	utf8mb4
+Client characterset:	utf8mb4
+Conn.  characterset:	utf8mb4
+UNIX socket:		/var/run/mysqld/mysqld.sock
+Uptime:			7 hours 27 min 20 sec
+
+Threads: 10  Questions: 31302  Slow queries: 0  Opens: 159  Flush tables: 1  Open tables: 63  Queries per second avg: 1.166
+&lt;span class=&quot;nt&quot;&gt;--------------&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;This post guides us how to set up a MariaDB server and secure connection between the server and its clients. Next post will cover setting up the Galera cluster.&lt;/p&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://mariadb.com/kb/en/secure-connections-overview&quot;&gt;https://mariadb.com/kb/en/secure-connections-overview&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://mariadb.com/kb/en/securing-connections-for-client-and-server&quot;&gt;https://mariadb.com/kb/en/securing-connections-for-client-and-server&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Introduction First part of the series covers how to set up and secure MariaDB. MariaDB is a community-developed, commercially supported fork of the MySQL relational database management system, intended to remain free and open-source software under the GNU General Public License https://en.wikipedia.org/wiki/MariaDB The series will guide through how to set up a Galera cluster with 3 nodes, secure connection between them, and finally set up HAProxy as a load balancer to the webservers where each webserver talks to a particular MariaDB instance on the same server. This purpose is to have a highly available and endurable system which is expected to run continuously without failure for a long time. This only covers horizontal scaling of different nodes. Vertical scaling may be covered in the future. Set up MariaDB Install MariaDB packages: $galera-01 sudo apt-get install mariadb-server mariadb-backup Run the security script: $galera-01 sudo mysql_secure_installation Sample output: NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB SERVERS IN PRODUCTION USE! PLEASE READ EACH STEP CAREFULLY! In order to log into MariaDB to secure it, we'll need the current password for the root user. If you've just installed MariaDB, and you haven't set the root password yet, the password will be blank, so you should just press enter here. Enter current password for root (enter for none): OK, successfully used password, moving on... Setting the root password ensures that nobody can log into the MariaDB root user without the proper authorisation. Set root password? [Y/n] Y New password: Re-enter new password: Password updated successfully! Reloading privilege tables.. ... Success! By default, a MariaDB installation has an anonymous user, allowing anyone to log into MariaDB without having to have a user account created for them. This is intended only for testing, and to make the installation go a bit smoother. You should remove them before moving into a production environment. Remove anonymous users? [Y/n] Y ... Success! Normally, root should only be allowed to connect from 'localhost'. This ensures that someone cannot guess at the root password from the network. Disallow root login remotely? [Y/n] Y ... Success! By default, MariaDB comes with a database named 'test' that anyone can access. This is also intended only for testing, and should be removed before moving into a production environment. Remove test database and access to it? [Y/n] Y - Dropping test database... ... Success! - Removing privileges on test database... ... Success! Reloading the privilege tables will ensure that all changes made so far will take effect immediately. Reload privilege tables now? [Y/n] Y ... Success! Cleaning up... All done! If you've completed all of the above steps, your MariaDB installation should now be secure. Thanks for using MariaDB! Set up SSL for MariaDB Create CA Certificate Make a directory named certs in /etc/mysql/ directory using the mkdir command: $galera-01 cd /etc/mysql $galera-01 sudo mkdir certs $galera-01 cd certs Note: Common Name value used for the server and client certificates/keys must each differ from the Common Name value used for the CA certificate. To avoid any issues, set it as follows: CA common Name : MariaDB admin Server common Name: MariaDB server Client common Name: MariaDB client Type the following command to create a new CA key: $galera-01 sudo openssl genrsa 2048 &amp;gt; ca-key.pem OR $galera-01 sudo openssl genrsa 4096 &amp;gt; ca-key.pem Sample output: Generating RSA private key, 2048 bit long modulus (2 primes) .......+++++ ..............................................................+++++ e is 65537 (0x010001) Type the following command to generate the certificate using that key: $galera-01 sudo openssl req -new -x509 -nodes -days 365000 -key ca-key.pem -out ca-cert.pem Sample output: You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a Distinguished Name or a DN. There are quite a few fields but you can leave some blank For some fields there will be a default value, If you enter '.', the field will be left blank. ----- Country Name (2 letter code) [AU]: State or Province Name (full name) [Some-State]: Locality Name (eg, city) []: Organization Name (eg, company) [Internet Widgits Pty Ltd]: Organizational Unit Name (eg, section) []: Common Name (e.g. server FQDN or YOUR name) []:MariaDB admin Email Address []: Now there should be two files as follows: $galera-01 ls /etc/mysql/certs ca-cert.pem – Certificate file for the Certificate Authority (CA). ca-key.pem – Key file for the Certificate Authority (CA). Let’s use both files to generate the server and client certificates. Create the server SSL certificate To create the server key, run: $galera-01 sudo openssl req -newkey rsa:2048 -days 365000 -nodes -keyout server-key.pem -out server-req.pem Sample output: Generating a RSA private key .........................................................................................................................................+++++ ...........................................................+++++ writing new private key to 'server-key.pem' ----- You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a Distinguished Name or a DN. There are quite a few fields but you can leave some blank For some fields there will be a default value, If you enter '.', the field will be left blank. ----- Country Name (2 letter code) [AU]: State or Province Name (full name) [Some-State]: Locality Name (eg, city) []: Organization Name (eg, company) [Internet Widgits Pty Ltd]: Organizational Unit Name (eg, section) []: Common Name (e.g. server FQDN or YOUR name) []:MariaDB server Email Address []: Please enter the following 'extra' attributes to be sent with your certificate request A challenge password []: An optional company name []: Next process the server RSA key, enter: $galera-01 sudo openssl rsa -in server-key.pem -out server-key.pem Sample output: writing RSA key Finally sign the server certificate, run: $galera-01 sudo openssl x509 -req -in server-req.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out server-cert.pem Sample output: Signature ok subject=C = AU, ST = Some-State, O = Internet Widgits Pty Ltd, CN = MariaDB server Getting CA Private Key Now you should have these two additional files: /etc/mysql/certs/server-cert.pem – MariaDB server certificate file. /etc/mysql/certs/server-key.pem – MariaDB server key file. Create the client TLS/SSL certificate To create the client key, run: $galera-01 sudo openssl req -newkey rsa:2048 -days 365000 -nodes -keyout client-key.pem -out client-req.pem Sample output: Generating a RSA private key .......................................+++++ ...............+++++ writing new private key to 'client-key.pem' ----- You are about to be asked to enter information that will be incorporated into your certificate request. What you are about to enter is what is called a Distinguished Name or a DN. There are quite a few fields but you can leave some blank For some fields there will be a default value, If you enter '.', the field will be left blank. ----- Country Name (2 letter code) [AU]: State or Province Name (full name) [Some-State]: Locality Name (eg, city) []: Organization Name (eg, company) [Internet Widgits Pty Ltd]: Organizational Unit Name (eg, section) []: Common Name (e.g. server FQDN or YOUR name) []:Mariadb client Email Address []: Please enter the following 'extra' attributes to be sent with your certificate request A challenge password []: An optional company name []: Next, process client RSA key, enter: $galera-01 sudo openssl rsa -in client-key.pem -out client-key.pem Sample output: writing RSA key Finally, sign the client certificate, run: $galera-01 sudo openssl x509 -req -in client-req.pem -days 365000 -CA ca-cert.pem -CAkey ca-key.pem -set_serial 01 -out client-cert.pem Sample output: Signature ok subject=/C=AU/ST=Some-State/O=Internet Widgits Pty Ltd/CN=MariaDB client Getting CA Private Key Verify the certificates Type the following command to verify the certificates to make sure everything was created correctly: $galera-01 openssl verify -CAfile ca-cert.pem server-cert.pem client-cert.pem Sample output: server-cert.pem: OK client-cert.pem: OK Configure SSL for MariaDB Server Edit /etc/mysql/mariadb.conf.d/50-server.cnf and add the following lines in [mysqld] section: ssl-ca=/etc/mysql/certs/ca-cert.pem ssl-cert=/etc/mysql/certs/server-cert.pem ssl-key=/etc/mysql/certs/server-key.pem bind-address = * Give permission to mysql so it can read the certs properly: $galera-01 sudo chown -Rv mysql:root /etc/mysql/certs/ changed ownership of '/etc/mysql/certs/server-key.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/client-req.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/server-req.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/ca-key.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/server-cert.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/client-cert.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/ca-cert.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/client-key.pem' from root:root to mysql:root changed ownership of '/etc/mysql/certs/' from root:root to mysql:root Then, restart MariaDB service to apply the changes: $galera-01 sudo systemctl restart mysql Next, log in to MariaDB shell and check SSL variable: $galera-01 sudo mysql -u root -p Enter your root password, then run the following command: MariaDB [(none)]&amp;gt; SHOW VARIABLES LIKE '%ssl%'; You will see that SSL variables are now enabled: +---------------------+----------------------------------+ | Variable_name | Value | +---------------------+----------------------------------+ | have_openssl | NO | | have_ssl | YES | | ssl_ca | /etc/mysql/certs/ca-cert.pem | | ssl_capath | | | ssl_cert | /etc/mysql/certs/server-cert.pem | | ssl_cipher | | | ssl_crl | | | ssl_crlpath | | | ssl_key | /etc/mysql/certs/server-key.pem | | version_ssl_library | YaSSL 2.4.4 | +---------------------+----------------------------------+ 10 rows in set (0.001 sec) Configure SSL for MariaDB Client Edit /etc/mysql/mariadb.conf.d/50-client.cnf and add the following lines in [client] section: ssl-ca=/etc/mysql/certs/ca-cert.pem ssl-cert=/etc/mysql/certs/client-cert.pem ssl-key=/etc/mysql/certs/client-key.pem Verify Secure Connection Log in to MariaDB shell: $galera-01 sudo mysql -u root -p Now, check the status of connection with the following command: MariaDB [mysql]&amp;gt; status Detail about secure connection should be displayed like so: -------------- mysql Ver 15.1 Distrib 10.3.22-MariaDB, for debian-linux-gnu (x86_64) using readline 5.2 Connection id: 282 Current database: Current user: root@localhost SSL: Cipher in use is DHE-RSA-AES256-SHA Current pager: stdout Using outfile: '' Using delimiter: ; Server: MariaDB Server version: 10.3.22-MariaDB-0+deb10u1 Debian 10 Protocol version: 10 Connection: Localhost via UNIX socket Server characterset: utf8mb4 Db characterset: utf8mb4 Client characterset: utf8mb4 Conn. characterset: utf8mb4 UNIX socket: /var/run/mysqld/mysqld.sock Uptime: 7 hours 27 min 20 sec Threads: 10 Questions: 31302 Slow queries: 0 Opens: 159 Flush tables: 1 Open tables: 63 Queries per second avg: 1.166 -------------- Conclusion This post guides us how to set up a MariaDB server and secure connection between the server and its clients. Next post will cover setting up the Galera cluster. Resources https://mariadb.com/kb/en/secure-connections-overview https://mariadb.com/kb/en/securing-connections-for-client-and-server</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/galera_small.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/galera_small.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">How to Setup Wireguard + Pi-hole on Debian 10 / Ubuntu 18.04</title><link href="https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/" rel="alternate" type="text/html" title="How to Setup Wireguard + Pi-hole on Debian 10 / Ubuntu 18.04" /><published>2020-05-01T00:00:00+00:00</published><updated>2020-05-01T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804</id><content type="html" xml:base="https://jasonthai.me/blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/">&lt;blockquote&gt;
   &lt;p&gt;WireGuard® is an extremely simple yet fast and modern VPN that utilizes state-of-the-art cryptography. It aims to be faster, simpler, leaner, and more useful than IPsec, while avoiding the massive headache. It intends to be considerably more performant than OpenVPN. WireGuard is designed as a general purpose VPN for running on embedded interfaces and super computers alike, fit for many different circumstances. Initially released for the Linux kernel, it is now cross-platform (Windows, macOS, BSD, iOS, Android) and widely deployable. It is currently under heavy development, but already it might be regarded as the most secure, easiest to use, and simplest VPN solution in the industry.
 &lt;a href=&quot;https://www.wireguard.com/&quot;&gt;https://www.wireguard.com&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -538,136 +932,4 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 &lt;p&gt;I did not run so much in September and my legs are getting itchy. Hopefully I’ll run again soon in the new area.&lt;/p&gt;
 
-&lt;p&gt;This upcoming month of October is the &lt;a href=&quot;https://www.dhs.gov/national-cyber-security-awareness-month&quot;&gt;Cybersecurity Awareness Month&lt;/a&gt;, please spend sometime going over your online presence, updating your passwords. That’s all folks.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">Vy finally came back after doing internship in Hanoi. It has a brief yet long 3 months for us. We also moved in the new apartment and although it took a while, we reached to a point where everything was set up. We bought a new dining table, 2 chairs, a new bed and some other kitchen items. We did a lot of things together for the first time too like baking. Vy and I managed to successfully bake a coffee cake. We also decided to eat at home more and I started cooking a bit. We spent quite a bit of money during this month as the cost of moving and buying things for the new place. As a result, I skipped one cycle of investing. Hopefully this will resume this coming month of October. I did not run so much in September and my legs are getting itchy. Hopefully I’ll run again soon in the new area. This upcoming month of October is the Cybersecurity Awareness Month, please spend sometime going over your online presence, updating your passwords. That’s all folks.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/the-month-september.jpg" /><media:content medium="image" url="https://jasonthai.me/assets/img/the-month-september.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">What I’m up to in August 2019</title><link href="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/" rel="alternate" type="text/html" title="What I'm up to in August 2019" /><published>2019-09-01T00:00:00+00:00</published><updated>2019-09-01T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019</id><content type="html" xml:base="https://jasonthai.me/blog/2019/09/01/what-im-up-to-in-august-2019/">&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/month-of-august.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/month-of-august.jpg&quot; alt=&quot;August&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;p&gt;This month has been busy. I have been learning more about self-hosting software and doing some tinkering with them.&lt;/p&gt;
-
-&lt;p&gt;Currently I am checking out these 2 subreddits:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://reddit.com/r/selfhosted&quot;&gt;https://reddit.com/r/selfhosted&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://reddit.com/r/homelab&quot;&gt;https://reddit.com/r/homelab&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These subs give me some motivation of creating my home server to store data and share with families and friends. But that will be the next step as I am using a cloud provider to do my hosting.&lt;/p&gt;
-
-&lt;p&gt;What I am hosting:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://bitwarden.com&quot;&gt;Bitwarden&lt;/a&gt; - Opensource password manager. I decided to delete my Lastpass’s account and use a self-hosted Bitwarden instance to manage my passwords. So far so good. I keep my data.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://nextcloud.com&quot;&gt;Nextcloud&lt;/a&gt; - Productivity platform (Gsuite replacement). I use this to sync my files across computers. The platform offers a lot more than just file syncing. I haven’t explored much but it looks promising. Another file syncing alternative is &lt;a href=&quot;https://seafile.com&quot;&gt;Seafile&lt;/a&gt; which people say is more reliable.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://plex.tv&quot;&gt;Plex&lt;/a&gt; - Media organizer. I am also exploring hosting my media so I can view them everywhere. Another popular alternative is &lt;a href=&quot;https://github.com/jellyfin/jellyfin&quot;&gt;Jellyfin&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tt-rss.org&quot;&gt;TT-RSS&lt;/a&gt; - RSS feeds&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://firefly-iii.org/&quot;&gt;Firefly-III&lt;/a&gt; - Budget app. I am also trying out this budget app. It is quite different from my &lt;a href=&quot;https://www.youneedabudget.com/&quot;&gt;YNAB&lt;/a&gt; and needs taking used too. So far I am more pleased with the latter one.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If you want to try out these services, let me know and I can give you access to them.&lt;/p&gt;
-
-&lt;p&gt;Moving on…
-I am still reading about finance this month. They are easy to understand and are a nice complement to the ones I read in July. I highly recommend these books.&lt;/p&gt;
-
-&lt;style type=&quot;text/css&quot; media=&quot;screen&quot;&gt;
-  .gr_custom_container_1567354622 {
-    /* customize your Goodreads widget container here*/
-    border: 1px solid gray;
-    border-radius:10px;
-    padding: 10px 5px 10px 5px;
-    background-color: #FFFFFF;
-    color: #000000;
-    width: 300px
-  }
-  .gr_custom_header_1567354622 {
-    /* customize your Goodreads header here*/
-    border-bottom: 1px solid gray;
-    width: 100%;
-    margin-bottom: 5px;
-    text-align: center;
-    font-size: 120%
-  }
-  .gr_custom_each_container_1567354622 {
-    /* customize each individual book container here */
-    width: 100%;
-    clear: both;
-    margin-bottom: 10px;
-    overflow: auto;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #aaa;
-  }
-  .gr_custom_book_container_1567354622 {
-    /* customize your book covers here */
-    overflow: hidden;
-    height: 60px;
-      float: left;
-      margin-right: 4px;
-      width: 39px;
-  }
-  .gr_custom_author_1567354622 {
-    /* customize your author names here */
-    font-size: 10px;
-  }
-  .gr_custom_tags_1567354622 {
-    /* customize your tags here */
-    font-size: 10px;
-    color: gray;
-  }
-  .gr_custom_rating_1567354622 {
-    /* customize your rating stars here */
-    float: right;
-  }
-&lt;/style&gt;
-
-&lt;div align=&quot;center&quot; id=&quot;gr_custom_widget_1567354622&quot;&gt;
-          &lt;div class=&quot;gr_custom_container_1567354622&quot;&gt;
-    &lt;h2 class=&quot;gr_custom_header_1567354622&quot;&gt;
-    &lt;a style=&quot;text-decoration: none;&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/list/54938708-jason-thai?shelf=august-2019&amp;amp;utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;Jason&amp;#39;s bookshelf: august-2019&lt;/a&gt;
-    &lt;/h2&gt;
-      &lt;div class=&quot;gr_custom_each_container_1567354622&quot;&gt;
-          &lt;div class=&quot;gr_custom_book_container_1567354622&quot;&gt;
-            &lt;a title=&quot;The Bogleheads' Guide to Investing&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960404866?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;&lt;img alt=&quot;The Bogleheads' Guide to Investing&quot; border=&quot;0&quot; src=&quot;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1388380454l/381355._SY75_.jpg&quot; /&gt;&lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_rating_1567354622&quot;&gt;
-            &lt;span class=&quot; staticStars notranslate&quot;&gt;&lt;img src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_title_1567354622&quot;&gt;
-            &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960404866?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;The Bogleheads' Guide to Investing&lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_author_1567354622&quot;&gt;
-            by &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/author/show/66008.Taylor_Larimore&quot;&gt;Taylor Larimore&lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_tags_1567354622&quot;&gt;
-            tagged:
-            august-2019
-          &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;gr_custom_each_container_1567354622&quot;&gt;
-          &lt;div class=&quot;gr_custom_book_container_1567354622&quot;&gt;
-            &lt;a title=&quot;The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk&quot; rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960405014?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;&lt;img alt=&quot;The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk&quot; border=&quot;0&quot; src=&quot;https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1528428190l/36809342._SY75_.jpg&quot; /&gt;&lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_rating_1567354622&quot;&gt;
-            &lt;span class=&quot; staticStars notranslate&quot;&gt;&lt;img src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;img alt=&quot;&quot; src=&quot;https://www.goodreads.com/images/layout/gr_red_star_inactive.png&quot; /&gt;&lt;/span&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_title_1567354622&quot;&gt;
-            &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/review/show/2960405014?utm_medium=api&amp;amp;utm_source=custom_widget&quot;&gt;The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk&lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_author_1567354622&quot;&gt;
-            by &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/author/show/66008.Taylor_Larimore&quot;&gt;Taylor Larimore&lt;/a&gt;
-          &lt;/div&gt;
-          &lt;div class=&quot;gr_custom_tags_1567354622&quot;&gt;
-            tagged:
-            august-2019
-          &lt;/div&gt;
-      &lt;/div&gt;
-  &lt;br style=&quot;clear: both&quot; /&gt;
-  &lt;center&gt;
-    &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/&quot;&gt;&lt;img alt=&quot;goodreads.com&quot; style=&quot;border:0&quot; src=&quot;https://www.goodreads.com/images/widget/widget_logo.gif&quot; /&gt;&lt;/a&gt;
-  &lt;/center&gt;
-  &lt;noscript&gt;
-    Share &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/&quot;&gt;book reviews&lt;/a&gt; and ratings with Jason, and even join a &lt;a rel=&quot;nofollow&quot; href=&quot;https://www.goodreads.com/group&quot;&gt;book club&lt;/a&gt; on Goodreads.
-  &lt;/noscript&gt;
-  &lt;/div&gt;
-
-      &lt;/div&gt;
-&lt;script src=&quot;https://www.goodreads.com/review/custom_widget/54938708.Jason's%20bookshelf:%20august-2019?cover_position=left&amp;amp;cover_size=small&amp;amp;num_books=5&amp;amp;order=a&amp;amp;shelf=august-2019&amp;amp;show_author=1&amp;amp;show_cover=1&amp;amp;show_rating=1&amp;amp;show_review=1&amp;amp;show_tags=1&amp;amp;show_title=1&amp;amp;sort=date_added&amp;amp;widget_bg_color=FFFFFF&amp;amp;widget_bg_transparent=&amp;amp;widget_border_width=1&amp;amp;widget_id=1567354622&amp;amp;widget_text_color=000000&amp;amp;widget_title_size=medium&amp;amp;widget_width=medium&quot; type=&quot;text/javascript&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-
-&lt;p&gt;Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">This month has been busy. I have been learning more about self-hosting software and doing some tinkering with them. Currently I am checking out these 2 subreddits: https://reddit.com/r/selfhosted https://reddit.com/r/homelab These subs give me some motivation of creating my home server to store data and share with families and friends. But that will be the next step as I am using a cloud provider to do my hosting. What I am hosting: Bitwarden - Opensource password manager. I decided to delete my Lastpass’s account and use a self-hosted Bitwarden instance to manage my passwords. So far so good. I keep my data. Nextcloud - Productivity platform (Gsuite replacement). I use this to sync my files across computers. The platform offers a lot more than just file syncing. I haven’t explored much but it looks promising. Another file syncing alternative is Seafile which people say is more reliable. Plex - Media organizer. I am also exploring hosting my media so I can view them everywhere. Another popular alternative is Jellyfin TT-RSS - RSS feeds Firefly-III - Budget app. I am also trying out this budget app. It is quite different from my YNAB and needs taking used too. So far I am more pleased with the latter one. If you want to try out these services, let me know and I can give you access to them. Moving on… I am still reading about finance this month. They are easy to understand and are a nice complement to the ones I read in July. I highly recommend these books. Jason&amp;#39;s bookshelf: august-2019 The Bogleheads' Guide to Investing by Taylor Larimore tagged: august-2019 The Bogleheads' Guide to the Three-Fund Portfolio: How a Simple Portfolio of Three Total Market Index Funds Outperforms Most Investors with Less Risk by Taylor Larimore tagged: august-2019 Share book reviews and ratings with Jason, and even join a book club on Goodreads. Finally the biggest news, I am moving this upcoming September! I have been living at my current place for over four years. It suits well for a bachelor who is living alone. Now Vy is here with me, I want us to live someplace bigger and more comfortable. So it is exciting to move yet it is a little bit bittersweet as the current landlords are very nice people. Anyway, looking forward to the new place!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/month-of-august.jpg" /><media:content medium="image" url="https://jasonthai.me/assets/img/month-of-august.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;This upcoming month of October is the &lt;a href=&quot;https://www.dhs.gov/national-cyber-security-awareness-month&quot;&gt;Cybersecurity Awareness Month&lt;/a&gt;, please spend sometime going over your online presence, updating your passwords. That’s all folks.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="blog" /><category term="en" /><summary type="html">Vy finally came back after doing internship in Hanoi. It has a brief yet long 3 months for us. We also moved in the new apartment and although it took a while, we reached to a point where everything was set up. We bought a new dining table, 2 chairs, a new bed and some other kitchen items. We did a lot of things together for the first time too like baking. Vy and I managed to successfully bake a coffee cake. We also decided to eat at home more and I started cooking a bit. We spent quite a bit of money during this month as the cost of moving and buying things for the new place. As a result, I skipped one cycle of investing. Hopefully this will resume this coming month of October. I did not run so much in September and my legs are getting itchy. Hopefully I’ll run again soon in the new area. This upcoming month of October is the Cybersecurity Awareness Month, please spend sometime going over your online presence, updating your passwords. That’s all folks.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/the-month-september.jpg" /><media:content medium="image" url="https://jasonthai.me/assets/img/the-month-september.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

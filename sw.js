@@ -92,6 +92,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "65a5c8c8854814c0bb72fd2798f4cd81"
   },
   {
+    "url": "assets/img/galera_small.webp",
+    "revision": "cb018c210cd7eaffd432ba2f2168215e"
+  },
+  {
     "url": "assets/img/google-syndication.webp",
     "revision": "e7eb12b6b2c003b73e2b8736df8f5287"
   },
@@ -533,11 +537,15 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "blog/2020/05/01/how-to-setup-wireguard-pi-hole-on-debian-10-ubuntu-1804/index.html",
-    "revision": "005a8cd38c24fdadb6529206338f6df7"
+    "revision": "b53a40a5c4d2f667be72f3bcb31a4516"
+  },
+  {
+    "url": "blog/2020/06/08/high-availability-series-part-i-set-up-and-secure-mariadb-on-debian-servers/index.html",
+    "revision": "1ca24dd62885dd93a2f6685fcded7db8"
   },
   {
     "url": "categories/index.html",
-    "revision": "35752e04935f35d5462eb06143a5e61e"
+    "revision": "e752066d57e86a87e4670811350ba027"
   },
   {
     "url": "default/index.html",
@@ -561,7 +569,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "index.html",
-    "revision": "80f2d35692aab6d5d00fff678f40cc13"
+    "revision": "c8ada7142c74d2025e5603a2910ca6fe"
   },
   {
     "url": "manifest.json",
@@ -569,19 +577,19 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "page/2/index.html",
-    "revision": "1fade4c1f4d7b7de9d47115e05774989"
+    "revision": "54e0f5ca436ae1e27d0e8291362b56b6"
   },
   {
     "url": "page/3/index.html",
-    "revision": "ce51c54984533a23401dbf8999301a93"
+    "revision": "51f6bb62e68b640c6c5972a211e52efc"
   },
   {
     "url": "page/4/index.html",
-    "revision": "8affeb243124b6a0575af1a1ea802293"
+    "revision": "c8cbbbe456ada4f2a4e0325600274f21"
   },
   {
     "url": "posts/index.html",
-    "revision": "d9354651ba3af425bd5f47dc41439270"
+    "revision": "110d38af8a5a531183699e6916de1b9b"
   },
   {
     "url": "redirects.json",
@@ -597,7 +605,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "tags/index.html",
-    "revision": "2e3cfa841af9e876ac82c2f5fa7c8357"
+    "revision": "a8e3fbc971e6864a22597a5d25491a01"
   },
   {
     "url": "vi/index.html",
