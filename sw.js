@@ -101,7 +101,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/img/haproxy-galera.webp",
-    "revision": "c6b1774951c7379759d43a156638e9f6"
+    "revision": "fdb712dc7f2954a09b25af7781274cd5"
   },
   {
     "url": "assets/img/haproxy-stats.webp",
