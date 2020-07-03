@@ -1,4 +1,216 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-06-26T17:51:57+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">[High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster</title><link href="https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster/" rel="alternate" type="text/html" title="[High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster" /><published>2020-06-20T00:00:00+00:00</published><updated>2020-06-20T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster</id><content type="html" xml:base="https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-07-03T21:00:00+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel</title><link href="https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/" rel="alternate" type="text/html" title="[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel" /><published>2020-07-03T00:00:00+00:00</published><updated>2020-07-03T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel</id><content type="html" xml:base="https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/haproxy-galera.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/haproxy-galera.png&quot; alt=&quot;HA Galera Cluster&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;HAProxy is a free, very fast and reliable solution offering high availability, load balancing, and proxying for TCP and HTTP-based applications. It is particularly suited for very high traffic web sites and powers quite a number of the world’s most visited ones. Over the years it has become the de-facto standard opensource load balancer, is now shipped with most mainstream Linux distributions, and is often deployed by default in cloud platforms
+&lt;a href=&quot;https://www.haproxy.org&quot;&gt;https://www.haproxy.org&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Stunnel is a proxy designed to add TLS encryption functionality to existing clients and servers without any changes in the programs’ code. Its architecture is optimized for security, portability, and scalability (including load-balancing), making it suitable for large deployments.
+&lt;a href=&quot;https://www.stunnel.org&quot;&gt;https://www.stunnel.org&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;We will configure HAProxy as a load balancer to our Galera cluster.  This will help prevent having a single point of failure if any of our DB node is down. HAProxy will automatically route traffic to the other available nodes and keep connection to the cluster up.&lt;/p&gt;
+
+&lt;p&gt;Stunnel is not necessary if connection between HAProxy to the DB nodes is private. This may not be the case if our DB node is geographically separated or from different providers where private subnets are not possible. We will configure Stunnel to ensure there is a private and secure tunnel between HAProxy to each of the DB nodes.&lt;/p&gt;
+
+&lt;h1 id=&quot;prerequisite&quot;&gt;Prerequisite&lt;/h1&gt;
+&lt;p&gt;Determine how to install HAProxy 2.1 for your Debian based servers by going to &lt;a href=&quot;https://haproxy.debian.net/&quot;&gt;https://haproxy.debian.net/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Install Stunnel on our Galera nodes and HAProxy node:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; stunnel4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;configure-stunnel-on-the-first-galera-node&quot;&gt;Configure Stunnel on the first Galera node:&lt;/h1&gt;
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
+
+pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
+
+&lt;span class=&quot;c&quot;&gt;# set to yes to allow logging to syslog&lt;/span&gt;
+syslog &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; no
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysql-server-galera-01]
+cert &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/client-cert.pem
+key &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/client-key.pem
+accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 13306
+connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 3306
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;configure-stunnel-on-the-second-galera-node&quot;&gt;Configure Stunnel on the second Galera node:&lt;/h1&gt;
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
+
+pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
+
+&lt;span class=&quot;c&quot;&gt;# set to yes to allow logging to syslog&lt;/span&gt;
+syslog &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; no
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysql-server-galera-02]
+cert &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/client-cert.pem
+key &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/client-key.pem
+accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 23306
+connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 3306
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;configure-stunnel-on-the-third-galera-node&quot;&gt;Configure Stunnel on the third Galera node:&lt;/h1&gt;
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
+
+pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
+
+&lt;span class=&quot;c&quot;&gt;# set to yes to allow logging to syslog&lt;/span&gt;
+syslog &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; no
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysql-server-galera-03]
+cert &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/client-cert.pem
+key &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/client-key.pem
+accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 33306
+connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 3306
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;configure-stunnel-on-our-haproxy-node&quot;&gt;Configure Stunnel on our HAProxy node:&lt;/h1&gt;
+&lt;p&gt;From any of the DB nodes, create &lt;code class=&quot;highlighter-rouge&quot;&gt;stunnel.pem&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo cat&lt;/span&gt; /etc/mysql/certs/ca-cert.pem /etc/mysql/certs/client-cert.pem &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /etc/mysql/certs/stunnel.pem
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Copy &lt;code class=&quot;highlighter-rouge&quot;&gt;stunnel.pem&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/certs&lt;/code&gt; on our HAProxy node.&lt;/p&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
+
+pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
+
+&lt;span class=&quot;c&quot;&gt;# set to yes to allow logging to syslog&lt;/span&gt;
+syslog &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; no
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysql-client-galera-01]
+client &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes
+&lt;/span&gt;CAfile &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/stunnel.pem
+accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 127.0.0.1:13306
+connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; IP-of-node1:23306
+verify &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 2
+verifyChain &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysql-client-galera-02]
+client &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes
+&lt;/span&gt;CAfile &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/stunnel.pem
+accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 127.0.0.1:23306
+connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; IP-of-node2:23306
+verify &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 2
+verifyChain &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysql-client-galera-03]
+client &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes
+&lt;/span&gt;CAfile &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /etc/mysql/certs/stunnel.pem
+accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 127.0.0.1:33306
+connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; IP-of-node3:33306
+verify &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 2
+verifyChain &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;yes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Some explanations of the configurations:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;client&lt;/strong&gt; - specify that we are configuring to connect as a client&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CAfile&lt;/strong&gt; - specify the Cert Authority and the cert we will be using&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;accept&lt;/strong&gt; - accept connections on specified address&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;connect&lt;/strong&gt; - connect to a remote address&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;verify&lt;/strong&gt; - verify the peer certificate.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;verifiyChain&lt;/strong&gt; - verify the peer certificate chain starting from the root CA&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Restart Stunnel to apply the config:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$haproxy&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart stunnel4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Check that all the connections are up:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$haproxy&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-node&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ss &lt;span class=&quot;nt&quot;&gt;-tulpn&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;LISTEN
+tcp     LISTEN   0        128            127.0.0.1:13306          0.0.0.0:&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;      &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;stunnel4&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;25228,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;7&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+tcp     LISTEN   0        128            127.0.0.1:23306          0.0.0.0:&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;      &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;stunnel4&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;25228,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;8&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+tcp     LISTEN   0        128            127.0.0.1:33306          0.0.0.0:&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;      &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;stunnel4&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;25228,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;9&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;configure-haproxy&quot;&gt;Configure HAProxy&lt;/h1&gt;
+&lt;p&gt;On one of the DB node,  login to MYSQL Console and create a user haproxy@127.0.0.1:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql
+MariaDB &lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;none&lt;span class=&quot;o&quot;&gt;)]&amp;gt;&lt;/span&gt; create user &lt;span class=&quot;s1&quot;&gt;'haproxy'&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;'127.0.0.1'&lt;/span&gt; IDENTIFIED BY &lt;span class=&quot;s1&quot;&gt;'SOME-SECURE-PASSWORD'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;This step is needed so HAProxy can do a health check to see whether our nodes are up and running.&lt;/p&gt;
+
+&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/haproxy/haproxy.cfg&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;frontend galera_cluster_frontend
+    &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:3307
+    mode tcp
+    option tcplog
+    default_backend galera_cluster_backend
+
+backend galera_cluster_backend
+    mode tcp
+    option tcpka
+    option mysql-check user haproxy
+    option dontlog-normal
+    balance roundrobin
+    server galera-01 127.0.0.1:13306 check weight 1
+    server galera-02 127.0.0.1:23306 check weight 1
+    server galera-03 127.0.0.1:33306 check weight 1
+
+frontend stats
+    &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:8404
+    stats &lt;span class=&quot;nb&quot;&gt;enable
+    &lt;/span&gt;stats uri /
+    stats refresh 10s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Some explanations of options:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;balance&lt;/strong&gt; – This defines the destination selection policy used to select a server to route the incoming connections to.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;mode tcp&lt;/strong&gt; – Galera Cluster uses TCP type of connections.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;option tcpka&lt;/strong&gt; – Enables the keepalive function to maintain TCP connections.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;option mysql-check user haproxy&lt;/strong&gt; – Define backend database server check, to determine whether the node is currently operational.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;server  “server-name” “IP_address” check weight 1&lt;/strong&gt; – Defines the nodes you want HAProxy to use in routing connections.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Restart HAProxy to apply the config:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$haproxy&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart haproxy
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h1 id=&quot;test-connection-via-haproxy&quot;&gt;Test Connection via HAProxy&lt;/h1&gt;
+&lt;p&gt;Check that HAProxy has a bind on port 3307:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$haproxy&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ss &lt;span class=&quot;nt&quot;&gt;-tunelp&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;3307
+tcp     LISTEN   0        128              0.0.0.0:3307          0.0.0.0:&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;      &lt;span class=&quot;nb&quot;&gt;users&lt;/span&gt;:&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;haproxy&quot;&lt;/span&gt;,pid&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;18324,fd&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;5&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Try to connect from HAProxy to port 3307:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$haproxy&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt; 127.0.0.1 &lt;span class=&quot;nt&quot;&gt;-P&lt;/span&gt; 3307 &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; some_user &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; or &lt;span class=&quot;se&quot;&gt;\g&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Your MariaDB connection &lt;span class=&quot;nb&quot;&gt;id &lt;/span&gt;is 39834
+Server version: 10.4.13-MariaDB-1:10.4.13+maria~buster mariadb.org binary distribution
+
+Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type &lt;span class=&quot;s1&quot;&gt;'help;'&lt;/span&gt; or &lt;span class=&quot;s1&quot;&gt;'\h'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;help. Type &lt;span class=&quot;s1&quot;&gt;'\c'&lt;/span&gt; to clear the current input statement.
+
+MariaDB &lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;none&lt;span class=&quot;o&quot;&gt;)]&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;checking-haproxys-stats-page&quot;&gt;Checking HAProxy’s Stats Page&lt;/h1&gt;
+&lt;p&gt;If you noticed, we have configured a stats page for HAProxy on port 8404 in our config file. You can check out the stats page by going to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://IP-of-HAProxy-node:8404&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You will see something like this:&lt;/p&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/haproxy-stats.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/haproxy-stats.png&quot; alt=&quot;HAProxy Stats&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion:&lt;/h1&gt;
+&lt;p&gt;We have configured a HAProxy node as a load balancer to our Galera cluster. Connection between HAProxy to the three nodes is secured by Stunnel. In the next post, we will go over setting up a full HA webservers that are powered by a HA Galera cluster.&lt;/p&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources:&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/06/08/high-availability-series-part-i-set-up-and-secure-mariadb-on-debian-servers/&quot;&gt;[High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster/&quot;&gt;[High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://computingforgeeks.com/galera-cluster-high-availability-with-haproxy-on-ubuntu-18-04-centos-7&quot;&gt;https://computingforgeeks.com/galera-cluster-high-availability-with-haproxy-on-ubuntu-18-04-centos-7&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Introduction HAProxy is a free, very fast and reliable solution offering high availability, load balancing, and proxying for TCP and HTTP-based applications. It is particularly suited for very high traffic web sites and powers quite a number of the world’s most visited ones. Over the years it has become the de-facto standard opensource load balancer, is now shipped with most mainstream Linux distributions, and is often deployed by default in cloud platforms https://www.haproxy.org Stunnel is a proxy designed to add TLS encryption functionality to existing clients and servers without any changes in the programs’ code. Its architecture is optimized for security, portability, and scalability (including load-balancing), making it suitable for large deployments. https://www.stunnel.org We will configure HAProxy as a load balancer to our Galera cluster. This will help prevent having a single point of failure if any of our DB node is down. HAProxy will automatically route traffic to the other available nodes and keep connection to the cluster up. Stunnel is not necessary if connection between HAProxy to the DB nodes is private. This may not be the case if our DB node is geographically separated or from different providers where private subnets are not possible. We will configure Stunnel to ensure there is a private and secure tunnel between HAProxy to each of the DB nodes. Prerequisite Determine how to install HAProxy 2.1 for your Debian based servers by going to https://haproxy.debian.net/ Install Stunnel on our Galera nodes and HAProxy node: $galera-01 sudo apt-get install -y stunnel4 Configure Stunnel on the first Galera node: Create /etc/stunnel/mysql.conf and add the following: # Configure our secured MySQL server pid = /run/stunnel.pid # set to yes to allow logging to syslog syslog = no [mysql-server-galera-01] cert = /etc/mysql/certs/client-cert.pem key = /etc/mysql/certs/client-key.pem accept = 13306 connect = 3306 Configure Stunnel on the second Galera node: Create /etc/stunnel/mysql.conf and add the following: # Configure our secured MySQL server pid = /run/stunnel.pid # set to yes to allow logging to syslog syslog = no [mysql-server-galera-02] cert = /etc/mysql/certs/client-cert.pem key = /etc/mysql/certs/client-key.pem accept = 23306 connect = 3306 Configure Stunnel on the third Galera node: Create /etc/stunnel/mysql.conf and add the following: # Configure our secured MySQL server pid = /run/stunnel.pid # set to yes to allow logging to syslog syslog = no [mysql-server-galera-03] cert = /etc/mysql/certs/client-cert.pem key = /etc/mysql/certs/client-key.pem accept = 33306 connect = 3306 Configure Stunnel on our HAProxy node: From any of the DB nodes, create stunnel.pem file: $galera-01 sudo cat /etc/mysql/certs/ca-cert.pem /etc/mysql/certs/client-cert.pem &amp;gt; /etc/mysql/certs/stunnel.pem Copy stunnel.pem to /etc/mysql/certs on our HAProxy node. Create /etc/stunnel/mysql.conf and add the following: # Configure our secured MySQL server pid = /run/stunnel.pid # set to yes to allow logging to syslog syslog = no [mysql-client-galera-01] client = yes CAfile = /etc/mysql/certs/stunnel.pem accept = 127.0.0.1:13306 connect = IP-of-node1:23306 verify = 2 verifyChain = yes [mysql-client-galera-02] client = yes CAfile = /etc/mysql/certs/stunnel.pem accept = 127.0.0.1:23306 connect = IP-of-node2:23306 verify = 2 verifyChain = yes [mysql-client-galera-03] client = yes CAfile = /etc/mysql/certs/stunnel.pem accept = 127.0.0.1:33306 connect = IP-of-node3:33306 verify = 2 verifyChain = yes Some explanations of the configurations: client - specify that we are configuring to connect as a client CAfile - specify the Cert Authority and the cert we will be using accept - accept connections on specified address connect - connect to a remote address verify - verify the peer certificate. verifiyChain - verify the peer certificate chain starting from the root CA Restart Stunnel to apply the config: $haproxy sudo systemctl restart stunnel4 Check that all the connections are up: $haproxy-node sudo ss -tulpn | grep LISTEN tcp LISTEN 0 128 127.0.0.1:13306 0.0.0.0:* users:((&quot;stunnel4&quot;,pid=25228,fd=7)) tcp LISTEN 0 128 127.0.0.1:23306 0.0.0.0:* users:((&quot;stunnel4&quot;,pid=25228,fd=8)) tcp LISTEN 0 128 127.0.0.1:33306 0.0.0.0:* users:((&quot;stunnel4&quot;,pid=25228,fd=9)) Configure HAProxy On one of the DB node, login to MYSQL Console and create a user haproxy@127.0.0.1: $galera-01 sudo mysql MariaDB [(none)]&amp;gt; create user 'haproxy'@'127.0.0.1' IDENTIFIED BY 'SOME-SECURE-PASSWORD'; This step is needed so HAProxy can do a health check to see whether our nodes are up and running. Edit /etc/haproxy/haproxy.cfg and add the following: frontend galera_cluster_frontend bind *:3307 mode tcp option tcplog default_backend galera_cluster_backend backend galera_cluster_backend mode tcp option tcpka option mysql-check user haproxy option dontlog-normal balance roundrobin server galera-01 127.0.0.1:13306 check weight 1 server galera-02 127.0.0.1:23306 check weight 1 server galera-03 127.0.0.1:33306 check weight 1 frontend stats bind *:8404 stats enable stats uri / stats refresh 10s Some explanations of options: balance – This defines the destination selection policy used to select a server to route the incoming connections to. mode tcp – Galera Cluster uses TCP type of connections. option tcpka – Enables the keepalive function to maintain TCP connections. option mysql-check user haproxy – Define backend database server check, to determine whether the node is currently operational. server “server-name” “IP_address” check weight 1 – Defines the nodes you want HAProxy to use in routing connections. Restart HAProxy to apply the config: $haproxy sudo systemctl restart haproxy Test Connection via HAProxy Check that HAProxy has a bind on port 3307: $haproxy sudo ss -tunelp | grep 3307 tcp LISTEN 0 128 0.0.0.0:3307 0.0.0.0:* users:((&quot;haproxy&quot;,pid=18324,fd=5)) Try to connect from HAProxy to port 3307: $haproxy sudo mysql -h 127.0.0.1 -P 3307 -u some_user -p Enter password: Welcome to the MariaDB monitor. Commands end with ; or \g. Your MariaDB connection id is 39834 Server version: 10.4.13-MariaDB-1:10.4.13+maria~buster mariadb.org binary distribution Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others. Type 'help;' or '\h' for help. Type '\c' to clear the current input statement. MariaDB [(none)]&amp;gt; Checking HAProxy’s Stats Page If you noticed, we have configured a stats page for HAProxy on port 8404 in our config file. You can check out the stats page by going to http://IP-of-HAProxy-node:8404 You will see something like this: Conclusion: We have configured a HAProxy node as a load balancer to our Galera cluster. Connection between HAProxy to the three nodes is secured by Stunnel. In the next post, we will go over setting up a full HA webservers that are powered by a HA Galera cluster. Resources: [High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers [High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster https://computingforgeeks.com/galera-cluster-high-availability-with-haproxy-on-ubuntu-18-04-centos-7</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/haproxy-galera.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/haproxy-galera.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">[High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster</title><link href="https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster/" rel="alternate" type="text/html" title="[High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster" /><published>2020-06-20T00:00:00+00:00</published><updated>2020-06-20T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster</id><content type="html" xml:base="https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Second part of the series covers how to set up and secure a multi master Galera cluster consisting of 3 mariadb servers. A multi master cluster allow reads and writes from any of the nodes. Changes are replicated synchronously to the other nodes.&lt;/p&gt;
 
 &lt;p&gt;We will go over how to set it up and secure the communication between the three nodes. There are 3 different vectors that we can secure through SSL: traffic between the database server and client, replication traffic within Galera Cluster, and the State Snapshot Transfer (SST). We will go over all three.&lt;/p&gt;
@@ -1082,96 +1294,4 @@ Flags:
   &lt;li&gt;&lt;a href=&quot;https://talk.lowendspirit.com&quot;&gt;LowendSpirit&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Feel free to contact me if you are interested in knowing more about these selfhosted apps. Cheers!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">This is probably the last post of December 2019. I wish everyone has had a good year so far and an exciting 2020. I have been playing around with selfhosting some more and here is the list of apps I am currently hosting: Portainer - Docker management system Heimdall - Application dashboard Plex - Media management system Tautulli - Plex media server monitoring Ombi - Request movies &amp;amp; TV for plex users Nextcloud - Productivity platform and more Bitwarden - Password manager Current server providers I am using: TerraHost - Dedicated server for media streaming Hetzner - Dedicated server for media streaming Smarthost - VPS for selfhosted apps Hosthatch - Storage VPS IonSwitch - VPS for my blog Buyvm - VPS for VPN PHP-Friends - VPS for selfhosted apps Letbox - Storage VPS InceptionHosting - VPS for VPN Hostsolutions - Storage VPS Tools I am using to monitor servers: HetrixTools ServerStatus Server forums I am checking: LowendTalk LowendSpirit Feel free to contact me if you are interested in knowing more about these selfhosted apps. Cheers!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/cloud-server.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/cloud-server.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Deploy Nextcloud With Docker Compose in Ubuntu 18.04</title><link href="https://jasonthai.me/blog/2019/11/03/deploy-nextcloud-with-docker-compose/" rel="alternate" type="text/html" title="Deploy Nextcloud With Docker Compose in Ubuntu 18.04" /><published>2019-11-03T00:00:00+00:00</published><updated>2019-11-03T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/11/03/deploy-nextcloud-with-docker-compose</id><content type="html" xml:base="https://jasonthai.me/blog/2019/11/03/deploy-nextcloud-with-docker-compose/">&lt;p&gt;In one of the previous posts, I mentioned using &lt;a href=&quot;https://nextcloud.com/&quot;&gt;Nextcloud&lt;/a&gt; as a self-hosted cloud platform. This post goes into details how I set up my instance.&lt;/p&gt;
-
-&lt;h2 id=&quot;install-docker-and-docker-compose&quot;&gt;Install Docker and Docker-Compose&lt;/h2&gt;
-&lt;p&gt;To install docker, run:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;To install docker-compose, run:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;docker-composeyml&quot;&gt;docker-compose.yml&lt;/h2&gt;
-&lt;p&gt;Create this &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; with following contents:&lt;/p&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3'&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;db&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mariadb&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;--transaction-isolation=READ-COMMITTED --binlog-format=ROW&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/opt/nextcloud-db:/var/lib/mysql&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_ROOT_PASSWORD=ENTER MYSQL PASSWORD&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_PASSWORD=ENTER MYSQL PASSWORD&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_DATABASE=nextcloud&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;MYSQL_USER=nextcloud&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;redis&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis:alpine&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nextcloud:apache&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;ports&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;8080:80&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;REDIS_HOST=redis&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/opt/nextcloud-data:/var/www/html&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;cron&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;nextcloud:apache&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;restart&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;always&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/opt/nextcloud-data:/var/www/html&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;entrypoint&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/cron.sh&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;depends_on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;db&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;redis&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose -f docker-compose.yml up -d&lt;/code&gt; to start all necessary containers.&lt;/p&gt;
-
-&lt;h2 id=&quot;setting-up&quot;&gt;Setting Up&lt;/h2&gt;
-
-&lt;p&gt;Browse to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt; and you’ll see a set up page like this:&lt;/p&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/nextcloud-setup.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/nextcloud-setup.png&quot; alt=&quot;Setup&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;p&gt;Fill in the fills as the following:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Database user: nextcloud&lt;/li&gt;
-  &lt;li&gt;Database password: Enter your password in &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; file&lt;/li&gt;
-  &lt;li&gt;Database name: nextcloud&lt;/li&gt;
-  &lt;li&gt;Database host: db&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;After setting up nextcloud, you will see something like:&lt;/p&gt;
-
-&lt;picture&gt;
-    &lt;source srcset=&quot;https://jasonthai.me/assets/img/nextcloud.webp&quot; type=&quot;image/webp&quot; /&gt;
-    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/nextcloud.jpeg&quot; alt=&quot;Nextcloud&quot; /&gt;
-&lt;/picture&gt;
-
-&lt;h2 id=&quot;modify-overwrite-protocal&quot;&gt;Modify Overwrite Protocal&lt;/h2&gt;
-&lt;p&gt;Modify &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/nextcloud-data/config/config.php&lt;/code&gt; and add:&lt;/p&gt;
-&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s1&quot;&gt;'overwriteprotocol'&lt;/span&gt; =&amp;gt; &lt;span class=&quot;s1&quot;&gt;'https'&lt;/span&gt;,
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;modify-upload-max-filesize&quot;&gt;Modify Upload Max Filesize&lt;/h2&gt;
-&lt;p&gt;By default, Nextcloud only allows uploading file up to 2MB which is not very useful. We can modify the max filesize by adding &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/nextcloud-data/.htaccess&lt;/code&gt; with following:&lt;/p&gt;
-&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;&lt;span class=&quot;n&quot;&gt;IfModule&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mod_php7&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&amp;gt;
-...
-&lt;span class=&quot;n&quot;&gt;php_value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;upload_max_filesize&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;php_value&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post_max_size&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;G&lt;/span&gt;
-&amp;lt;/&lt;span class=&quot;n&quot;&gt;IfModule&lt;/span&gt;&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">In one of the previous posts, I mentioned using Nextcloud as a self-hosted cloud platform. This post goes into details how I set up my instance. Install Docker and Docker-Compose To install docker, run: curl -fsSL https://get.docker.com -o get-docker.sh sh get-docker.sh To install docker-compose, run: sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose sudo chmod +x /usr/local/bin/docker-compose docker-compose.yml Create this docker-compose.yml with following contents: version: '3' services: db: image: mariadb command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW restart: always volumes: - /opt/nextcloud-db:/var/lib/mysql environment: - MYSQL_ROOT_PASSWORD=ENTER MYSQL PASSWORD - MYSQL_PASSWORD=ENTER MYSQL PASSWORD - MYSQL_DATABASE=nextcloud - MYSQL_USER=nextcloud redis: image: redis:alpine restart: always app: image: nextcloud:apache ports: - 8080:80 environment: - REDIS_HOST=redis depends_on: - db - redis volumes: - /opt/nextcloud-data:/var/www/html restart: always cron: image: nextcloud:apache restart: always volumes: - /opt/nextcloud-data:/var/www/html entrypoint: /cron.sh depends_on: - db - redis Run docker-compose -f docker-compose.yml up -d to start all necessary containers. Setting Up Browse to http://localhost:8080 and you’ll see a set up page like this: Fill in the fills as the following: Database user: nextcloud Database password: Enter your password in docker-compose.yml file Database name: nextcloud Database host: db After setting up nextcloud, you will see something like: Modify Overwrite Protocal Modify /opt/nextcloud-data/config/config.php and add: 'overwriteprotocol' =&amp;gt; 'https', Modify Upload Max Filesize By default, Nextcloud only allows uploading file up to 2MB which is not very useful. We can modify the max filesize by adding /opt/nextcloud-data/.htaccess with following: &amp;lt;IfModule mod_php7.c&amp;gt; ... php_value upload_max_filesize 16G php_value post_max_size 16G &amp;lt;/IfModule&amp;gt;</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/NextcloudLogo.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/NextcloudLogo.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;Feel free to contact me if you are interested in knowing more about these selfhosted apps. Cheers!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">This is probably the last post of December 2019. I wish everyone has had a good year so far and an exciting 2020. I have been playing around with selfhosting some more and here is the list of apps I am currently hosting: Portainer - Docker management system Heimdall - Application dashboard Plex - Media management system Tautulli - Plex media server monitoring Ombi - Request movies &amp;amp; TV for plex users Nextcloud - Productivity platform and more Bitwarden - Password manager Current server providers I am using: TerraHost - Dedicated server for media streaming Hetzner - Dedicated server for media streaming Smarthost - VPS for selfhosted apps Hosthatch - Storage VPS IonSwitch - VPS for my blog Buyvm - VPS for VPN PHP-Friends - VPS for selfhosted apps Letbox - Storage VPS InceptionHosting - VPS for VPN Hostsolutions - Storage VPS Tools I am using to monitor servers: HetrixTools ServerStatus Server forums I am checking: LowendTalk LowendSpirit Feel free to contact me if you are interested in knowing more about these selfhosted apps. Cheers!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/cloud-server.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/cloud-server.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
