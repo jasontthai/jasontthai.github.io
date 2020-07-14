@@ -1,4 +1,173 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-07-13T00:34:02+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel</title><link href="https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/" rel="alternate" type="text/html" title="[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel" /><published>2020-07-03T00:00:00+00:00</published><updated>2020-07-03T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel</id><content type="html" xml:base="https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-07-14T01:11:47+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">[High Availability Series] PART IV: Example Setup of Distributed Load Balancing Wallabag with Data Tier Clustering</title><link href="https://jasonthai.me/blog/2020/07/13/high-availability-series-part-iv-example-setup-of-distributed-load-balancing-wallabag-with-data-tier-clustering/" rel="alternate" type="text/html" title="[High Availability Series] PART IV: Example Setup of Distributed Load Balancing Wallabag with Data Tier Clustering" /><published>2020-07-13T00:00:00+00:00</published><updated>2020-07-13T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/07/13/high-availability-series-part-iv-example-setup-of-distributed-load-balancing-wallabag-with-data-tier-clustering</id><content type="html" xml:base="https://jasonthai.me/blog/2020/07/13/high-availability-series-part-iv-example-setup-of-distributed-load-balancing-wallabag-with-data-tier-clustering/">&lt;picture&gt;
+    &lt;source srcset=&quot;https://jasonthai.me/assets/img/ha-cluster.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://jasonthai.me/assets/img/ha-cluster.png&quot; alt=&quot;HA Distributed Web Apps&quot; /&gt;
+&lt;/picture&gt;
+
+&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Wallabag is a self hostable application for saving web pages: Save and classify articles. Read them later. Freely
+&lt;a href=&quot;https://wallabag.org/en&quot;&gt;https://wallabag.org/en&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This post will provide an example of setting up a highly available web application. We will cover set up Wallabag using Docker Compose and configure HAProxy to load balance the multiple webservers that run Wallabag.&lt;/p&gt;
+
+&lt;h1 id=&quot;prerequisite&quot;&gt;Prerequisite&lt;/h1&gt;
+&lt;p&gt;You should have set up the Galera cluster and configured HAProxy as the load balancer for the DB nodes. As shown in the diagram, the webserver node is the same as the HAProxy node configured to communicate with Galera cluster.
+Refer to all the previous posts of HA Series to set them up:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/06/08/high-availability-series-part-i-set-up-and-secure-mariadb-on-debian-servers/&quot;&gt;[High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster/&quot;&gt;[High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/&quot;&gt;[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You should also have set up Apache2 as your web server, and installed Docker and Docker Compose:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-fsSL&lt;/span&gt; https://get.docker.com &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; get-docker.sh
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sh get-docker.sh
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://github.com/docker/compose/releases/download/1.24.1/docker-compose-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; /usr/local/bin/docker-compose
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo chmod&lt;/span&gt; +x /usr/local/bin/docker-compose
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;apache2
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;a2enmod ssl proxy proxy_http
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note the IP of docker0 proto on the webserver node:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip r | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;docker0
+172.17.0.0/16 dev docker0 proto kernel scope &lt;span class=&quot;nb&quot;&gt;link &lt;/span&gt;src 172.17.0.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;The value is usually &lt;code class=&quot;highlighter-rouge&quot;&gt;172.17.0.1&lt;/code&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;configure-the-first-webserver-instance&quot;&gt;Configure the first webserver instance&lt;/h1&gt;
+&lt;h2 id=&quot;install-wallabag&quot;&gt;Install Wallabag&lt;/h2&gt;
+&lt;p&gt;Create the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; and add the following lines:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: &lt;span class=&quot;s1&quot;&gt;'2'&lt;/span&gt;
+services:
+  wallabag:
+    image: wallabag/wallabag
+    logging:
+      driver: &lt;span class=&quot;s2&quot;&gt;&quot;json-file&quot;&lt;/span&gt;
+      options:
+        max-file: &lt;span class=&quot;s2&quot;&gt;&quot;3&quot;&lt;/span&gt;
+        max-size: &lt;span class=&quot;s2&quot;&gt;&quot;10m&quot;&lt;/span&gt;
+    environment:
+      - &lt;span class=&quot;nv&quot;&gt;POPULATE_DATABASE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DATABASE_DRIVER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pdo_mysql
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DATABASE_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;172.17.0.1
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DATABASE_PORT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;3307
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DATABASE_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;wallabag
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DATABASE_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;wallabag
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DATABASE_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;SOME SECURE PASSWORD&quot;&lt;/span&gt;
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DATABASE_CHARSET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;utf8mb4
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__MAILER_HOST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ENTER YOUR VALUE HERE
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__MAILER_USER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ENTER YOUR VALUE HERE
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__MAILER_PASSWORD&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ENTER YOUR VALUE HERE
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__FROM_EMAIL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ENTER YOUR VALUE HERE
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__DOMAIN_NAME&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ENTER YOUR VALUE HERE
+      - &lt;span class=&quot;nv&quot;&gt;SYMFONY__ENV__FOSUSER_REGISTRATION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;false
+    &lt;/span&gt;ports:
+      - 8080:80
+    volumes:
+      - /opt/wallabag/images:/var/www/wallabag/web/assets/images
+    restart: always
+    network_mode: bridge
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Explanation of a few options:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SYMFONYENVDATABASE_HOST=172.17.0.1&lt;/strong&gt; - The IP of docker0 proto we noted earlier. This tells docker to talk to the localhost mysql instance. Why not &lt;code class=&quot;highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; ? Because docker communicates in its own subnet and &lt;code class=&quot;highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; does not mean localhost.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SYMFONYENVDATABASE_PORT=3307&lt;/strong&gt; - As previously configured, &lt;code class=&quot;highlighter-rouge&quot;&gt;3307&lt;/code&gt; is the port we expose through HAProxy to talk to our Galera cluster&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;network_mode: bridge&lt;/strong&gt; - Configure the network mode in order for docker to talk to local mysql on the webserver node.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Start the container:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;docker-compose up &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;configure-apache-reverse-proxy-to-expose-wallabag-to-end-users&quot;&gt;Configure Apache reverse proxy to expose Wallabag to end users&lt;/h2&gt;
+&lt;p&gt;The domain I use is &lt;a href=&quot;http://wallabag.jasonthai.me&quot;&gt;https://wallabag.jasonthai.me&lt;/a&gt;, you can change this to your own one.&lt;/p&gt;
+
+&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/apache2/sites-available/wallabag.jasonthai.me.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;VirtualHost &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:80&amp;gt;
+    ServerName wallabag.jasonthai.me
+    Redirect permanent / https://wallabag.jasonthai.me/
+&amp;lt;/VirtualHost&amp;gt;
+
+&amp;lt;VirtualHost &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:443&amp;gt;
+    ServerAdmin webmaster@localhost
+    ServerName wallabag.jasonthai.me
+    ServerAlias wallabag.jasonthai.me
+
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:8080/
+    ProxyPassReverse / http://127.0.0.1:8080/
+
+    ErrorLog &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;APACHE_LOG_DIR&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/wallabag-error.log
+    CustomLog &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;APACHE_LOG_DIR&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;/wallabag-access.log combined
+SSLEngine on
+SSLCertificateFile /etc/letsencrypt/live/jasonthai.me/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/jasonthai.me/privkey.pem
+Include /etc/letsencrypt/options-ssl-apache.conf
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Note: I have already configured SSL/TLS certificates. You need to configure one yourself.&lt;/p&gt;
+
+&lt;p&gt;Enable the configuration and reload apache2:&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;a2ensite /etc/apache2/sites-available/wallabag.jasonthai.me.conf
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl reload apache2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;configure-the-second-and-third-webserver-node&quot;&gt;Configure the second and third webserver node&lt;/h1&gt;
+&lt;p&gt;Do the same as the first node&lt;/p&gt;
+&lt;h1 id=&quot;configure-haproxy-to-load-balance-three-webservers&quot;&gt;Configure HAProxy to load balance three webservers&lt;/h1&gt;
+&lt;p&gt;ON your separate HAProxy node, Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/haproxy/haproxy.cfg&lt;/code&gt; and add the following (remember to replace with your actual domain):&lt;/p&gt;
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;frontend https-in
+    &lt;span class=&quot;c&quot;&gt;# Only bind on 80 if you also want to listen for connections on 80&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:443 ssl crt /etc/certs/jasonthai.me.pem
+    &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; :::443 ssl crt /etc/certs/jasonthai.me.pem
+    option httplog
+    mode http
+		
+    acl wallabag hdr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;host&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; wallabag.jasonthai.me
+    use_backend wallabag &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;wallabag
+
+    default_backend no-match
+		
+backend wallabag
+    mode http
+    balance roundrobin
+    option ssl-hello-chk
+    option httpchk HEAD /login HTTP/1.1&lt;span class=&quot;se&quot;&gt;\r\n&lt;/span&gt;Host:wallabag.jasonthai.me
+    http-check expect status 200
+
+    http-request disable-l7-retry &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;METH_POST
+
+    default-server ssl sni req.hdr&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Host&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; check check-ssl verify none
+    &lt;span class=&quot;c&quot;&gt;# Add an entry for each of your backend servers and their resolvable hostnames&lt;/span&gt;
+    server webserver-01 IP-of-webserver-01:443
+    server webserver-02 IP-of-webserver-02:443
+    server webserver-03 IP-of-webserver-03:443
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Note: I have already configured SSL/TLS certificates. You need to configure one yourself.&lt;/p&gt;
+
+&lt;h1 id=&quot;configure-dns-for-your-wallabag-and-ip&quot;&gt;Configure DNS for your Wallabag and IP&lt;/h1&gt;
+&lt;p&gt;Depending on your DNS provider, you will need to configure this yourself. Point your Wallabag domain you configured to the IP address of HAProxy node we have just configured. You may also add another HAProxy node and use a GEO-based DNS to improve the performance and add some more redundancy.&lt;/p&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;This post provides an example of setting up a highly available Wallabag using the technology we have convered so far in the high availability series. Future post will go into details of some failover mechanisms and good practices for HA systems.&lt;/p&gt;
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/06/08/high-availability-series-part-i-set-up-and-secure-mariadb-on-debian-servers/&quot;&gt;[High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/06/20/high-availability-series-part-ii-configure-and-secure-a-3-node-galera-cluster/&quot;&gt;[High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/&quot;&gt;[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://galeracluster.com/library/documentation/deployment-variants.html&quot;&gt;https://galeracluster.com/library/documentation/deployment-variants.html&lt;/a&gt;&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Introduction Wallabag is a self hostable application for saving web pages: Save and classify articles. Read them later. Freely https://wallabag.org/en This post will provide an example of setting up a highly available web application. We will cover set up Wallabag using Docker Compose and configure HAProxy to load balance the multiple webservers that run Wallabag. Prerequisite You should have set up the Galera cluster and configured HAProxy as the load balancer for the DB nodes. As shown in the diagram, the webserver node is the same as the HAProxy node configured to communicate with Galera cluster. Refer to all the previous posts of HA Series to set them up: [High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers [High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster [High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel You should also have set up Apache2 as your web server, and installed Docker and Docker Compose: $ curl -fsSL https://get.docker.com -o get-docker.sh $ sh get-docker.sh $ sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose $ sudo chmod +x /usr/local/bin/docker-compose $ sudo apt install apache2 $ sudo a2enmod ssl proxy proxy_http Note the IP of docker0 proto on the webserver node: $ ip r | grep docker0 172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 The value is usually 172.17.0.1 Configure the first webserver instance Install Wallabag Create the docker-compose.yml and add the following lines: version: '2' services: wallabag: image: wallabag/wallabag logging: driver: &quot;json-file&quot; options: max-file: &quot;3&quot; max-size: &quot;10m&quot; environment: - POPULATE_DATABASE=false - SYMFONY__ENV__DATABASE_DRIVER=pdo_mysql - SYMFONY__ENV__DATABASE_HOST=172.17.0.1 - SYMFONY__ENV__DATABASE_PORT=3307 - SYMFONY__ENV__DATABASE_NAME=wallabag - SYMFONY__ENV__DATABASE_USER=wallabag - SYMFONY__ENV__DATABASE_PASSWORD=&quot;SOME SECURE PASSWORD&quot; - SYMFONY__ENV__DATABASE_CHARSET=utf8mb4 - SYMFONY__ENV__MAILER_HOST=ENTER YOUR VALUE HERE - SYMFONY__ENV__MAILER_USER=ENTER YOUR VALUE HERE - SYMFONY__ENV__MAILER_PASSWORD=ENTER YOUR VALUE HERE - SYMFONY__ENV__FROM_EMAIL=ENTER YOUR VALUE HERE - SYMFONY__ENV__DOMAIN_NAME=ENTER YOUR VALUE HERE - SYMFONY__ENV__FOSUSER_REGISTRATION=false ports: - 8080:80 volumes: - /opt/wallabag/images:/var/www/wallabag/web/assets/images restart: always network_mode: bridge Explanation of a few options: SYMFONYENVDATABASE_HOST=172.17.0.1 - The IP of docker0 proto we noted earlier. This tells docker to talk to the localhost mysql instance. Why not 127.0.0.1 ? Because docker communicates in its own subnet and 127.0.0.1 does not mean localhost. SYMFONYENVDATABASE_PORT=3307 - As previously configured, 3307 is the port we expose through HAProxy to talk to our Galera cluster network_mode: bridge - Configure the network mode in order for docker to talk to local mysql on the webserver node. Start the container: $ docker-compose up -d Configure Apache reverse proxy to expose Wallabag to end users The domain I use is https://wallabag.jasonthai.me, you can change this to your own one. Create /etc/apache2/sites-available/wallabag.jasonthai.me.conf and add the following: &amp;lt;VirtualHost *:80&amp;gt; ServerName wallabag.jasonthai.me Redirect permanent / https://wallabag.jasonthai.me/ &amp;lt;/VirtualHost&amp;gt; &amp;lt;VirtualHost *:443&amp;gt; ServerAdmin webmaster@localhost ServerName wallabag.jasonthai.me ServerAlias wallabag.jasonthai.me ProxyPreserveHost On ProxyPass / http://127.0.0.1:8080/ ProxyPassReverse / http://127.0.0.1:8080/ ErrorLog ${APACHE_LOG_DIR}/wallabag-error.log CustomLog ${APACHE_LOG_DIR}/wallabag-access.log combined SSLEngine on SSLCertificateFile /etc/letsencrypt/live/jasonthai.me/fullchain.pem SSLCertificateKeyFile /etc/letsencrypt/live/jasonthai.me/privkey.pem Include /etc/letsencrypt/options-ssl-apache.conf &amp;lt;/VirtualHost&amp;gt; Note: I have already configured SSL/TLS certificates. You need to configure one yourself. Enable the configuration and reload apache2: $ sudo a2ensite /etc/apache2/sites-available/wallabag.jasonthai.me.conf $ sudo systemctl reload apache2 Configure the second and third webserver node Do the same as the first node Configure HAProxy to load balance three webservers ON your separate HAProxy node, Edit /etc/haproxy/haproxy.cfg and add the following (remember to replace with your actual domain): frontend https-in # Only bind on 80 if you also want to listen for connections on 80 bind *:443 ssl crt /etc/certs/jasonthai.me.pem bind :::443 ssl crt /etc/certs/jasonthai.me.pem option httplog mode http acl wallabag hdr(host) -i wallabag.jasonthai.me use_backend wallabag if wallabag default_backend no-match backend wallabag mode http balance roundrobin option ssl-hello-chk option httpchk HEAD /login HTTP/1.1\r\nHost:wallabag.jasonthai.me http-check expect status 200 http-request disable-l7-retry if METH_POST default-server ssl sni req.hdr(Host) check check-ssl verify none # Add an entry for each of your backend servers and their resolvable hostnames server webserver-01 IP-of-webserver-01:443 server webserver-02 IP-of-webserver-02:443 server webserver-03 IP-of-webserver-03:443 Note: I have already configured SSL/TLS certificates. You need to configure one yourself. Configure DNS for your Wallabag and IP Depending on your DNS provider, you will need to configure this yourself. Point your Wallabag domain you configured to the IP address of HAProxy node we have just configured. You may also add another HAProxy node and use a GEO-based DNS to improve the performance and add some more redundancy. Conclusion This post provides an example of setting up a highly available Wallabag using the technology we have convered so far in the high availability series. Future post will go into details of some failover mechanisms and good practices for HA systems. References [High Availability Series] PART I: Set Up and Use SSL to Secure MariaDB on Debian Servers [High Availability Series] PART II: Configure and Secure a 3-node Galera Cluster [High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel https://galeracluster.com/library/documentation/deployment-variants.html</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/ha-cluster.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/ha-cluster.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel</title><link href="https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/" rel="alternate" type="text/html" title="[High Availability Series] PART III: High Availability Galera Cluster with HAProxy and Stunnel" /><published>2020-07-03T00:00:00+00:00</published><updated>2020-07-03T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel</id><content type="html" xml:base="https://jasonthai.me/blog/2020/07/03/high-availability-series-part-iii-high-availability-galera-cluster-with-haproxy-and-stunnel/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;picture&gt;
     &lt;source srcset=&quot;https://jasonthai.me/assets/img/haproxy-galera.webp&quot; type=&quot;image/webp&quot; /&gt;
@@ -1255,43 +1424,4 @@ Flags:
 &lt;blockquote&gt;
 
   &lt;p&gt;The xBrowserSync desktop browser web extension syncs your browser data between desktop browsers. It works with the browser’s native bookmarking features so you can keep using the native tools whilst always staying in sync. If you like to organise your bookmarks into folders don’t worry, xBrowserSync respects your bookmark hierarchy and syncs it across your browsers.&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">TL;DR: My xbrowsersync service API can be accessed through: https://xbrowsersync.jasonthai.me Before using xBrowserSync, I do not have a good way of consolidating all my bookmarks. xBrowserSync helps me sync all my bookmarks across different browsers like Chrome, Firefox, Brave, etc. After you have downloaded the extension for your browser, you can either use the default provided xbrowsersync service or you can update to my service in the setting: From https://xbrowsersync.org: xBrowserSync is a free and open-source alternative to browser syncing tools offered by companies like Google, Firefox, Opera and others. The project was born out of a concern for the over-reliance on services provided by big tech, who collect as much personal data as they can and have demonstrated that they do not respect their user’s privacy . Now, with the proliferation of open-source code and projects it’s easier than ever to create tools and services that allow users to take back control of their data! xBrowserSync respects your privacy and gives you complete anonymity. No sign up is required and no personal data is ever collected. To start syncing simply download xBrowserSync for your desktop browser or mobile platform, enter an encryption password and click Create New Sync! You’ll receive an anonymous sync ID which identifies your data and can be used to access your data on other browsers and devices. xBrowserSync does not only sync but also enhances your productivity by enriching your native browser bookmarks with the addition of descriptions and tags, and an intuitive search interface enables you to find, modify and share bookmarks quickly and easily. xBrowserSync even adds descriptions and tags to new bookmarks for you automatically. And don’t ever worry about losing your data thanks to the included back up and restore functionality. The xBrowserSync desktop browser web extension syncs your browser data between desktop browsers. It works with the browser’s native bookmarking features so you can keep using the native tools whilst always staying in sync. If you like to organise your bookmarks into folders don’t worry, xBrowserSync respects your bookmark hierarchy and syncs it across your browsers.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/xbrowsersync.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/xbrowsersync.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">December List of Selfhosted Apps</title><link href="https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps/" rel="alternate" type="text/html" title="December List of Selfhosted Apps" /><published>2019-12-26T00:00:00+00:00</published><updated>2019-12-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps</id><content type="html" xml:base="https://jasonthai.me/blog/2019/12/26/december-list-of-selfhosted-apps/">&lt;p&gt;This is probably the last post of December 2019. I wish everyone has had a good year so far and an exciting 2020.&lt;/p&gt;
-
-&lt;p&gt;I have been playing around with selfhosting some more and here is the list of apps I am currently hosting:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.portainer.io&quot;&gt;Portainer&lt;/a&gt; - Docker management system&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://heimdall.site&quot;&gt;Heimdall&lt;/a&gt; - Application dashboard&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://plex.tv&quot;&gt;Plex&lt;/a&gt; - Media management system&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tautulli.com&quot;&gt;Tautulli&lt;/a&gt; - Plex media server monitoring&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ombi.io&quot;&gt;Ombi&lt;/a&gt; - Request movies &amp;amp; TV for plex users&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://nextcloud.com&quot;&gt;Nextcloud&lt;/a&gt; - Productivity platform and more&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://bitwarden.com&quot;&gt;Bitwarden&lt;/a&gt; - Password manager&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Current server providers I am using:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://terrahost.no&quot;&gt;TerraHost&lt;/a&gt; - Dedicated server for media streaming&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hetzner.com&quot;&gt;Hetzner&lt;/a&gt; - Dedicated server for media streaming&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://smarthost.com&quot;&gt;Smarthost&lt;/a&gt; - VPS for selfhosted apps&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hosthatch.com&quot;&gt;Hosthatch&lt;/a&gt; - Storage VPS&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ionswitch.com&quot;&gt;IonSwitch&lt;/a&gt; - VPS for my blog&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://buyvm.net&quot;&gt;Buyvm&lt;/a&gt; - VPS for VPN&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://php-friends.de&quot;&gt;PHP-Friends&lt;/a&gt; - VPS for selfhosted apps&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://letbox.com&quot;&gt;Letbox&lt;/a&gt; - Storage VPS&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://inceptionhosting.com&quot;&gt;InceptionHosting&lt;/a&gt; - VPS for VPN&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hostsolutions.ro&quot;&gt;Hostsolutions&lt;/a&gt; - Storage VPS&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Tools I am using to monitor servers:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hetrixtools.com&quot;&gt;HetrixTools&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/BotoX/ServerStatus&quot;&gt;ServerStatus&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Server forums I am checking:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://lowendtalk.com&quot;&gt;LowendTalk&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://talk.lowendspirit.com&quot;&gt;LowendSpirit&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Feel free to contact me if you are interested in knowing more about these selfhosted apps. Cheers!&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">This is probably the last post of December 2019. I wish everyone has had a good year so far and an exciting 2020. I have been playing around with selfhosting some more and here is the list of apps I am currently hosting: Portainer - Docker management system Heimdall - Application dashboard Plex - Media management system Tautulli - Plex media server monitoring Ombi - Request movies &amp;amp; TV for plex users Nextcloud - Productivity platform and more Bitwarden - Password manager Current server providers I am using: TerraHost - Dedicated server for media streaming Hetzner - Dedicated server for media streaming Smarthost - VPS for selfhosted apps Hosthatch - Storage VPS IonSwitch - VPS for my blog Buyvm - VPS for VPN PHP-Friends - VPS for selfhosted apps Letbox - Storage VPS InceptionHosting - VPS for VPN Hostsolutions - Storage VPS Tools I am using to monitor servers: HetrixTools ServerStatus Server forums I am checking: LowendTalk LowendSpirit Feel free to contact me if you are interested in knowing more about these selfhosted apps. Cheers!</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/cloud-server.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/cloud-server.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;/blockquote&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">TL;DR: My xbrowsersync service API can be accessed through: https://xbrowsersync.jasonthai.me Before using xBrowserSync, I do not have a good way of consolidating all my bookmarks. xBrowserSync helps me sync all my bookmarks across different browsers like Chrome, Firefox, Brave, etc. After you have downloaded the extension for your browser, you can either use the default provided xbrowsersync service or you can update to my service in the setting: From https://xbrowsersync.org: xBrowserSync is a free and open-source alternative to browser syncing tools offered by companies like Google, Firefox, Opera and others. The project was born out of a concern for the over-reliance on services provided by big tech, who collect as much personal data as they can and have demonstrated that they do not respect their user’s privacy . Now, with the proliferation of open-source code and projects it’s easier than ever to create tools and services that allow users to take back control of their data! xBrowserSync respects your privacy and gives you complete anonymity. No sign up is required and no personal data is ever collected. To start syncing simply download xBrowserSync for your desktop browser or mobile platform, enter an encryption password and click Create New Sync! You’ll receive an anonymous sync ID which identifies your data and can be used to access your data on other browsers and devices. xBrowserSync does not only sync but also enhances your productivity by enriching your native browser bookmarks with the addition of descriptions and tags, and an intuitive search interface enables you to find, modify and share bookmarks quickly and easily. xBrowserSync even adds descriptions and tags to new bookmarks for you automatically. And don’t ever worry about losing your data thanks to the included back up and restore functionality. The xBrowserSync desktop browser web extension syncs your browser data between desktop browsers. It works with the browser’s native bookmarking features so you can keep using the native tools whilst always staying in sync. If you like to organise your bookmarks into folders don’t worry, xBrowserSync respects your bookmark hierarchy and syncs it across your browsers.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/xbrowsersync.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/xbrowsersync.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

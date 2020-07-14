@@ -92,6 +92,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "e7eb12b6b2c003b73e2b8736df8f5287"
   },
   {
+    "url": "assets/img/ha-cluster.webp",
+    "revision": "61931cb375363b93e4921ad07329f4d4"
+  },
+  {
     "url": "assets/img/half-marathon-cover.webp",
     "revision": "3b1e1e0e323820931dbb1ba9bca2e00a"
   },
