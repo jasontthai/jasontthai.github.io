@@ -388,6 +388,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "3a70b871c930a7ed8af27caa162af123"
   },
   {
+    "url": "assets/version.txt",
+    "revision": "e4c2e8edac362acab7123654b9e73432"
+  },
+  {
     "url": "favicon.ico",
     "revision": "d45dae1c4971840baa50643d92208269"
   },
