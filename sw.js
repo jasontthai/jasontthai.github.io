@@ -12,6 +12,14 @@ workbox.precaching.precacheAndRoute([
     "revision": "6118e6b5ae26923af9497d1d9cfc0039"
   },
   {
+    "url": "assets/img/1000-concurrent.webp",
+    "revision": "284a4439668dd391021499ce2b3c1ca4"
+  },
+  {
+    "url": "assets/img/2000-concurrent.webp",
+    "revision": "95d1a99fa8932cdf5b2f822daf6dd927"
+  },
+  {
     "url": "assets/img/3years_featured.webp",
     "revision": "dd6a69b33a927bff9cf7d4ba64692b0d"
   },
@@ -154,6 +162,10 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "assets/img/NextcloudLogo.webp",
     "revision": "d598fae1834f90569f9ce1309ae492e5"
+  },
+  {
+    "url": "assets/img/NginxVarnish.webp",
+    "revision": "1e9144b789731ab8b2be9d1ad8b1afea"
   },
   {
     "url": "assets/img/openvpn-pihole.webp",
