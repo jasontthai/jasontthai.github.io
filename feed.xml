@@ -1,4 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-08-20T20:27:58+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Set Up Nginx + Varnish for High Traffic Websites</title><link href="https://jasonthai.me/blog/2020/07/24/set-up-nginx-varnish-for-high-traffic-websites/" rel="alternate" type="text/html" title="Set Up Nginx + Varnish for High Traffic Websites" /><published>2020-07-24T00:00:00+00:00</published><updated>2020-07-24T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/07/24/set-up-nginx-varnish-for-high-traffic-websites</id><content type="html" xml:base="https://jasonthai.me/blog/2020/07/24/set-up-nginx-varnish-for-high-traffic-websites/">&lt;picture&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-08-23T17:28:50+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Jason’s Notes: IPv6 Support and Services Page Enhancement</title><link href="https://jasonthai.me/blog/2020/08/23/jasons-notes-ipv6-support-and-services-page-enhancement/" rel="alternate" type="text/html" title="Jason’s Notes: IPv6 Support and Services Page Enhancement" /><published>2020-08-23T00:00:00+00:00</published><updated>2020-08-23T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/08/23/jasons-notes-ipv6-support-and-services-page-enhancement</id><content type="html" xml:base="https://jasonthai.me/blog/2020/08/23/jasons-notes-ipv6-support-and-services-page-enhancement/">&lt;p&gt;Jason’s Notes is now IPv6 compatible. &lt;a href=&quot;https://ready.chair6.net/?url=https%3A%2F%2Fjasonthai.me&quot;&gt;Click here for validation&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Also,  service page now also returns the status. We can now see whether the service is online or offline without navigating to the custom status page.&lt;/p&gt;
+
+&lt;p&gt;Here is how it looks like. To view the page, navigate to &lt;a href=&quot;https://jasonthai.me/services/&quot;&gt;https://jasonthai.me/services/&lt;/a&gt;&lt;/p&gt;
+
+&lt;picture&gt;
+    &lt;source srcset=&quot;https://cdn.jasonthai.me/assets/img/status.webp&quot; type=&quot;image/webp&quot; /&gt;
+    &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://cdn.jasonthai.me/https://jasonthai.me/assets/img/status.png&quot; alt=&quot;Status&quot; /&gt;
+&lt;/picture&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Jason’s Notes is now IPv6 compatible. Click here for validation Also, service page now also returns the status. We can now see whether the service is online or offline without navigating to the custom status page. Here is how it looks like. To view the page, navigate to https://jasonthai.me/services/</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/ipv6.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/ipv6.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Set Up Nginx + Varnish for High Traffic Websites</title><link href="https://jasonthai.me/blog/2020/07/24/set-up-nginx-varnish-for-high-traffic-websites/" rel="alternate" type="text/html" title="Set Up Nginx + Varnish for High Traffic Websites" /><published>2020-07-24T00:00:00+00:00</published><updated>2020-07-24T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/07/24/set-up-nginx-varnish-for-high-traffic-websites</id><content type="html" xml:base="https://jasonthai.me/blog/2020/07/24/set-up-nginx-varnish-for-high-traffic-websites/">&lt;picture&gt;
     &lt;source srcset=&quot;https://cdn.jasonthai.me/assets/img/NginxVarnish.webp&quot; type=&quot;image/webp&quot; /&gt;
     &lt;img class=&quot;db ml-auto mr-auto&quot; src=&quot;https://cdn.jasonthai.me/https://jasonthai.me/assets/img/NginxVarnish.png&quot; alt=&quot;Nginx + Varnish&quot; /&gt;
 &lt;/picture&gt;
@@ -1489,76 +1498,4 @@ curl https://raw.githubusercontent.com/jasontthai/keys/master/&lt;span class=&qu
 
 &lt;p&gt;When I login with  user1, the server will get user1’s public keys from Github and validates it agaisnt user1’s private key.&lt;/p&gt;
 
-&lt;p&gt;There are a few problems with this approach:  I rely on an external service to retrieve the public keys. If Github goes offline, I will be unable to login to my servers at all. This also adds latency to the login step as we need to retrieve the keys over the internet. So I should think about some caching mechanism in case this happens.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I usually use authorized_key files to store SSH public keys in order to access my servers . However once I start to have multiple servers, I realize manually managing SSH keys is nightmare. Recently I found out a better way to manage these SSH keys In /etc/ssh/sshd_config file there are 2 configurations: AuthorizedKeysCommand /keys.sh AuthorizedKeysCommandUser nobody We can use AuthorizedKeysCommand to point to an script that returns all the SSH keys. In this case, my script is: #!/bin/bash curl https://raw.githubusercontent.com/jasontthai/keys/master/$1 Name this file key.sh and make it executable: chmod a+x /keys.sh The public keys are stored in a Github repo which can be updated any time. The structure of the repo is this: keys/ ├── user1 ├── user2 ├── user3 └── user4 When I login with user1, the server will get user1’s public keys from Github and validates it agaisnt user1’s private key. There are a few problems with this approach: I rely on an external service to retrieve the public keys. If Github goes offline, I will be unable to login to my servers at all. This also adds latency to the login step as we need to retrieve the keys over the internet. So I should think about some caching mechanism in case this happens.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/ssh.jpg" /><media:content medium="image" url="https://jasonthai.me/assets/img/ssh.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Setup Shell Script for Linux-based Servers</title><link href="https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers/" rel="alternate" type="text/html" title="Setup Shell Script for Linux-based Servers" /><published>2020-02-12T00:00:00+00:00</published><updated>2020-02-12T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers</id><content type="html" xml:base="https://jasonthai.me/blog/2020/02/12/setup-shell-script-for-linux-based-servers/">&lt;p&gt;Since I have a few Linux servers that are running RHEL, Debian or Ubuntu OS, I want to have an automatic and convenient way to quickly set up and get them running.  Specifically I want to do a the following things for a fresh server:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Upgrade the server’s packages to the latest version&lt;/li&gt;
-  &lt;li&gt;Install essential packages such as: fail2ban, ufw, htop, apache2, docker, etc.&lt;/li&gt;
-  &lt;li&gt;Create new user with sudo access&lt;/li&gt;
-  &lt;li&gt;Disable root login and password authentication in favor of SSH keys&lt;/li&gt;
-  &lt;li&gt;Ability to install other packages if required&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;With that in mind, I created a simple setup script which you can find here: &lt;a href=&quot;https://github.com/jasontthai/shell-scripts&quot;&gt;https://github.com/jasontthai/shell-scripts&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;running-the-script&quot;&gt;Running the Script&lt;/h3&gt;
-&lt;p&gt;To run the script manually with prompt so you can decide what the script does:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -L json.id/setup.sh | sudo bash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;To run the script in automatic mode without prompt except for adding new user:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -L json.id/setup.sh | sudo bash -s -- -a
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;example-of-output&quot;&gt;Example of output&lt;/h3&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-sL&lt;/span&gt; json.id/setup.sh | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;bash
-&lt;span class=&quot;c&quot;&gt;# ## ## ## ## ## ## ## ## ## ## ## ## #&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#           VPS Setup Script          #&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# ## ## ## ## ## ## ## ## ## ## ## ## #&lt;/span&gt;
-
-Wed 12 Feb 2020 03:56:01 PM PST
-Updating system...
-
-Installing Basic Packages: &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;ufw fail2ban htop curl apache2
-
-Add Sudo User? &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;y/N]: y
-Disable Root Login? &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;y/N]: y
-Disable Password Authentication? &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;y/N]: y
-Install Docker? &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;y/N]: y
-Install Docker Compose? &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;y/N]: y
-Enter your TIMEZONE &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Empty to skip]:
-Enter any other packages to be installed &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Empty to skip]:
-
-Setting &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;user...
-Username: testuser
-Password:
-
-Adding SSH Keys
-Enter SSH Key &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Empty to skip]:
-
-Disabling Root Login...
-
-Disabling Password Authentication...
-
-Docker Installed. Added testuser to docker group
-
-Docker Compose Installed.
-
-Finished setup script.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;or to view help&lt;/p&gt;
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl &lt;span class=&quot;nt&quot;&gt;-sL&lt;/span&gt; json.id/setup.sh | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;bash &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# ## ## ## ## ## ## ## ## ## ## ## ## #&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;#           VPS Setup Script          #&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# ## ## ## ## ## ## ## ## ## ## ## ## #&lt;/span&gt;
-
-Wed 12 Feb 2020 04:04:07 PM PST
-
-Usage: ./setup.sh &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-mh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-       curl &lt;span class=&quot;nt&quot;&gt;-sL&lt;/span&gt; json.id/setup.sh | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;bash
-       curl &lt;span class=&quot;nt&quot;&gt;-sL&lt;/span&gt; json.id/setup.sh | &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;bash &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;ah&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-Flags:
-       &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt; : run setup script automatically
-       &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt; : prints this lovely message, &lt;span class=&quot;k&quot;&gt;then &lt;/span&gt;exits
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">Since I have a few Linux servers that are running RHEL, Debian or Ubuntu OS, I want to have an automatic and convenient way to quickly set up and get them running. Specifically I want to do a the following things for a fresh server: Upgrade the server’s packages to the latest version Install essential packages such as: fail2ban, ufw, htop, apache2, docker, etc. Create new user with sudo access Disable root login and password authentication in favor of SSH keys Ability to install other packages if required With that in mind, I created a simple setup script which you can find here: https://github.com/jasontthai/shell-scripts Running the Script To run the script manually with prompt so you can decide what the script does: curl -L json.id/setup.sh | sudo bash To run the script in automatic mode without prompt except for adding new user: curl -L json.id/setup.sh | sudo bash -s -- -a Example of output curl -sL json.id/setup.sh | sudo bash # ## ## ## ## ## ## ## ## ## ## ## ## # # VPS Setup Script # # ## ## ## ## ## ## ## ## ## ## ## ## # Wed 12 Feb 2020 03:56:01 PM PST Updating system... Installing Basic Packages: sudo ufw fail2ban htop curl apache2 Add Sudo User? [y/N]: y Disable Root Login? [y/N]: y Disable Password Authentication? [y/N]: y Install Docker? [y/N]: y Install Docker Compose? [y/N]: y Enter your TIMEZONE [Empty to skip]: Enter any other packages to be installed [Empty to skip]: Setting sudo user... Username: testuser Password: Adding SSH Keys Enter SSH Key [Empty to skip]: Disabling Root Login... Disabling Password Authentication... Docker Installed. Added testuser to docker group Docker Compose Installed. Finished setup script. or to view help curl -sL json.id/setup.sh | sudo bash -s -- -h # ## ## ## ## ## ## ## ## ## ## ## ## # # VPS Setup Script # # ## ## ## ## ## ## ## ## ## ## ## ## # Wed 12 Feb 2020 04:04:07 PM PST Usage: ./setup.sh [-mh] curl -sL json.id/setup.sh | sudo bash curl -sL json.id/setup.sh | sudo bash -s --{ah} Flags: -a : run setup script automatically -h : prints this lovely message, then exits</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/scripts.png" /><media:content medium="image" url="https://jasonthai.me/assets/img/scripts.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+&lt;p&gt;There are a few problems with this approach:  I rely on an external service to retrieve the public keys. If Github goes offline, I will be unable to login to my servers at all. This also adds latency to the login step as we need to retrieve the keys over the internet. So I should think about some caching mechanism in case this happens.&lt;/p&gt;</content><author><name>Jason Thai</name></author><category term="tech" /><category term="en" /><summary type="html">I usually use authorized_key files to store SSH public keys in order to access my servers . However once I start to have multiple servers, I realize manually managing SSH keys is nightmare. Recently I found out a better way to manage these SSH keys In /etc/ssh/sshd_config file there are 2 configurations: AuthorizedKeysCommand /keys.sh AuthorizedKeysCommandUser nobody We can use AuthorizedKeysCommand to point to an script that returns all the SSH keys. In this case, my script is: #!/bin/bash curl https://raw.githubusercontent.com/jasontthai/keys/master/$1 Name this file key.sh and make it executable: chmod a+x /keys.sh The public keys are stored in a Github repo which can be updated any time. The structure of the repo is this: keys/ ├── user1 ├── user2 ├── user3 └── user4 When I login with user1, the server will get user1’s public keys from Github and validates it agaisnt user1’s private key. There are a few problems with this approach: I rely on an external service to retrieve the public keys. If Github goes offline, I will be unable to login to my servers at all. This also adds latency to the login step as we need to retrieve the keys over the internet. So I should think about some caching mechanism in case this happens.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://jasonthai.me/assets/img/ssh.jpg" /><media:content medium="image" url="https://jasonthai.me/assets/img/ssh.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

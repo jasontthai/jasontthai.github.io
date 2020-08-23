@@ -128,6 +128,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "d3540508507f4184a512933332c1c190"
   },
   {
+    "url": "assets/img/ipv6.webp",
+    "revision": "1c530acf0ebf9613e6de396dad44df12"
+  },
+  {
     "url": "assets/img/jasonthai-mobile-view.webp",
     "revision": "96f545935ef61945b4f9bda03874a1f3"
   },
@@ -302,6 +306,10 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "assets/img/ssh.webp",
     "revision": "d90cccfc987fdac96bcd2c7f22cb27d6"
+  },
+  {
+    "url": "assets/img/status.webp",
+    "revision": "b72cd940799fac81d722a040410c11e8"
   },
   {
     "url": "assets/img/succulent.webp",
