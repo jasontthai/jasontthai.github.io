@@ -168,6 +168,10 @@ workbox.precaching.precacheAndRoute([
     "revision": "d598fae1834f90569f9ce1309ae492e5"
   },
   {
+    "url": "assets/img/nginx.webp",
+    "revision": "267d7528ea62545c6da8c52aa42b8d1e"
+  },
+  {
     "url": "assets/img/NginxVarnish.webp",
     "revision": "1e9144b789731ab8b2be9d1ad8b1afea"
   },
