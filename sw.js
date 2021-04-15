@@ -9,7 +9,7 @@ if (workbox) {
 workbox.precaching.precacheAndRoute([
   {
     "url": "assets/css/style.css",
-    "revision": "6118e6b5ae26923af9497d1d9cfc0039"
+    "revision": "bcff7abd4ce187b55367b48074ea1427"
   },
   {
     "url": "assets/img/1000-concurrent.webp",
@@ -405,7 +405,7 @@ workbox.precaching.precacheAndRoute([
   },
   {
     "url": "assets/main.css",
-    "revision": "4e866afef789b382d543b3a4b073fc29"
+    "revision": "0ef2a27fcafac70e812826a9d6437bd3"
   },
   {
     "url": "assets/minima-social-icons.svg",

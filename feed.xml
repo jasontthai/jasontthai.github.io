@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.7">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2020-11-16T16:53:31+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Nginx Reverse Proxy Template</title><link href="https://jasonthai.me/blog/2020/08/26/nginx-reverse-proxy-template/" rel="alternate" type="text/html" title="Nginx Reverse Proxy Template" /><published>2020-08-26T00:00:00+00:00</published><updated>2020-08-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/08/26/nginx-reverse-proxy-template</id><content type="html" xml:base="https://jasonthai.me/blog/2020/08/26/nginx-reverse-proxy-template/">&lt;p&gt;My go to template for using reverse proxy in Nginx (replace &lt;code class=&quot;highlighter-rouge&quot;&gt;domain.tld&lt;/code&gt; with actual domain and  port &lt;code class=&quot;highlighter-rouge&quot;&gt;3000&lt;/code&gt; with the port number):&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.0">Jekyll</generator><link href="https://jasonthai.me/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jasonthai.me/" rel="alternate" type="text/html" /><updated>2021-04-15T17:54:18+00:00</updated><id>https://jasonthai.me/feed.xml</id><title type="html">Jason’s Notes</title><subtitle>Jason Thai's personal page</subtitle><author><name>Jason Thai</name></author><entry><title type="html">Nginx Reverse Proxy Template</title><link href="https://jasonthai.me/blog/2020/08/26/nginx-reverse-proxy-template/" rel="alternate" type="text/html" title="Nginx Reverse Proxy Template" /><published>2020-08-26T00:00:00+00:00</published><updated>2020-08-26T00:00:00+00:00</updated><id>https://jasonthai.me/blog/2020/08/26/nginx-reverse-proxy-template</id><content type="html" xml:base="https://jasonthai.me/blog/2020/08/26/nginx-reverse-proxy-template/">&lt;p&gt;My go to template for using reverse proxy in Nginx (replace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;domain.tld&lt;/code&gt; with actual domain and  port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3000&lt;/code&gt; with the port number):&lt;/p&gt;
 
 &lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; {
     &lt;span class=&quot;n&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;;
@@ -83,7 +83,7 @@ tcp6       0      0 :::6081             :::&lt;span class=&quot;k&quot;&gt;*&lt;
 tcp6       0      0 ::1:6082            :::&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;            LISTEN      715/varnishd
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;By default, varnish will be configured to talk to port &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt; as its default backend. Verify by checking &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/varnish/default.vcl&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;By default, varnish will be configured to talk to port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;8080&lt;/code&gt; as its default backend. Verify by checking &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/varnish/default.vcl&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /etc/varnish/default.vcl
 ...
 backend default &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
@@ -93,7 +93,7 @@ backend default &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 ...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h1 id=&quot;configure-nginx&quot;&gt;Configure Nginx&lt;/h1&gt;
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/nginx/sites-available/your-website.com.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/nginx/sites-available/your-website.com.conf&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;server &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
     listen 80&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     listen &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;::]:80&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -146,8 +146,8 @@ server &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 We created 3 server blocks that listen to port 80, 443 and 8080 respectively:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;The first block redirect HTTP traffic to our HTTPS backend&lt;/li&gt;
-  &lt;li&gt;The second block direct HTTPS traffic to our Varnish cache which is listening on port &lt;code class=&quot;highlighter-rouge&quot;&gt;6081&lt;/code&gt;. This is also known as reverse proxy where we are directing traffic from port 443 to port 6081. We also added a few headers to increase security. Note: in order to use port 443, you should have configured SSL/TLS. The above configuration assumes you have set one up using letsencrypt.&lt;/li&gt;
-  &lt;li&gt;The third block listens on port &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;, which is called by Varnish to look up and cache our website’s contents.&lt;/li&gt;
+  &lt;li&gt;The second block direct HTTPS traffic to our Varnish cache which is listening on port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;6081&lt;/code&gt;. This is also known as reverse proxy where we are directing traffic from port 443 to port 6081. We also added a few headers to increase security. Note: in order to use port 443, you should have configured SSL/TLS. The above configuration assumes you have set one up using letsencrypt.&lt;/li&gt;
+  &lt;li&gt;The third block listens on port &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;8080&lt;/code&gt;, which is called by Varnish to look up and cache our website’s contents.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Enable our website configuration:&lt;/p&gt;
@@ -257,11 +257,11 @@ Refer to all the previous posts of HA Series to set them up:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ip r | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;docker0
 172.17.0.0/16 dev docker0 proto kernel scope &lt;span class=&quot;nb&quot;&gt;link &lt;/span&gt;src 172.17.0.1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;The value is usually &lt;code class=&quot;highlighter-rouge&quot;&gt;172.17.0.1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The value is usually &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;172.17.0.1&lt;/code&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;configure-the-first-webserver-instance&quot;&gt;Configure the first webserver instance&lt;/h1&gt;
 &lt;h2 id=&quot;install-wallabag&quot;&gt;Install Wallabag&lt;/h2&gt;
-&lt;p&gt;Create the &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; and add the following lines:&lt;/p&gt;
+&lt;p&gt;Create the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; and add the following lines:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;version: &lt;span class=&quot;s1&quot;&gt;'2'&lt;/span&gt;
 services:
   wallabag:
@@ -295,8 +295,8 @@ services:
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Explanation of a few options:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;SYMFONYENVDATABASE_HOST=172.17.0.1&lt;/strong&gt; - The IP of docker0 proto we noted earlier. This tells docker to talk to the localhost mysql instance. Why not &lt;code class=&quot;highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; ? Because docker communicates in its own subnet and &lt;code class=&quot;highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; does not mean localhost.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SYMFONYENVDATABASE_PORT=3307&lt;/strong&gt; - As previously configured, &lt;code class=&quot;highlighter-rouge&quot;&gt;3307&lt;/code&gt; is the port we expose through HAProxy to talk to our Galera cluster&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SYMFONYENVDATABASE_HOST=172.17.0.1&lt;/strong&gt; - The IP of docker0 proto we noted earlier. This tells docker to talk to the localhost mysql instance. Why not &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; ? Because docker communicates in its own subnet and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;127.0.0.1&lt;/code&gt; does not mean localhost.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SYMFONYENVDATABASE_PORT=3307&lt;/strong&gt; - As previously configured, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;3307&lt;/code&gt; is the port we expose through HAProxy to talk to our Galera cluster&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;network_mode: bridge&lt;/strong&gt; - Configure the network mode in order for docker to talk to local mysql on the webserver node.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -307,7 +307,7 @@ services:
 &lt;h2 id=&quot;configure-apache-reverse-proxy-to-expose-wallabag-to-end-users&quot;&gt;Configure Apache reverse proxy to expose Wallabag to end users&lt;/h2&gt;
 &lt;p&gt;The domain I use is &lt;a href=&quot;http://wallabag.jasonthai.me&quot;&gt;https://wallabag.jasonthai.me&lt;/a&gt;, you can change this to your own one.&lt;/p&gt;
 
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/apache2/sites-available/wallabag.jasonthai.me.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/apache2/sites-available/wallabag.jasonthai.me.conf&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;VirtualHost &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:80&amp;gt;
     ServerName wallabag.jasonthai.me
     Redirect permanent / https://wallabag.jasonthai.me/
@@ -340,7 +340,7 @@ Include /etc/letsencrypt/options-ssl-apache.conf
 &lt;h1 id=&quot;configure-the-second-and-third-webserver-node&quot;&gt;Configure the second and third webserver node&lt;/h1&gt;
 &lt;p&gt;Do the same as the first node&lt;/p&gt;
 &lt;h1 id=&quot;configure-haproxy-to-load-balance-three-webservers&quot;&gt;Configure HAProxy to load balance three webservers&lt;/h1&gt;
-&lt;p&gt;ON your separate HAProxy node, Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/haproxy/haproxy.cfg&lt;/code&gt; and add the following (remember to replace with your actual domain):&lt;/p&gt;
+&lt;p&gt;ON your separate HAProxy node, Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/haproxy/haproxy.cfg&lt;/code&gt; and add the following (remember to replace with your actual domain):&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;frontend https-in
     &lt;span class=&quot;c&quot;&gt;# Only bind on 80 if you also want to listen for connections on 80&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:443 ssl crt /etc/certs/jasonthai.me.pem
@@ -410,7 +410,7 @@ backend wallabag
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; stunnel4
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h1 id=&quot;configure-stunnel-on-the-first-galera-node&quot;&gt;Configure Stunnel on the first Galera node:&lt;/h1&gt;
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
 
 pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
@@ -425,7 +425,7 @@ accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 13306
 connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 3306
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h1 id=&quot;configure-stunnel-on-the-second-galera-node&quot;&gt;Configure Stunnel on the second Galera node:&lt;/h1&gt;
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
 
 pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
@@ -440,7 +440,7 @@ accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 23306
 connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 3306
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h1 id=&quot;configure-stunnel-on-the-third-galera-node&quot;&gt;Configure Stunnel on the third Galera node:&lt;/h1&gt;
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
 
 pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
@@ -455,13 +455,13 @@ accept  &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 33306
 connect &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 3306
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h1 id=&quot;configure-stunnel-on-our-haproxy-node&quot;&gt;Configure Stunnel on our HAProxy node:&lt;/h1&gt;
-&lt;p&gt;From any of the DB nodes, create &lt;code class=&quot;highlighter-rouge&quot;&gt;stunnel.pem&lt;/code&gt; file:&lt;/p&gt;
+&lt;p&gt;From any of the DB nodes, create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stunnel.pem&lt;/code&gt; file:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-01&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo cat&lt;/span&gt; /etc/mysql/certs/ca-cert.pem /etc/mysql/certs/client-cert.pem &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /etc/mysql/certs/stunnel.pem
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Copy &lt;code class=&quot;highlighter-rouge&quot;&gt;stunnel.pem&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/certs&lt;/code&gt; on our HAProxy node.&lt;/p&gt;
+&lt;p&gt;Copy &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;stunnel.pem&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/certs&lt;/code&gt; on our HAProxy node.&lt;/p&gt;
 
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/stunnel/mysql.conf&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Configure our secured MySQL server&lt;/span&gt;
 
 pid &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /run/stunnel.pid
@@ -521,7 +521,7 @@ MariaDB &lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;none&lt;span class=&quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;This step is needed so HAProxy can do a health check to see whether our nodes are up and running.&lt;/p&gt;
 
-&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/haproxy/haproxy.cfg&lt;/code&gt; and add the following:&lt;/p&gt;
+&lt;p&gt;Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/haproxy/haproxy.cfg&lt;/code&gt; and add the following:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;frontend galera_cluster_frontend
     &lt;span class=&quot;nb&quot;&gt;bind&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;:3307
     mode tcp
@@ -577,7 +577,7 @@ MariaDB &lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;none&lt;span class=&quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;checking-haproxys-stats-page&quot;&gt;Checking HAProxy’s Stats Page&lt;/h1&gt;
-&lt;p&gt;If you noticed, we have configured a stats page for HAProxy on port 8404 in our config file. You can check out the stats page by going to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://IP-of-HAProxy-node:8404&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;If you noticed, we have configured a stats page for HAProxy on port 8404 in our config file. You can check out the stats page by going to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://IP-of-HAProxy-node:8404&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;You will see something like this:&lt;/p&gt;
 
@@ -600,7 +600,7 @@ MariaDB &lt;span class=&quot;o&quot;&gt;[(&lt;/span&gt;none&lt;span class=&quot;
 &lt;p&gt;We will go over how to set it up and secure the communication between the three nodes. There are 3 different vectors that we can secure through SSL: traffic between the database server and client, replication traffic within Galera Cluster, and the State Snapshot Transfer (SST). We will go over all three.&lt;/p&gt;
 
 &lt;h1 id=&quot;initial-configuration&quot;&gt;Initial Configuration:&lt;/h1&gt;
-&lt;p&gt;On every node of the cluster, add the following lines in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/hosts&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;On every node of the cluster, add the following lines in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/hosts&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;IP-of-node1 galera-01
 IP-of-node2 galera-02
 IP-of-node3 galera-03
@@ -608,7 +608,7 @@ IP-of-node3 galera-03
 
 &lt;p&gt;Optional: Setting up the firewall to only allow cluster traffic communication between the three nodes with ufw. 
 Galera requires a number of ports for connectivity between its nodes. Below is the list:&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3306 is the default port for MySQL client connections and State Snapshot Transfer using mysqldump for backups.
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;3306 is the default port for MySQL client connections and State Snapshot Transfer using mysqldump for backups.
 4567 is reserved for Galera Cluster replication traffic. Multicast replication uses both TCP and UDP transport on this port.
 4568 is the port for Incremental State Transfer.
 4444 is used for all other State Snapshot Transfer.
@@ -631,7 +631,7 @@ Galera requires a number of ports for connectivity between its nodes. Below is t
 &lt;h1 id=&quot;configure-the-first-node&quot;&gt;Configure the first node:&lt;/h1&gt;
 &lt;p&gt;Following the the first part of the series, we have covered securing the traffic between the server and the client. Now we are ready to initialize the first node of the cluster.&lt;/p&gt;
 
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/galera.cnf&lt;/code&gt; and add the following lines:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/galera.cnf&lt;/code&gt; and add the following lines:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysqld]
 &lt;span class=&quot;nv&quot;&gt;binlog_format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ROW
 default-storage-engine&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;innodb
@@ -670,9 +670,9 @@ bind-address&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.0.0.0
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h1 id=&quot;configure-the-second-node&quot;&gt;Configure the second node:&lt;/h1&gt;
-&lt;p&gt;Following part I of the series, we have created all the necessary certs in node 1 of the cluster. We do not have to create the certs again, simply copy the certs from the first node to the second node and place them in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/certs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Following part I of the series, we have created all the necessary certs in node 1 of the cluster. We do not have to create the certs again, simply copy the certs from the first node to the second node and place them in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/certs&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/galera.cnf&lt;/code&gt; and add the following lines:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/galera.cnf&lt;/code&gt; and add the following lines:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysqld]
 &lt;span class=&quot;nv&quot;&gt;binlog_format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ROW
 default-storage-engine&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;innodb
@@ -708,9 +708,9 @@ bind-address&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;0.0.0.0
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$galera&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;-02&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl restart mariadb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h1 id=&quot;configure-the-third-node&quot;&gt;Configure the third node:&lt;/h1&gt;
-&lt;p&gt;Again copy the certs from the first node to the third node and place them in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/certs&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Again copy the certs from the first node to the third node and place them in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/certs&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Create &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/galera.cnf&lt;/code&gt; and add the following lines:&lt;/p&gt;
+&lt;p&gt;Create &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/galera.cnf&lt;/code&gt; and add the following lines:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;mysqld]
 &lt;span class=&quot;nv&quot;&gt;binlog_format&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ROW
 default-storage-engine&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;innodb
@@ -1137,7 +1137,7 @@ client-cert.pem: OK
 
 &lt;/details&gt;
 &lt;h2 id=&quot;configure-ssl-for-mariadb-server&quot;&gt;Configure SSL for MariaDB Server&lt;/h2&gt;
-&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/50-server.cnf&lt;/code&gt; and add the following lines in [mysqld] section:&lt;/p&gt;
+&lt;p&gt;Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/50-server.cnf&lt;/code&gt; and add the following lines in [mysqld] section:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssl-ca&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/ca-cert.pem
 ssl-cert&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/server-cert.pem
 ssl-key&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/server-key.pem
@@ -1189,7 +1189,7 @@ changed ownership of &lt;span class=&quot;s1&quot;&gt;'/etc/mysql/certs/'&lt;/sp
 10 rows &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;0.001 sec&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h2 id=&quot;configure-ssl-for-mariadb-client&quot;&gt;Configure SSL for MariaDB Client&lt;/h2&gt;
-&lt;p&gt;Edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/50-client.cnf&lt;/code&gt; and add the following lines in [client] section:&lt;/p&gt;
+&lt;p&gt;Edit &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/etc/mysql/mariadb.conf.d/50-client.cnf&lt;/code&gt; and add the following lines in [client] section:&lt;/p&gt;
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssl-ca&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/ca-cert.pem
 ssl-cert&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/client-cert.pem
 ssl-key&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/etc/mysql/certs/client-key.pem
@@ -1318,7 +1318,7 @@ default via XXX.XXX.XXX.XXX dev eth0 onlink // note this address
 &lt;/picture&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;The following step is important, make sure to select &lt;code class=&quot;highlighter-rouge&quot;&gt;wg0&lt;/code&gt; as the interface&lt;/li&gt;
+  &lt;li&gt;The following step is important, make sure to select &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;wg0&lt;/code&gt; as the interface&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;picture&gt;
@@ -1345,7 +1345,7 @@ default via XXX.XXX.XXX.XXX dev eth0 onlink // note this address
 &lt;/picture&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;This following step is important, make sure to choose &lt;code class=&quot;highlighter-rouge&quot;&gt;no&lt;/code&gt; so we can assign our internal address which is &lt;code class=&quot;highlighter-rouge&quot;&gt;10.7.0.1&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;This following step is important, make sure to choose &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;no&lt;/code&gt; so we can assign our internal address which is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10.7.0.1&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;picture&gt;
@@ -1354,7 +1354,7 @@ default via XXX.XXX.XXX.XXX dev eth0 onlink // note this address
 &lt;/picture&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Enter &lt;code class=&quot;highlighter-rouge&quot;&gt;10.7.0.1/24&lt;/code&gt;. This is the static address VPN will use to talk to Pi-hole&lt;/li&gt;
+  &lt;li&gt;Enter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10.7.0.1/24&lt;/code&gt;. This is the static address VPN will use to talk to Pi-hole&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;picture&gt;
@@ -1398,13 +1398,13 @@ pagead2.googlesyndication.com has address 0.0.0.0
 pagead2.googlesyndication.com has IPv6 address ::
 pagead2.googlesyndication.com is an &lt;span class=&quot;nb&quot;&gt;alias &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;pagead46.l.doubleclick.net.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Pi-hole blocked &lt;code class=&quot;highlighter-rouge&quot;&gt;pagead2.googlesyndication.com&lt;/code&gt; as the domain is in its blacklist.&lt;/p&gt;
+&lt;p&gt;Pi-hole blocked &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pagead2.googlesyndication.com&lt;/code&gt; as the domain is in its blacklist.&lt;/p&gt;
 
 &lt;h3 id=&quot;generate-wireguard-client-config-file&quot;&gt;Generate Wireguard Client Config File&lt;/h3&gt;
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;bash wireguard-install.sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bash wireguard-install.sh&lt;/code&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;configure-wireguard-to-use-pi-hole-dns&quot;&gt;Configure Wireguard to use Pi-hole DNS&lt;/h3&gt;
-&lt;p&gt;Edit your wireguard client conf file and update the DNS servers setting with Pi-hole internal address. In my case it is &lt;code class=&quot;highlighter-rouge&quot;&gt;10.7.0.1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Edit your wireguard client conf file and update the DNS servers setting with Pi-hole internal address. In my case it is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10.7.0.1&lt;/code&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;test-from-browser&quot;&gt;Test From Browser&lt;/h3&gt;
 &lt;p&gt;After connecting to your VPN using Wireguard client. Go to this address &lt;a href=&quot;http://pagead2.googlesyndication.com&quot;&gt;http://pagead2.googlesyndication.com&lt;/a&gt;, if everything works correctly you will see this:&lt;/p&gt;
@@ -1415,7 +1415,7 @@ pagead2.googlesyndication.com is an &lt;span class=&quot;nb&quot;&gt;alias &lt;/
 &lt;/picture&gt;
 
 &lt;h3 id=&quot;pi-hole-statistics&quot;&gt;Pi-hole Statistics&lt;/h3&gt;
-&lt;p&gt;You can go to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://pi.hole/admin&lt;/code&gt; once you are connected to the VPN and see some of Pi-hole’s stats. The result is mind-boggling. Almost half of my traffic is to serve ads.&lt;/p&gt;
+&lt;p&gt;You can go to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://pi.hole/admin&lt;/code&gt; once you are connected to the VPN and see some of Pi-hole’s stats. The result is mind-boggling. Almost half of my traffic is to serve ads.&lt;/p&gt;
 
 &lt;picture&gt;
     &lt;source srcset=&quot;https://cdn.jasonthai.me/assets/img/pi-hole-stats.webp&quot; type=&quot;image/webp&quot; /&gt;
